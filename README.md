@@ -2,7 +2,11 @@ F5 BIG-IQ REST Postman Collection Introduction
 ----------------------
 A postman collection to perform common BIG-IQ tasks for managing BIG-IP devices via REST
 
-*Warning* This is not for the faint at heart, care must be taken to issue commands in the proper order and watching the results as you progress. Remember, this is a framework for interfacing with the REST API of BIG-IQ. This operates at a very low level and has it's inherent risks of human error.
+*Warning* 
+------------
+This is not for the faint at heart, care must be taken to issue commands in the proper order and watching the results as you progress. Remember, this is a framework for interfacing with the REST API of BIG-IQ. This operates at a very low level and has it's inherent risks of human error.
+------------
+
 Installation
 ------------
 
