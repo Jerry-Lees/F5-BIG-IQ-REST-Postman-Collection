@@ -12,7 +12,7 @@ This is not for the faint at heart, care must be taken to issue commands in the 
 
 ## Installation
 
-Download the file in the repository and import into your postman installation
+Download the file in the repository and import into your postman installation.
 
 ------------
 
