@@ -4,7 +4,7 @@ A postman collection to perform common BIG-IQ tasks for managing BIG-IP devices 
 
 ------------
 
-## *Warning*
+## ***Warning***
 
 This is not for the faint at heart, care must be taken to issue commands in the proper order and watching the results as you progress. Remember, this is a framework for interfacing with the REST API of BIG-IQ. This operates at a very low level and has it's inherent risks of human error.
 
@@ -43,13 +43,13 @@ Optionally, once setup above, you may want to set the following variables and pr
 
     This is the management IP address of teh BIG-IP that you wish to add, delete, or otherwise modify configuration items.
 
-    Note, once populated, you can run the *Get Device by address* Request to populate additional required information.
+    Note, once populated, you can run the ***Get Device by address*** Request to populate additional required information.
 
 -SearchVirtualName
 
     This is the variable that contains the name of a virtual you wish to search for. Note: it is best to put the exact virtual name in the variable since a substring could return multiple matches and thus possibly cause unexpected behavior
 
-    Note, once populated, you can run the *Get Virtual Information From Name* and *Get remaining Virtual Information* Requests to populate required information about the virtual server.
+    Note, once populated, you can run the ***Get Virtual Information From Name*** and ***Get remaining Virtual Information*** Requests to populate required information about the virtual server.
 
 ## Getting to work
 
