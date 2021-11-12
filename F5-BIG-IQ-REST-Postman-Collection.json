@@ -1,0 +1,3573 @@
+{
+	"info": {
+		"_postman_id": "f83caa9b-10d9-4a1d-8237-beeeb69960f2",
+		"name": "BIG-IQ REST Tools",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Completed",
+			"item": [
+				{
+					"name": "Gather information to start",
+					"item": [
+						{
+							"name": "Device Info",
+							"item": [
+								{
+									"name": "Get Devices",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+													"\r",
+													"\r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "basic",
+											"basic": [
+												{
+													"key": "password",
+													"value": "1chnl!",
+													"type": "string"
+												},
+												{
+													"key": "username",
+													"value": "admin",
+													"type": "string"
+												},
+												{
+													"key": "saveHelperData",
+													"value": false,
+													"type": "boolean"
+												},
+												{
+													"key": "showPassword",
+													"value": false,
+													"type": "boolean"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "X-F5-Auth-Token",
+												"value": "{{AuthToken}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "https://{{BIGIQ_Mgmt}}/mgmt/shared/resolver/device-groups/cm-adccore-allbigipDevices/devices/",
+											"protocol": "https",
+											"host": [
+												"{{BIGIQ_Mgmt}}"
+											],
+											"path": [
+												"mgmt",
+												"shared",
+												"resolver",
+												"device-groups",
+												"cm-adccore-allbigipDevices",
+												"devices",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Clear Environment",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/*\r",
+											"Inputs:\r",
+											"    None.\r",
+											"\r",
+											"Outputs:\r",
+											"\tNone, clears the environment variables.\r",
+											"*/\r",
+											"\r",
+											"//Init all Environment variables\r",
+											"postman.setEnvironmentVariable(\"VirtualID\",\"\")\r",
+											"postman.setEnvironmentVariable(\"VirtualJSON\",\"\")\r",
+											"postman.setEnvironmentVariable(\"VirtualSelfLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"VirtualDeviceLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"VirtualProfilesLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"SearchPoolName\",\"\")\r",
+											"postman.setEnvironmentVariable(\"PoolID\",\"\")\r",
+											"postman.setEnvironmentVariable(\"PoolJSON\",\"\")\r",
+											"postman.setEnvironmentVariable(\"PoolMemberJSON\",\"\")\r",
+											"postman.setEnvironmentVariable(\"PoolSelfLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"PoolDeviceLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"PoolMembersLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"PoolMembersURI\",\"\")\r",
+											"postman.setEnvironmentVariable(\"PoolMemberSelfLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"PoolMemberPort\",\"\")\r",
+											"postman.setEnvironmentVariable(\"PoolMemberID\",\"\")\r",
+											"postman.setEnvironmentVariable(\"PoolMonitorLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"SearchMonitorName\",\"\")\r",
+											"postman.setEnvironmentVariable(\"MonitorID\",\"\")\r",
+											"postman.setEnvironmentVariable(\"MonitorJSON\",\"\")\r",
+											"postman.setEnvironmentVariable(\"MonitorSelfLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"SearchNodeName\",\"\")\r",
+											"postman.setEnvironmentVariable(\"NodeID\",\"\")\r",
+											"postman.setEnvironmentVariable(\"NodeJSON\",\"\")\r",
+											"postman.setEnvironmentVariable(\"NodeSelfLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"DeviceSelfLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"MonitorSelfLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"MonitorID\",\"\")\r",
+											"postman.setEnvironmentVariable(\"MonitorType\",\"\")\r",
+											"postman.setEnvironmentVariable(\"MonitorJSON\",\"\")\r",
+											"postman.setEnvironmentVariable(\"MonitorTypeString\",\"\")\r",
+											"postman.setEnvironmentVariable(\"MonitorTypeName\",\"\")\r",
+											"postman.setEnvironmentVariable(\"NewMonitorLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"NewDeviceLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"DeviceSilo\",\"\")\r",
+											"postman.setEnvironmentVariable(\"DeviceID\",\"\")\r",
+											"postman.setEnvironmentVariable(\"DeviceSelfURI\",\"\")\r",
+											"postman.setEnvironmentVariable(\"MonitorSelfURI\",\"\")\r",
+											"postman.setEnvironmentVariable(\"PoolMonitorURI\",\"\")\r",
+											"postman.setEnvironmentVariable(\"PoolDeviceURI\",\"\")\r",
+											"postman.setEnvironmentVariable(\"PoolSelfURI\",\"\")\r",
+											"postman.setEnvironmentVariable(\"VirtualProfilesURI\",\"\")\r",
+											"postman.setEnvironmentVariable(\"VirtualDeviceURI\",\"\")\r",
+											"postman.setEnvironmentVariable(\"VirtualSelfURI\",\"\")\r",
+											"postman.setEnvironmentVariable(\"VirtualProfilesURI\",\"\")\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPID\",\"\")\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPName\",\"\")\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPSelfLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPSelfURI\",\"\")\r",
+											"postman.setEnvironmentVariable(\"ProfileServerSSLID\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileServerSSLName\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileServerSSLSelfLink\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileServerSSLSelfURI\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileClientSSLID\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileClientSSLName\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileClientSSLSelfLink\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileClientSSLSelfURI\", \"\");\r",
+											"postman.setEnvironmentVariable(\"NodeSelfURI\",\"\")\r",
+											"postman.setEnvironmentVariable(\"NodeName\",\"\")\r",
+											"postman.setEnvironmentVariable(\"NodeDescription\",\"\")\r",
+											"postman.setEnvironmentVariable(\"NewDescription\",\"\")\r",
+											"postman.setEnvironmentVariable(\"SearchPoolName\",\"\")\r",
+											"postman.setEnvironmentVariable(\"SearchMonitorName\",\"\")\r",
+											"postman.setEnvironmentVariable(\"SearchNodeName\",\"\")\r",
+											"//postman.setEnvironmentVariable(\"\",\"\")\r",
+											"//postman.setEnvironmentVariable(\"\",\"\")\r",
+											"//postman.setEnvironmentVariable(\"\",\"\")\r",
+											"//postman.setEnvironmentVariable(\"\",\"\")\r",
+											"//postman.setEnvironmentVariable(\"\",\"\")\r",
+											"\r",
+											"\r",
+											"console.log(\"Cleared Environment variables.\")\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/virtual?$filter=name eq '*{{SearchVirtualName}}*'",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"virtual"
+									],
+									"query": [
+										{
+											"key": "$filter",
+											"value": "name eq '*{{SearchVirtualName}}*'"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Device by address",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/*\r",
+											"Input:\r",
+											"    SearchDeviceAddress - The address of the LTM to place the configuration on.\r",
+											"Output:\r",
+											"    DeviceID            - The ID of the LTM Device to recieve configuration\r",
+											"    DeviceSelfLink      - The link to the LTM device to use in JSON documents used in a REST Call.\r",
+											"    DeviceSelfURI       - The URI to use in a REST call to gather configuration representing the LTM device.\r",
+											"    NewDeviceLink       - Same as DeviceSelfLink \r",
+											"    DeviceSilo          - The Silo that teh device's configuration is located in within BIG-IQ.\r",
+											"*/\r",
+											"//begin parsing\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"let devices = pm.globals.get(\"itemOfArray\");\r",
+											"\r",
+											"devices = jsonData.items;\r",
+											"//console.log (devices)\r",
+											"\r",
+											"//console.log(\"Items: \"+jsonData.items[1].name)\r",
+											"searchname = pm.variables.get(\"SearchDeviceAddress\")\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"for (device in devices){\r",
+											"    if (jsonData.items[device].address == searchname) {\r",
+											"        deviceid=jsonData.items[device].uuid\r",
+											"        //gather data for environment Variables related to the object\r",
+											"        postman.setEnvironmentVariable(\"DeviceID\", deviceid);\r",
+											"        postman.setEnvironmentVariable(\"DeviceSelfLink\", jsonData.items[device].selfLink);\r",
+											"        postman.setEnvironmentVariable(\"DeviceSelfURI\", jsonData.items[device].selfLink.replace(/localhost/g,bigiqmgmt));\r",
+											"        postman.setEnvironmentVariable(\"NewDeviceLink\", jsonData.items[device].selfLink);\r",
+											"        postman.setEnvironmentVariable(\"DeviceSilo\", jsonData.items[device].properties.silo);\r",
+											"        //postman.setEnvironmentVariable(\"PoolSelfLink\", jsonData.items[device].poolReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"        //postman.setEnvironmentVariable(\"deviceDeviceLink\", jsonData.items[device].deviceReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"        //postman.setEnvironmentVariable(\"DeviceSelfLink\", jsonData.items[device].deviceReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"        //postman.setEnvironmentVariable(\"deviceProfilesLink\", jsonData.items[device].profilesCollectionReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"\r",
+											"        //log data saved\r",
+											"        console.log (\"Found device with address \"+searchname+\": Now you may continue to get the specific device's json from the REST API.\")\r",
+											"        //log if verbose set to greater than 0, do not log if set to 0\r",
+											"        if (pm.variables.get(\"BeVerbose\")) {\r",
+											"            //console.log(\"\")\r",
+											"            console.log(\"found, but not updated, the following environmental information:\")\r",
+											"            console.log(\"The device hostname is: \"+jsonData.items[device].hostname)\r",
+											"            console.log(\"The device ID is: \"+jsonData.items[device].uuid)\r",
+											"            console.log(\"The device self sink is: \"+jsonData.items[device].selfLink.replace(/localhost/g,bigiqmgmt))\r",
+											"        }\r",
+											"        console.log (\"Gathering the specific device's json from the REST API.\")\r",
+											"    }\r",
+											"    console.log (\"**NOTICE** The device hostname that will be used for changes will be: \"+jsonData.items[device].hostname+\". Verify this is correct before proceeding!!\")\r",
+											"}\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/shared/resolver/device-groups/cm-adccore-allbigipDevices/devices/?$filter=('address eq '{{SearchDeviceAddress}}')",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"shared",
+										"resolver",
+										"device-groups",
+										"cm-adccore-allbigipDevices",
+										"devices",
+										""
+									],
+									"query": [
+										{
+											"key": "$filter",
+											"value": "('address eq '{{SearchDeviceAddress}}')"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Virtual Information From Name",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"/*\r",
+											"Inputs:\r",
+											"    SearchVirtualName        - User Input, the name of the virtual to search for and gather information about.\r",
+											"\r",
+											"Outputs:\r",
+											"\tVirtualID\t\t\t- Programmatically populated value, The ID that references the virtual server\r",
+											"\tVirtualSelfLink\t\t- Programmatically populated value, The link to use in JSON documents to reference the Virtual Server\r",
+											"\tVirtualSelfURI\t\t- Programmatically populated value, The link used to make requests about the virtual server in REST Calls\r",
+											"\tVirtualDeviceLink\t- Programmatically populated value, The link to use in JSON documents to reference the Device the virtual server is on.\r",
+											"\tVirtualDeviceURI\t- Programmatically populated value, The link used to make requests about the Device containing the configuration in REST Calls\r",
+											"\tVirtualProfilesLink\t- Programmatically populated value, The link to use in JSON documents to reference the Profiles assigned to the virtual server.\r",
+											"\tVirtualProfilesURI\t- Programmatically populated value, The link used to make requests about the Profiles assigend in REST Calls\r",
+											"\tVirtualJSON\t\t\t- Programmatically populated value, The JSON that references the Virtual Server \r",
+											"\tPoolSelfLink\t\t- Programmatically populated value, The link to use in JSON documents to reference the Pool \r",
+											"\tPoolSelfURI\t\t\t- Programmatically populated value, The link used to make requests about the Pool assigned in REST Calls\r",
+											"\tPoolID\t\t\t\t- Programmatically populated value, The ID that references the Pool Associated with the virtual server.\r",
+											"\tPoolDeviceLink\t\t- Programmatically populated value, The link to use in JSON documents to reference the Device containnig teh Pool configuration.\r",
+											"\tPoolDeviceURI\t\t- Programmatically populated value, The link used to make requests about the device containing the Pool configuration in REST Calls\r",
+											"\tPoolMembersLink\t\t- Programmatically populated value, The link to use in JSON documents to reference the Pool Members\r",
+											"\tPoolMembersURI\t\t- Programmatically populated value, The link used to make requests about the Pool Members in REST Calls\r",
+											"\tPoolMonitorLink\t\t- Programmatically populated value, The link to use in JSON documents to reference the Monitor assigned to the pool\r",
+											"\tPoolMonitorURI\t\t- Programmatically populated value, The link used to make requests about the monitor assigend to teh pool in REST Calls\r",
+											"\tMonitorSelfLink\t\t- Programmatically populated value, The link to use in JSON documents to reference the Monitor assigned\r",
+											"\tMonitorSelfURI\t\t- Programmatically populated value, The link used to make requests about the monitor assigned in REST Calls\r",
+											"\tMonitorID\t\t\t- Programmatically populated value, The ID that represents the monitor.\r",
+											"\tMonitorType\t\t\t- Programmatically populated value, The type of monitor\r",
+											"\tMonitorTypeString\t- Programmatically populated value, The string of the path used to reference the type in a JSON document.\r",
+											"\tMonitorTypeName\t\t- Programmatically populated value, The string used to reference the type in a JSON document.\r",
+											"\tDeviceSelfLink\t\t- Programmatically populated value, The link to use in JSON documents to reference the device with the configuration.\r",
+											"\tDeviceSelfURI\t\t- Programmatically populated value, The link used to make requests about the Device containing teh configuration in REST Calls\r",
+											"\tDeviceSilo\t\t\t- Programmatically populated value, Teh Silo teh device/configuration is located in within BIG-IQ\r",
+											"*/\r",
+											"\r",
+											"//Init all Environment variables\r",
+											"postman.setEnvironmentVariable(\"VirtualID\",\"\")\r",
+											"postman.setEnvironmentVariable(\"VirtualJSON\",\"\")\r",
+											"postman.setEnvironmentVariable(\"VirtualSelfLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"VirtualDeviceLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"VirtualProfilesLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"SearchPoolName\",\"\")\r",
+											"postman.setEnvironmentVariable(\"PoolID\",\"\")\r",
+											"postman.setEnvironmentVariable(\"PoolJSON\",\"\")\r",
+											"postman.setEnvironmentVariable(\"PoolMemberJSON\",\"\")\r",
+											"postman.setEnvironmentVariable(\"PoolSelfLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"PoolDeviceLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"PoolMembersLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"PoolMembersURI\",\"\")\r",
+											"postman.setEnvironmentVariable(\"PoolMemberSelfLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"PoolMemberPort\",\"\")\r",
+											"postman.setEnvironmentVariable(\"PoolMemberID\",\"\")\r",
+											"postman.setEnvironmentVariable(\"PoolMonitorLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"SearchMonitorName\",\"\")\r",
+											"postman.setEnvironmentVariable(\"MonitorID\",\"\")\r",
+											"postman.setEnvironmentVariable(\"MonitorJSON\",\"\")\r",
+											"postman.setEnvironmentVariable(\"MonitorSelfLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"SearchNodeName\",\"\")\r",
+											"postman.setEnvironmentVariable(\"NodeID\",\"\")\r",
+											"postman.setEnvironmentVariable(\"NodeJSON\",\"\")\r",
+											"postman.setEnvironmentVariable(\"NodeSelfLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"DeviceSelfLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"MonitorSelfLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"MonitorID\",\"\")\r",
+											"postman.setEnvironmentVariable(\"MonitorType\",\"\")\r",
+											"postman.setEnvironmentVariable(\"MonitorJSON\",\"\")\r",
+											"postman.setEnvironmentVariable(\"MonitorTypeString\",\"\")\r",
+											"postman.setEnvironmentVariable(\"MonitorTypeName\",\"\")\r",
+											"postman.setEnvironmentVariable(\"NewMonitorLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"NewDeviceLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"DeviceSilo\",\"\")\r",
+											"postman.setEnvironmentVariable(\"DeviceID\",\"\")\r",
+											"postman.setEnvironmentVariable(\"DeviceSelfURI\",\"\")\r",
+											"postman.setEnvironmentVariable(\"MonitorSelfURI\",\"\")\r",
+											"postman.setEnvironmentVariable(\"PoolMonitorURI\",\"\")\r",
+											"postman.setEnvironmentVariable(\"PoolDeviceURI\",\"\")\r",
+											"postman.setEnvironmentVariable(\"PoolSelfURI\",\"\")\r",
+											"postman.setEnvironmentVariable(\"VirtualProfilesURI\",\"\")\r",
+											"postman.setEnvironmentVariable(\"VirtualDeviceURI\",\"\")\r",
+											"postman.setEnvironmentVariable(\"VirtualSelfURI\",\"\")\r",
+											"postman.setEnvironmentVariable(\"VirtualProfilesURI\",\"\")\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPID\",\"\")\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPName\",\"\")\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPSelfLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPSelfURI\",\"\")\r",
+											"postman.setEnvironmentVariable(\"ProfileServerSSLID\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileServerSSLName\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileServerSSLSelfLink\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileServerSSLSelfURI\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileClientSSLID\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileClientSSLName\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileClientSSLSelfLink\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileClientSSLSelfURI\", \"\");\r",
+											"postman.setEnvironmentVariable(\"NodeSelfURI\",\"\")\r",
+											"postman.setEnvironmentVariable(\"NodeName\",\"\")\r",
+											"postman.setEnvironmentVariable(\"NodeDescription\",\"\")\r",
+											"postman.setEnvironmentVariable(\"NewDescription\",\"\")\r",
+											"postman.setEnvironmentVariable(\"SearchPoolName\",\"\")\r",
+											"postman.setEnvironmentVariable(\"SearchMonitorName\",\"\")\r",
+											"postman.setEnvironmentVariable(\"SearchNodeName\",\"\")\r",
+											"//postman.setEnvironmentVariable(\"\",\"\")\r",
+											"//postman.setEnvironmentVariable(\"\",\"\")\r",
+											"//postman.setEnvironmentVariable(\"\",\"\")\r",
+											"//postman.setEnvironmentVariable(\"\",\"\")\r",
+											"//postman.setEnvironmentVariable(\"\",\"\")\r",
+											"\r",
+											"console.log(\"Cleared Environment variables.\")\r",
+											"\r",
+											"\r",
+											"//begin parsing\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"let virtuals = pm.globals.get(\"itemOfArray\");\r",
+											"\r",
+											"virtuals = jsonData.items;\r",
+											"//console.log (virtuals)\r",
+											"\r",
+											"//console.log(\"Items: \"+jsonData.items[1].name)\r",
+											"searchname = pm.variables.get(\"SearchVirtualName\")\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"for (virtual in virtuals){\r",
+											"    if (jsonData.items[virtual].name == searchname) {\r",
+											"        virtualid=jsonData.items[virtual].id\r",
+											"        //gather data for environment Variables related to the object\r",
+											"        postman.setEnvironmentVariable(\"VirtualID\", virtualid);\r",
+											"        postman.setEnvironmentVariable(\"VirtualSelfLink\", jsonData.items[virtual].selfLink);\r",
+											"        postman.setEnvironmentVariable(\"VirtualSelfURI\", jsonData.items[virtual].selfLink.replace(/localhost/g,bigiqmgmt));\r",
+											"        postman.setEnvironmentVariable(\"PoolSelfLink\", jsonData.items[virtual].poolReference.link);\r",
+											"        postman.setEnvironmentVariable(\"PoolSelfURI\", jsonData.items[virtual].poolReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"        postman.setEnvironmentVariable(\"VirtualDeviceLink\", jsonData.items[virtual].deviceReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"        postman.setEnvironmentVariable(\"VirtualDeviceURI\", jsonData.items[virtual].deviceReference.link);\r",
+											"        postman.setEnvironmentVariable(\"DeviceSelfLink\", jsonData.items[virtual].deviceReference.link);\r",
+											"        postman.setEnvironmentVariable(\"DeviceSelfURI\", jsonData.items[virtual].deviceReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"        postman.setEnvironmentVariable(\"DeviceSilo\", jsonData.items[virtual].cm.silo);\r",
+											"        postman.setEnvironmentVariable(\"VirtualProfilesLink\", jsonData.items[virtual].profilesCollectionReference.link);\r",
+											"        postman.setEnvironmentVariable(\"VirtualProfilesURI\", jsonData.items[virtual].profilesCollectionReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"\r",
+											"        //log data saved\r",
+											"        console.log (\"Found \"+searchname+\": Now you may continue to get the specific virtual's json from the REST API.\")\r",
+											"        //log if verbose set to greater than 0, do not log if set to 0\r",
+											"        if (pm.variables.get(\"BeVerbose\")) {\r",
+											"            //console.log(\"\")\r",
+											"            console.log(\"updated the following environmental information:\")\r",
+											"            console.log(\"Set Virtual ID to: \"+pm.variables.get(\"VirtualID\"))\r",
+											"            console.log(\"Set Pool Self Link to: \"+pm.variables.get(\"PoolSelfLink\"))\r",
+											"            console.log(\"Set Virtual Self Link to: \"+pm.variables.get(\"VirtualSelfLink\"))\r",
+											"            console.log(\"Set Virtual LTM Device to: \"+pm.variables.get(\"VirtualDeviceLink\"))\r",
+											"            console.log(\"Set Virtual Profiles Link to: \"+pm.variables.get(\"VirtualProfilesLink\"))\r",
+											"        }\r",
+											"        console.log (\"Gathering the specific virtual's json from the REST API.\")\r",
+											"    }\r",
+											"}\r",
+											"\r",
+											"//now get the virtual server's JSON inline\r",
+											"MgmtIP = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"const options = {\r",
+											"    method: 'GET',\r",
+											"    url: pm.variables.get(\"VirtualSelfURI\"),\r",
+											"    header: 'ContentType: application/json',\r",
+											"    header: 'X-F5-Auth-Token: '+pm.variables.get(\"AuthToken\"),\r",
+											"    body: \"\"\r",
+											"};\r",
+											"\r",
+											"pm.sendRequest(options, (error, response) => {\r",
+											"    if (error) {\r",
+											"        throw new Error(error);\r",
+											"    } else {\r",
+											"        console.log(\"Found JSON for Virtual, storing in Environment variable 'VirtualJSON'\")\r",
+											"        postman.setEnvironmentVariable(\"VirtualJSON\", response.text())\r",
+											"    }\r",
+											"});\r",
+											"\r",
+											"//gather pool info\r",
+											"console.log(\"Gathering Pool related information.\")\r",
+											"const options2 = {\r",
+											"    method: 'GET',\r",
+											"    url: pm.variables.get(\"PoolSelfURI\"),\r",
+											"    header: 'ContentType: application/json',\r",
+											"    header: 'X-F5-Auth-Token: '+pm.variables.get(\"AuthToken\"),\r",
+											"    body: \"\"\r",
+											"\r",
+											"};\r",
+											"pm.sendRequest(options2, (error, response) => {\r",
+											"    if (error) {\r",
+											"        throw new Error(error);\r",
+											"    } else {\r",
+											"        var jsonData = response.json()\r",
+											"        var monitortype = \"\"\r",
+											"        poolid=jsonData.id\r",
+											"        //gather data for environment Variables related to the object\r",
+											"        postman.setEnvironmentVariable(\"PoolID\", poolid);\r",
+											"        postman.setEnvironmentVariable(\"PoolDeviceLink\", jsonData.deviceReference.link)\r",
+											"        postman.setEnvironmentVariable(\"PoolDeviceURI\", jsonData.deviceReference.link.replace(/localhost/g,bigiqmgmt))\r",
+											"        postman.setEnvironmentVariable(\"PoolMembersLink\", jsonData.membersCollectionReference.link)\r",
+											"        postman.setEnvironmentVariable(\"PoolMembersURI\", jsonData.membersCollectionReference.link.replace(/localhost/g,bigiqmgmt))\r",
+											"        //this will need to change somehow, the monitors are not always TCP (monitorTcpReferences), and what if there is more than one monitor assigned?\r",
+											"        \r",
+											"        //determine what type of monitors we have\r",
+											"        try {\r",
+											"            monitortype = jsonData.monitorTcpReferences[0].kind\r",
+											"        } catch (error) {\r",
+											"            //do nothing\r",
+											"            console.log(\"caught no tcp monitors\")\r",
+											"        }\r",
+											"        try {\r",
+											"            monitortype = jsonData.monitorHttpsReferences[0].kind\r",
+											"        } catch (error) {\r",
+											"            //do nothing\r",
+											"            console.log(\"caught no https monitors\")\r",
+											"        }\r",
+											"        try {\r",
+											"            monitortype = jsonData.monitorHttpReferences[0].kind\r",
+											"        } catch (error) {\r",
+											"            //do nothing\r",
+											"            console.log(\"caught no http monitors\")\r",
+											"        }\r",
+											"\r",
+											"        console.log (monitortype)\r",
+											"\r",
+											"        switch(monitortype) {\r",
+											"            case \"cm:adc-core:working-config:ltm:monitor:http:adcmonitorhttpstate\":\r",
+											"                postman.setEnvironmentVariable(\"PoolMonitorLink\", jsonData.monitorHttpReferences[0].link)\r",
+											"                postman.setEnvironmentVariable(\"PoolMonitorURI\", jsonData.monitorHttpReferences[0].link.replace(/localhost/g,bigiqmgmt))\r",
+											"                postman.setEnvironmentVariable(\"MonitorSelfLink\", jsonData.monitorHttpReferences[0].link)\r",
+											"                postman.setEnvironmentVariable(\"MonitorSelfURI\", jsonData.monitorHttpReferences[0].link.replace(/localhost/g,bigiqmgmt))\r",
+											"                postman.setEnvironmentVariable(\"MonitorID\", jsonData.monitorHttpReferences[0].id)\r",
+											"                postman.setEnvironmentVariable(\"MonitorType\", jsonData.monitorHttpReferences[0].kind)\r",
+											"                postman.setEnvironmentVariable(\"MonitorTypeString\", \"monitorHttpReferences\")\r",
+											"                postman.setEnvironmentVariable(\"MonitorTypeName\", \"http\")\r",
+											"            break;\r",
+											"            case \"cm:adc-core:working-config:ltm:monitor:https:adcmonitorhttpsstate\":\r",
+											"                postman.setEnvironmentVariable(\"PoolMonitorLink\", jsonData.monitorHttpsReferences[0].link)\r",
+											"                postman.setEnvironmentVariable(\"PoolMonitorURI\", jsonData.monitorHttpsReferences[0].link.replace(/localhost/g,bigiqmgmt))\r",
+											"                postman.setEnvironmentVariable(\"MonitorSelfLink\", jsonData.monitorHttpsReferences[0].link)\r",
+											"                postman.setEnvironmentVariable(\"MonitorSelfURI\", jsonData.monitorHttpsReferences[0].link.replace(/localhost/g,bigiqmgmt))\r",
+											"                postman.setEnvironmentVariable(\"MonitorID\", jsonData.monitorHttpsReferences[0].id)\r",
+											"                postman.setEnvironmentVariable(\"MonitorType\", jsonData.monitorHttpsReferences[0].kind)\r",
+											"                postman.setEnvironmentVariable(\"MonitorTypeString\", \"monitorHttpsReferences\")\r",
+											"                postman.setEnvironmentVariable(\"MonitorTypeName\", \"https\")\r",
+											"            break;\r",
+											"            case \"cm:adc-core:working-config:ltm:monitor:tcp:adcmonitortcpstate\":\r",
+											"                postman.setEnvironmentVariable(\"PoolMonitorLink\", jsonData.monitorTcpReferences[0].link)\r",
+											"                postman.setEnvironmentVariable(\"PoolMonitorURI\", jsonData.monitorTcpReferences[0].link.replace(/localhost/g,bigiqmgmt))\r",
+											"                postman.setEnvironmentVariable(\"MonitorSelfLink\", jsonData.monitorTcpReferences[0].link)\r",
+											"                postman.setEnvironmentVariable(\"MonitorSelfURI\", jsonData.monitorTcpReferences[0].link.replace(/localhost/g,bigiqmgmt))\r",
+											"                postman.setEnvironmentVariable(\"MonitorID\", jsonData.monitorTcpReferences[0].id)\r",
+											"                postman.setEnvironmentVariable(\"MonitorType\", jsonData.monitorTcpReferences[0].kind)\r",
+											"                postman.setEnvironmentVariable(\"MonitorTypeString\", \"monitorTcpReferences\")\r",
+											"                postman.setEnvironmentVariable(\"MonitorTypeName\", \"tcp\")\r",
+											"            break;\r",
+											"        }\r",
+											"       \r",
+											"        postman.setEnvironmentVariable(\"PoolJSON\", response.text());\r",
+											"        console.log(\"Found JSON for the Pool, storing in Environment variable 'PoolJSON'\")\r",
+											"\r",
+											"        //log if verbose set to greater than 0, do not log if set to 0\r",
+											"        if (pm.variables.get(\"BeVerbose\")) {\r",
+											"            console.log(\"updated the following environmental information:\")\r",
+											"            console.log(\"Set pool device link to: \"+pm.variables.get(\"PoolDeviceLink\"))\r",
+											"            console.log(\"Set pool members link to: \"+pm.variables.get(\"PoolMembersLink\"))\r",
+											"            console.log(\"Set pool monitor link to: \"+pm.variables.get(\"PoolMonitorLink\"))\r",
+											"            console.log(\"Set monitor self link to: \"+pm.variables.get(\"MonitorSelfLink\"))\r",
+											"            console.log(\"Set monitor id to: \"+pm.variables.get(\"MonitorID\"))\r",
+											"            //console.log(pm.variables.get(\"PoolJSON\"))\r",
+											"        }\r",
+											"    }\r",
+											"});\r",
+											" \r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/virtual?$filter=name eq '*{{SearchVirtualName}}*'",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"virtual"
+									],
+									"query": [
+										{
+											"key": "$filter",
+											"value": "name eq '*{{SearchVirtualName}}*'"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get remaining Virtual Information",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"//begin parsing\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"let poolmembers = pm.globals.get(\"itemOfArray\");\r",
+											"\r",
+											"poolmembers = jsonData.items;\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"// get pool member info\r",
+											"for (poolmember in poolmembers){\r",
+											"\tpoolmemberid=jsonData.items[poolmember].id\r",
+											"\tpostman.setEnvironmentVariable(\"PoolMemberJSON\", responseBody);\r",
+											"    console.log(\"updated the pool member JSON.\")\r",
+											"}\r",
+											"\r",
+											"//now get the monitor info inline\r",
+											"MgmtIP = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"const options = {\r",
+											"    method: 'GET',\r",
+											"    url: pm.variables.get(\"MonitorSelfURI\"),\r",
+											"    header: 'ContentType: application/json',\r",
+											"    header: 'X-F5-Auth-Token: '+pm.variables.get(\"AuthToken\"),\r",
+											"    body: \"\"\r",
+											"\r",
+											"};\r",
+											"\r",
+											"pm.sendRequest(options, (error, response) => {\r",
+											"    if (error) {\r",
+											"        throw new Error(error);\r",
+											"    } else {\r",
+											"        var jsonData = response.json()\r",
+											"\r",
+											"        if (pm.variables.get(\"MonitorID\") == jsonData.id) {\r",
+											"            console.log(\"Found JSON for Monitor, storing in Environment variable 'MonitorJSON'\")\r",
+											"            postman.setEnvironmentVariable(\"MonitorJSON\", response.text())\r",
+											"            postman.setEnvironmentVariable(\"SearchMonitorName\", jsonData.name)\r",
+											"\r",
+											"            //log if verbose set to greater than 0, do not log if set to 0\r",
+											"            if (pm.variables.get(\"BeVerbose\")) {\r",
+											"                console.log(\"updated the following environmental information:\")\r",
+											"                console.log(\"Set monitor JSON to: \"+pm.variables.get(\"MonitorJSON\"))\r",
+											"                console.log(\"Set search monitor name to: \"+pm.variables.get(\"SearchMonitorName\"))\r",
+											"            }\r",
+											"       }\r",
+											"    }\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{PoolMembersURI}}",
+									"host": [
+										"{{PoolMembersURI}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Monitor Functions",
+					"item": [
+						{
+							"name": "Create new monitor from Environment variables",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"//console.log(bigiqmgmt)\r",
+											"//console.log(pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'))\r",
+											"//console.log(pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'))\r",
+											"//postman.setEnvironmentVariable(\"NewMonitorLink\", pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'));\r",
+											"//postman.setEnvironmentVariable(\"NewDeviceLink\", pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'));\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/*\r",
+											"Inputs:\r",
+											"    NewMonitorTypeName     - User Supplied value for the type of monitor being created.\r",
+											"    DeviceSilo             - The name of the silo the configuration for the device is in.\r",
+											"    NewMonitorName         - The name of teh new monitor.\r",
+											"    NewMonitorRecvString   - The Receive string for the monitor.\r",
+											"    NewMonitorSendString   - The Send strin for the monitor.\r",
+											"\r",
+											"Outputs:\r",
+											"    MonitorID           - The ID of the monitor created\r",
+											"    MonitorSelfLink     - The link to teh monitor for adding to JSON documents\r",
+											"    MonitorSelfURI      - The link to the monitor used in REST calls\r",
+											"    NewMonitorLink      - The link to the monitor used in REST calls\r",
+											"\tMonitorTypeString\t- Programmatically populated value, The string of the path used to reference the type in a JSON document.\r",
+											"\tMonitorTypeName\t\t- Programmatically populated value, The string used to reference the type in a JSON document.\r",
+											"*/\r",
+											"//begin parsing\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"postman.setEnvironmentVariable(\"MonitorID\", jsonData.id);\r",
+											"postman.setEnvironmentVariable(\"MonitorSelfLink\", jsonData.selfLink);\r",
+											"postman.setEnvironmentVariable(\"MonitorSelfURI\", jsonData.selfLink.replace(/localhost/g,bigiqmgmt));\r",
+											"postman.setEnvironmentVariable(\"NewMonitorLink\", jsonData.selfLink);\r",
+											"var monitortype = jsonData.kind\r",
+											"\r",
+											"postman.setEnvironmentVariable(\"MonitorType\", monitortype);\r",
+											"postman.setEnvironmentVariable(\"NewMonitorType\", monitortype);\r",
+											"//MonitorTypeString\r",
+											"        switch(monitortype) {\r",
+											"            case \"cm:adc-core:working-config:ltm:monitor:http:adcmonitorhttpstate\":\r",
+											"                postman.setEnvironmentVariable(\"MonitorTypeString\", \"monitorHttpReferences\")\r",
+											"                postman.setEnvironmentVariable(\"MonitorTypeName\", \"http\")\r",
+											"            break;\r",
+											"            case \"cm:adc-core:working-config:ltm:monitor:https:adcmonitorhttpsstate\":\r",
+											"                postman.setEnvironmentVariable(\"MonitorTypeString\", \"monitorHttpsReferences\")\r",
+											"                postman.setEnvironmentVariable(\"MonitorTypeName\", \"https\")\r",
+											"            break;\r",
+											"            case \"cm:adc-core:working-config:ltm:monitor:tcp:adcmonitortcpstate\":\r",
+											"                postman.setEnvironmentVariable(\"MonitorTypeString\", \"monitorTcpReferences\")\r",
+											"                postman.setEnvironmentVariable(\"MonitorTypeName\", \"tcp\")\r",
+											"            break;\r",
+											"            case \"cm:adc-core:working-config:ltm:monitor:udp:adcmonitorudpstate\":\r",
+											"                postman.setEnvironmentVariable(\"MonitorTypeString\", \"monitorUdpReferences\")\r",
+											"                postman.setEnvironmentVariable(\"MonitorTypeName\", \"udp\")\r",
+											"            break;\r",
+											"        }\r",
+											"\r",
+											"postman.setEnvironmentVariable(\"MonitorJSON\", responseBody);\r",
+											"postman.setEnvironmentVariable(\"NewMonitorLink\", jsonData.selfLink);\r",
+											"postman.setEnvironmentVariable(\"MonitorSelfLink\", jsonData.selfLink);\r",
+											"postman.setEnvironmentVariable(\"MonitorSelfURI\", jsonData.selfLink.replace(/localhost/g,bigiqmgmt));\r",
+											"\r",
+											"//log data saved\r",
+											"console.log (\"Now you may continue to add this monitor where needed.\")\r",
+											"//log if verbose set to greater than 0, do not log if set to 0\r",
+											"if (pm.variables.get(\"BeVerbose\")) {\r",
+											"    //console.log(\"\")\r",
+											"    console.log(\"updated the following environmental information:\")\r",
+											"    console.log(\"Set Monitor ID to: \"+pm.variables.get(\"MonitorID\"))\r",
+											"    console.log(\"Set Monitor Self Link to: \"+pm.variables.get(\"MonitorSelfLink\"));\r",
+											"    console.log(\"Set Monitor Type String to: \"+pm.variables.get(\"MonitorTypeString\"));\r",
+											"    //MonitorType\r",
+											"    console.log(\"Set Monitor Type Name to: \"+pm.variables.get(\"MonitorTypeName\"));\r",
+											"}\r",
+											"console.log (\"Gathering the specific Monitor's json from the REST API.\")\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cm\": {\r\n        \"silo\": \"{{DeviceSilo}}\"\r\n    },\r\n    \"kind\": \"cm:adc-core:working-config:ltm:monitor:{{NewMonitorTypeName}}:adcmonitor{{NewMonitorTypeName}}state\",\r\n    \"name\": \"{{NewMonitorName}}\",\r\n    \"recv\": \"{{NewMonitorRecvString}}\",\r\n    \"send\": \"{{NewMonitorSendString}}\",\r\n    \"timeout\": 16,\r\n    \"interval\": 5,\r\n    \"partition\": \"Common\",\r\n    \"defaultsFromReference\": {\r\n        \"name\": \"{{NewMonitorTypeName}}\"\r\n    }\r\n}"
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/monitor/{{NewMonitorTypeName}}/",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"monitor",
+										"{{NewMonitorTypeName}}",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete monitor from Environment variables",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"//console.log(bigiqmgmt)\r",
+											"//console.log(pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'))\r",
+											"//console.log(pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'))\r",
+											"//postman.setEnvironmentVariable(\"NewMonitorLink\", pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'));\r",
+											"//postman.setEnvironmentVariable(\"NewDeviceLink\", pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'));\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/*\r",
+											"Inputs:\r",
+											"    NewMonitorTypeName  - User Supplied value for the type of monitor being created\r",
+											"    MonitorID           - The ID of the monitor created\r",
+											"Outputs:\r",
+											"    MonitorID           - The ID of teh monitor created, set to \"\".\r",
+											"    MonitorSelfLink     - The link to teh monitor for adding to JSON documents, set to \"\".\r",
+											"    NewMonitorLink      - The link to the monitor used in REST calls, set to \"\".\r",
+											"    MonitorType         - The \"kind\" of monitor, set to \"\".\r",
+											"    MonitorSelfURI      - The link to the monitor used in REST calls, set to \"\".\r",
+											"\tMonitorTypeString\t- Programmatically populated value, The string of the path used to reference the type in a JSON document, set to \"\".\r",
+											"\tMonitorTypeName\t\t- Programmatically populated value, The string used to reference the type in a JSON document, set to \"\".\r",
+											"*/\r",
+											"//begin parsing\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"postman.setEnvironmentVariable(\"MonitorID\", \"\");\r",
+											"postman.setEnvironmentVariable(\"MonitorSelfLink\", \"\");\r",
+											"postman.setEnvironmentVariable(\"MonitorSelfURI\", \"\");\r",
+											"postman.setEnvironmentVariable(\"NewMonitorLink\", \"\");\r",
+											"postman.setEnvironmentVariable(\"MonitorType\", \"\");\r",
+											"postman.setEnvironmentVariable(\"MonitorTypeString\", \"\")\r",
+											"postman.setEnvironmentVariable(\"MonitorTypeName\", \"\")\r",
+											"\r",
+											"postman.setEnvironmentVariable(\"MonitorJSON\", responseBody);\r",
+											"\r",
+											"//log data saved\r",
+											"console.log (\"Now you may continue to add this monitor where needed.\")\r",
+											"//log if verbose set to greater than 0, do not log if set to 0\r",
+											"if (pm.variables.get(\"BeVerbose\")) {\r",
+											"    //console.log(\"\")\r",
+											"    console.log(\"updated the following environmental information:\")\r",
+											"    console.log(\"Set Monitor ID to: \"+pm.variables.get(\"MonitorID\"))\r",
+											"    console.log(\"Set Monitor Self Link to: \"+pm.variables.get(\"MonitorSelfLink\"));\r",
+											"    console.log(\"Set Monitor Type String to: \"+pm.variables.get(\"MonitorTypeString\"));\r",
+											"    //MonitorType\r",
+											"    console.log(\"Set Monitor Type Name to: \"+pm.variables.get(\"MonitorTypeName\"));\r",
+											"}\r",
+											"console.log (\"Gathering the specific Monitor's json from the REST API.\")\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/monitor/{{NewMonitorTypeName}}/{{MonitorID}}",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"monitor",
+										"{{NewMonitorTypeName}}",
+										"{{MonitorID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find monitor from Name",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"//console.log(bigiqmgmt)\r",
+											"//console.log(pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'))\r",
+											"//console.log(pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'))\r",
+											"//postman.setEnvironmentVariable(\"NewMonitorLink\", pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'));\r",
+											"//postman.setEnvironmentVariable(\"NewDeviceLink\", pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'));\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/*\r",
+											"Inputs:\r",
+											"    MonitorTypeName     - User Supplied value for the type of monitor being created\r",
+											"    SearchMonitorName   - The name of the monitor to find\r",
+											"\r",
+											"Outputs:\r",
+											"    MonitorID           - The ID of teh monitor created\r",
+											"    MonitorType         - \r",
+											"\tMonitorTypeString\t- Programmatically populated value, The string of the path used to reference the type in a JSON document.\r",
+											"\tMonitorTypeName\t\t- Programmatically populated value, The string used to reference the type in a JSON document.\r",
+											"    MonitorSelfLink     - The link to the monitor for adding to JSON documents\r",
+											"    MonitorSelfURI      - The link to the monitor used in REST calls\r",
+											"*/\r",
+											"\r",
+											"//begin parsing\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"let monitors = pm.globals.get(\"itemOfArray\");\r",
+											"\r",
+											"monitors = jsonData.items;\r",
+											"//console.log (monitors)\r",
+											"\r",
+											"//console.log(\"Items: \"+jsonData.items[1].name)\r",
+											"searchname = pm.variables.get(\"SearchMonitorName\")\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"console.log(\"Searching for monitor named: \"+searchname)\r",
+											"for (monitor in monitors){\r",
+											"    if (jsonData.items[monitor].name == searchname) {\r",
+											"        console.log(\"Found Monitor named \"+searchname+\"!\")\r",
+											"        monitorid=jsonData.items[monitor].id\r",
+											"        //gather data for environment Variables related to the object\r",
+											"        postman.setEnvironmentVariable(\"MonitorID\", monitorid);\r",
+											"        postman.setEnvironmentVariable(\"MonitorType\", jsonData.items[monitor].kind);\r",
+											"//MonitorTypeString\r",
+											"        switch(jsonData.items[monitor].kind) {\r",
+											"            case \"cm:adc-core:working-config:ltm:monitor:http:adcmonitorhttpstate\":\r",
+											"                postman.setEnvironmentVariable(\"MonitorTypeString\", \"monitorHttpReferences\")\r",
+											"                postman.setEnvironmentVariable(\"MonitorTypeName\", \"http\")\r",
+											"            break;\r",
+											"            case \"cm:adc-core:working-config:ltm:monitor:https:adcmonitorhttpsstate\":\r",
+											"                postman.setEnvironmentVariable(\"MonitorTypeString\", \"monitorHttpsReferences\")\r",
+											"                postman.setEnvironmentVariable(\"MonitorTypeName\", \"https\")\r",
+											"            break;\r",
+											"            case \"cm:adc-core:working-config:ltm:monitor:tcp:adcmonitortcpstate\":\r",
+											"                postman.setEnvironmentVariable(\"MonitorTypeString\", \"monitorTcpReferences\")\r",
+											"                postman.setEnvironmentVariable(\"MonitorTypeName\", \"tcp\")\r",
+											"            break;\r",
+											"        }\r",
+											"        //MonitorJSON\r",
+											"        postman.setEnvironmentVariable(\"MonitorSelfLink\", jsonData.items[monitor].selfLink);\r",
+											"        postman.setEnvironmentVariable(\"MonitorSelfURI\", jsonData.items[monitor].selfLink.replace(/localhost/g,bigiqmgmt));\r",
+											"\r",
+											"        //log data saved\r",
+											"        console.log (\"Found \"+searchname+\": Now you may continue to get the specific monitor's json from the REST API.\")\r",
+											"        //log if verbose set to greater than 0, do not log if set to 0\r",
+											"        if (pm.variables.get(\"BeVerbose\")) {\r",
+											"            //console.log(\"\")\r",
+											"            console.log(\"updated the following environmental information:\")\r",
+											"            console.log(\"Set monitor ID to: \"+pm.variables.get(\"MonitorID\"))\r",
+											"            console.log(\"Set monitor Self Link to: \"+pm.variables.get(\"MonitorSelfLink\"))\r",
+											"            console.log(\"Set monitor LTM Device to: \"+pm.variables.get(\"MonitorDeviceLink\"))\r",
+											"            console.log(\"Set monitor Profiles Link to: \"+pm.variables.get(\"MonitorProfilesLink\"))\r",
+											"        }\r",
+											"        console.log (\"Gathering the specific monitor's json from the REST API.\")\r",
+											"    }\r",
+											"}\r",
+											"\r",
+											"//now get the virtual server's JSON inline\r",
+											"MgmtIP = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"const options = {\r",
+											"    method: 'GET',\r",
+											"    url: pm.variables.get(\"MonitorSelfURI\"),\r",
+											"    header: 'ContentType: application/json',\r",
+											"    header: 'X-F5-Auth-Token: '+pm.variables.get(\"AuthToken\"),\r",
+											"    body: \"\"\r",
+											"};\r",
+											"\r",
+											"pm.sendRequest(options, (error, response) => {\r",
+											"    if (error) {\r",
+											"        throw new Error(error);\r",
+											"    } else {\r",
+											"        console.log(\"Found JSON for Monitor (\"+searchname+\"), storing in Environment variable 'MonitorJSON'\")\r",
+											"        postman.setEnvironmentVariable(\"MonitorJSON\", response.text())\r",
+											"    }\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/monitor/{{MonitorTypeName}}/",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"monitor",
+										"{{MonitorTypeName}}",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Node Functions",
+					"item": [
+						{
+							"name": "Get Node ID From IP Address",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/*\r",
+											"Inputs:\r",
+											"    SearchNodeName - The name of the node to find in all nodes.\r",
+											"Outputs:\r",
+											"    NodeID          - The ID of the found node.\r",
+											"    NodeSelfLink    - The link to the node's configuration to use in JSON Documents used to make a REST call\r",
+											"    NodeSelfURI     - The link to a node's configuration to use when making a REST call.\r",
+											"    NodeDescription - The node's description.\r",
+											"    NodeName        - The name of the Node, automatically the same as the IP address.\r",
+											"    NodeJSON        - The JSON output representing the Node3's configuration.\r",
+											"*/\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"let nodes = pm.globals.get(\"itemOfArray\");\r",
+											"MgmtIP = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"nodes = jsonData.items;\r",
+											"//console.log (nodes)\r",
+											"\r",
+											"//console.log(\"Items: \"+jsonData.items[1].name)\r",
+											"searchname = pm.variables.get(\"SearchNodeName\")\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"for (node in nodes){\r",
+											"    if (jsonData.items[node].name == searchname) {\r",
+											"        nodeid=jsonData.items[node].id\r",
+											"        postman.setEnvironmentVariable(\"NodeID\", nodeid);\r",
+											"        postman.setEnvironmentVariable(\"NodeSelfLink\", jsonData.items[node].selfLink);\r",
+											"        postman.setEnvironmentVariable(\"NodeSelfURI\", jsonData.items[node].selfLink.replace(/localhost/g,bigiqmgmt));\r",
+											"        postman.setEnvironmentVariable(\"NodeDescription\", jsonData.items[node].description);\r",
+											"        postman.setEnvironmentVariable(\"NodeName\", jsonData.items[node].name);\r",
+											"        //PoolMemberSelfLink\r",
+											"        console.log (\"Now you may continue to get the specific node's json from the REST API.\")\r",
+											"    }\r",
+											"}\r",
+											"\r",
+											"pm.test(\"Items Returned > 0 Test\", function () {\r",
+											"    var jsonData = JSON.parse(responseBody);\r",
+											"    const responseJson = pm.response.json();\r",
+											"    // this is technically not 100% accurate, we want it to actually be exactly 1 in most cases.\r",
+											"    pm.expect(responseJson.totalItems).to.be.greaterThan(0);\r",
+											"    \r",
+											"});\r",
+											"//now get the node's JSON inline\r",
+											"const options = {\r",
+											"    method: 'GET',\r",
+											"    url: pm.variables.get(\"NodeSelfLink\").replace(/localhost/g,MgmtIP),\r",
+											"    header: 'ContentType: application/json',\r",
+											"    header: 'X-F5-Auth-Token: '+pm.variables.get(\"AuthToken\"),\r",
+											"    body: \"\"\r",
+											"};\r",
+											"\r",
+											"pm.sendRequest(options, (error, response) => {\r",
+											"    if (error) {\r",
+											"        throw new Error(error);\r",
+											"    } else {\r",
+											"        console.log(\"Found JSON for Node, storing in Environment variable 'NodeJSON'\")\r",
+											"        postman.setEnvironmentVariable(\"NodeJSON\", response.text())\r",
+											"        console.log(pm.variables.get(\"NodeSelfLink\"))\r",
+											"        console.log(pm.variables.get(\"NodeJSON\"))\r",
+											"    }\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/node?$filter=name eq '{{SearchNodeName}}'",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"node"
+									],
+									"query": [
+										{
+											"key": "$filter",
+											"value": "name eq '{{SearchNodeName}}'"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Node From Environment",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/*\r",
+											"Inputs:\r",
+											"    SearchNodeName        - User Input\r",
+											"    NodeDescription - User Input\r",
+											"    DeviceSelfLink  - From \"Get Device by Address\"\r",
+											"\r",
+											"Outputs:\r",
+											"    NodeID          - \r",
+											"    NodeName        - \r",
+											"    NodeSelfLink    - \r",
+											"    NodeSelfURI     - \r",
+											"    NodeDescription - \r",
+											"    NodeName        - \r",
+											"    NodeJSON        - \r",
+											"\r",
+											"*/\r",
+											"\r",
+											"//begin parsing\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"searchname = pm.variables.get(\"SearchNodeName\")\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"    nodeid=jsonData.id\r",
+											"    postman.setEnvironmentVariable(\"NodeID\", nodeid);\r",
+											"    postman.setEnvironmentVariable(\"NodeSelfLink\", jsonData.selfLink);\r",
+											"    postman.setEnvironmentVariable(\"NodeSelfURI\", jsonData.selfLink.replace(/localhost/g,bigiqmgmt));\r",
+											"    postman.setEnvironmentVariable(\"NodeDescription\", jsonData.description);\r",
+											"    postman.setEnvironmentVariable(\"NodeName\", jsonData.name);\r",
+											"    postman.setEnvironmentVariable(\"NodeJSON\", responseBody)\r",
+											"    console.log(\"Found JSON for Node, storing in Environment variable 'NodeJSON'\")\r",
+											"    //log data saved\r",
+											"    console.log (\"Created \"+searchname+\": Now you may continue to get the specific node's json from the REST API.\")\r",
+											"    //log if verbose set to greater than 0, do not log if set to 0\r",
+											"    if (pm.variables.get(\"BeVerbose\")) {\r",
+											"        //console.log(\"\")\r",
+											"        console.log(\"Updated the following environmental information:\")\r",
+											"        console.log(\"Set node ID to: \"+pm.variables.get(\"NodeID\"))\r",
+											"        console.log(\"Set node Self Link to: \"+pm.variables.get(\"NodeSelfLink\"))\r",
+											"        console.log(\"Set node Self Link to: \"+pm.variables.get(\"NodeSelfURI\"))\r",
+											"        console.log(\"Set node Profiles Link to: \"+pm.variables.get(\"DeviceSilo\"))\r",
+											"    }\r",
+											"    console.log (\"Gathering the specific node's json from the REST API.\")\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"cm\": {\r\n\t\t\"silo\": \"{{DeviceSilo}}\"\r\n\t},\r\n\t\"kind\": \"cm:adc-core:working-config:ltm:node:adcnodestate\",\r\n\t\"name\": \"{{SearchNodeName}}\",\r\n\t\"ratio\": 1,\r\n\t\"address\": \"{{SearchNodeName}}\",\r\n\t\"partition\": \"Common\",\r\n\t\"rateLimit\": \"disabled\",\r\n\t\"generation\": 1,\r\n\t\"description\": \"{{NodeDescription}}\",\r\n\t\"isEphemeral\": false,\r\n\t\"stateConfig\": \"user-up\",\r\n\t\"sessionConfig\": \"user-enabled\",\r\n\t\"connectionLimit\": 0,\r\n\t\"deviceReference\": {\r\n\t\t\"link\": \"{{DeviceSelfLink}}\"\r\n\t}\r\n}\r\n"
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/node/",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"node",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Node From Environment",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/*\r",
+											"Inputs:\r",
+											"    NodeID        - Programatic input (from another REST call)\r",
+											"\r",
+											"Outputs:\r",
+											"    NodeID          - Set to Blank\r",
+											"    NodeName        - Set to Blank\r",
+											"    NodeSelfLink    - Set to Blank\r",
+											"    NodeSelfURI     - Set to Blank\r",
+											"    NodeJSON        - Set to Blank\r",
+											"    NodeDescription - Set to Blank\r",
+											"*/\r",
+											"\r",
+											"//begin parsing\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"searchname = pm.variables.get(\"SearchNodeName\")\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"    nodeid=jsonData.id\r",
+											"    //gather data for environment Variables related to the object\r",
+											"    postman.setEnvironmentVariable(\"NodeID\", \"\");\r",
+											"    postman.setEnvironmentVariable(\"NodeName\", \"\")\r",
+											"    postman.setEnvironmentVariable(\"NodeSelfLink\", \"\")\r",
+											"    postman.setEnvironmentVariable(\"NodeSelfURI\", \"\")\r",
+											"    postman.setEnvironmentVariable(\"NodeJSON\", \"\")\r",
+											"    postman.setEnvironmentVariable(\"NodeDescription\", \"\")\r",
+											"    //log data saved\r",
+											"    console.log (\"Deleted \"+searchname+\".\")\r",
+											"    //log if verbose set to greater than 0, do not log if set to 0\r",
+											"    if (pm.variables.get(\"BeVerbose\")) {\r",
+											"        //console.log(\"\")\r",
+											"        console.log(\"updated the following environmental information:\")\r",
+											"        console.log(\"Set node ID to: \"+pm.variables.get(\"NodeID\"))\r",
+											"        console.log(\"Set node Self Link to: \"+pm.variables.get(\"NodeSelfLink\"))\r",
+											"        console.log(\"Set node Self URI to: \"+pm.variables.get(\"NodeSelfURI\"))\r",
+											"        console.log(\"DeviceSilo is: \"+pm.variables.get(\"DeviceSilo\"))\r",
+											"        console.log(\"Set node NodeJSON Link to: \"+pm.variables.get(\"NodeJSON\"))\r",
+											"        console.log(\"Set node NodeDescription to: \"+pm.variables.get(\"NodeDescription\"))\r",
+											"    }\r",
+											"    console.log (\"Gathering the specific node's json from the REST API.\")\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/node/{{NodeID}}",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"node",
+										"{{NodeID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Pool Functions",
+					"item": [
+						{
+							"name": "Get Pool Information from Name",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"//begin parsing\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"let pools = pm.globals.get(\"itemOfArray\");\r",
+											"\r",
+											"pools = jsonData.items;\r",
+											"//console.log (pools)\r",
+											"\r",
+											"//console.log(\"Items: \"+jsonData.items[1].name)\r",
+											"searchname = pm.variables.get(\"SearchPoolName\")\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"for (pool in pools){\r",
+											"    if (jsonData.items[pool].name == searchname) {\r",
+											"        poolid=jsonData.items[pool].id\r",
+											"        //gather data for environment Variables related to the object\r",
+											"        postman.setEnvironmentVariable(\"PoolID\", poolid);\r",
+											"        postman.setEnvironmentVariable(\"PoolSelfLink\", jsonData.items[pool].selfLink);\r",
+											"        postman.setEnvironmentVariable(\"PoolSelfURI\", jsonData.items[pool].selfLink.replace(/localhost/g,bigiqmgmt));\r",
+											"        postman.setEnvironmentVariable(\"PoolMembersLink\", jsonData.items[pool].membersCollectionReference.link);\r",
+											"        postman.setEnvironmentVariable(\"PoolMembersURI\", jsonData.items[pool].membersCollectionReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"        postman.setEnvironmentVariable(\"PoolDeviceLink\", jsonData.items[pool].deviceReference.link);\r",
+											"        postman.setEnvironmentVariable(\"PoolDeviceURI\", jsonData.items[pool].deviceReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"        \r",
+											"        //postman.setEnvironmentVariable(\"\", jsonData.items[pool].);\r",
+											"        //postman.setEnvironmentVariable(\"\", jsonData.items[pool].);\r",
+											"        //postman.setEnvironmentVariable(\"\", jsonData.items[pool].);\r",
+											"\r",
+											"        //log data saved\r",
+											"        console.log (\"Found \"+searchname+\": Now you may continue to get the specific pool's json from the REST API.\")\r",
+											"        //log if verbose set to greater than 0, do not log if set to 0\r",
+											"        if (pm.variables.get(\"BeVerbose\")) {\r",
+											"            //console.log(\"\")\r",
+											"            console.log(\"updated the following environmental information:\")\r",
+											"            console.log(\"Set pool ID to: \"+pm.variables.get(\"PoolID\"))\r",
+											"            console.log(\"Set Pool Self Link to: \"+pm.variables.get(\"PoolSelfLink\"))\r",
+											"            console.log(\"Set pool Self URI to: \"+pm.variables.get(\"PoolSelfURI\"))\r",
+											"            console.log(\"Set pool LTM Device to: \"+pm.variables.get(\"PoolDeviceLink\"))\r",
+											"        }\r",
+											"        console.log (\"Gathering the specific pool's json from the REST API.\")\r",
+											"    }\r",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/pool/?$filter=name eq '*{{SearchPoolName}}*'",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"pool",
+										""
+									],
+									"query": [
+										{
+											"key": "$filter",
+											"value": "name eq '*{{SearchPoolName}}*'"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Pool from Environment variables",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"console.log(bigiqmgmt)\r",
+											"console.log(pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'))\r",
+											"console.log(pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'))\r",
+											"postman.setEnvironmentVariable(\"NewMonitorLink\", pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'));\r",
+											"postman.setEnvironmentVariable(\"NewDeviceLink\", pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'));\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/*\r",
+											"Pre-Reqs:\r",
+											"    Previously populated monitor information is required, as is a device reference.\r",
+											"\r",
+											"Inputs:\r",
+											"    DeviceSilo          - Programatic input (from another REST call) or User Input\r",
+											"        This can be user populated, but is populated automatically with most device calls. \r",
+											"        Must be the same as the target when multiple solos are used.\r",
+											"    NewDescription      - User Input\r",
+											"        This is User Supplied if creating a new Pool, Programatic Supplied if modifying a new pool.\r",
+											"    NewDeviceLink       - Programatic input (from another REST call) or User Input\r",
+											"        This is generally progamatically populated, it is a selfLink specifying the target Device that is managed.\r",
+											"    NewPoolName         - User Input\r",
+											"        This is User Supplied if creating a new Pool, Programatic Supplied if modifying a new pool.\r",
+											"    MonitorTypeString   - Programatic input (from another REST call) or User Input\r",
+											"        This should be programatically populated. This is the string identifier in the JSON that specifies the type of monitor to/from REST.\r",
+											"        This iss NOT the same string as is used in a TMSH command; monitorHttpReferences, monitorHttpsReferences, monitorTcpReferences, etc\r",
+											"    MonitorTypeName     - Programatic input (from another REST call) or User Input\r",
+											"        This can be user provided, in a search for example, or is programatically provided. It is the type of monitor. \r",
+											"        Unlike above, this is teh same string used in a tmsh command; http, https, tcp, etc\r",
+											"    NewMonitorLink      - Programatic input (from another REST call) or User Input\r",
+											"        This should be programatically populated. This is a link to teh device that the pool is to be created on.\r",
+											"*/\r",
+											"\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"postman.setEnvironmentVariable(\"PoolID\", jsonData.id);\r",
+											"postman.setEnvironmentVariable(\"PoolDeviceLink\", jsonData.deviceReference.link.replace(/localhost/g,bigiqmgmt))\r",
+											"postman.setEnvironmentVariable(\"PoolMembersLink\", jsonData.membersCollectionReference.link)\r",
+											"postman.setEnvironmentVariable(\"PoolMembersURI\", jsonData.membersCollectionReference.link.replace(/localhost/g,bigiqmgmt))\r",
+											"postman.setEnvironmentVariable(\"PoolSelfLink\", jsonData.selfLink);\r",
+											"postman.setEnvironmentVariable(\"PoolSelfURI\", jsonData.selfLink.replace(/localhost/g,bigiqmgmt));\r",
+											"postman.setEnvironmentVariable(\"PoolJSON\", responseBody);\r",
+											"\r",
+											"\r",
+											"//use MonitorType to determine pool monitor reference\r",
+											"var monitortype = pm.variables.get(\"MonitorType\")\r",
+											"//console.log(monitortype)\r",
+											"switch(monitortype) {\r",
+											"    case \"cm:adc-core:working-config:ltm:monitor:http:adcmonitorhttpstate\":\r",
+											"        postman.setEnvironmentVariable(\"PoolMonitorLink\", jsonData.monitorHttpReferences[0].link)\r",
+											"//        console.log(jsonData.monitorHttpReferences[0].link)\r",
+											"        postman.setEnvironmentVariable(\"MonitorTypeName\", \"http\")\r",
+											"    break;\r",
+											"    case \"cm:adc-core:working-config:ltm:monitor:https:adcmonitorhttpsstate\":\r",
+											"        postman.setEnvironmentVariable(\"PoolMonitorLink\", jsonData.monitorHttpsReferences[0].link)\r",
+											"//        console.log(jsonData.monitorHttpsReferences[0].link)\r",
+											"        postman.setEnvironmentVariable(\"MonitorTypeName\", \"https\")\r",
+											"    break;\r",
+											"    case \"cm:adc-core:working-config:ltm:monitor:tcp:adcmonitortcpstate\":\r",
+											"        postman.setEnvironmentVariable(\"PoolMonitorLink\", jsonData.monitorTcpReferences[0].link)\r",
+											"//        console.log(jsonData.monitorTcpReferences[0].link)\r",
+											"        postman.setEnvironmentVariable(\"MonitorTypeName\", \"tcp\")\r",
+											"    break;\r",
+											"    case \"cm:adc-core:working-config:ltm:monitor:udp:adcmonitorudpstate\":\r",
+											"        postman.setEnvironmentVariable(\"PoolMonitorLink\", jsonData.monitorUdpReferences[0].link)\r",
+											"//        console.log(jsonData.monitorTcpReferences[0].link)\r",
+											"        postman.setEnvironmentVariable(\"MonitorTypeName\", \"udp\")\r",
+											"    break;\r",
+											"}\r",
+											"\r",
+											"if (pm.variables.get(\"BeVerbose\")) {\r",
+											"    console.log(\"Created Pool with the following properties:\")\r",
+											"    console.log(\"Name: \"+jsonData.name)\r",
+											"    console.log(\"Pool ID: \"+pm.variables.get(\"PoolID\"))\r",
+											"    console.log(\"Pool Device Link \"+pm.variables.get(\"PoolDeviceLink\"))\r",
+											"    console.log(\"Pool Members Link \"+pm.variables.get(\"PoolMembersLink\"))\r",
+											"    console.log(\"Pool Self Link \"+pm.variables.get(\"PoolSelfLink\"))\r",
+											"}\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cm\": {\r\n        \"silo\": \"{{DeviceSilo}}\"\r\n    },\r\n    \"allowNat\":true,\r\n   \"allowSnat\":true,\r\n   \"description\":\"{{NewDescription}}\",\r\n   \"ignorePersistedWeight\":false,\r\n   \"ipTosToClient\":null,\r\n   \"ipTosToServer\":null,\r\n   \"linkQosToClient\":65535,\r\n   \"linkQosToServer\":65535,\r\n   \"loadBalancingMode\":\"round-robin\",\r\n   \"monitorReferences\":[],\r\n   \"minActiveMembers\":0,\r\n   \"minUpMembers\":null,\r\n   \"queueDepthLimit\":0,\r\n   \"enableQueueOnConnectionLimit\":false,\r\n   \"queueTimeLimit\":0,\r\n   \"serviceDownAction\":\"none\",\r\n   \"slowRampTime\":10,\r\n   \"reselectTries\":0,\r\n   \"membersReference\":{\r\n      \"link\":\"\"\r\n   },\r\n   \"profiles\":[],\r\n   \"requestQueueTimeLimit\":0,\r\n   \"deviceReference\":{\r\n      \"link\":\"{{NewDeviceLink}}\"\r\n   },\r\n   \"partition\":\"Common\",\r\n   \"kind\":\"cm:adc-core:working-config:ltm:pool:adcpoolstate\",\r\n   \"name\":\"{{NewPoolName}}\",\r\n   \"{{MonitorTypeString}}\":[\r\n      {\r\n         \"name\":\"{{MonitorTypeName}}\",\r\n         \"partition\":\"Common\",\r\n         \"link\":\"{{NewMonitorLink}}\"\r\n      }\r\n   ],\r\n   \"ipTosToClientControl\":\"pass-through\",\r\n   \"ipTosToServerControl\":\"pass-through\"\r\n}"
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/pool",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"pool"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Pool from Environment variables",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/*\r",
+											"\r",
+											"Inputs:\r",
+											"    PoolID          - Programatic input (from another REST call) or User Input\r",
+											"\r",
+											"Outputs:\r",
+											"    None\r",
+											"*/\r",
+											"\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"console.log(\"Deleted Pool ID \"+pm.variables.get(\"PoolID\")+\" from BIGIQ device: \"+bigiqmgmt)\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/pool/{{PoolID}}",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"pool",
+										"{{PoolID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Pool member from Environment variables",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"console.log(bigiqmgmt)\r",
+											"console.log(pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'))\r",
+											"console.log(pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'))\r",
+											"postman.setEnvironmentVariable(\"NewMonitorLink\", pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'));\r",
+											"postman.setEnvironmentVariable(\"NewDeviceLink\", pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'));\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"/*\r",
+											"Inputs:\r",
+											"    PoolID          - The ID of the pool you wish to add a pool member to.\r",
+											"    NodeSelfLink    - The Self Link to the node you wish to add as a pool member\r",
+											"    NodeName        - The Name of the Node.\r",
+											"    PoolMemberPort  - User supplied value. The port tehNode is listening on.\r",
+											"    NodeDescription - User supplied value. The description for the Node.\r",
+											"\r",
+											"Outputs:\r",
+											"    NodeID          - The ID of the found node.\r",
+											"    NodeSelfLink    - The Self Link to the Node.\r",
+											"    NodeSelfURI     - The URI for the node to make changes via REST calls.\r",
+											"    NodeDescription - The description for the Node.\r",
+											"    NodeName        - The Name of the Node.\r",
+											"    NodeJSON        - The JSON for the Node reference.\r",
+											"*/\r",
+											"\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"postman.setEnvironmentVariable(\"PoolMemberSelfLink\", jsonData.selfLink);\r",
+											"postman.setEnvironmentVariable(\"PoolMemberID\", jsonData.id);\r",
+											"\r",
+											"if (pm.variables.get(\"BeVerbose\")) {\r",
+											"    console.log(\"Added Node to the Pool with the following properties:\")\r",
+											"    console.log(\"Name: \"+jsonData.name)\r",
+											"    console.log(\"Pool ID: \"+pm.variables.get(\"PoolID\"))\r",
+											"    console.log(\"Pool Device Link \"+pm.variables.get(\"PoolDeviceLink\"))\r",
+											"    console.log(\"Pool Members' Self Link \"+pm.variables.get(\"PoolMemberSelfLink\"))\r",
+											"}\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"nodeReference\":{\r\n      \"link\":\"{{NodeSelfLink}}\"\r\n   },\r\n   \"ratio\":1,\r\n   \"priorityGroup\":0,\r\n   \"connectionLimit\":0,\r\n   \"rateLimit\":\"disabled\",\r\n   \"name\":\"{{NodeName}}:{{PoolMemberPort}}\",\r\n   \"description\":\"{{NodeDescription}}\",\r\n   \"partition\":\"Common\",\r\n   \"port\":\"{{PoolMemberPort}}\"\r\n}"
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/pool/{{PoolID}}/members",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"pool",
+										"{{PoolID}}",
+										"members"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Pool member from Environment variables",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"console.log(bigiqmgmt)\r",
+											"console.log(pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'))\r",
+											"console.log(pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'))\r",
+											"postman.setEnvironmentVariable(\"NewMonitorLink\", pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'));\r",
+											"postman.setEnvironmentVariable(\"NewDeviceLink\", pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'));\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"// this doesn't currently work, it doesn't have the pool member ID from a node look up.\r",
+											"\r",
+											"/*\r",
+											"Inputs:\r",
+											"    PoolID          - The ID of the pool you wish to modify a pool member.\r",
+											"    PoolMemberID    - The ID of the pool member you wish to delete.\r",
+											"\r",
+											"Outputs:\r",
+											"    None\r",
+											"*/\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"if (pm.variables.get(\"BeVerbose\")) {\r",
+											"    console.log(\"Deleted Node from the Pool with the following properties:\")\r",
+											"    console.log(\"Name: \"+jsonData.name)\r",
+											"    console.log(\"Pool ID: \"+pm.variables.get(\"PoolID\"))\r",
+											"    console.log(\"Pool Device Link \"+pm.variables.get(\"PoolDeviceLink\"))\r",
+											"    console.log(\"Pool Members Link \"+pm.variables.get(\"PoolMembersLink\"))\r",
+											"}\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/pool/{{PoolID}}/members/{{PoolMemberID}}",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"pool",
+										"{{PoolID}}",
+										"members",
+										"{{PoolMemberID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get pool's members JSON",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"console.log(\"Now modify the following JSON (inside the quotes)to post back to REST for modifying a pool after editing the JSON.\")\r",
+											"console.log(responseBody)\r",
+											"postman.setEnvironmentVariable(\"PoolMemberJSON\", responseBody);\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/pool/{{PoolID}}/members",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"pool",
+										"{{PoolID}}",
+										"members"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Virtual Server Functions",
+					"item": [
+						{
+							"name": "Create HTTP Profile",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/*\r",
+											"Pre-Reqs:\r",
+											"\r",
+											"Inputs:\r",
+											"    DeviceSilo          - Programatic input (from another REST call) or User Input\r",
+											"        This can be user populated, but is populated automatically with most device calls. \r",
+											"        Must be the same as the target when multiple solos are used.\r",
+											"\r",
+											"Outputs:\r",
+											"\r",
+											"*/\r",
+											"\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"var bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPID\", jsonData.id);\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPName\", jsonData.name);\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPSelfLink\", jsonData.selfLink);\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPSelfURI\", jsonData.selfLink.replace(/localhost/g,bigiqmgmt));\r",
+											"//postman.setEnvironmentVariable(\"xxxxx\", jsonData.xxxx);\r",
+											"//postman.setEnvironmentVariable(\"xxxxx\", jsonData.xxxx);\r",
+											"//postman.setEnvironmentVariable(\"xxxxx\", jsonData.xxxx);\r",
+											"\r",
+											"\r",
+											"if (pm.variables.get(\"BeVerbose\")) {\r",
+											"    console.log(\"Created http Profile with the following properties:\")\r",
+											"    console.log(\"Name: \"+jsonData.name)\r",
+											"    console.log(\"ID: \"+pm.variables.get(\"ProfileHTTPID\"))\r",
+											"    console.log(\"SelfLink\"+pm.variables.get(\"ProfileHTTPSelfLink\"))\r",
+											"    console.log(\"SelfURI\"+pm.variables.get(\"ProfileHTTPSelfURI\"))\r",
+											"}\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "       {\r\n            \"cm\": {\r\n                \"silo\": \"{{DeviceSilo}}\"\r\n            },\r\n            \"kind\": \"cm:adc-core:working-config:ltm:profile:http:adcprofilehttpstate\",\r\n            \"name\": \"{{NewHTTPProfileName}}\",\r\n            \"partition\": \"Common\",\r\n            \"proxyType\": \"reverse\",\r\n            \"isNoDelete\": false,\r\n            \"viaRequest\": \"preserve\",\r\n            \"enforcement\": {\r\n                \"pipeline\": \"allow\",\r\n                \"maxRequests\": 0.0,\r\n                \"knownMethods\": [\r\n                    \"CONNECT\",\r\n                    \"DELETE\",\r\n                    \"GET\",\r\n                    \"HEAD\",\r\n                    \"LOCK\",\r\n                    \"OPTIONS\",\r\n                    \"POST\",\r\n                    \"PROPFIND\",\r\n                    \"PUT\",\r\n                    \"TRACE\",\r\n                    \"UNLOCK\"\r\n                ],\r\n                \"maxHeaderSize\": 32768.0,\r\n                \"unknownMethod\": \"allow\",\r\n                \"maxHeaderCount\": 64.0,\r\n                \"excessClientHeaders\": \"reject\",\r\n                \"excessServerHeaders\": \"reject\",\r\n                \"oversizeClientHeaders\": \"reject\",\r\n                \"oversizeServerHeaders\": \"reject\",\r\n                \"isTruncatedRedirectsEnabled\": false\r\n            },\r\n            \"headerErase\": \"\",\r\n            \"viaHostName\": \"\",\r\n            \"viaResponse\": \"preserve\",\r\n            \"fallbackHost\": \"\",\r\n            \"headerInsert\": \"\",\r\n            \"lwsSeparator\": \"\",\r\n            \"explicitProxy\": {\r\n                \"hostNames\": [],\r\n                \"tunnelName\": \"\",\r\n                \"dnsResolver\": \"none\",\r\n                \"routeDomain\": \"\",\r\n                \"dnsErrorMessage\": \"\",\r\n                \"badRequestMessage\": \"\",\r\n                \"badResponseMessage\": \"\",\r\n                \"connectErrorMessage\": \"\",\r\n                \"defaultConnectHandling\": \"deny\"\r\n            },\r\n            \"basicAuthRealm\": \"\",\r\n            \"encryptCookies\": [],\r\n            \"redirectRewrite\": \"none\",\r\n            \"requestChunking\": \"sustain\",\r\n            \"serverAgentName\": \"BigIP\",\r\n            \"responseChunking\": \"sustain\",\r\n            \"isAcceptXffEnabled\": false,\r\n            \"encryptCookieSecret\": \"\",\r\n            \"fallbackStatusCodes\": [],\r\n            \"xffAlternativeNames\": [],\r\n            \"responseHeadersPermitted\": [],\r\n            \"isInsertXforwardedForEnabled\": {{NewHTTPProfileXFF}},\r\n            \"isOneconnectTransformationsEnabled\": true\r\n        }"
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/profile/http/",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"profile",
+										"http",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get serverssl Profile by Name",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"//begin parsing\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"let profiles = pm.globals.get(\"itemOfArray\");\r",
+											"\r",
+											"profiles = jsonData.items;\r",
+											"//console.log (profiles)\r",
+											"\r",
+											"//console.log(\"Items: \"+jsonData.items[1].name)\r",
+											"searchname = pm.variables.get(\"ProfileSearchName\")\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"for (profile in profiles){\r",
+											"    if (jsonData.items[profile].name == searchname) {\r",
+											"        profileid=jsonData.items[profile].id\r",
+											"        //gather data for environment Variables related to the object\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLID\", profileid);\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLName\", jsonData.items[profile].name);\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLSelfLink\", jsonData.items[profile].selfLink);\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLSelfURI\", jsonData.items[profile].selfLink.replace(/localhost/g,bigiqmgmt));\r",
+											"\r",
+											"        //log data saved\r",
+											"        console.log (\"Found \"+searchname+\": Now you may continue to get the specific profile's json from the REST API.\")\r",
+											"        //log if verbose set to greater than 0, do not log if set to 0\r",
+											"        if (pm.variables.get(\"BeVerbose\")) {\r",
+											"            //console.log(\"\")\r",
+											"            console.log(\"updated the following environmental information:\")\r",
+											"            console.log(\"Set profile name to: \"+pm.variables.get(\"ProfileServerSSLName\"))\r",
+											"            console.log(\"Set profile ID to: \"+pm.variables.get(\"ProfileServerSSLID\"))\r",
+											"            console.log(\"Set profile Self Link to: \"+pm.variables.get(\"ProfileServerSSLSelfLink\"))\r",
+											"            console.log(\"Set profile Self URI to: \"+pm.variables.get(\"ProfileServerSSLSelfURI\"))\r",
+											"        }\r",
+											"        //console.log (\"Gathering the specific profile's json from the REST API.\")\r",
+											"    }\r",
+											"}\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/profile/server-ssl?$filter=name eq '*{{ProfileSearchName}}*'",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"profile",
+										"server-ssl"
+									],
+									"query": [
+										{
+											"key": "$filter",
+											"value": "name eq '*{{ProfileSearchName}}*'"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get cientssl Profile by Name",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"//begin parsing\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"let profiles = pm.globals.get(\"itemOfArray\");\r",
+											"\r",
+											"profiles = jsonData.items;\r",
+											"//console.log (profiles)\r",
+											"\r",
+											"//console.log(\"Items: \"+jsonData.items[1].name)\r",
+											"searchname = pm.variables.get(\"ProfileSearchName\")\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"for (profile in profiles){\r",
+											"    if (jsonData.items[profile].name == searchname) {\r",
+											"        profileid=jsonData.items[profile].id\r",
+											"        //gather data for environment Variables related to the object\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLID\", profileid);\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLName\", jsonData.items[profile].name);\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLSelfLink\", jsonData.items[profile].selfLink);\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLSelfURI\", jsonData.items[profile].selfLink.replace(/localhost/g,bigiqmgmt));\r",
+											"\r",
+											"        //log data saved\r",
+											"        console.log (\"Found \"+searchname+\": Now you may continue to get the specific profile's json from the REST API.\")\r",
+											"        //log if verbose set to greater than 0, do not log if set to 0\r",
+											"        if (pm.variables.get(\"BeVerbose\")) {\r",
+											"            //console.log(\"\")\r",
+											"            console.log(\"updated the following environmental information:\")\r",
+											"            console.log(\"updated the following environmental information:\")\r",
+											"            console.log(\"Set profile name to: \"+pm.variables.get(\"ProfileClientSSLName\"))\r",
+											"            console.log(\"Set profile ID to: \"+pm.variables.get(\"ProfileClientSSLID\"))\r",
+											"            console.log(\"Set profile Self Link to: \"+pm.variables.get(\"ProfileClientSSLSelfLink\"))\r",
+											"            console.log(\"Set profile Self URI to: \"+pm.variables.get(\"ProfileClientSSLSelfURI\"))\r",
+											"        }\r",
+											"        //console.log (\"Gathering the specific profile's json from the REST API.\")\r",
+											"    }\r",
+											"}\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/profile/client-ssl?$filter=name eq '*{{ProfileSearchName}}*'",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"profile",
+										"client-ssl"
+									],
+									"query": [
+										{
+											"key": "$filter",
+											"value": "name eq '*{{ProfileSearchName}}*'"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Development Requests Area - !Non-working!",
+			"item": [
+				{
+					"name": "Deploy Functions",
+					"item": [
+						{
+							"name": "**Create Pool Deployment without deploy",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"postman.setEnvironmentVariable(\"DeployName\", \"AutoDeploy-\"+Date.now())\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"console.log(\"The deployment named \"+pm.variables.get(\"DeployName\")+\" was created.\")"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"skipVerifyConfig\":false,\r\n   \"skipDistribution\":true,\r\n   \"name\":\"{{DeployName}}\",\r\n   \"deviceReferences\":[\r\n      {\r\n         \"link\":\"{{DeviceSelfLink}}\"\r\n      }\r\n   ],\r\n   \"objectsToDeployReferences\":[\r\n      {\r\n         \"link\":\"{{PoolSelfLink}}\"\r\n      }],\r\n   \"deploySpecifiedObjectsOnly\":false\r\n}"
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/tasks/deploy-configuration",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"tasks",
+										"deploy-configuration"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Scratch",
+					"item": [
+						{
+							"name": "** Get scratch",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/pool/8a5b5b55-9525-3388-b64d-62e95526d879",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"pool",
+										"8a5b5b55-9525-3388-b64d-62e95526d879"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "** Modify Specific Virtual",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cm\": {\r\n        \"silo\": \"{{DeviceSilo}}\"\r\n    },\r\n    \"id\": \"{{VirtualID}}\",\r\n    \"kind\": \"cm:adc-core:working-config:ltm:virtual:adcvirtualstate\",\r\n    \"mask\": \"{{VirtualMask}}\",\r\n    \"name\": \"{{VirtualName}}\",\r\n    \"nat64\": \"disabled\",\r\n    \"state\": \"enabled\",\r\n    \"mirror\": \"disabled\",\r\n    \"gtmScore\": 0,\r\n    \"policies\": [],\r\n    \"selfLink\": \"{{VirtualSelfLink}}\",\r\n    \"partition\": \"Common\",\r\n    \"rateLimit\": \"disabled\",\r\n    \"ipProtocol\": \"tcp\",\r\n    \"properties\": {\r\n        \"virtual-address\": {\r\n            \"name\": \"{{VirtualAddress}}\",\r\n            \"address\": \"{{VirtualAddress}}\",\r\n            \"floating\": \"enabled\",\r\n            \"partition\": \"Common\",\r\n            \"trafficGroup\": \"/Common/traffic-group-1\",\r\n            \"deviceReference\": {\r\n                \"link\": \"{{DeviceSelfLink}}\"\r\n            }\r\n        }\r\n    },\r\n    \"sourcePort\": \"preserve\",\r\n    \"autoLasthop\": \"default\",\r\n    \"description\": \"{{NewDescription}}\",\r\n    \"vlansEnabled\": \"disabled\",\r\n    \"addressStatus\": \"yes\",\r\n    \"poolReference\": {\r\n        \"link\": \"{{PoolSelfLink}}\",\r\n    },\r\n    \"rateLimitMode\": \"object\",\r\n    \"sourceAddress\": \"0.0.0.0/0\",\r\n    \"translatePort\": \"enabled\",\r\n    \"connectionLimit\": 0,\r\n    \"destinationPort\": \"{{VirtualPort}}\",\r\n    \"deviceReference\": {\r\n        \"id\": \"66c4f977-2999-462a-99e4-5b325ea60413\",\r\n        \"kind\": \"shared:resolver:device-groups:restdeviceresolverdevicestate\",\r\n        \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-adccore-allbigipDevices/devices/66c4f977-2999-462a-99e4-5b325ea60413\",\r\n        \"name\": \"mem10fw-viprion-cluster01-bo.network.fedex.com\",\r\n        \"machineId\": \"66c4f977-2999-462a-99e4-5b325ea60413\"\r\n    },\r\n    \"lastUpdateMicros\": 1632945137513583,\r\n    \"translateAddress\": \"enabled\",\r\n    \"destinationAddress\": \"10.255.74.237\",\r\n    \"sourceAddressTranslation\": {\r\n        \"type\": \"snat\",\r\n        \"snatpoolReference\": {\r\n            \"id\": \"946796b3-f82c-3892-8dca-2b242c02f66e\",\r\n            \"kind\": \"cm:adc-core:working-config:ltm:snatpool:adcsnatpoolstate\",\r\n            \"link\": \"https://localhost/mgmt/cm/adc-core/working-config/ltm/snatpool/946796b3-f82c-3892-8dca-2b242c02f66e\",\r\n            \"name\": \"OneArm-SNATPool\",\r\n            \"partition\": \"Common\"\r\n        }\r\n    },\r\n    \"profilesCollectionReference\": {\r\n        \"link\": \"https://localhost/mgmt/cm/adc-core/working-config/ltm/virtual/5be22ba1-7d9a-38e4-958d-206e84f82bda/profiles\",\r\n        \"isSubcollection\": true\r\n    }\r\n}"
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/virtual/{{VirtualID}}",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"virtual",
+										"{{VirtualID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "** Profile test",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/profile/client-ssl/",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"profile",
+										"client-ssl",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "** get ssl key",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/sys/file/ssl-key/7628ab5b-8a08-3aba-bf12-107c0a73d259",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"sys",
+										"file",
+										"ssl-key",
+										"7628ab5b-8a08-3aba-bf12-107c0a73d259"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Clear *Everything* from the Environment",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"/*\r",
+									"Inputs:\r",
+									"    None.\r",
+									"\r",
+									"Outputs:\r",
+									"\tNone, clears *ALL* the environment variables. (basically, a 'Factory Reset')\r",
+									"*/\r",
+									"\r",
+									"//Init all Environment variables\r",
+									"postman.setEnvironmentVariable(\"VirtualID\",\"\")\r",
+									"postman.setEnvironmentVariable(\"VirtualJSON\",\"\")\r",
+									"postman.setEnvironmentVariable(\"VirtualSelfLink\",\"\")\r",
+									"postman.setEnvironmentVariable(\"VirtualDeviceLink\",\"\")\r",
+									"postman.setEnvironmentVariable(\"VirtualProfilesLink\",\"\")\r",
+									"postman.setEnvironmentVariable(\"SearchPoolName\",\"\")\r",
+									"postman.setEnvironmentVariable(\"PoolID\",\"\")\r",
+									"postman.setEnvironmentVariable(\"PoolJSON\",\"\")\r",
+									"postman.setEnvironmentVariable(\"PoolMemberJSON\",\"\")\r",
+									"postman.setEnvironmentVariable(\"PoolSelfLink\",\"\")\r",
+									"postman.setEnvironmentVariable(\"PoolDeviceLink\",\"\")\r",
+									"postman.setEnvironmentVariable(\"PoolMembersLink\",\"\")\r",
+									"postman.setEnvironmentVariable(\"PoolMembersURI\",\"\")\r",
+									"postman.setEnvironmentVariable(\"PoolMemberSelfLink\",\"\")\r",
+									"postman.setEnvironmentVariable(\"PoolMemberPort\",\"\")\r",
+									"postman.setEnvironmentVariable(\"PoolMemberID\",\"\")\r",
+									"postman.setEnvironmentVariable(\"PoolMonitorLink\",\"\")\r",
+									"postman.setEnvironmentVariable(\"SearchMonitorName\",\"\")\r",
+									"postman.setEnvironmentVariable(\"MonitorID\",\"\")\r",
+									"postman.setEnvironmentVariable(\"MonitorJSON\",\"\")\r",
+									"postman.setEnvironmentVariable(\"MonitorSelfLink\",\"\")\r",
+									"postman.setEnvironmentVariable(\"SearchNodeName\",\"\")\r",
+									"postman.setEnvironmentVariable(\"NodeID\",\"\")\r",
+									"postman.setEnvironmentVariable(\"NodeJSON\",\"\")\r",
+									"postman.setEnvironmentVariable(\"NodeSelfLink\",\"\")\r",
+									"postman.setEnvironmentVariable(\"DeviceSelfLink\",\"\")\r",
+									"postman.setEnvironmentVariable(\"MonitorSelfLink\",\"\")\r",
+									"postman.setEnvironmentVariable(\"MonitorID\",\"\")\r",
+									"postman.setEnvironmentVariable(\"MonitorType\",\"\")\r",
+									"postman.setEnvironmentVariable(\"MonitorJSON\",\"\")\r",
+									"postman.setEnvironmentVariable(\"MonitorTypeString\",\"\")\r",
+									"postman.setEnvironmentVariable(\"MonitorTypeName\",\"\")\r",
+									"postman.setEnvironmentVariable(\"NewMonitorLink\",\"\")\r",
+									"postman.setEnvironmentVariable(\"NewDeviceLink\",\"\")\r",
+									"postman.setEnvironmentVariable(\"DeviceSilo\",\"\")\r",
+									"postman.setEnvironmentVariable(\"DeviceID\",\"\")\r",
+									"postman.setEnvironmentVariable(\"DeviceSelfURI\",\"\")\r",
+									"postman.setEnvironmentVariable(\"MonitorSelfURI\",\"\")\r",
+									"postman.setEnvironmentVariable(\"PoolMonitorURI\",\"\")\r",
+									"postman.setEnvironmentVariable(\"PoolDeviceURI\",\"\")\r",
+									"postman.setEnvironmentVariable(\"PoolSelfURI\",\"\")\r",
+									"postman.setEnvironmentVariable(\"VirtualProfilesURI\",\"\")\r",
+									"postman.setEnvironmentVariable(\"VirtualDeviceURI\",\"\")\r",
+									"postman.setEnvironmentVariable(\"VirtualSelfURI\",\"\")\r",
+									"postman.setEnvironmentVariable(\"VirtualProfilesURI\",\"\")\r",
+									"postman.setEnvironmentVariable(\"ProfileHTTPID\",\"\")\r",
+									"postman.setEnvironmentVariable(\"ProfileHTTPName\",\"\")\r",
+									"postman.setEnvironmentVariable(\"ProfileHTTPSelfLink\",\"\")\r",
+									"postman.setEnvironmentVariable(\"ProfileHTTPSelfURI\",\"\")\r",
+									"postman.setEnvironmentVariable(\"ProfileServerSSLID\", \"\");\r",
+									"postman.setEnvironmentVariable(\"ProfileServerSSLName\", \"\");\r",
+									"postman.setEnvironmentVariable(\"ProfileServerSSLSelfLink\", \"\");\r",
+									"postman.setEnvironmentVariable(\"ProfileServerSSLSelfURI\", \"\");\r",
+									"postman.setEnvironmentVariable(\"ProfileClientSSLID\", \"\");\r",
+									"postman.setEnvironmentVariable(\"ProfileClientSSLName\", \"\");\r",
+									"postman.setEnvironmentVariable(\"ProfileClientSSLSelfLink\", \"\");\r",
+									"postman.setEnvironmentVariable(\"ProfileClientSSLSelfURI\", \"\");\r",
+									"postman.setEnvironmentVariable(\"NodeSelfURI\",\"\")\r",
+									"postman.setEnvironmentVariable(\"NodeName\",\"\")\r",
+									"postman.setEnvironmentVariable(\"NodeDescription\",\"\")\r",
+									"postman.setEnvironmentVariable(\"NewDescription\",\"\")\r",
+									"postman.setEnvironmentVariable(\"SearchPoolName\",\"\")\r",
+									"postman.setEnvironmentVariable(\"SearchMonitorName\",\"\")\r",
+									"postman.setEnvironmentVariable(\"SearchNodeName\",\"\")\r",
+									"//postman.setEnvironmentVariable(\"\",\"\")\r",
+									"//postman.setEnvironmentVariable(\"\",\"\")\r",
+									"\r",
+									"//clear normally not cleared Environment variables\r",
+									"postman.setEnvironmentVariable(\"NewHTTPProfileXFF\",\"\")\r",
+									"postman.setEnvironmentVariable(\"NewHTTPProfileName\",\"\")\r",
+									"postman.setEnvironmentVariable(\"ProfileSearchName\",\"\")\r",
+									"postman.setEnvironmentVariable(\"DeployName\",\"\")\r",
+									"postman.setEnvironmentVariable(\"NewMonitorType\",\"\")\r",
+									"postman.setEnvironmentVariable(\"NewMonitorRecvString\",\"\")\r",
+									"postman.setEnvironmentVariable(\"NewMonitorSendString\",\"\")\r",
+									"postman.setEnvironmentVariable(\"NewMonitorTypeName\",\"\")\r",
+									"postman.setEnvironmentVariable(\"NewMonitorName\",\"\")\r",
+									"postman.setEnvironmentVariable(\"NewPoolName\",\"\")\r",
+									"postman.setEnvironmentVariable(\"SearchDeviceAddress\",\"\")\r",
+									"/postman.setEnvironmentVariable(\"SearchVirtualName\",\"\")\r",
+									"postman.setEnvironmentVariable(\"AuthTokenTimeoutTime\",\"\")\r",
+									"postman.setEnvironmentVariable(\"AuthToken\",\"\")\r",
+									"postman.setEnvironmentVariable(\"Password\",\"\")\r",
+									"postman.setEnvironmentVariable(\"UserName\",\"\")\r",
+									"postman.setEnvironmentVariable(\"BIGIQ_Mgmt\",\"\")\r",
+									"\r",
+									"postman.setEnvironmentVariable(\"ObjectID\",\"\")\r",
+									"postman.setEnvironmentVariable(\"VirtualName\",\"\")\r",
+									"postman.setEnvironmentVariable(\"VirtualAddress\",\"\")\r",
+									"postman.setEnvironmentVariable(\"VirtualMask\",\"\")\r",
+									"postman.setEnvironmentVariable(\"VirtualPort\",\"\")\r",
+									"postman.setEnvironmentVariable(\"\",\"\")\r",
+									"postman.setEnvironmentVariable(\"\",\"\")\r",
+									"postman.setEnvironmentVariable(\"\",\"\")\r",
+									"postman.setEnvironmentVariable(\"\",\"\")\r",
+									"//postman.setEnvironmentVariable(\"\",\"\")\r",
+									"\r",
+									"console.log(\"Cleared Environment variables.\")\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "1chnl!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{AuthToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/virtual",
+							"protocol": "https",
+							"host": [
+								"{{BIGIQ_Mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"cm",
+								"adc-core",
+								"working-config",
+								"ltm",
+								"virtual"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"MgmtIP = pm.variables.get(\"BIGIQ_Mgmt\")",
+					"user = pm.variables.get(\"UserName\")",
+					"password = pm.variables.get(\"Password\")",
+					"",
+					"if (MgmtIP == \"\") {",
+					"    console.log (\"*FAILURE!* BIG-IQ Management address is empty! Please set it in the environment variables to avoid future errors.\")",
+					"}",
+					"if (user == \"\") {",
+					"    console.log (\"*FAILURE!* BIG-IQ Management user is empty! Please set it in the environment variables to avoid future errors.\")",
+					"}",
+					"if (password == \"\") {",
+					"    console.log (\"*FAILURE!* BIG-IQ Management password is empty! Please set it in the environment variables to avoid future errors.\")",
+					"}",
+					"",
+					"const options = {",
+					"    method: 'POST',",
+					"    url: 'https://'+MgmtIP+'/mgmt/shared/authn/login',",
+					"    header: 'ContentType: application/json',",
+					"    body: \"{ \\\"username\\\":\\\"\"+user+\"\\\", \\\"password\\\":\\\"\"+password+\"\\\", \\\"loginProviderName\\\": \\\"tmos\\\"}\"",
+					"",
+					"};",
+					"pm.sendRequest(options, (error, response) => {",
+					"    if (error) {",
+					"        throw new Error(error);",
+					"    } else {",
+					"        //console.log(response.json()); //this works... it shows the JSON",
+					"        var jsonData = response.json()",
+					"        console.info(\"Token: \"+jsonData.token.token)",
+					"        postman.setEnvironmentVariable(\"AuthToken\", jsonData.token.token);",
+					"        postman.setEnvironmentVariable(\"AuthTokenTimeoutTime\", jsonData.token.exp)",
+					"    }",
+					"});",
+					"",
+					"",
+					"",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Status 200 Test\", function () {",
+					"    var jsonData = JSON.parse(responseBody);",
+					"    pm.response.to.have.status(200);",
+					"});",
+					""
+				]
+			}
+		}
+	]
+}
