@@ -162,7 +162,6 @@
 											"postman.setEnvironmentVariable(\"MonitorTypeName\",\"\")\r",
 											"postman.setEnvironmentVariable(\"NewMonitorLink\",\"\")\r",
 											"postman.setEnvironmentVariable(\"NewDeviceLink\",\"\")\r",
-											"postman.setEnvironmentVariable(\"DeviceSilo\",\"\")\r",
 											"postman.setEnvironmentVariable(\"DeviceID\",\"\")\r",
 											"postman.setEnvironmentVariable(\"DeviceSelfURI\",\"\")\r",
 											"postman.setEnvironmentVariable(\"MonitorSelfURI\",\"\")\r",
@@ -297,7 +296,6 @@
 											"    DeviceSelfLink      - The link to the LTM device to use in JSON documents used in a REST Call.\r",
 											"    DeviceSelfURI       - The URI to use in a REST call to gather configuration representing the LTM device.\r",
 											"    NewDeviceLink       - Same as DeviceSelfLink \r",
-											"    DeviceSilo          - The Silo that teh device's configuration is located in within BIG-IQ.\r",
 											"*/\r",
 											"//begin parsing\r",
 											"var jsonData = JSON.parse(responseBody)\r",
@@ -319,7 +317,6 @@
 											"        postman.setEnvironmentVariable(\"DeviceSelfLink\", jsonData.items[device].selfLink);\r",
 											"        postman.setEnvironmentVariable(\"DeviceSelfURI\", jsonData.items[device].selfLink.replace(/localhost/g,bigiqmgmt));\r",
 											"        postman.setEnvironmentVariable(\"NewDeviceLink\", jsonData.items[device].selfLink);\r",
-											"        postman.setEnvironmentVariable(\"DeviceSilo\", jsonData.items[device].properties.silo);\r",
 											"        //postman.setEnvironmentVariable(\"PoolSelfLink\", jsonData.items[device].poolReference.link.replace(/localhost/g,bigiqmgmt));\r",
 											"        //postman.setEnvironmentVariable(\"deviceDeviceLink\", jsonData.items[device].deviceReference.link.replace(/localhost/g,bigiqmgmt));\r",
 											"        //postman.setEnvironmentVariable(\"DeviceSelfLink\", jsonData.items[device].deviceReference.link.replace(/localhost/g,bigiqmgmt));\r",
@@ -447,7 +444,6 @@
 											"\tMonitorTypeName\t\t- Programmatically populated value, The string used to reference the type in a JSON document.\r",
 											"\tDeviceSelfLink\t\t- Programmatically populated value, The link to use in JSON documents to reference the device with the configuration.\r",
 											"\tDeviceSelfURI\t\t- Programmatically populated value, The link used to make requests about the Device containing teh configuration in REST Calls\r",
-											"\tDeviceSilo\t\t\t- Programmatically populated value, The Silo the device/configuration is located in within BIG-IQ\r",
 											"*/\r",
 											"\r",
 											"//Init all Environment variables\r",
@@ -484,7 +480,6 @@
 											"postman.setEnvironmentVariable(\"MonitorTypeName\",\"\")\r",
 											"postman.setEnvironmentVariable(\"NewMonitorLink\",\"\")\r",
 											"postman.setEnvironmentVariable(\"NewDeviceLink\",\"\")\r",
-											"postman.setEnvironmentVariable(\"DeviceSilo\",\"\")\r",
 											"postman.setEnvironmentVariable(\"DeviceID\",\"\")\r",
 											"postman.setEnvironmentVariable(\"DeviceSelfURI\",\"\")\r",
 											"postman.setEnvironmentVariable(\"MonitorSelfURI\",\"\")\r",
@@ -548,7 +543,6 @@
 											"        postman.setEnvironmentVariable(\"VirtualDeviceURI\", jsonData.items[virtual].deviceReference.link);\r",
 											"        postman.setEnvironmentVariable(\"DeviceSelfLink\", jsonData.items[virtual].deviceReference.link);\r",
 											"        postman.setEnvironmentVariable(\"DeviceSelfURI\", jsonData.items[virtual].deviceReference.link.replace(/localhost/g,bigiqmgmt));\r",
-											"        postman.setEnvironmentVariable(\"DeviceSilo\", jsonData.items[virtual].cm.silo);\r",
 											"        postman.setEnvironmentVariable(\"VirtualProfilesLink\", jsonData.items[virtual].profilesCollectionReference.link);\r",
 											"        postman.setEnvironmentVariable(\"VirtualProfilesURI\", jsonData.items[virtual].profilesCollectionReference.link.replace(/localhost/g,bigiqmgmt));\r",
 											"        postman.setEnvironmentVariable(\"VirtualDestinationAddress\", jsonData.items[virtual].destinationAddress);\r",
@@ -879,7 +873,6 @@
 											"/*\r",
 											"Inputs:\r",
 											"    NewMonitorTypeName     - User Supplied value for the type of monitor being created.\r",
-											"    DeviceSilo             - The name of the silo the configuration for the device is in.\r",
 											"    NewMonitorName         - The name of teh new monitor.\r",
 											"    NewMonitorRecvString   - The Receive string for the monitor.\r",
 											"    NewMonitorSendString   - The Send strin for the monitor.\r",
@@ -992,7 +985,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"cm\": {\r\n        \"silo\": \"{{DeviceSilo}}\"\r\n    },\r\n    \"kind\": \"cm:adc-core:working-config:ltm:monitor:{{NewMonitorTypeName}}:adcmonitor{{NewMonitorTypeName}}state\",\r\n    \"name\": \"{{NewMonitorName}}\",\r\n    \"recv\": \"{{NewMonitorRecvString}}\",\r\n    \"send\": \"{{NewMonitorSendString}}\",\r\n    \"timeout\": 16,\r\n    \"interval\": 5,\r\n    \"partition\": \"Common\",\r\n    \"defaultsFromReference\": {\r\n        \"name\": \"{{NewMonitorTypeName}}\"\r\n    }\r\n}"
+									"raw": "{\r\n    \"kind\": \"cm:adc-core:working-config:ltm:monitor:{{NewMonitorTypeName}}:adcmonitor{{NewMonitorTypeName}}state\",\r\n    \"name\": \"{{NewMonitorName}}\",\r\n    \"recv\": \"{{NewMonitorRecvString}}\",\r\n    \"send\": \"{{NewMonitorSendString}}\",\r\n    \"timeout\": 16,\r\n    \"interval\": 5,\r\n    \"partition\": \"Common\",\r\n    \"defaultsFromReference\": {\r\n        \"name\": \"{{NewMonitorTypeName}}\"\r\n    }\r\n}"
 								},
 								"url": {
 									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/monitor/{{NewMonitorTypeName}}/",
@@ -1538,7 +1531,6 @@
 											"        console.log(\"Set node ID to: \"+pm.variables.get(\"NodeID\"))\r",
 											"        console.log(\"Set node Self Link to: \"+pm.variables.get(\"NodeSelfLink\"))\r",
 											"        console.log(\"Set node Self Link to: \"+pm.variables.get(\"NodeSelfURI\"))\r",
-											"        console.log(\"Set node Profiles Link to: \"+pm.variables.get(\"DeviceSilo\"))\r",
 											"    }\r",
 											"    console.log (\"Gathering the specific node's json from the REST API.\")\r",
 											""
@@ -1588,7 +1580,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"cm\": {\r\n\t\t\"silo\": \"{{DeviceSilo}}\"\r\n\t},\r\n\t\"kind\": \"cm:adc-core:working-config:ltm:node:adcnodestate\",\r\n\t\"name\": \"{{SearchNodeName}}\",\r\n\t\"ratio\": 1,\r\n\t\"address\": \"{{SearchNodeName}}\",\r\n\t\"partition\": \"Common\",\r\n\t\"rateLimit\": \"disabled\",\r\n\t\"generation\": 1,\r\n\t\"description\": \"{{NodeDescription}}\",\r\n\t\"isEphemeral\": false,\r\n\t\"stateConfig\": \"user-up\",\r\n\t\"sessionConfig\": \"user-enabled\",\r\n\t\"connectionLimit\": 0,\r\n\t\"deviceReference\": {\r\n\t\t\"link\": \"{{DeviceSelfLink}}\"\r\n\t}\r\n}\r\n"
+									"raw": "{\r\n\t\"kind\": \"cm:adc-core:working-config:ltm:node:adcnodestate\",\r\n\t\"name\": \"{{SearchNodeName}}\",\r\n\t\"ratio\": 1,\r\n\t\"address\": \"{{SearchNodeName}}\",\r\n\t\"partition\": \"Common\",\r\n\t\"rateLimit\": \"disabled\",\r\n\t\"generation\": 1,\r\n\t\"description\": \"{{NodeDescription}}\",\r\n\t\"isEphemeral\": false,\r\n\t\"stateConfig\": \"user-up\",\r\n\t\"sessionConfig\": \"user-enabled\",\r\n\t\"connectionLimit\": 0,\r\n\t\"deviceReference\": {\r\n\t\t\"link\": \"{{DeviceSelfLink}}\"\r\n\t}\r\n}\r\n"
 								},
 								"url": {
 									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/node/",
@@ -1665,7 +1657,6 @@
 											"        console.log(\"Set node ID to: \"+pm.variables.get(\"NodeID\"))\r",
 											"        console.log(\"Set node Self Link to: \"+pm.variables.get(\"NodeSelfLink\"))\r",
 											"        console.log(\"Set node Self URI to: \"+pm.variables.get(\"NodeSelfURI\"))\r",
-											"        console.log(\"DeviceSilo is: \"+pm.variables.get(\"DeviceSilo\"))\r",
 											"        console.log(\"Set node NodeJSON Link to: \"+pm.variables.get(\"NodeJSON\"))\r",
 											"        console.log(\"Set node NodeDescription to: \"+pm.variables.get(\"NodeDescription\"))\r",
 											"    }\r",
@@ -1880,9 +1871,6 @@
 											"    Previously populated monitor information is required, as is a device reference.\r",
 											"\r",
 											"Inputs:\r",
-											"    DeviceSilo          - Programatic input (from another REST call) or User Input\r",
-											"        This can be user populated, but is populated automatically with most device calls. \r",
-											"        Must be the same as the target when multiple solos are used.\r",
 											"    NewDescription      - User Input\r",
 											"        This is User Supplied if creating a new Pool, Programatic Supplied if modifying a new pool.\r",
 											"    NewDeviceLink       - Programatic input (from another REST call) or User Input\r",
@@ -1913,9 +1901,9 @@
 											"//use MonitorType to determine pool monitor reference\r",
 											"var monitortype = pm.variables.get(\"MonitorType\")\r",
 											"\r",
-											"        //set monitor variables\r",
-											"        postman.setEnvironmentVariable(\"MonitorTypeString\", MonitorTypeString.Get(jsonData));\r",
-											"        postman.setEnvironmentVariable(\"MonitorTypeName\", MonitorTypeName.Get(jsonData));\r",
+											"//set monitor variables\r",
+											"postman.setEnvironmentVariable(\"MonitorTypeString\", MonitorTypeString.Get(jsonData));\r",
+											"postman.setEnvironmentVariable(\"MonitorTypeName\", MonitorTypeName.Get(jsonData));\r",
 											"\r",
 											"if (pm.variables.get(\"BeVerbose\")) {\r",
 											"    console.log(\"Created Pool with the following properties:\")\r",
@@ -1989,7 +1977,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"cm\": {\r\n        \"silo\": \"{{DeviceSilo}}\"\r\n    },\r\n    \"allowNat\":true,\r\n   \"allowSnat\":true,\r\n   \"description\":\"{{NewDescription}}\",\r\n   \"ignorePersistedWeight\":false,\r\n   \"ipTosToClient\":null,\r\n   \"ipTosToServer\":null,\r\n   \"linkQosToClient\":65535,\r\n   \"linkQosToServer\":65535,\r\n   \"loadBalancingMode\":\"round-robin\",\r\n   \"monitorReferences\":[],\r\n   \"minActiveMembers\":0,\r\n   \"minUpMembers\":null,\r\n   \"queueDepthLimit\":0,\r\n   \"enableQueueOnConnectionLimit\":false,\r\n   \"queueTimeLimit\":0,\r\n   \"serviceDownAction\":\"none\",\r\n   \"slowRampTime\":10,\r\n   \"reselectTries\":0,\r\n   \"membersReference\":{\r\n      \"link\":\"\"\r\n   },\r\n   \"profiles\":[],\r\n   \"requestQueueTimeLimit\":0,\r\n   \"deviceReference\":{\r\n      \"link\":\"{{NewDeviceLink}}\"\r\n   },\r\n   \"partition\":\"Common\",\r\n   \"kind\":\"cm:adc-core:working-config:ltm:pool:adcpoolstate\",\r\n   \"name\":\"{{NewPoolName}}\",\r\n   \"{{MonitorTypeString}}\":[\r\n      {\r\n         \"name\":\"{{MonitorTypeName}}\",\r\n         \"partition\":\"Common\",\r\n         \"link\":\"{{NewMonitorLink}}\"\r\n      }\r\n   ],\r\n   \"ipTosToClientControl\":\"pass-through\",\r\n   \"ipTosToServerControl\":\"pass-through\"\r\n}"
+									"raw": "{\r\n    \"allowNat\":true,\r\n   \"allowSnat\":true,\r\n   \"description\":\"{{NewDescription}}\",\r\n   \"ignorePersistedWeight\":false,\r\n   \"ipTosToClient\":null,\r\n   \"ipTosToServer\":null,\r\n   \"linkQosToClient\":65535,\r\n   \"linkQosToServer\":65535,\r\n   \"loadBalancingMode\":\"round-robin\",\r\n   \"monitorReferences\":[],\r\n   \"minActiveMembers\":0,\r\n   \"minUpMembers\":null,\r\n   \"queueDepthLimit\":0,\r\n   \"enableQueueOnConnectionLimit\":false,\r\n   \"queueTimeLimit\":0,\r\n   \"serviceDownAction\":\"none\",\r\n   \"slowRampTime\":10,\r\n   \"reselectTries\":0,\r\n   \"membersReference\":{\r\n      \"link\":\"\"\r\n   },\r\n   \"profiles\":[],\r\n   \"requestQueueTimeLimit\":0,\r\n   \"deviceReference\":{\r\n      \"link\":\"{{NewDeviceLink}}\"\r\n   },\r\n   \"partition\":\"Common\",\r\n   \"kind\":\"cm:adc-core:working-config:ltm:pool:adcpoolstate\",\r\n   \"name\":\"{{NewPoolName}}\",\r\n   \"{{MonitorTypeString}}\":[\r\n      {\r\n         \"name\":\"{{MonitorTypeName}}\",\r\n         \"partition\":\"Common\",\r\n         \"link\":\"{{NewMonitorLink}}\"\r\n      }\r\n   ],\r\n   \"ipTosToClientControl\":\"pass-through\",\r\n   \"ipTosToServerControl\":\"pass-through\"\r\n}"
 								},
 								"url": {
 									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/pool",
@@ -2453,10 +2441,8 @@
 											"Pre-Reqs:\r",
 											"\r",
 											"Inputs:\r",
-											"    DeviceSilo          - Programatic input (from another REST call) or User Input\r",
-											"        This can be user populated, but is populated automatically with most device calls. \r",
-											"        Must be the same as the target when multiple solos are used.\r",
-											"\r",
+											"    NewHTTPProfileName\r",
+											"    NewHTTPProfileXFF\r",
 											"Outputs:\r",
 											"\r",
 											"*/\r",
@@ -2527,7 +2513,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "       {\r\n            \"cm\": {\r\n                \"silo\": \"{{DeviceSilo}}\"\r\n            },\r\n            \"kind\": \"cm:adc-core:working-config:ltm:profile:http:adcprofilehttpstate\",\r\n            \"name\": \"{{NewHTTPProfileName}}\",\r\n            \"partition\": \"Common\",\r\n            \"proxyType\": \"reverse\",\r\n            \"isNoDelete\": false,\r\n            \"viaRequest\": \"preserve\",\r\n            \"enforcement\": {\r\n                \"pipeline\": \"allow\",\r\n                \"maxRequests\": 0.0,\r\n                \"knownMethods\": [\r\n                    \"CONNECT\",\r\n                    \"DELETE\",\r\n                    \"GET\",\r\n                    \"HEAD\",\r\n                    \"LOCK\",\r\n                    \"OPTIONS\",\r\n                    \"POST\",\r\n                    \"PROPFIND\",\r\n                    \"PUT\",\r\n                    \"TRACE\",\r\n                    \"UNLOCK\"\r\n                ],\r\n                \"maxHeaderSize\": 32768.0,\r\n                \"unknownMethod\": \"allow\",\r\n                \"maxHeaderCount\": 64.0,\r\n                \"excessClientHeaders\": \"reject\",\r\n                \"excessServerHeaders\": \"reject\",\r\n                \"oversizeClientHeaders\": \"reject\",\r\n                \"oversizeServerHeaders\": \"reject\",\r\n                \"isTruncatedRedirectsEnabled\": false\r\n            },\r\n            \"headerErase\": \"\",\r\n            \"viaHostName\": \"\",\r\n            \"viaResponse\": \"preserve\",\r\n            \"fallbackHost\": \"\",\r\n            \"headerInsert\": \"\",\r\n            \"lwsSeparator\": \"\",\r\n            \"explicitProxy\": {\r\n                \"hostNames\": [],\r\n                \"tunnelName\": \"\",\r\n                \"dnsResolver\": \"none\",\r\n                \"routeDomain\": \"\",\r\n                \"dnsErrorMessage\": \"\",\r\n                \"badRequestMessage\": \"\",\r\n                \"badResponseMessage\": \"\",\r\n                \"connectErrorMessage\": \"\",\r\n                \"defaultConnectHandling\": \"deny\"\r\n            },\r\n            \"basicAuthRealm\": \"\",\r\n            \"encryptCookies\": [],\r\n            \"redirectRewrite\": \"none\",\r\n            \"requestChunking\": \"sustain\",\r\n            \"serverAgentName\": \"BigIP\",\r\n            \"responseChunking\": \"sustain\",\r\n            \"isAcceptXffEnabled\": false,\r\n            \"encryptCookieSecret\": \"\",\r\n            \"fallbackStatusCodes\": [],\r\n            \"xffAlternativeNames\": [],\r\n            \"responseHeadersPermitted\": [],\r\n            \"isInsertXforwardedForEnabled\": {{NewHTTPProfileXFF}},\r\n            \"isOneconnectTransformationsEnabled\": true\r\n        }"
+									"raw": "       {\r\n            \"kind\": \"cm:adc-core:working-config:ltm:profile:http:adcprofilehttpstate\",\r\n            \"name\": \"{{NewHTTPProfileName}}\",\r\n            \"partition\": \"Common\",\r\n            \"proxyType\": \"reverse\",\r\n            \"isNoDelete\": false,\r\n            \"viaRequest\": \"preserve\",\r\n            \"enforcement\": {\r\n                \"pipeline\": \"allow\",\r\n                \"maxRequests\": 0.0,\r\n                \"knownMethods\": [\r\n                    \"CONNECT\",\r\n                    \"DELETE\",\r\n                    \"GET\",\r\n                    \"HEAD\",\r\n                    \"LOCK\",\r\n                    \"OPTIONS\",\r\n                    \"POST\",\r\n                    \"PROPFIND\",\r\n                    \"PUT\",\r\n                    \"TRACE\",\r\n                    \"UNLOCK\"\r\n                ],\r\n                \"maxHeaderSize\": 32768.0,\r\n                \"unknownMethod\": \"allow\",\r\n                \"maxHeaderCount\": 64.0,\r\n                \"excessClientHeaders\": \"reject\",\r\n                \"excessServerHeaders\": \"reject\",\r\n                \"oversizeClientHeaders\": \"reject\",\r\n                \"oversizeServerHeaders\": \"reject\",\r\n                \"isTruncatedRedirectsEnabled\": false\r\n            },\r\n            \"headerErase\": \"\",\r\n            \"viaHostName\": \"\",\r\n            \"viaResponse\": \"preserve\",\r\n            \"fallbackHost\": \"\",\r\n            \"headerInsert\": \"\",\r\n            \"lwsSeparator\": \"\",\r\n            \"explicitProxy\": {\r\n                \"hostNames\": [],\r\n                \"tunnelName\": \"\",\r\n                \"dnsResolver\": \"none\",\r\n                \"routeDomain\": \"\",\r\n                \"dnsErrorMessage\": \"\",\r\n                \"badRequestMessage\": \"\",\r\n                \"badResponseMessage\": \"\",\r\n                \"connectErrorMessage\": \"\",\r\n                \"defaultConnectHandling\": \"deny\"\r\n            },\r\n            \"basicAuthRealm\": \"\",\r\n            \"encryptCookies\": [],\r\n            \"redirectRewrite\": \"none\",\r\n            \"requestChunking\": \"sustain\",\r\n            \"serverAgentName\": \"BigIP\",\r\n            \"responseChunking\": \"sustain\",\r\n            \"isAcceptXffEnabled\": false,\r\n            \"encryptCookieSecret\": \"\",\r\n            \"fallbackStatusCodes\": [],\r\n            \"xffAlternativeNames\": [],\r\n            \"responseHeadersPermitted\": [],\r\n            \"isInsertXforwardedForEnabled\": {{NewHTTPProfileXFF}},\r\n            \"isOneconnectTransformationsEnabled\": true\r\n        }"
 								},
 								"url": {
 									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/profile/http/",
@@ -3126,7 +3112,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"cm\": {\r\n        \"silo\": \"{{DeviceSilo}}\"\r\n    },\r\n    \"id\": \"{{VirtualID}}\",\r\n    \"kind\": \"cm:adc-core:working-config:ltm:virtual:adcvirtualstate\",\r\n    \"mask\": \"{{VirtualMask}}\",\r\n    \"name\": \"{{VirtualName}}\",\r\n    \"nat64\": \"disabled\",\r\n    \"state\": \"enabled\",\r\n    \"mirror\": \"disabled\",\r\n    \"gtmScore\": 0,\r\n    \"policies\": [],\r\n    \"selfLink\": \"{{VirtualSelfLink}}\",\r\n    \"partition\": \"Common\",\r\n    \"rateLimit\": \"disabled\",\r\n    \"ipProtocol\": \"tcp\",\r\n    \"properties\": {\r\n        \"virtual-address\": {\r\n            \"name\": \"{{VirtualAddress}}\",\r\n            \"address\": \"{{VirtualAddress}}\",\r\n            \"floating\": \"enabled\",\r\n            \"partition\": \"Common\",\r\n            \"trafficGroup\": \"/Common/traffic-group-1\",\r\n            \"deviceReference\": {\r\n                \"link\": \"{{DeviceSelfLink}}\"\r\n            }\r\n        }\r\n    },\r\n    \"sourcePort\": \"preserve\",\r\n    \"autoLasthop\": \"default\",\r\n    \"description\": \"{{NewDescription}}\",\r\n    \"vlansEnabled\": \"disabled\",\r\n    \"addressStatus\": \"yes\",\r\n    \"poolReference\": {\r\n        \"link\": \"{{PoolSelfLink}}\",\r\n    },\r\n    \"rateLimitMode\": \"object\",\r\n    \"sourceAddress\": \"0.0.0.0/0\",\r\n    \"translatePort\": \"enabled\",\r\n    \"connectionLimit\": 0,\r\n    \"destinationPort\": \"{{VirtualPort}}\",\r\n    \"deviceReference\": {\r\n        \"id\": \"66c4f977-2999-462a-99e4-5b325ea60413\",\r\n        \"kind\": \"shared:resolver:device-groups:restdeviceresolverdevicestate\",\r\n        \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-adccore-allbigipDevices/devices/66c4f977-2999-462a-99e4-5b325ea60413\",\r\n        \"name\": \"mem10fw-viprion-cluster01-bo.network.fedex.com\",\r\n        \"machineId\": \"66c4f977-2999-462a-99e4-5b325ea60413\"\r\n    },\r\n    \"lastUpdateMicros\": 1632945137513583,\r\n    \"translateAddress\": \"enabled\",\r\n    \"destinationAddress\": \"10.255.74.237\",\r\n    \"sourceAddressTranslation\": {\r\n        \"type\": \"snat\",\r\n        \"snatpoolReference\": {\r\n            \"id\": \"946796b3-f82c-3892-8dca-2b242c02f66e\",\r\n            \"kind\": \"cm:adc-core:working-config:ltm:snatpool:adcsnatpoolstate\",\r\n            \"link\": \"https://localhost/mgmt/cm/adc-core/working-config/ltm/snatpool/946796b3-f82c-3892-8dca-2b242c02f66e\",\r\n            \"name\": \"OneArm-SNATPool\",\r\n            \"partition\": \"Common\"\r\n        }\r\n    },\r\n    \"profilesCollectionReference\": {\r\n        \"link\": \"https://localhost/mgmt/cm/adc-core/working-config/ltm/virtual/5be22ba1-7d9a-38e4-958d-206e84f82bda/profiles\",\r\n        \"isSubcollection\": true\r\n    }\r\n}"
+									"raw": "{\r\n    \"id\": \"{{VirtualID}}\",\r\n    \"kind\": \"cm:adc-core:working-config:ltm:virtual:adcvirtualstate\",\r\n    \"mask\": \"{{VirtualMask}}\",\r\n    \"name\": \"{{VirtualName}}\",\r\n    \"nat64\": \"disabled\",\r\n    \"state\": \"enabled\",\r\n    \"mirror\": \"disabled\",\r\n    \"gtmScore\": 0,\r\n    \"policies\": [],\r\n    \"selfLink\": \"{{VirtualSelfLink}}\",\r\n    \"partition\": \"Common\",\r\n    \"rateLimit\": \"disabled\",\r\n    \"ipProtocol\": \"tcp\",\r\n    \"properties\": {\r\n        \"virtual-address\": {\r\n            \"name\": \"{{VirtualAddress}}\",\r\n            \"address\": \"{{VirtualAddress}}\",\r\n            \"floating\": \"enabled\",\r\n            \"partition\": \"Common\",\r\n            \"trafficGroup\": \"/Common/traffic-group-1\",\r\n            \"deviceReference\": {\r\n                \"link\": \"{{DeviceSelfLink}}\"\r\n            }\r\n        }\r\n    },\r\n    \"sourcePort\": \"preserve\",\r\n    \"autoLasthop\": \"default\",\r\n    \"description\": \"{{NewDescription}}\",\r\n    \"vlansEnabled\": \"disabled\",\r\n    \"addressStatus\": \"yes\",\r\n    \"poolReference\": {\r\n        \"link\": \"{{PoolSelfLink}}\",\r\n    },\r\n    \"rateLimitMode\": \"object\",\r\n    \"sourceAddress\": \"0.0.0.0/0\",\r\n    \"translatePort\": \"enabled\",\r\n    \"connectionLimit\": 0,\r\n    \"destinationPort\": \"{{VirtualPort}}\",\r\n    \"deviceReference\": {\r\n        \"id\": \"66c4f977-2999-462a-99e4-5b325ea60413\",\r\n        \"kind\": \"shared:resolver:device-groups:restdeviceresolverdevicestate\",\r\n        \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-adccore-allbigipDevices/devices/66c4f977-2999-462a-99e4-5b325ea60413\",\r\n        \"name\": \"mem10fw-viprion-cluster01-bo.network.fedex.com\",\r\n        \"machineId\": \"66c4f977-2999-462a-99e4-5b325ea60413\"\r\n    },\r\n    \"lastUpdateMicros\": 1632945137513583,\r\n    \"translateAddress\": \"enabled\",\r\n    \"destinationAddress\": \"10.255.74.237\",\r\n    \"sourceAddressTranslation\": {\r\n        \"type\": \"snat\",\r\n        \"snatpoolReference\": {\r\n            \"id\": \"946796b3-f82c-3892-8dca-2b242c02f66e\",\r\n            \"kind\": \"cm:adc-core:working-config:ltm:snatpool:adcsnatpoolstate\",\r\n            \"link\": \"https://localhost/mgmt/cm/adc-core/working-config/ltm/snatpool/946796b3-f82c-3892-8dca-2b242c02f66e\",\r\n            \"name\": \"OneArm-SNATPool\",\r\n            \"partition\": \"Common\"\r\n        }\r\n    },\r\n    \"profilesCollectionReference\": {\r\n        \"link\": \"https://localhost/mgmt/cm/adc-core/working-config/ltm/virtual/5be22ba1-7d9a-38e4-958d-206e84f82bda/profiles\",\r\n        \"isSubcollection\": true\r\n    }\r\n}"
 								},
 								"url": {
 									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/virtual/{{VirtualID}}",
@@ -3395,7 +3381,6 @@
 									"postman.setEnvironmentVariable(\"MonitorTypeName\",\"\")\r",
 									"postman.setEnvironmentVariable(\"NewMonitorLink\",\"\")\r",
 									"postman.setEnvironmentVariable(\"NewDeviceLink\",\"\")\r",
-									"postman.setEnvironmentVariable(\"DeviceSilo\",\"\")\r",
 									"postman.setEnvironmentVariable(\"DeviceID\",\"\")\r",
 									"postman.setEnvironmentVariable(\"DeviceSelfURI\",\"\")\r",
 									"postman.setEnvironmentVariable(\"MonitorSelfURI\",\"\")\r",
