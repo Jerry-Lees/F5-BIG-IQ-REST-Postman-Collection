@@ -413,19 +413,6 @@
 							"name": "Get Virtual Information From Name",
 							"event": [
 								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
-											"\r",
-											"\r",
-											"\r",
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
 									"listen": "test",
 									"script": {
 										"exec": [
@@ -460,7 +447,7 @@
 											"\tMonitorTypeName\t\t- Programmatically populated value, The string used to reference the type in a JSON document.\r",
 											"\tDeviceSelfLink\t\t- Programmatically populated value, The link to use in JSON documents to reference the device with the configuration.\r",
 											"\tDeviceSelfURI\t\t- Programmatically populated value, The link used to make requests about the Device containing teh configuration in REST Calls\r",
-											"\tDeviceSilo\t\t\t- Programmatically populated value, Teh Silo teh device/configuration is located in within BIG-IQ\r",
+											"\tDeviceSilo\t\t\t- Programmatically populated value, The Silo the device/configuration is located in within BIG-IQ\r",
 											"*/\r",
 											"\r",
 											"//Init all Environment variables\r",
@@ -654,38 +641,9 @@
 											"\r",
 											"        console.log (monitortype)\r",
 											"\r",
-											"        switch(monitortype) {\r",
-											"            case \"cm:adc-core:working-config:ltm:monitor:http:adcmonitorhttpstate\":\r",
-											"                postman.setEnvironmentVariable(\"PoolMonitorLink\", jsonData.monitorHttpReferences[0].link)\r",
-											"                postman.setEnvironmentVariable(\"PoolMonitorURI\", jsonData.monitorHttpReferences[0].link.replace(/localhost/g,bigiqmgmt))\r",
-											"                postman.setEnvironmentVariable(\"MonitorSelfLink\", jsonData.monitorHttpReferences[0].link)\r",
-											"                postman.setEnvironmentVariable(\"MonitorSelfURI\", jsonData.monitorHttpReferences[0].link.replace(/localhost/g,bigiqmgmt))\r",
-											"                postman.setEnvironmentVariable(\"MonitorID\", jsonData.monitorHttpReferences[0].id)\r",
-											"                postman.setEnvironmentVariable(\"MonitorType\", jsonData.monitorHttpReferences[0].kind)\r",
-											"                postman.setEnvironmentVariable(\"MonitorTypeString\", \"monitorHttpReferences\")\r",
-											"                postman.setEnvironmentVariable(\"MonitorTypeName\", \"http\")\r",
-											"            break;\r",
-											"            case \"cm:adc-core:working-config:ltm:monitor:https:adcmonitorhttpsstate\":\r",
-											"                postman.setEnvironmentVariable(\"PoolMonitorLink\", jsonData.monitorHttpsReferences[0].link)\r",
-											"                postman.setEnvironmentVariable(\"PoolMonitorURI\", jsonData.monitorHttpsReferences[0].link.replace(/localhost/g,bigiqmgmt))\r",
-											"                postman.setEnvironmentVariable(\"MonitorSelfLink\", jsonData.monitorHttpsReferences[0].link)\r",
-											"                postman.setEnvironmentVariable(\"MonitorSelfURI\", jsonData.monitorHttpsReferences[0].link.replace(/localhost/g,bigiqmgmt))\r",
-											"                postman.setEnvironmentVariable(\"MonitorID\", jsonData.monitorHttpsReferences[0].id)\r",
-											"                postman.setEnvironmentVariable(\"MonitorType\", jsonData.monitorHttpsReferences[0].kind)\r",
-											"                postman.setEnvironmentVariable(\"MonitorTypeString\", \"monitorHttpsReferences\")\r",
-											"                postman.setEnvironmentVariable(\"MonitorTypeName\", \"https\")\r",
-											"            break;\r",
-											"            case \"cm:adc-core:working-config:ltm:monitor:tcp:adcmonitortcpstate\":\r",
-											"                postman.setEnvironmentVariable(\"PoolMonitorLink\", jsonData.monitorTcpReferences[0].link)\r",
-											"                postman.setEnvironmentVariable(\"PoolMonitorURI\", jsonData.monitorTcpReferences[0].link.replace(/localhost/g,bigiqmgmt))\r",
-											"                postman.setEnvironmentVariable(\"MonitorSelfLink\", jsonData.monitorTcpReferences[0].link)\r",
-											"                postman.setEnvironmentVariable(\"MonitorSelfURI\", jsonData.monitorTcpReferences[0].link.replace(/localhost/g,bigiqmgmt))\r",
-											"                postman.setEnvironmentVariable(\"MonitorID\", jsonData.monitorTcpReferences[0].id)\r",
-											"                postman.setEnvironmentVariable(\"MonitorType\", jsonData.monitorTcpReferences[0].kind)\r",
-											"                postman.setEnvironmentVariable(\"MonitorTypeString\", \"monitorTcpReferences\")\r",
-											"                postman.setEnvironmentVariable(\"MonitorTypeName\", \"tcp\")\r",
-											"            break;\r",
-											"        }\r",
+											"        //set monitor variables\r",
+											"        postman.setEnvironmentVariable(\"MonitorTypeString\", MonitorTypeString.Get(jsonData));\r",
+											"        postman.setEnvironmentVariable(\"MonitorTypeName\", MonitorTypeName.Get(jsonData));\r",
 											"       \r",
 											"        postman.setEnvironmentVariable(\"PoolJSON\", response.text());\r",
 											"        console.log(\"Found JSON for the Pool, storing in Environment variable 'PoolJSON'\")\r",
@@ -703,6 +661,19 @@
 											"    }\r",
 											"});\r",
 											" \r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
 											""
 										],
 										"type": "text/javascript"
@@ -902,22 +873,6 @@
 							"name": "Create new monitor from Environment variables",
 							"event": [
 								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											"\r",
-											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
-											"//console.log(bigiqmgmt)\r",
-											"//console.log(pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'))\r",
-											"//console.log(pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'))\r",
-											"//postman.setEnvironmentVariable(\"NewMonitorLink\", pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'));\r",
-											"//postman.setEnvironmentVariable(\"NewDeviceLink\", pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'));\r",
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
 									"listen": "test",
 									"script": {
 										"exec": [
@@ -950,25 +905,10 @@
 											"\r",
 											"postman.setEnvironmentVariable(\"MonitorType\", monitortype);\r",
 											"postman.setEnvironmentVariable(\"NewMonitorType\", monitortype);\r",
-											"//MonitorTypeString\r",
-											"        switch(monitortype) {\r",
-											"            case \"cm:adc-core:working-config:ltm:monitor:http:adcmonitorhttpstate\":\r",
-											"                postman.setEnvironmentVariable(\"MonitorTypeString\", \"monitorHttpReferences\")\r",
-											"                postman.setEnvironmentVariable(\"MonitorTypeName\", \"http\")\r",
-											"            break;\r",
-											"            case \"cm:adc-core:working-config:ltm:monitor:https:adcmonitorhttpsstate\":\r",
-											"                postman.setEnvironmentVariable(\"MonitorTypeString\", \"monitorHttpsReferences\")\r",
-											"                postman.setEnvironmentVariable(\"MonitorTypeName\", \"https\")\r",
-											"            break;\r",
-											"            case \"cm:adc-core:working-config:ltm:monitor:tcp:adcmonitortcpstate\":\r",
-											"                postman.setEnvironmentVariable(\"MonitorTypeString\", \"monitorTcpReferences\")\r",
-											"                postman.setEnvironmentVariable(\"MonitorTypeName\", \"tcp\")\r",
-											"            break;\r",
-											"            case \"cm:adc-core:working-config:ltm:monitor:udp:adcmonitorudpstate\":\r",
-											"                postman.setEnvironmentVariable(\"MonitorTypeString\", \"monitorUdpReferences\")\r",
-											"                postman.setEnvironmentVariable(\"MonitorTypeName\", \"udp\")\r",
-											"            break;\r",
-											"        }\r",
+											"\r",
+											"        //set monitor variables\r",
+											"        postman.setEnvironmentVariable(\"MonitorTypeString\", MonitorTypeString.Get(jsonData));\r",
+											"        postman.setEnvironmentVariable(\"MonitorTypeName\", MonitorTypeName.Get(jsonData));\r",
 											"\r",
 											"postman.setEnvironmentVariable(\"MonitorJSON\", responseBody);\r",
 											"postman.setEnvironmentVariable(\"NewMonitorLink\", jsonData.selfLink);\r",
@@ -989,6 +929,22 @@
 											"}\r",
 											"console.log (\"Gathering the specific Monitor's json from the REST API.\")\r",
 											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"//console.log(bigiqmgmt)\r",
+											"//console.log(pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'))\r",
+											"//console.log(pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'))\r",
+											"//postman.setEnvironmentVariable(\"NewMonitorLink\", pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'));\r",
+											"//postman.setEnvironmentVariable(\"NewDeviceLink\", pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'));\r",
 											""
 										],
 										"type": "text/javascript"
@@ -1196,22 +1152,6 @@
 							"name": "Find monitor from Name",
 							"event": [
 								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											"\r",
-											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
-											"//console.log(bigiqmgmt)\r",
-											"//console.log(pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'))\r",
-											"//console.log(pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'))\r",
-											"//postman.setEnvironmentVariable(\"NewMonitorLink\", pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'));\r",
-											"//postman.setEnvironmentVariable(\"NewDeviceLink\", pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'));\r",
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
 									"listen": "test",
 									"script": {
 										"exec": [
@@ -1249,25 +1189,16 @@
 											"        //gather data for environment Variables related to the object\r",
 											"        postman.setEnvironmentVariable(\"MonitorID\", monitorid);\r",
 											"        postman.setEnvironmentVariable(\"MonitorType\", jsonData.items[monitor].kind);\r",
-											"//MonitorTypeString\r",
-											"        switch(jsonData.items[monitor].kind) {\r",
-											"            case \"cm:adc-core:working-config:ltm:monitor:http:adcmonitorhttpstate\":\r",
-											"                postman.setEnvironmentVariable(\"MonitorTypeString\", \"monitorHttpReferences\")\r",
-											"                postman.setEnvironmentVariable(\"MonitorTypeName\", \"http\")\r",
-											"            break;\r",
-											"            case \"cm:adc-core:working-config:ltm:monitor:https:adcmonitorhttpsstate\":\r",
-											"                postman.setEnvironmentVariable(\"MonitorTypeString\", \"monitorHttpsReferences\")\r",
-											"                postman.setEnvironmentVariable(\"MonitorTypeName\", \"https\")\r",
-											"            break;\r",
-											"            case \"cm:adc-core:working-config:ltm:monitor:tcp:adcmonitortcpstate\":\r",
-											"                postman.setEnvironmentVariable(\"MonitorTypeString\", \"monitorTcpReferences\")\r",
-											"                postman.setEnvironmentVariable(\"MonitorTypeName\", \"tcp\")\r",
-											"            break;\r",
-											"        }\r",
-											"        //MonitorJSON\r",
+											"\r",
+											"        //set monitor variables\r",
+											"        postman.setEnvironmentVariable(\"MonitorTypeString\", MonitorTypeString.Get(jsonData));\r",
+											"        postman.setEnvironmentVariable(\"MonitorTypeName\", MonitorTypeName.Get(jsonData));\r",
+											"        \r",
+											"\r",
+											"        //Save MonitorJSON\r",
 											"        postman.setEnvironmentVariable(\"MonitorSelfLink\", jsonData.items[monitor].selfLink);\r",
 											"        postman.setEnvironmentVariable(\"MonitorSelfURI\", jsonData.items[monitor].selfLink.replace(/localhost/g,bigiqmgmt));\r",
-											"\r",
+											"        \r",
 											"        //log data saved\r",
 											"        console.log (\"Found \"+searchname+\": Now you may continue to get the specific monitor's json from the REST API.\")\r",
 											"        //log if verbose set to greater than 0, do not log if set to 0\r",
@@ -1303,6 +1234,22 @@
 											"    }\r",
 											"});\r",
 											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"//console.log(bigiqmgmt)\r",
+											"//console.log(pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'))\r",
+											"//console.log(pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'))\r",
+											"//postman.setEnvironmentVariable(\"NewMonitorLink\", pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'));\r",
+											"//postman.setEnvironmentVariable(\"NewDeviceLink\", pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'));\r",
 											""
 										],
 										"type": "text/javascript"
@@ -1925,22 +1872,6 @@
 							"name": "Create Pool from Environment variables",
 							"event": [
 								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											"\r",
-											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
-											"console.log(bigiqmgmt)\r",
-											"console.log(pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'))\r",
-											"console.log(pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'))\r",
-											"postman.setEnvironmentVariable(\"NewMonitorLink\", pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'));\r",
-											"postman.setEnvironmentVariable(\"NewDeviceLink\", pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'));\r",
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
 									"listen": "test",
 									"script": {
 										"exec": [
@@ -1981,29 +1912,10 @@
 											"\r",
 											"//use MonitorType to determine pool monitor reference\r",
 											"var monitortype = pm.variables.get(\"MonitorType\")\r",
-											"//console.log(monitortype)\r",
-											"switch(monitortype) {\r",
-											"    case \"cm:adc-core:working-config:ltm:monitor:http:adcmonitorhttpstate\":\r",
-											"        postman.setEnvironmentVariable(\"PoolMonitorLink\", jsonData.monitorHttpReferences[0].link)\r",
-											"//        console.log(jsonData.monitorHttpReferences[0].link)\r",
-											"        postman.setEnvironmentVariable(\"MonitorTypeName\", \"http\")\r",
-											"    break;\r",
-											"    case \"cm:adc-core:working-config:ltm:monitor:https:adcmonitorhttpsstate\":\r",
-											"        postman.setEnvironmentVariable(\"PoolMonitorLink\", jsonData.monitorHttpsReferences[0].link)\r",
-											"//        console.log(jsonData.monitorHttpsReferences[0].link)\r",
-											"        postman.setEnvironmentVariable(\"MonitorTypeName\", \"https\")\r",
-											"    break;\r",
-											"    case \"cm:adc-core:working-config:ltm:monitor:tcp:adcmonitortcpstate\":\r",
-											"        postman.setEnvironmentVariable(\"PoolMonitorLink\", jsonData.monitorTcpReferences[0].link)\r",
-											"//        console.log(jsonData.monitorTcpReferences[0].link)\r",
-											"        postman.setEnvironmentVariable(\"MonitorTypeName\", \"tcp\")\r",
-											"    break;\r",
-											"    case \"cm:adc-core:working-config:ltm:monitor:udp:adcmonitorudpstate\":\r",
-											"        postman.setEnvironmentVariable(\"PoolMonitorLink\", jsonData.monitorUdpReferences[0].link)\r",
-											"//        console.log(jsonData.monitorTcpReferences[0].link)\r",
-											"        postman.setEnvironmentVariable(\"MonitorTypeName\", \"udp\")\r",
-											"    break;\r",
-											"}\r",
+											"\r",
+											"        //set monitor variables\r",
+											"        postman.setEnvironmentVariable(\"MonitorTypeString\", MonitorTypeString.Get(jsonData));\r",
+											"        postman.setEnvironmentVariable(\"MonitorTypeName\", MonitorTypeName.Get(jsonData));\r",
 											"\r",
 											"if (pm.variables.get(\"BeVerbose\")) {\r",
 											"    console.log(\"Created Pool with the following properties:\")\r",
@@ -2014,6 +1926,22 @@
 											"    console.log(\"Pool Self Link \"+pm.variables.get(\"PoolSelfLink\"))\r",
 											"}\r",
 											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"console.log(bigiqmgmt)\r",
+											"console.log(pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'))\r",
+											"console.log(pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'))\r",
+											"postman.setEnvironmentVariable(\"NewMonitorLink\", pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'));\r",
+											"postman.setEnvironmentVariable(\"NewDeviceLink\", pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'));\r",
 											""
 										],
 										"type": "text/javascript"
@@ -3053,7 +2981,7 @@
 									}
 								],
 								"url": {
-									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/pool/8a5b5b55-9525-3388-b64d-62e95526d879",
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/pool/",
 									"protocol": "https",
 									"host": [
 										"{{BIGIQ_Mgmt}}"
@@ -3065,7 +2993,91 @@
 										"working-config",
 										"ltm",
 										"pool",
-										"8a5b5b55-9525-3388-b64d-62e95526d879"
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "** Get all pools",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/pool/",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"pool",
+										""
 									]
 								}
 							},
@@ -3519,6 +3531,7 @@
 			"script": {
 				"type": "text/javascript",
 				"exec": [
+					"//authenticate to teh BIG-IQ",
 					"MgmtIP = pm.variables.get(\"BIGIQ_Mgmt\")",
 					"user = pm.variables.get(\"UserName\")",
 					"password = pm.variables.get(\"Password\")",
@@ -3552,8 +3565,88 @@
 					"    }",
 					"});",
 					"",
+					"//funtions",
+					"MonitorTypeString = {",
+					"  Get: function(jsonData) {",
+					"        // monitor \"devination\" hack",
+					"        switch(jsonData.items[monitor].kind) {",
+					"            case \"cm:adc-core:working-config:ltm:monitor:http:adcmonitorhttpstate\":",
+					"                return \"monitorHttpReferences\"",
+					"            break;",
+					"            case \"cm:adc-core:working-config:ltm:monitor:https:adcmonitorhttpsstate\":",
+					"                return \"monitorHttpsReferences\"",
+					"            break;",
+					"            case \"cm:adc-core:working-config:ltm:monitor:tcp:adcmonitortcpstate\":",
+					"                return \"monitorTcpReferences\"",
+					"            break;",
+					"            case \"cm:adc-core:working-config:ltm:monitor:tcp-half-open:adcmonitortcphalfopenstate\":",
+					"                return \"monitorTcpHalfOpenReferences\"",
+					"            break;",
+					"            case \"cm:adc-core:working-config:ltm:monitor:dns:adcmonitordnsstate\":",
+					"                return \"monitorDnsReferences\"",
+					"            break;",
+					"            case \"cm:adc-core:working-config:ltm:monitor:icmp:adcmonitoricmpstate\":",
+					"                return \"monitorGatewayIcmpReferences\"",
+					"            break;",
+					"            case \"cm:adc-core:working-config:ltm:monitor:external:adcmonitorexternalstate\":",
+					"                return \"monitorExternalReferences\"",
+					"            break;",
+					"            case \"cm:adc-core:working-config:ltm:monitor:ftp:adcmonitorftpstate\":",
+					"                return \"monitorFtpReferences\"",
+					"            break;            ",
+					"            case \"cm:adc-core:working-config:ltm:monitor:ldap:adcmonitorldapstate\":",
+					"                return \"monitorLdapReferences\"",
+					"            break;            ",
+					"            case \"cm:adc-core:working-config:ltm:monitor:smtp:adcmonitorsmtpstate\":",
+					"                return \"monitorSmtpReferences\"",
+					"            break;            ",
+					"            //case \"xxxxx\":",
+					"            //    return \"xxxxxxxxx\"",
+					"            //break;            ",
+					"        }",
+					"    }",
+					"}",
 					"",
-					"",
+					"MonitorTypeName = {",
+					"  Get: function(jsonData) {",
+					"        // monitor \"devination\" hack",
+					"        switch(jsonData.items[monitor].kind) {",
+					"            case \"cm:adc-core:working-config:ltm:monitor:http:adcmonitorhttpstate\":",
+					"                return \"http\"",
+					"            break;",
+					"            case \"cm:adc-core:working-config:ltm:monitor:https:adcmonitorhttpsstate\":",
+					"                return \"https\"",
+					"            break;",
+					"            case \"cm:adc-core:working-config:ltm:monitor:tcp:adcmonitortcpstate\":",
+					"                return \"tcp\"",
+					"            break;",
+					"            case \"cm:adc-core:working-config:ltm:monitor:tcp-half-open:adcmonitortcphalfopenstate\":",
+					"                return \"tcp-half-open\"",
+					"            break;",
+					"            case \"cm:adc-core:working-config:ltm:monitor:dns:adcmonitordnsstate\":",
+					"                return \"dns\"",
+					"            break;",
+					"            case \"cm:adc-core:working-config:ltm:monitor:icmp:adcmonitoricmpstate\":",
+					"                return \"icmp\"",
+					"            break;",
+					"            case \"cm:adc-core:working-config:ltm:monitor:external:adcmonitorexternalstate\":",
+					"                return \"external\"",
+					"            break;",
+					"            case \"cm:adc-core:working-config:ltm:monitor:ftp:adcmonitorftpstate\":",
+					"                return \"ftp\"",
+					"            break;            ",
+					"            case \"cm:adc-core:working-config:ltm:monitor:ldap:adcmonitorldapstate\":",
+					"                return \"ldap\"",
+					"            break;            ",
+					"            case \"cm:adc-core:working-config:ltm:monitor:smtp:adcmonitorsmtpstate\":",
+					"                return \"smtp\"",
+					"            break;            ",
+					"            //case \"xxxxx\":",
+					"            //    return \"xxxxxxxxx\"",
+					"            //break;            ",
+					"        }",
+					"    }",
+					"}",
 					""
 				]
 			}
