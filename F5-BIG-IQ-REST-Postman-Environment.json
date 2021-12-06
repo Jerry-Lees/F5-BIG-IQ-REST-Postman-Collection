@@ -288,11 +288,6 @@
 			"enabled": true
 		},
 		{
-			"key": "DeviceSilo",
-			"value": "",
-			"enabled": true
-		},
-		{
 			"key": "NewPoolName",
 			"value": "",
 			"enabled": true
@@ -419,6 +414,6 @@
 		}
 	],
 	"_postman_variable_scope": "environment",
-	"_postman_exported_at": "2021-12-03T16:03:19.337Z",
+	"_postman_exported_at": "2021-12-06T15:51:44.100Z",
 	"_postman_exported_using": "Postman/9.2.0"
 }
