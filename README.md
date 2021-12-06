@@ -35,21 +35,34 @@ Set the following REQUIRED variables initially:
 
     This is the password to the administrative account. USE CAUTION: This is stored in clear text, guard this file closely once populated. Unfortunately, Postman doesn't have a feature to prompt the user for information interactively-- despite a feature request being open since 2013.
 
+-SearchDeviceAddress
+    This is the management address of the BIG-IP you wish to make changes to, note that some calls will populate the variables related to this as well. While not technically *required*, it is recommended to populate this and run the "Get Device by address" request to ensure the correct BIG-IP is selected.
+
         https://github.com/postmanlabs/postman-app-support/issues/285
 
 Optionally, once setup above, you may want to set the following variables and pre-populate some information by running some initial calls to the REST API:
-
--SearchDeviceAddress
-
-    This is the management IP address of teh BIG-IP that you wish to add, delete, or otherwise modify configuration items.
-
-    Note, once populated, you can run the ***Get Device by address*** Request to populate additional required information.
 
 -SearchVirtualName
 
     This is the variable that contains the name of a virtual you wish to search for. Note: it is best to put the exact virtual name in the variable since a substring could return multiple matches and thus possibly cause unexpected behavior
 
     Note, once populated, you can run the ***Get Virtual Information From Name*** and ***Get remaining Virtual Information*** Requests to populate required information about the virtual server.
+
+## Getting started
+
+To get familiar with the variables in the environment and to test your setup, follow teh following get started tasks below.
+
+### Initial test requests
+Once the above variables are populted for your environment, you can run "Gather information to start/Get Virtual Information from name" by populating the following variable:
+
+-SearchVirtualName
+    This is the virtual server you wish to search for. This would be typically used to populate variables and/or to get teh configuration for a virtual server you wish to modify.
+
+After running this, take a look at the environment variables. You should find that a great deal of information is populated about the virtual server its pool, pool's monitor, and the device it is configured on.
+
+Next, run "Gather information to start/Get remaining Virtual Information" and look at the variables again. You should see that more information is populated about the pool.
+
+(add more here)
 
 ## Getting to work
 
