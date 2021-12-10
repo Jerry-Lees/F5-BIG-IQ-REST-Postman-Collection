@@ -50,7 +50,31 @@ Optionally, once setup above, you may want to set the following variables and pr
 
 ## Getting started
 
-To get familiar with the variables in the environment and to test your setup, follow teh following get started tasks below.
+To get familiar with the variables in the environment and to test your setup, follow the following get started tasks below.
+
+### Troubleshooting
+
+1. Always check the pre-requisits for the request that had an error and ensure that the appropriate environments have correct values
+
+2. Most requests run multiple requests in the javascript in the tests and/or pre-request scripts section of the request, both in the script itself and at the collection level.
+
+#### Specific errors
+
+##### *FAILURE!* BIG-IQ Management address is empty! Please set it in the environment variables to avoid future errors
+
+This is due to the "BIGIQ_Mgmt" variable not being populated in the environment. This is the most common issue with a new installation or when the environment has been cleared. Also, check the other variables related to login as well. There are messsage prompts telling the user what variables are empty in the console log as well.
+
+##### *FAILURE!* BIG-IQ Management user is empty! Please set it in the environment variables to avoid future errors
+
+This is due to the "UserName" variable not being populated in the environment. This is the most common issue with a new installation or when the environment has been cleared. Also, check the other variables related to login as well. There are messsage prompts telling the user what variables are empty in the console log as well.
+
+##### *FAILURE!* BIG-IQ Management password is empty! Please set it in the environment variables to avoid future errors
+
+This is due to the "Password" variable not being populated in the environment. This is the most common issue with a new installation or when the environment has been cleared. Also, check the other variables related to login as well. There are messsage prompts telling the user what variables are empty in the console log as well.
+
+##### Error: [object Object]
+
+This is due, most likely, to a environment variable not being set or a login failing becasue information for login such as credentials or the BIG-IQ address not being populated. In general, look at the console logs for the previous request that was made and check that requests "response body" to see if any errors occured.
 
 ### Initial test requests
 
@@ -60,7 +84,7 @@ Run this section *ONLY* against a test environment. This mini-guide will take yo
 Once the above variables are populted for your environment, you can run "Gather information to start/Get Virtual Information from name" by populating the following variable:
 
 -SearchVirtualName
-    This is the virtual server you wish to search for. This would be typically used to populate variables and/or to get teh configuration for a virtual server you wish to modify.
+    This is the virtual server you wish to search for. This would be typically used to populate variables and/or to get the configuration for a virtual server you wish to modify.
 
 After running this, take a look at the environment variables. You should find that a great deal of information is populated about the virtual server its pool, pool's monitor, and the device it is configured on.
 
@@ -71,6 +95,26 @@ Next, run "Gather information to start/Get remaining Virtual Information" and lo
 ## Getting to work
 
 The collection preforms many common tasks such as:
+
+### Device Tasks
+
+The most important part of orchestration with BIG-IQ is to tell BIG-IQ what device it is going to create, Read, update, or Delete configiration for. Environment variables for this get popuolated by running the "Gather information to start/Get Device by address" request with the "SearchDeviceAddress" environemnt variable set to the address of the BIG-IP.
+
+When Successful, this will populate the following variables:
+
+DeviceID - Which is the device ID/GUID used as references and in the URI to device specific REST calls.
+
+DeviceSelfLink - Which is the URL used inside the JSON document sent in the request body of REST calls. this should ALWAYS be to the hostname 'localhost'
+
+DeviceSelfURI - Which is the URL used inside the URI for a call to the BIG-IQ REST REST API. This should ALWAYS be to the address of the BIG-IQ device and NOT the hostname 'localhost'.
+
+NewDeviceLink - This is the variable that will be used in REST calls to create new objects and shoudl be the same (initially) as the "DeviceSelfLink"
+
+(In addition some login variables that every requests updates are updated:
+
+AuthToken - This is the token sent back by the REST API and used (and updated) in every call to authenticate the request.
+
+AuthTokenTimeoutTime - This is the time that the token will time out. In BIG-IQ REST this is not updateable like in BIG-IP REST. It is currently not used but could be helpful in troubleshooting. The time is a number representing UTC time.
 
 ### Monitor Tasks
 
