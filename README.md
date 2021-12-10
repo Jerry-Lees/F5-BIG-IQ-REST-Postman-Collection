@@ -53,6 +53,10 @@ Optionally, once setup above, you may want to set the following variables and pr
 To get familiar with the variables in the environment and to test your setup, follow teh following get started tasks below.
 
 ### Initial test requests
+
+*READ THIS FIRST*
+Run this section *ONLY* against a test environment. This mini-guide will take you through modifying the configuration of a virtual server. *DO NOT* use this in a production environment or for a virtual that has impact.
+
 Once the above variables are populted for your environment, you can run "Gather information to start/Get Virtual Information from name" by populating the following variable:
 
 -SearchVirtualName
