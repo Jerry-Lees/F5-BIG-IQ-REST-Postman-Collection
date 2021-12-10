@@ -78,7 +78,8 @@ This is due, most likely, to a environment variable not being set or a login fai
 
 ### Initial test requests
 
-*READ THIS FIRST*
+#### READ THIS FIRST
+
 Run this section *ONLY* against a test environment. This mini-guide will take you through modifying the configuration of a virtual server. *DO NOT* use this in a production environment or for a virtual that has impact.
 
 Once the above variables are populted for your environment, you can run "Gather information to start/Get Virtual Information from name" by populating the following variable:
