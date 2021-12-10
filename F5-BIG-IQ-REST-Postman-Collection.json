@@ -1979,8 +1979,6 @@
 											"    MonitorTypeName     - Programatic input (from another REST call) or User Input\r",
 											"        This can be user provided, in a search for example, or is programatically provided. It is the type of monitor. \r",
 											"        Unlike above, this is teh same string used in a tmsh command; http, https, tcp, etc\r",
-											"    NewMonitorLink      - Programatic input (from another REST call) or User Input\r",
-											"        This should be programatically populated. This is a link to teh device that the pool is to be created on.\r",
 											"*/\r",
 											"\r",
 											"var jsonData = JSON.parse(responseBody)\r",
@@ -1998,8 +1996,8 @@
 											"var monitortype = pm.variables.get(\"MonitorType\")\r",
 											"\r",
 											"//set monitor variables\r",
-											"postman.setEnvironmentVariable(\"MonitorTypeString\", MonitorTypeString.Get(jsonData));\r",
-											"postman.setEnvironmentVariable(\"MonitorTypeName\", MonitorTypeName.Get(jsonData));\r",
+											"//postman.setEnvironmentVariable(\"MonitorTypeString\", MonitorTypeString.Get(jsonData));\r",
+											"//postman.setEnvironmentVariable(\"MonitorTypeName\", MonitorTypeName.Get(jsonData));\r",
 											"\r",
 											"if (pm.variables.get(\"BeVerbose\")) {\r",
 											"    console.log(\"Created Pool with the following properties:\")\r",
@@ -2764,7 +2762,7 @@
 							"response": []
 						},
 						{
-							"name": "Get cientssl Profile by Name",
+							"name": "Get clientssl Profile by Name",
 							"event": [
 								{
 									"listen": "prerequest",
