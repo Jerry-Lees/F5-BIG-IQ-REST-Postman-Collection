@@ -76,6 +76,10 @@ This is due to the "Password" variable not being populated in the environment. T
 
 This is due, most likely, to a environment variable not being set or a login failing becasue information for login such as credentials or the BIG-IQ address not being populated. In general, look at the console logs for the previous request that was made and check that requests "response body" to see if any errors occured.
 
+#### Error: runtime:extensions~request: request url is empty
+
+This is likely due to leading or trailing whitespace in a user entered parameter, or an other typo, thus causing a search to fail to return any results.
+
 ### Initial test requests
 
 #### READ THIS FIRST

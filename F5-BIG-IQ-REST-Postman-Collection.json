@@ -155,7 +155,6 @@
 											"postman.setEnvironmentVariable(\"NodeSelfLink\",\"\")\r",
 											"postman.setEnvironmentVariable(\"DeviceSelfLink\",\"\")\r",
 											"postman.setEnvironmentVariable(\"MonitorSelfLink\",\"\")\r",
-											"postman.setEnvironmentVariable(\"MonitorID\",\"\")\r",
 											"postman.setEnvironmentVariable(\"MonitorType\",\"\")\r",
 											"postman.setEnvironmentVariable(\"MonitorJSON\",\"\")\r",
 											"postman.setEnvironmentVariable(\"MonitorTypeString\",\"\")\r",
@@ -194,10 +193,34 @@
 											"postman.setEnvironmentVariable(\"VirtualDestinationAddress\",\"\")\r",
 											"postman.setEnvironmentVariable(\"VirtualSourceAddress\",\"\")\r",
 											"postman.setEnvironmentVariable(\"VirtualSNATType\",\"\")\r",
-											"//postman.setEnvironmentVariable(\"\",\"\")\r",
-											"//postman.setEnvironmentVariable(\"\",\"\")\r",
-											"//postman.setEnvironmentVariable(\"\",\"\")\r",
-											"//postman.setEnvironmentVariable(\"\",\"\")\r",
+											"postman.setEnvironmentVariable(\"ProfileFastL4ID\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileFastL4Name\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileFastL4SelfLink\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileFastL4SelfURI\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPID\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPName\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPSelfLink\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPSelfURI\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileTCPID\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileTCPName\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileTCPSelfLink\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileTCPSelfURI\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileClientSSLID\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileClientSSLName\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileClientSSLSelfLink\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileClientSSLSelfURI\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileServerSSLID\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileServerSSLName\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileServerSSLSelfLink\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileServerSSLSelfURI\", \"\");\r",
+											"\r",
+											"postman.setEnvironmentVariable(\"VirtualMask\",\"\")\r",
+											"postman.setEnvironmentVariable(\"VirtualPort\",\"\")\r",
+											"postman.setEnvironmentVariable(\"VirtualSNATPoolName\",\"\")\r",
+											"postman.setEnvironmentVariable(\"VirtualSNATPoolID\",\"\")\r",
+											"postman.setEnvironmentVariable(\"VirtualSNATPoolSelfURI\",\"\")\r",
+											"postman.setEnvironmentVariable(\"VirtualSNATPoolSelfLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"VirtualName\",\"\")\r",
 											"//postman.setEnvironmentVariable(\"\",\"\")\r",
 											"\r",
 											"\r",
@@ -477,7 +500,6 @@
 											"postman.setEnvironmentVariable(\"NodeSelfLink\",\"\")\r",
 											"postman.setEnvironmentVariable(\"DeviceSelfLink\",\"\")\r",
 											"postman.setEnvironmentVariable(\"MonitorSelfLink\",\"\")\r",
-											"postman.setEnvironmentVariable(\"MonitorID\",\"\")\r",
 											"postman.setEnvironmentVariable(\"MonitorType\",\"\")\r",
 											"postman.setEnvironmentVariable(\"MonitorJSON\",\"\")\r",
 											"postman.setEnvironmentVariable(\"MonitorTypeString\",\"\")\r",
@@ -516,9 +538,34 @@
 											"postman.setEnvironmentVariable(\"VirtualDestinationAddress\",\"\")\r",
 											"postman.setEnvironmentVariable(\"VirtualSourceAddress\",\"\")\r",
 											"postman.setEnvironmentVariable(\"VirtualSNATType\",\"\")\r",
-											"//postman.setEnvironmentVariable(\"\",\"\")\r",
-											"//postman.setEnvironmentVariable(\"\",\"\")\r",
-											"//postman.setEnvironmentVariable(\"\",\"\")\r",
+											"postman.setEnvironmentVariable(\"ProfileFastL4ID\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileFastL4Name\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileFastL4SelfLink\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileFastL4SelfURI\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPID\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPName\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPSelfLink\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPSelfURI\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileTCPID\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileTCPName\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileTCPSelfLink\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileTCPSelfURI\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileClientSSLID\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileClientSSLName\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileClientSSLSelfLink\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileClientSSLSelfURI\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileServerSSLID\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileServerSSLName\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileServerSSLSelfLink\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileServerSSLSelfURI\", \"\");\r",
+											"\r",
+											"postman.setEnvironmentVariable(\"VirtualMask\",\"\")\r",
+											"postman.setEnvironmentVariable(\"VirtualPort\",\"\")\r",
+											"postman.setEnvironmentVariable(\"VirtualSNATPoolName\",\"\")\r",
+											"postman.setEnvironmentVariable(\"VirtualSNATPoolID\",\"\")\r",
+											"postman.setEnvironmentVariable(\"VirtualSNATPoolSelfURI\",\"\")\r",
+											"postman.setEnvironmentVariable(\"VirtualSNATPoolSelfLink\",\"\")\r",
+											"postman.setEnvironmentVariable(\"VirtualName\",\"\")\r",
 											"//postman.setEnvironmentVariable(\"\",\"\")\r",
 											"//postman.setEnvironmentVariable(\"\",\"\")\r",
 											"\r",
@@ -567,7 +614,7 @@
 											"        postman.setEnvironmentVariable(\"VirtualPort\", jsonData.items[virtual].destinationPort);\r",
 											"        postman.setEnvironmentVariable(\"VirtualSourceAddress\", jsonData.items[virtual].sourceAddress);\r",
 											"        //postman.setEnvironmentVariable(\"\", jsonData.items[virtual].);\r",
-											"\r",
+											"        //postman.setEnvironmentVariable(\"\", jsonData.items[virtual].);\r",
 											"        //log data saved\r",
 											"        console.log (\"Found \"+searchname+\": Now you may continue to get the specific virtual's json from the REST API.\")\r",
 											"        //log if verbose set to greater than 0, do not log if set to 0\r",
@@ -599,7 +646,6 @@
 											"    if (error) {\r",
 											"        throw new Error(error);\r",
 											"    } else {\r",
-											"        console.log(\"Found JSON for Virtual, storing in Environment variable 'VirtualJSON'\")\r",
 											"        postman.setEnvironmentVariable(\"VirtualJSON\", response.text())\r",
 											"    }\r",
 											"});\r",
@@ -633,17 +679,19 @@
 											"        console.log(jsonData)\r",
 											"        try {\r",
 											"            monitortype = jsonData.monitorTcpReferences[0].kind\r",
+											"            postman.setEnvironmentVariable(\"MonitorID\", jsonData.monitorTcpReferences[0].id);\r",
 											"            postman.setEnvironmentVariable(\"MonitorSelfLink\", jsonData.monitorTcpReferences[0].link);\r",
 											"            postman.setEnvironmentVariable(\"MonitorSelfURI\", jsonData.monitorTcpReferences[0].link.replace(/localhost/g,bigiqmgmt));\r",
 											"            postman.setEnvironmentVariable(\"MonitorTypeString\", \"monitorTcpReferences\");\r",
 											"            postman.setEnvironmentVariable(\"MonitorTypeName\", \"tcp\");\r",
-											"            postman.setEnvironmentVariable(\"MonitorType\", \"tcp\");MonitorType\r",
+											"            postman.setEnvironmentVariable(\"MonitorType\", \"tcp\");\r",
 											"        } catch (error) {\r",
 											"            //do nothing\r",
 											"            console.log(\"caught no tcp monitors\")\r",
 											"        }\r",
 											"        try {\r",
 											"            monitortype = jsonData.monitorHttpsReferences[0].kind\r",
+											"            postman.setEnvironmentVariable(\"MonitorID\", jsonData.monitorHttpsReferences[0].id);\r",
 											"            postman.setEnvironmentVariable(\"MonitorSelfLink\", jsonData.monitorHttpsReferences[0].link);\r",
 											"            postman.setEnvironmentVariable(\"MonitorSelfURI\", jsonData.monitorHttpsReferences[0].link.replace(/localhost/g,bigiqmgmt));\r",
 											"            postman.setEnvironmentVariable(\"MonitorTypeString\", \"monitorHttpsReferences\");\r",
@@ -655,6 +703,7 @@
 											"        }\r",
 											"        try {\r",
 											"            monitortype = jsonData.monitorHttpReferences[0].kind\r",
+											"            postman.setEnvironmentVariable(\"MonitorID\", jsonData.monitorHttpReferences[0].id);\r",
 											"            postman.setEnvironmentVariable(\"MonitorSelfLink\", jsonData.monitorHttpReferences[0].link);\r",
 											"            postman.setEnvironmentVariable(\"MonitorSelfURI\", jsonData.monitorHttpReferences[0].link.replace(/localhost/g,bigiqmgmt));\r",
 											"            postman.setEnvironmentVariable(\"MonitorTypeString\", \"monitorHttpReferences\");\r",
@@ -666,6 +715,7 @@
 											"        }\r",
 											"        try {\r",
 											"            monitortype = jsonData.monitorTcpHalfOpenReferences[0].kind\r",
+											"            postman.setEnvironmentVariable(\"MonitorID\", jsonData.monitorTcpHalfOpenReferences[0].id);\r",
 											"            postman.setEnvironmentVariable(\"MonitorSelfLink\", jsonData.monitorTcpHalfOpenReferences[0].link);\r",
 											"            postman.setEnvironmentVariable(\"MonitorSelfURI\", jsonData.monitorTcpHalfOpenReferences[0].link.replace(/localhost/g,bigiqmgmt));\r",
 											"            postman.setEnvironmentVariable(\"MonitorTypeString\", \"monitorTcpHalfOpenReferences\");\r",
@@ -677,6 +727,7 @@
 											"        }\r",
 											"        try {\r",
 											"            monitortype = jsonData.monitorDnsReferences[0].kind\r",
+											"            postman.setEnvironmentVariable(\"MonitorID\", jsonData.monitorDnsReferences[0].id);\r",
 											"            postman.setEnvironmentVariable(\"MonitorSelfLink\", jsonData.monitorDnsReferences[0].link);\r",
 											"            postman.setEnvironmentVariable(\"MonitorSelfURI\", jsonData.monitorDnsReferences[0].link.replace(/localhost/g,bigiqmgmt));\r",
 											"            postman.setEnvironmentVariable(\"MonitorTypeString\", \"monitorDnsReferences\");\r",
@@ -688,6 +739,7 @@
 											"        }\r",
 											"        try {\r",
 											"            monitortype = jsonData.monitorGatewayIcmpReferences[0].kind\r",
+											"            postman.setEnvironmentVariable(\"MonitorID\", jsonData.monitorGatewayIcmpReferences[0].id);\r",
 											"            postman.setEnvironmentVariable(\"MonitorSelfLink\", jsonData.monitorGatewayIcmpReferences[0].link);\r",
 											"            postman.setEnvironmentVariable(\"MonitorSelfURI\", jsonData.monitorGatewayIcmpReferences[0].link.replace(/localhost/g,bigiqmgmt));\r",
 											"            postman.setEnvironmentVariable(\"MonitorTypeString\", \"monitorGatewayIcmpReferences\");\r",
@@ -699,6 +751,7 @@
 											"        }\r",
 											"        try {\r",
 											"            monitortype = jsonData.monitorExternalReferences[0].kind\r",
+											"            postman.setEnvironmentVariable(\"MonitorID\", jsonData.monitorExternalReferences[0].id);\r",
 											"            postman.setEnvironmentVariable(\"MonitorSelfLink\", jsonData.monitorExternalReferences[0].link);\r",
 											"            postman.setEnvironmentVariable(\"MonitorSelfURI\", jsonData.monitorExternalReferences[0].link.replace(/localhost/g,bigiqmgmt));\r",
 											"            postman.setEnvironmentVariable(\"MonitorTypeString\", \"monitorExternalReferences\");\r",
@@ -710,6 +763,7 @@
 											"        }\r",
 											"        try {\r",
 											"            monitortype = jsonData.monitorFtpReferences[0].kind\r",
+											"            postman.setEnvironmentVariable(\"MonitorID\", jsonData.monitorExternalReferences[0].id);\r",
 											"            postman.setEnvironmentVariable(\"MonitorSelfLink\", jsonData.monitorFtpReferences[0].link);\r",
 											"            postman.setEnvironmentVariable(\"MonitorSelfURI\", jsonData.monitorFtpReferences[0].link.replace(/localhost/g,bigiqmgmt));\r",
 											"            postman.setEnvironmentVariable(\"MonitorTypeString\", \"monitorDnsReferences\");\r",
@@ -721,6 +775,7 @@
 											"        }\r",
 											"        try {\r",
 											"            monitortype = jsonData.monitorLdapReferences[0].kind\r",
+											"            postman.setEnvironmentVariable(\"MonitorID\", jsonData.monitorExternalReferences[0].id);\r",
 											"            postman.setEnvironmentVariable(\"MonitorSelfLink\", jsonData.monitorLdapReferences[0].link);\r",
 											"            postman.setEnvironmentVariable(\"MonitorSelfURI\", jsonData.monitorLdapReferences[0].link.replace(/localhost/g,bigiqmgmt));\r",
 											"            postman.setEnvironmentVariable(\"MonitorTypeString\", \"monitorLdapReferences\");\r",
@@ -732,6 +787,7 @@
 											"        }\r",
 											"        try {\r",
 											"            monitortype = jsonData.monitorSmtpReferences[0].kind\r",
+											"            postman.setEnvironmentVariable(\"MonitorID\", jsonData.monitorExternalReferences[0].id);\r",
 											"            postman.setEnvironmentVariable(\"MonitorSelfLink\", jsonData.monitorSmtpReferences[0].link);\r",
 											"            postman.setEnvironmentVariable(\"MonitorSelfURI\", jsonData.monitorSmtpReferences[0].link.replace(/localhost/g,bigiqmgmt));\r",
 											"            postman.setEnvironmentVariable(\"MonitorTypeString\", \"monitorSmtpReferences\");\r",
@@ -760,7 +816,95 @@
 											"        }\r",
 											"    }\r",
 											"});\r",
-											" \r",
+											"\r",
+											"//VirtualProfilesURI\r",
+											"const GetProfiles = {\r",
+											"    method: 'GET',\r",
+											"    url: pm.variables.get(\"VirtualProfilesURI\"),\r",
+											"    header: 'ContentType: application/json',\r",
+											"    header: 'X-F5-Auth-Token: '+pm.variables.get(\"AuthToken\"),\r",
+											"    body: \"\"\r",
+											"};\r",
+											"\r",
+											" pm.sendRequest(GetProfiles, (error, response) => {\r",
+											"    if (error) {\r",
+											"        throw new Error(error);\r",
+											"    } else {\r",
+											"                //console.log (response.text)\r",
+											"                var jsonData = response.json()//JSON.parse(response)\r",
+											"                let profiles = pm.globals.get(\"itemOfArray\");\r",
+											"                profiles = jsonData.items;\r",
+											"                bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"                index = 0;\r",
+											"                for (profile in profiles){\r",
+											"                    //Check for ClientSSL Profiles\r",
+											"                    try {\r",
+											"                        postman.setEnvironmentVariable(\"ProfileClientSSLID\", jsonData.items[index].profileClientsslReference.id);\r",
+											"                        postman.setEnvironmentVariable(\"ProfileClientSSLName\", jsonData.items[index].profileClientsslReference.name);\r",
+											"                        postman.setEnvironmentVariable(\"ProfileClientSSLSelfLink\", jsonData.items[index].profileClientsslReference.link);\r",
+											"                        postman.setEnvironmentVariable(\"ProfileClientSSLSelfURI\", jsonData.items[index].profileClientsslReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"                        console.log(\"Found ClientSSL Profile: \"+ jsonData.items[index].profileClientsslReference.name)\r",
+											"                    } catch (error) {\r",
+											"                        //do nothing\r",
+											"                        console.log(\"caught no ClientSSL Profiles\")\r",
+											"                    }\r",
+											"\r",
+											"                    //Check for ServerSSL Profiles\r",
+											"                    try {\r",
+											"                        postman.setEnvironmentVariable(\"ProfileServerSSLID\", jsonData.items[index].profileServersslReference.id);\r",
+											"                        postman.setEnvironmentVariable(\"ProfileServerSSLName\", jsonData.items[index].profileServersslReference.name);\r",
+											"                        postman.setEnvironmentVariable(\"ProfileServerSSLSelfLink\", jsonData.items[index].profileServersslReference.link);\r",
+											"                        postman.setEnvironmentVariable(\"ProfileServerSSLSelfURI\", jsonData.items[index].profileServersslReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"                        console.log(\"Found ClientSSL Profile: \"+ jsonData.items[index].profileServersslReference.name)\r",
+											"                    } catch (error) {\r",
+											"                        //do nothing\r",
+											"                        console.log(\"caught no ServerSSL Profiles\")\r",
+											"                    }\r",
+											"\r",
+											"                    //Check for HTTP Profiles\r",
+											"                    try {\r",
+											"                        postman.setEnvironmentVariable(\"ProfileHTTPID\", jsonData.items[index].profileHttpReference.id);\r",
+											"                        postman.setEnvironmentVariable(\"ProfileHTTPName\", jsonData.items[index].profileHttpReference.name);\r",
+											"                        postman.setEnvironmentVariable(\"ProfileHTTPSelfLink\", jsonData.items[index].profileHttpReference.link);\r",
+											"                        postman.setEnvironmentVariable(\"ProfileHTTPSelfURI\", jsonData.items[index].profileHttpReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"                        console.log(\"Found ClientSSL Profile: \"+ jsonData.items[index].profileHttpReference.name)\r",
+											"                    } catch (error) {\r",
+											"                        //do nothing\r",
+											"                        console.log(\"caught no HTTP Profiles\")\r",
+											"                    }\r",
+											"\r",
+											"                    //Check for TCP Profiles\r",
+											"                    try {\r",
+											"                        postman.setEnvironmentVariable(\"ProfileTCPID\", jsonData.items[index].profileTcpReference.id);\r",
+											"                        postman.setEnvironmentVariable(\"ProfileTCPName\", jsonData.items[index].profileTcpReference.name);\r",
+											"                        postman.setEnvironmentVariable(\"ProfileTCPSelfLink\", jsonData.items[index].profileTcpReference.link);\r",
+											"                        postman.setEnvironmentVariable(\"ProfileTCPSelfURI\", jsonData.items[index].profileTcpReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"                        console.log(\"Found TCP Profile: \"+ jsonData.items[index].profileTcpReference.name)\r",
+											"                    } catch (error) {\r",
+											"                        //do nothing\r",
+											"                        console.log(\"caught no TCP Profiles\")\r",
+											"                    }\r",
+											"\r",
+											"                    //Check for FastL4 Profiles\r",
+											"                    try {\r",
+											"                        postman.setEnvironmentVariable(\"ProfileFastL4ID\", jsonData.items[index].profileFastl4Reference.id);\r",
+											"                        postman.setEnvironmentVariable(\"ProfileFastL4Name\", jsonData.items[index].profileFastl4Reference.name);\r",
+											"                        postman.setEnvironmentVariable(\"ProfileFastL4SelfLink\", jsonData.items[index].profileFastl4Reference.link);\r",
+											"                        postman.setEnvironmentVariable(\"ProfileFastL4SelfURI\", jsonData.items[index].profileFastl4Reference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"                        console.log(\"Found FastL4 Profile: \"+ jsonData.items[index].profileFastl4Reference.name)\r",
+											"                    } catch (error) {\r",
+											"                        //do nothing\r",
+											"                        console.log(\"caught no FastL4 Profiles\")\r",
+											"                    }\r",
+											"\r",
+											"\r",
+											"                    index++;\r",
+											"                }\r",
+											"    }\r",
+											"});\r",
+											"\r",
+											"\r",
 											""
 										],
 										"type": "text/javascript"
@@ -3057,6 +3201,343 @@
 										}
 									]
 								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"clientssl\",\r\n  \"partition\": \"Common\",\r\n        \"profileClientsslReference\": {\r\n            \"kind\": \"cm:adc-core:working-config:ltm:profile:client-ssl:adcprofileclientsslstate\",\r\n            \"link\": \"https://localhost/mgmt/cm/adc-core/working-config/ltm/profile/client-ssl/08fa86e3-b807-36b5-a595-1e2457c88321\",\r\n            \"name\": \"devsso-2020-client\"\r\n        },\r\n    \"context\": \"all\"\r\n}"
+								},
+								"url": {
+									"raw": "https://10.155.111.64/mgmt/cm/adc-core/working-config/ltm/virtual/7e92e5b4-7865-3b66-9a8e-ae57d86a2202/profiles/",
+									"protocol": "https",
+									"host": [
+										"10",
+										"155",
+										"111",
+										"64"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"virtual",
+										"7e92e5b4-7865-3b66-9a8e-ae57d86a2202",
+										"profiles",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "**Create SSL Bridge Virtual Server",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody)\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"virtualid=jsonData.id\r",
+											"postman.setEnvironmentVariable(\"VirtualName\", jsonData.name);\r",
+											"postman.setEnvironmentVariable(\"VirtualID\", virtualid);\r",
+											"postman.setEnvironmentVariable(\"VirtualSelfLink\", jsonData.selfLink);\r",
+											"postman.setEnvironmentVariable(\"VirtualSelfURI\", jsonData.selfLink.replace(/localhost/g,bigiqmgmt));\r",
+											"postman.setEnvironmentVariable(\"PoolSelfLink\", jsonData.poolReference.link);\r",
+											"postman.setEnvironmentVariable(\"PoolSelfURI\", jsonData.poolReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"postman.setEnvironmentVariable(\"VirtualDeviceLink\", jsonData.deviceReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"postman.setEnvironmentVariable(\"VirtualDeviceURI\", jsonData.deviceReference.link);\r",
+											"postman.setEnvironmentVariable(\"DeviceID\", jsonData.deviceReference.id);\r",
+											"postman.setEnvironmentVariable(\"DeviceSelfLink\", jsonData.deviceReference.link);\r",
+											"postman.setEnvironmentVariable(\"DeviceSelfURI\", jsonData.deviceReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"postman.setEnvironmentVariable(\"VirtualProfilesLink\", jsonData.profilesCollectionReference.link);\r",
+											"postman.setEnvironmentVariable(\"VirtualProfilesURI\", jsonData.profilesCollectionReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"postman.setEnvironmentVariable(\"VirtualDestinationAddress\", jsonData.destinationAddress);\r",
+											"postman.setEnvironmentVariable(\"VirtualMask\", jsonData.mask);\r",
+											"postman.setEnvironmentVariable(\"VirtualSNATType\", jsonData.sourceAddressTranslation.type);\r",
+											"if (jsonData.sourceAddressTranslation.type == \"snat\")\r",
+											"{\r",
+											"    postman.setEnvironmentVariable(\"VirtualSNATPoolName\", jsonData.sourceAddressTranslation.snatpoolReference.name);\r",
+											"    postman.setEnvironmentVariable(\"VirtualSNATPoolID\", jsonData.sourceAddressTranslation.snatpoolReference.id);\r",
+											"    postman.setEnvironmentVariable(\"VirtualSNATPoolSelfURI\", jsonData.sourceAddressTranslation.snatpoolReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"    postman.setEnvironmentVariable(\"VirtualSNATPoolSelfLink\", jsonData.sourceAddressTranslation.snatpoolReference.link);\r",
+											"}\r",
+											"\r",
+											"//now get the virtual server's JSON inline\r",
+											"MgmtIP = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"const options = {\r",
+											"    method: 'GET',\r",
+											"    url: pm.variables.get(\"VirtualSelfURI\"),\r",
+											"    header: 'ContentType: application/json',\r",
+											"    header: 'X-F5-Auth-Token: '+pm.variables.get(\"AuthToken\"),\r",
+											"    body: \"\"\r",
+											"};\r",
+											"\r",
+											"pm.sendRequest(options, (error, response) => {\r",
+											"    if (error) {\r",
+											"        throw new Error(error);\r",
+											"    } else {\r",
+											"        console.log(\"Found JSON for Virtual, storing in Environment variable 'VirtualJSON'\")\r",
+											"        postman.setEnvironmentVariable(\"VirtualJSON\", response.text())\r",
+											"    }\r",
+											"});\r",
+											"\r",
+											"// Set the Prfiles reference with VirtualProfilesURI\r",
+											"const ClientSSLOptions = {\r",
+											"    method: 'POST',\r",
+											"    url: pm.variables.get(\"VirtualProfilesURI\"),\r",
+											"    header: 'ContentType: application/json',\r",
+											"    header: 'X-F5-Auth-Token: '+pm.variables.get(\"AuthToken\"),\r",
+											"    body: '{'+\r",
+											"  '\"name\": \"clientssl\",'+\r",
+											"  '\"partition\": \"Common\",'+\r",
+											"  '      \"profileClientsslReference\": {'+\r",
+											"  '          \"kind\": \"cm:adc-core:working-config:ltm:profile:client-ssl:adcprofileclientsslstate\",'+\r",
+											"  '          \"link\": \"'+ pm.variables.get(\"ProfileClientSSLSelfLink\") + '\",'+\r",
+											"  '          \"name\": \"'+ pm.variables.get(\"ProfileClientSSLName\") + '\"'+\r",
+											"  '      },'+\r",
+											"  '  \"context\": \"all\"'+\r",
+											"'}'\r",
+											"}\r",
+											"\r",
+											"pm.sendRequest(ClientSSLOptions, (error, response) => {\r",
+											"    if (error) {\r",
+											"        throw new Error(error);\r",
+											"    } else {\r",
+											"        console.log(\"Attached ClientSSL profile...\")\r",
+											"        //postman.setEnvironmentVariable(\"VirtualJSON\", response.text())\r",
+											"    }\r",
+											"});\r",
+											"\r",
+											"// attach HTTP Profile\r",
+											"const HTTPOptions = {\r",
+											"    method: 'POST',\r",
+											"    url: pm.variables.get(\"VirtualProfilesURI\"),\r",
+											"    header: 'ContentType: application/json',\r",
+											"    header: 'X-F5-Auth-Token: '+pm.variables.get(\"AuthToken\"),\r",
+											"    body: '{'+\r",
+											"  '\"name\": \"http\",'+\r",
+											"  '\"partition\": \"Common\",'+\r",
+											"        '\"profileHttpReference\": {'+\r",
+											"            '\"kind\": \"cm:adc-core:working-config:ltm:profile:http:adcprofilehttpstate\",'+\r",
+											"  '          \"link\": \"'+ pm.variables.get(\"ProfileHTTPSelfLink\") + '\",'+\r",
+											"  '          \"name\": \"'+ pm.variables.get(\"ProfileHTTPName\") + '\"'+\r",
+											"        '},'+\r",
+											"  '  \"context\": \"all\"'+\r",
+											"'}'\r",
+											"}\r",
+											"\r",
+											"pm.sendRequest(HTTPOptions, (error, response) => {\r",
+											"    if (error) {\r",
+											"        throw new Error(error);\r",
+											"    } else {\r",
+											"        console.log(\"Attached HTTP profile...\")\r",
+											"        //postman.setEnvironmentVariable(\"VirtualJSON\", response.text())\r",
+											"    }\r",
+											"});\r",
+											"\r",
+											"// attach TCP Profile\r",
+											"const TCPOptions = {\r",
+											"    method: 'POST',\r",
+											"    url: pm.variables.get(\"VirtualProfilesURI\"),\r",
+											"    header: 'ContentType: application/json',\r",
+											"    header: 'X-F5-Auth-Token: '+pm.variables.get(\"AuthToken\"),\r",
+											"    body: '{'+\r",
+											"  '\"name\": \"tcp\",'+\r",
+											"  '\"partition\": \"Common\",'+\r",
+											"        '\"profileTcpReference\": {'+\r",
+											"            '\"kind\": \"cm:adc-core:working-config:ltm:profile:tcp:adcprofiletcpstate\",'+\r",
+											"  '          \"link\": \"'+ pm.variables.get(\"ProfileTCPSelfLink\") + '\",'+\r",
+											"  '          \"name\": \"'+ pm.variables.get(\"ProfileTCPName\") + '\"'+\r",
+											"        '},'+\r",
+											"  '  \"context\": \"all\"'+\r",
+											"'}'\r",
+											"}\r",
+											"\r",
+											"pm.sendRequest(TCPOptions, (error, response) => {\r",
+											"    if (error) {\r",
+											"        throw new Error(error);\r",
+											"    } else {\r",
+											"        console.log(\"Attached TCP profile...\")\r",
+											"        //postman.setEnvironmentVariable(\"VirtualJSON\", response.text())\r",
+											"    }\r",
+											"});\r",
+											"\r",
+											"// attach ServerSSL Profile\r",
+											"const ServerSSLOptions = {\r",
+											"    method: 'POST',\r",
+											"    url: pm.variables.get(\"VirtualProfilesURI\"),\r",
+											"    header: 'ContentType: application/json',\r",
+											"    header: 'X-F5-Auth-Token: '+pm.variables.get(\"AuthToken\"),\r",
+											"    body: '{'+\r",
+											"  '\"name\": \"serverssl\",'+\r",
+											"  '\"partition\": \"Common\",'+\r",
+											"        '\"profileServersslReference\": {'+\r",
+											"            '\"kind\": \"cm:adc-core:working-config:ltm:profile:server-ssl:adcprofileserversslstate\",'+\r",
+											"  '          \"link\": \"'+ pm.variables.get(\"ProfileServerSSLSelfLink\") + '\",'+\r",
+											"  '          \"name\": \"'+ pm.variables.get(\"ProfileServerSSLName\") + '\"'+\r",
+											"        '},'+\r",
+											"  ' \"context\": \"all\"'+\r",
+											"'}'\r",
+											"}\r",
+											"\r",
+											"pm.sendRequest(ServerSSLOptions, (error, response) => {\r",
+											"    if (error) {\r",
+											"        throw new Error(error);\r",
+											"    } else {\r",
+											"        console.log(\"Attached Server SSL profile...\")\r",
+											"        //postman.setEnvironmentVariable(\"VirtualJSON\", response.text())\r",
+											"    }\r",
+											"});\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"kind\": \"cm:adc-core:working-config:ltm:virtual:adcvirtualstate\",\r\n    \"mask\": \"{{VirtualMask}}\",\r\n    \"name\": \"{{VirtualName}}\",\r\n    \"nat64\": \"disabled\",\r\n    \"state\": \"enabled\",\r\n    \"mirror\": \"disabled\",\r\n    \"policies\": [],\r\n    \"partition\": \"Common\",\r\n    \"rateLimit\": \"disabled\",\r\n    \"ipProtocol\": \"tcp\",\r\n    \"properties\": {\r\n        \"virtual-address\": {\r\n            \"name\": \"{{VirtualDestinationAddress}}\",\r\n            \"address\": \"{{VirtualDestinationAddress}}\",\r\n            \"floating\": \"enabled\",\r\n            \"partition\": \"Common\",\r\n            \"trafficGroup\": \"/Common/traffic-group-1\",\r\n            \"deviceReference\": {\r\n                \"link\": \"{{DeviceSelfLink}}\"\r\n            }\r\n        }\r\n    },\r\n    \"sourcePort\": \"preserve\",\r\n    \"autoLasthop\": \"default\",\r\n    \"description\": \"{{NewDescription}}\",\r\n    \"vlansEnabled\": \"disabled\",\r\n    \"addressStatus\": \"yes\",\r\n    \"poolReference\": {\r\n        \"id\": \"{{PoolID}}\",\r\n        \"kind\": \"cm:adc-core:working-config:ltm:pool:adcpoolstate\",\r\n        \"link\": \"{{PoolSelfLink}}\",\r\n        \"partition\": \"Common\"\r\n    },\r\n    \"rateLimitMode\": \"object\",\r\n    \"sourceAddress\": \"{{VirtualSourceAddress}}\",\r\n    \"translatePort\": \"enabled\",\r\n    \"connectionLimit\": 0,\r\n    \"destinationPort\": \"{{VirtualPort}}\",\r\n    \"deviceReference\": {\r\n        \"kind\": \"shared:resolver:device-groups:restdeviceresolverdevicestate\",\r\n        \"link\": \"{{DeviceSelfLink}}\"\r\n    },\r\n    \"translateAddress\": \"enabled\",\r\n    \"destinationAddress\": \"{{VirtualDestinationAddress}}\",\r\n    \"sourceAddressTranslation\": {\r\n        \"type\": \"automap\"\r\n    }\r\n}"
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/virtual/",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"virtual",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "**Create SSL Offload Virtual Server",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
 								"method": "GET",
 								"header": [
 									{
@@ -3071,7 +3552,7 @@
 									}
 								],
 								"url": {
-									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/pool/",
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/virtual/da13cc4c-5060-3cfc-bdd3-839fa750c94d",
 									"protocol": "https",
 									"host": [
 										"{{BIGIQ_Mgmt}}"
@@ -3082,8 +3563,260 @@
 										"adc-core",
 										"working-config",
 										"ltm",
-										"pool",
-										""
+										"virtual",
+										"da13cc4c-5060-3cfc-bdd3-839fa750c94d"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "**Create HTTP Virtual Server",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/virtual/2e6e189f-5dcc-303e-b7e9-fdf57a6af4a1",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"virtual",
+										"2e6e189f-5dcc-303e-b7e9-fdf57a6af4a1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "**Create TCP Virtual Server",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/virtual/21a91458-b01a-37d8-bd8a-1bf90fbd4b62",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"virtual",
+										"21a91458-b01a-37d8-bd8a-1bf90fbd4b62"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "**Create FastL4 Virtual Server",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/virtual/ead94f0f-7c27-32a5-ba71-4c6ce2e915a2",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"virtual",
+										"ead94f0f-7c27-32a5-ba71-4c6ce2e915a2"
 									]
 								}
 							},
@@ -3216,7 +3949,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"id\": \"{{VirtualID}}\",\r\n    \"kind\": \"cm:adc-core:working-config:ltm:virtual:adcvirtualstate\",\r\n    \"mask\": \"{{VirtualMask}}\",\r\n    \"name\": \"{{VirtualName}}\",\r\n    \"nat64\": \"disabled\",\r\n    \"state\": \"enabled\",\r\n    \"mirror\": \"disabled\",\r\n    \"gtmScore\": 0,\r\n    \"policies\": [],\r\n    \"selfLink\": \"{{VirtualSelfLink}}\",\r\n    \"partition\": \"Common\",\r\n    \"rateLimit\": \"disabled\",\r\n    \"ipProtocol\": \"tcp\",\r\n    \"properties\": {\r\n        \"virtual-address\": {\r\n            \"name\": \"{{VirtualDestinationAddress}}\",\r\n            \"address\": \"{{VirtualDestinationAddress}}\",\r\n            \"floating\": \"enabled\",\r\n            \"partition\": \"Common\",\r\n            \"trafficGroup\": \"/Common/traffic-group-1\",\r\n            \"deviceReference\": {\r\n                \"link\": \"{{DeviceSelfLink}}\"\r\n            }\r\n        }\r\n    },\r\n    \"sourcePort\": \"preserve\",\r\n    \"autoLasthop\": \"default\",\r\n    \"description\": \"{{NewDescription}}\",\r\n    \"vlansEnabled\": \"disabled\",\r\n    \"addressStatus\": \"yes\",\r\n    \"poolReference\": {\r\n        \"link\": \"{{PoolSelfLink}}\",\r\n    },\r\n    \"rateLimitMode\": \"object\",\r\n    \"sourceAddress\": \"0.0.0.0/0\",\r\n    \"translatePort\": \"enabled\",\r\n    \"connectionLimit\": 0,\r\n    \"destinationPort\": \"{{VirtualPort}}\",\r\n    \"deviceReference\": {\r\n        \"kind\": \"shared:resolver:device-groups:restdeviceresolverdevicestate\",\r\n        \"link\": \"{{DeviceSelfLink}}\",\r\n    },\r\n    \"translateAddress\": \"enabled\",\r\n    \"destinationAddress\": \"{{VirtualDestinationAddress}}\",\r\n    \"sourceAddressTranslation\": {\r\n        \"type\": \"{{VirtualSNATType}}\",\r\n        \"snatpoolReference\": {\r\n            \"id\": \"946796b3-f82c-3892-8dca-2b242c02f66e\",\r\n            \"kind\": \"cm:adc-core:working-config:ltm:snatpool:adcsnatpoolstate\",\r\n            \"link\": \"https://localhost/mgmt/cm/adc-core/working-config/ltm/snatpool/946796b3-f82c-3892-8dca-2b242c02f66e\",\r\n            \"name\": \"OneArm-SNATPool\",\r\n            \"partition\": \"Common\"\r\n        }\r\n    },\r\n    \"profilesCollectionReference\": {\r\n        \"link\": \"https://localhost/mgmt/cm/adc-core/working-config/ltm/virtual/5be22ba1-7d9a-38e4-958d-206e84f82bda/profiles\",\r\n        \"isSubcollection\": true\r\n    }\r\n}"
+									"raw": "{\r\n    \"id\": \"{{VirtualID}}\",\r\n    \"kind\": \"cm:adc-core:working-config:ltm:virtual:adcvirtualstate\",\r\n    \"mask\": \"{{VirtualMask}}\",\r\n    \"name\": \"{{VirtualName}}\",\r\n    \"nat64\": \"disabled\",\r\n    \"state\": \"enabled\",\r\n    \"mirror\": \"disabled\",\r\n    \"policies\": [],\r\n    \"selfLink\": \"{{VirtualSelfLink}}\",\r\n    \"partition\": \"Common\",\r\n    \"rateLimit\": \"disabled\",\r\n    \"ipProtocol\": \"tcp\",\r\n    \"properties\": {\r\n        \"virtual-address\": {\r\n            \"name\": \"{{VirtualDestinationAddress}}\",\r\n            \"address\": \"{{VirtualDestinationAddress}}\",\r\n            \"floating\": \"enabled\",\r\n            \"partition\": \"Common\",\r\n            \"trafficGroup\": \"/Common/traffic-group-1\",\r\n            \"deviceReference\": {\r\n                \"link\": \"{{DeviceSelfLink}}\"\r\n            }\r\n        }\r\n    },\r\n    \"sourcePort\": \"preserve\",\r\n    \"autoLasthop\": \"default\",\r\n    \"description\": \"{{NewDescription}}\",\r\n    \"vlansEnabled\": \"disabled\",\r\n    \"addressStatus\": \"yes\",\r\n    \"poolReference\": {\r\n        \"id\": \"{{PoolID}}\",\r\n        \"kind\": \"cm:adc-core:working-config:ltm:pool:adcpoolstate\",\r\n        \"link\": \"{{PoolSelfLink}}\",\r\n        \"partition\": \"Common\"\r\n    },\r\n    \"rateLimitMode\": \"object\",\r\n    \"sourceAddress\": \"{{VirtualSourceAddress}}\",\r\n    \"translatePort\": \"enabled\",\r\n    \"connectionLimit\": 0,\r\n    \"destinationPort\": \"{{VirtualPort}}\",\r\n    \"deviceReference\": {\r\n        \"kind\": \"shared:resolver:device-groups:restdeviceresolverdevicestate\",\r\n        \"link\": \"{{DeviceSelfLink}}\"\r\n    },\r\n    \"translateAddress\": \"enabled\",\r\n    \"destinationAddress\": \"{{VirtualDestinationAddress}}\",\r\n    \"sourceAddressTranslation\": {\r\n        \"type\": \"{{VirtualSNATType}}\",\r\n        \"snatpoolReference\": {\r\n            \"id\": \"{{VirtualSNATPoolID}}\",\r\n            \"kind\": \"cm:adc-core:working-config:ltm:snatpool:adcsnatpoolstate\",\r\n            \"link\": \"{{VirtualSNATPoolSelfLink}}\",\r\n            \"name\": \"{{VirtualSNATPoolName}}\",\r\n            \"partition\": \"Common\"\r\n        }\r\n    },\r\n    \"profilesCollectionReference\": {\r\n        \"link\": \"{{VirtualProfilesLink}}\",\r\n        \"isSubcollection\": true\r\n    }\r\n}"
 								},
 								"url": {
 									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/virtual/{{VirtualID}}",
@@ -3478,7 +4211,6 @@
 									"postman.setEnvironmentVariable(\"NodeSelfLink\",\"\")\r",
 									"postman.setEnvironmentVariable(\"DeviceSelfLink\",\"\")\r",
 									"postman.setEnvironmentVariable(\"MonitorSelfLink\",\"\")\r",
-									"postman.setEnvironmentVariable(\"MonitorID\",\"\")\r",
 									"postman.setEnvironmentVariable(\"MonitorType\",\"\")\r",
 									"postman.setEnvironmentVariable(\"MonitorJSON\",\"\")\r",
 									"postman.setEnvironmentVariable(\"MonitorTypeString\",\"\")\r",
@@ -3517,7 +4249,34 @@
 									"postman.setEnvironmentVariable(\"VirtualDestinationAddress\",\"\")\r",
 									"postman.setEnvironmentVariable(\"VirtualSourceAddress\",\"\")\r",
 									"postman.setEnvironmentVariable(\"VirtualSNATType\",\"\")\r",
-									"//postman.setEnvironmentVariable(\"\",\"\")\r",
+									"postman.setEnvironmentVariable(\"ProfileFastL4ID\", \"\");\r",
+									"postman.setEnvironmentVariable(\"ProfileFastL4Name\", \"\");\r",
+									"postman.setEnvironmentVariable(\"ProfileFastL4SelfLink\", \"\");\r",
+									"postman.setEnvironmentVariable(\"ProfileFastL4SelfURI\", \"\");\r",
+									"postman.setEnvironmentVariable(\"ProfileHTTPID\", \"\");\r",
+									"postman.setEnvironmentVariable(\"ProfileHTTPName\", \"\");\r",
+									"postman.setEnvironmentVariable(\"ProfileHTTPSelfLink\", \"\");\r",
+									"postman.setEnvironmentVariable(\"ProfileHTTPSelfURI\", \"\");\r",
+									"postman.setEnvironmentVariable(\"ProfileTCPID\", \"\");\r",
+									"postman.setEnvironmentVariable(\"ProfileTCPName\", \"\");\r",
+									"postman.setEnvironmentVariable(\"ProfileTCPSelfLink\", \"\");\r",
+									"postman.setEnvironmentVariable(\"ProfileTCPSelfURI\", \"\");\r",
+									"postman.setEnvironmentVariable(\"ProfileClientSSLID\", \"\");\r",
+									"postman.setEnvironmentVariable(\"ProfileClientSSLName\", \"\");\r",
+									"postman.setEnvironmentVariable(\"ProfileClientSSLSelfLink\", \"\");\r",
+									"postman.setEnvironmentVariable(\"ProfileClientSSLSelfURI\", \"\");\r",
+									"postman.setEnvironmentVariable(\"ProfileServerSSLID\", \"\");\r",
+									"postman.setEnvironmentVariable(\"ProfileServerSSLName\", \"\");\r",
+									"postman.setEnvironmentVariable(\"ProfileServerSSLSelfLink\", \"\");\r",
+									"postman.setEnvironmentVariable(\"ProfileServerSSLSelfURI\", \"\");\r",
+									"\r",
+									"postman.setEnvironmentVariable(\"VirtualMask\",\"\")\r",
+									"postman.setEnvironmentVariable(\"VirtualPort\",\"\")\r",
+									"postman.setEnvironmentVariable(\"VirtualSNATPoolName\",\"\")\r",
+									"postman.setEnvironmentVariable(\"VirtualSNATPoolID\",\"\")\r",
+									"postman.setEnvironmentVariable(\"VirtualSNATPoolSelfURI\",\"\")\r",
+									"postman.setEnvironmentVariable(\"VirtualSNATPoolSelfLink\",\"\")\r",
+									"postman.setEnvironmentVariable(\"VirtualName\",\"\")\r",
 									"//postman.setEnvironmentVariable(\"\",\"\")\r",
 									"\r",
 									"//clear normally not cleared Environment variables\r",
@@ -3543,10 +4302,10 @@
 									"postman.setEnvironmentVariable(\"VirtualName\",\"\")\r",
 									"postman.setEnvironmentVariable(\"VirtualMask\",\"\")\r",
 									"postman.setEnvironmentVariable(\"VirtualPort\",\"\")\r",
-									"postman.setEnvironmentVariable(\"\",\"\")\r",
-									"postman.setEnvironmentVariable(\"\",\"\")\r",
-									"postman.setEnvironmentVariable(\"\",\"\")\r",
-									"postman.setEnvironmentVariable(\"\",\"\")\r",
+									"//postman.setEnvironmentVariable(\"\",\"\")\r",
+									"//postman.setEnvironmentVariable(\"\",\"\")\r",
+									"//postman.setEnvironmentVariable(\"\",\"\")\r",
+									"//postman.setEnvironmentVariable(\"\",\"\")\r",
 									"//postman.setEnvironmentVariable(\"\",\"\")\r",
 									"\r",
 									"console.log(\"Cleared Environment variables.\")\r",
@@ -3627,14 +4386,14 @@
 					"user = pm.variables.get(\"UserName\")",
 					"password = pm.variables.get(\"Password\")",
 					"",
-					"if (MgmtIP == \"\") {",
-					"    console.log (\"*FAILURE!* BIG-IQ Management address is empty! Please set it in the environment variables to avoid future errors.\")",
+					"if (MgmtIP == \"\" || MgmtIP == undefined || MgmtIP == 0) {",
+					"    throw new Error(\"*FAILURE!* BIG-IQ Management address is empty! Please set it in the environment variables to avoid future errors.\")",
 					"}",
-					"if (user == \"\") {",
-					"    console.log (\"*FAILURE!* BIG-IQ Management user is empty! Please set it in the environment variables to avoid future errors.\")",
+					"if (user == \"\" || user == undefined || user == 0) {",
+					"    throw new Error('*FAILURE!* BIG-IQ Management user is empty! Please set it in the environment variables to avoid future errors.')",
 					"}",
-					"if (password == \"\") {",
-					"    console.log (\"*FAILURE!* BIG-IQ Management password is empty! Please set it in the environment variables to avoid future errors.\")",
+					"if (password == \"\" || password == undefined || password == 0) {",
+					"    throw new Error(\"*FAILURE!* BIG-IQ Management password is empty! Please set it in the environment variables to avoid future errors.\")",
 					"}",
 					"",
 					"const options = {",
