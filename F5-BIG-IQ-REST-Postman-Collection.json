@@ -3253,7 +3253,7 @@
 							"response": []
 						},
 						{
-							"name": "**Create SSL Bridge Virtual Server",
+							"name": "**Create Virtual Server from Environment Variables",
 							"event": [
 								{
 									"listen": "prerequest",
