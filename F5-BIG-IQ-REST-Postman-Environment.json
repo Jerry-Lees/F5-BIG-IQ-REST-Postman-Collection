@@ -43,6 +43,11 @@
 			"enabled": true
 		},
 		{
+			"key": "NewVirtualTemplate",
+			"value": "0",
+			"enabled": true
+		},
+		{
 			"key": "VirtualName",
 			"value": "",
 			"enabled": true
@@ -464,6 +469,6 @@
 		}
 	],
 	"_postman_variable_scope": "environment",
-	"_postman_exported_at": "2021-12-14T22:01:13.446Z",
+	"_postman_exported_at": "2021-12-15T23:16:09.955Z",
 	"_postman_exported_using": "Postman/9.3.0"
 }
