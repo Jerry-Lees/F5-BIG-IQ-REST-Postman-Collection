@@ -1120,9 +1120,20 @@
 							"name": "Delete Virtual Server  from Environment variables",
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/virtual/{{VirtualID}}?Content-Type=application/json&X-F5-Auth-Token={{AuthToken}}",
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/virtual/{{VirtualID}}",
 									"protocol": "https",
 									"host": [
 										"{{BIGIQ_Mgmt}}"
@@ -1135,16 +1146,6 @@
 										"ltm",
 										"virtual",
 										"{{VirtualID}}"
-									],
-									"query": [
-										{
-											"key": "Content-Type",
-											"value": "application/json"
-										},
-										{
-											"key": "X-F5-Auth-Token",
-											"value": "{{AuthToken}}"
-										}
 									]
 								}
 							},
@@ -3679,6 +3680,291 @@
 										"profile",
 										"fastl4",
 										"45406ec6-65ba-3c2d-a2c1-49e0c7d46dfd"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "** Create TCP Profile",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://10.155.111.64/mgmt/cm/adc-core/working-config/ltm/profile/tcp/",
+									"protocol": "https",
+									"host": [
+										"10",
+										"155",
+										"111",
+										"64"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"profile",
+										"tcp",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "** Create HTTP Profile",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "        {\r\n            \"hsts\": {\r\n                \"maximumAge\": 16070400,\r\n                \"isModeEnabled\": false,\r\n                \"isPreloadEnabled\": false,\r\n                \"isIncludeSubdomainsEnabled\": true\r\n            },\r\n            \"kind\": \"cm:adc-core:working-config:ltm:profile:http:adcprofilehttpstate\",\r\n            \"name\": \"http-transparent\",\r\n            \"sflow\": {\r\n                \"pollInterval\": 0,\r\n                \"samplingRate\": 0,\r\n                \"pollIntervalGlobal\": \"yes\",\r\n                \"samplingRateGlobal\": \"yes\"\r\n            },\r\n            \"lwsWidth\": 80,\r\n            \"partition\": \"Common\",\r\n            \"proxyType\": \"transparent\",\r\n            \"generation\": 1,\r\n            \"isNoDelete\": true,\r\n            \"viaRequest\": \"preserve\",\r\n            \"enforcement\": {\r\n                \"pipeline\": \"allow\",\r\n                \"maxRequests\": 0,\r\n                \"knownMethods\": [\r\n                    \"CONNECT\",\r\n                    \"DELETE\",\r\n                    \"GET\",\r\n                    \"HEAD\",\r\n                    \"LOCK\",\r\n                    \"OPTIONS\",\r\n                    \"POST\",\r\n                    \"PROPFIND\",\r\n                    \"PUT\",\r\n                    \"TRACE\",\r\n                    \"UNLOCK\"\r\n                ],\r\n                \"maxHeaderSize\": 16384,\r\n                \"unknownMethod\": \"allow\",\r\n                \"maxHeaderCount\": 32,\r\n                \"excessClientHeaders\": \"pass-through\",\r\n                \"excessServerHeaders\": \"pass-through\",\r\n                \"oversizeClientHeaders\": \"pass-through\",\r\n                \"oversizeServerHeaders\": \"pass-through\",\r\n                \"isTruncatedRedirectsEnabled\": true\r\n            },\r\n            \"headerErase\": \"\",\r\n            \"viaHostName\": \"\",\r\n            \"viaResponse\": \"preserve\",\r\n            \"fallbackHost\": \"\",\r\n            \"headerInsert\": \"\",\r\n            \"lwsSeparator\": \"\",\r\n            \"explicitProxy\": {\r\n                \"hostNames\": [],\r\n                \"tunnelName\": \"\",\r\n                \"dnsResolver\": \"none\",\r\n                \"routeDomain\": \"\",\r\n                \"dnsErrorMessage\": \"\",\r\n                \"badRequestMessage\": \"\",\r\n                \"badResponseMessage\": \"\",\r\n                \"connectErrorMessage\": \"\",\r\n                \"defaultConnectHandling\": \"deny\"\r\n            },\r\n            \"basicAuthRealm\": \"\",\r\n            \"encryptCookies\": [],\r\n            \"redirectRewrite\": \"none\",\r\n            \"requestChunking\": \"sustain\",\r\n            \"serverAgentName\": \"BigIP\",\r\n            \"lastUpdateMicros\": 1638553135569458,\r\n            \"responseChunking\": \"sustain\",\r\n            \"isAcceptXffEnabled\": false,\r\n            \"encryptCookieSecret\": \"\",\r\n            \"fallbackStatusCodes\": [],\r\n            \"xffAlternativeNames\": [],\r\n            \"responseHeadersPermitted\": [],\r\n            \"isInsertXforwardedForEnabled\": false,\r\n            \"isOneconnectTransformationsEnabled\": true\r\n        }"
+								},
+								"url": {
+									"raw": "https://10.155.111.64/mgmt/cm/adc-core/working-config/ltm/profile/http/",
+									"protocol": "https",
+									"host": [
+										"10",
+										"155",
+										"111",
+										"64"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"profile",
+										"http",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "** Create FastL4 Profile",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://10.155.111.64/mgmt/cm/adc-core/working-config/ltm/profile/fastl4/",
+									"protocol": "https",
+									"host": [
+										"10",
+										"155",
+										"111",
+										"64"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"profile",
+										"fastl4",
+										""
 									]
 								}
 							},
