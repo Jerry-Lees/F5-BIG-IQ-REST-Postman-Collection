@@ -80,6 +80,10 @@ This is due, most likely, to a environment variable not being set or a login fai
 
 This is likely due to leading or trailing whitespace in a user entered parameter, or an other typo, thus causing a search to fail to return any results.
 
+#### "message": "Get document for key: cm/adc-core/working-config/ltm/xxxxx/yyyyy/$filter=name eq '**' returned nothing"
+
+Double check that the value for an environment variable recently entered was put in the "Current Value" column, not the "Initial Value Column".
+
 ### Initial test requests
 
 #### READ THIS FIRST
