@@ -1260,6 +1260,8 @@
 											"        Unlike above, this is teh same string used in a tmsh command; http, https, tcp, etc\r",
 											"*/\r",
 											"\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
 											"var jsonData = JSON.parse(responseBody)\r",
 											"\r",
 											"postman.setEnvironmentVariable(\"PoolID\", jsonData.id);\r",
@@ -4007,6 +4009,16 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"/*\r",
+											"Need to update Environment for id and selfLink/URI after creation of teh profile\r",
+											" */\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"postman.setEnvironmentVariable(\"ProfileTCPID\", jsonData.id);\r",
+											"postman.setEnvironmentVariable(\"ProfileTCPSelfLink\", jsonData.selfLink)\r",
+											"postman.setEnvironmentVariable(\"ProfileTCPSelfURI\", jsonData.selfLink.replace(/localhost/g,bigiqmgmt))\r",
 											""
 										],
 										"type": "text/javascript"
