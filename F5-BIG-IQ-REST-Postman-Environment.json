@@ -358,16 +358,6 @@
 			"enabled": true
 		},
 		{
-			"key": "NewHTTPProfileName",
-			"value": "",
-			"enabled": true
-		},
-		{
-			"key": "NewHTTPProfileXFF",
-			"value": "",
-			"enabled": true
-		},
-		{
 			"key": "ProfileHTTPID",
 			"value": "",
 			"enabled": true
@@ -384,6 +374,26 @@
 		},
 		{
 			"key": "ProfileHTTPSelfURI",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ProfileHTTPParent",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ProfileHTTPParentLink",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ProfileHTTPParentURI",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ProfileHTTPXFF",
 			"value": "",
 			"enabled": true
 		},
@@ -408,6 +418,21 @@
 			"enabled": true
 		},
 		{
+			"key": "ProfileServerSSLParent",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ProfileServerSSLParentLink",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ProfileServerSSLParentURI",
+			"value": "",
+			"enabled": true
+		},
+		{
 			"key": "ProfileClientSSLID",
 			"value": "",
 			"enabled": true
@@ -424,6 +449,21 @@
 		},
 		{
 			"key": "ProfileClientSSLSelfURI",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ProfileClientSSLParent",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ProfileClientSSLParentLink",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ProfileClientSSLParentURI",
 			"value": "",
 			"enabled": true
 		},
@@ -448,6 +488,21 @@
 			"enabled": true
 		},
 		{
+			"key": "ProfileFastL4Parent",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ProfileFastL4ParentURI",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ProfileFastL4ParentLink",
+			"value": "",
+			"enabled": true
+		},
+		{
 			"key": "ProfileTCPID",
 			"value": "",
 			"enabled": true
@@ -466,9 +521,54 @@
 			"key": "ProfileTCPSelfURI",
 			"value": "",
 			"enabled": true
+		},
+		{
+			"key": "ProfileTCPParent",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ProfileTCPParentLink",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ProfileTCPParentURI",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "NewProfileParent",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "NewProfileType",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ProfileTCPidleTimeout",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ProfileTCPidleTimeoutJSON",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ProfileTCPisVerifiedAccept",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ProfileTCPisVerifiedAcceptJSON",
+			"value": "",
+			"enabled": true
 		}
 	],
 	"_postman_variable_scope": "environment",
-	"_postman_exported_at": "2021-12-16T17:19:42.212Z",
-	"_postman_exported_using": "Postman/9.3.0"
+	"_postman_exported_at": "2021-12-22T21:50:18.958Z",
+	"_postman_exported_using": "Postman/9.6.0"
 }
