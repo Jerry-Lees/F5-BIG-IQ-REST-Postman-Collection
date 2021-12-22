@@ -3665,6 +3665,42 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Delete tcp Profile from Environment variables",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{AuthToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/profile/tcp/{{ProfileTCPID}}",
+							"protocol": "https",
+							"host": [
+								"{{BIGIQ_Mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"cm",
+								"adc-core",
+								"working-config",
+								"ltm",
+								"profile",
+								"tcp",
+								"{{ProfileTCPID}}"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
