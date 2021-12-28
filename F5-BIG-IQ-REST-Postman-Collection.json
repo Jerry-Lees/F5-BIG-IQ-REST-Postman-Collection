@@ -236,6 +236,420 @@
 					]
 				},
 				{
+					"name": "Node Functions",
+					"item": [
+						{
+							"name": "Get Node ID From IP Address",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/*\r",
+											"Inputs:\r",
+											"    SearchNodeName - The name of the node to find in all nodes.\r",
+											"Outputs:\r",
+											"    NodeID          - The ID of the found node.\r",
+											"    NodeSelfLink    - The link to the node's configuration to use in JSON Documents used to make a REST call\r",
+											"    NodeSelfURI     - The link to a node's configuration to use when making a REST call.\r",
+											"    NodeDescription - The node's description.\r",
+											"    NodeName        - The name of the Node, automatically the same as the IP address.\r",
+											"    NodeJSON        - The JSON output representing the Node3's configuration.\r",
+											"*/\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"let nodes = pm.globals.get(\"itemOfArray\");\r",
+											"MgmtIP = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"nodes = jsonData.items;\r",
+											"//console.log (nodes)\r",
+											"\r",
+											"//console.log(\"Items: \"+jsonData.items[1].name)\r",
+											"searchname = pm.variables.get(\"SearchNodeName\")\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"for (node in nodes){\r",
+											"    if (jsonData.items[node].name == searchname) {\r",
+											"        nodeid=jsonData.items[node].id\r",
+											"        postman.setEnvironmentVariable(\"NodeID\", nodeid);\r",
+											"        postman.setEnvironmentVariable(\"NodeSelfLink\", jsonData.items[node].selfLink);\r",
+											"        postman.setEnvironmentVariable(\"NodeSelfURI\", jsonData.items[node].selfLink.replace(/localhost/g,bigiqmgmt));\r",
+											"        postman.setEnvironmentVariable(\"NodeDescription\", jsonData.items[node].description);\r",
+											"        postman.setEnvironmentVariable(\"NodeName\", jsonData.items[node].name);\r",
+											"        console.log (\"Now you may continue to get the specific node's json from the REST API.\")\r",
+											"    }\r",
+											"}\r",
+											"\r",
+											"pm.test(\"Items Returned > 0 Test\", function () {\r",
+											"    var jsonData = JSON.parse(responseBody);\r",
+											"    const responseJson = pm.response.json();\r",
+											"    // this is technically not 100% accurate, we want it to actually be exactly 1 in most cases.\r",
+											"    pm.expect(responseJson.totalItems).to.be.greaterThan(0);\r",
+											"    \r",
+											"});\r",
+											"//now get the node's JSON inline\r",
+											"const options = {\r",
+											"    method: 'GET',\r",
+											"    url: pm.variables.get(\"NodeSelfLink\").replace(/localhost/g,MgmtIP),\r",
+											"    header: 'ContentType: application/json',\r",
+											"    header: 'X-F5-Auth-Token: '+pm.variables.get(\"AuthToken\"),\r",
+											"    body: \"\"\r",
+											"};\r",
+											"\r",
+											"pm.sendRequest(options, (error, response) => {\r",
+											"    if (error) {\r",
+											"        throw new Error(error);\r",
+											"    } else {\r",
+											"        console.log(\"Found JSON for Node, storing in Environment variable 'NodeJSON'\")\r",
+											"        postman.setEnvironmentVariable(\"NodeJSON\", response.text())\r",
+											"        console.log(pm.variables.get(\"NodeSelfLink\"))\r",
+											"        console.log(pm.variables.get(\"NodeJSON\"))\r",
+											"    }\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/node?$filter=name eq '{{SearchNodeName}}'",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"node"
+									],
+									"query": [
+										{
+											"key": "$filter",
+											"value": "name eq '{{SearchNodeName}}'"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Node From Environment",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/*\r",
+											"Inputs:\r",
+											"    SearchNodeName        - User Input\r",
+											"    NodeDescription - User Input\r",
+											"    DeviceSelfLink  - From \"Get Device by Address\"\r",
+											"\r",
+											"Outputs:\r",
+											"    NodeID          - \r",
+											"    NodeName        - \r",
+											"    NodeSelfLink    - \r",
+											"    NodeSelfURI     - \r",
+											"    NodeDescription - \r",
+											"    NodeName        - \r",
+											"    NodeJSON        - \r",
+											"\r",
+											"*/\r",
+											"\r",
+											"//begin parsing\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"searchname = pm.variables.get(\"SearchNodeName\")\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"    nodeid=jsonData.id\r",
+											"    postman.setEnvironmentVariable(\"NodeID\", nodeid);\r",
+											"    postman.setEnvironmentVariable(\"NodeSelfLink\", jsonData.selfLink);\r",
+											"    postman.setEnvironmentVariable(\"NodeSelfURI\", jsonData.selfLink.replace(/localhost/g,bigiqmgmt));\r",
+											"    postman.setEnvironmentVariable(\"NodeDescription\", jsonData.description);\r",
+											"    postman.setEnvironmentVariable(\"NodeName\", jsonData.name);\r",
+											"    postman.setEnvironmentVariable(\"NodeJSON\", responseBody)\r",
+											"    console.log(\"Found JSON for Node, storing in Environment variable 'NodeJSON'\")\r",
+											"    //log data saved\r",
+											"    console.log (\"Created \"+searchname+\": Now you may continue to get the specific node's json from the REST API.\")\r",
+											"    //log if verbose set to greater than 0, do not log if set to 0\r",
+											"    if (pm.variables.get(\"BeVerbose\")) {\r",
+											"        //console.log(\"\")\r",
+											"        console.log(\"Updated the following environmental information:\")\r",
+											"        console.log(\"Set node ID to: \"+pm.variables.get(\"NodeID\"))\r",
+											"        console.log(\"Set node Self Link to: \"+pm.variables.get(\"NodeSelfLink\"))\r",
+											"        console.log(\"Set node Self Link to: \"+pm.variables.get(\"NodeSelfURI\"))\r",
+											"    }\r",
+											"    console.log (\"Gathering the specific node's json from the REST API.\")\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"kind\": \"cm:adc-core:working-config:ltm:node:adcnodestate\",\r\n\t\"name\": \"{{SearchNodeName}}\",\r\n\t\"ratio\": 1,\r\n\t\"address\": \"{{SearchNodeName}}\",\r\n\t\"partition\": \"Common\",\r\n\t\"rateLimit\": \"disabled\",\r\n\t\"generation\": 1,\r\n\t\"description\": \"{{NodeDescription}}\",\r\n\t\"isEphemeral\": false,\r\n\t\"stateConfig\": \"user-up\",\r\n\t\"sessionConfig\": \"user-enabled\",\r\n\t\"connectionLimit\": 0,\r\n\t\"deviceReference\": {\r\n\t\t\"link\": \"{{DeviceSelfLink}}\"\r\n\t}\r\n}\r\n"
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/node/",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"node",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Node From Environment",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/*\r",
+											"Inputs:\r",
+											"    NodeID        - Programatic input (from another REST call)\r",
+											"\r",
+											"Outputs:\r",
+											"    NodeID          - Set to Blank\r",
+											"    NodeName        - Set to Blank\r",
+											"    NodeSelfLink    - Set to Blank\r",
+											"    NodeSelfURI     - Set to Blank\r",
+											"    NodeJSON        - Set to Blank\r",
+											"    NodeDescription - Set to Blank\r",
+											"*/\r",
+											"\r",
+											"//begin parsing\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"searchname = pm.variables.get(\"SearchNodeName\")\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"    nodeid=jsonData.id\r",
+											"    //gather data for environment Variables related to the object\r",
+											"    postman.setEnvironmentVariable(\"NodeID\", \"\");\r",
+											"    postman.setEnvironmentVariable(\"NodeName\", \"\")\r",
+											"    postman.setEnvironmentVariable(\"NodeSelfLink\", \"\")\r",
+											"    postman.setEnvironmentVariable(\"NodeSelfURI\", \"\")\r",
+											"    postman.setEnvironmentVariable(\"NodeJSON\", \"\")\r",
+											"    postman.setEnvironmentVariable(\"NodeDescription\", \"\")\r",
+											"    //log data saved\r",
+											"    console.log (\"Deleted \"+searchname+\".\")\r",
+											"    //log if verbose set to greater than 0, do not log if set to 0\r",
+											"    if (pm.variables.get(\"BeVerbose\")) {\r",
+											"        //console.log(\"\")\r",
+											"        console.log(\"updated the following environmental information:\")\r",
+											"        console.log(\"Set node ID to: \"+pm.variables.get(\"NodeID\"))\r",
+											"        console.log(\"Set node Self Link to: \"+pm.variables.get(\"NodeSelfLink\"))\r",
+											"        console.log(\"Set node Self URI to: \"+pm.variables.get(\"NodeSelfURI\"))\r",
+											"        console.log(\"Set node NodeJSON Link to: \"+pm.variables.get(\"NodeJSON\"))\r",
+											"        console.log(\"Set node NodeDescription to: \"+pm.variables.get(\"NodeDescription\"))\r",
+											"    }\r",
+											"    console.log (\"Gathering the specific node's json from the REST API.\")\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/node/{{NodeID}}",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"node",
+										"{{NodeID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "Monitor Functions",
 					"item": [
 						{
@@ -685,420 +1099,6 @@
 										"monitor",
 										"{{MonitorTypeName}}",
 										""
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Node Functions",
-					"item": [
-						{
-							"name": "Get Node ID From IP Address",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
-											"\r",
-											"\r",
-											"\r",
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"/*\r",
-											"Inputs:\r",
-											"    SearchNodeName - The name of the node to find in all nodes.\r",
-											"Outputs:\r",
-											"    NodeID          - The ID of the found node.\r",
-											"    NodeSelfLink    - The link to the node's configuration to use in JSON Documents used to make a REST call\r",
-											"    NodeSelfURI     - The link to a node's configuration to use when making a REST call.\r",
-											"    NodeDescription - The node's description.\r",
-											"    NodeName        - The name of the Node, automatically the same as the IP address.\r",
-											"    NodeJSON        - The JSON output representing the Node3's configuration.\r",
-											"*/\r",
-											"var jsonData = JSON.parse(responseBody)\r",
-											"\r",
-											"let nodes = pm.globals.get(\"itemOfArray\");\r",
-											"MgmtIP = pm.variables.get(\"BIGIQ_Mgmt\")\r",
-											"nodes = jsonData.items;\r",
-											"//console.log (nodes)\r",
-											"\r",
-											"//console.log(\"Items: \"+jsonData.items[1].name)\r",
-											"searchname = pm.variables.get(\"SearchNodeName\")\r",
-											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
-											"\r",
-											"for (node in nodes){\r",
-											"    if (jsonData.items[node].name == searchname) {\r",
-											"        nodeid=jsonData.items[node].id\r",
-											"        postman.setEnvironmentVariable(\"NodeID\", nodeid);\r",
-											"        postman.setEnvironmentVariable(\"NodeSelfLink\", jsonData.items[node].selfLink);\r",
-											"        postman.setEnvironmentVariable(\"NodeSelfURI\", jsonData.items[node].selfLink.replace(/localhost/g,bigiqmgmt));\r",
-											"        postman.setEnvironmentVariable(\"NodeDescription\", jsonData.items[node].description);\r",
-											"        postman.setEnvironmentVariable(\"NodeName\", jsonData.items[node].name);\r",
-											"        console.log (\"Now you may continue to get the specific node's json from the REST API.\")\r",
-											"    }\r",
-											"}\r",
-											"\r",
-											"pm.test(\"Items Returned > 0 Test\", function () {\r",
-											"    var jsonData = JSON.parse(responseBody);\r",
-											"    const responseJson = pm.response.json();\r",
-											"    // this is technically not 100% accurate, we want it to actually be exactly 1 in most cases.\r",
-											"    pm.expect(responseJson.totalItems).to.be.greaterThan(0);\r",
-											"    \r",
-											"});\r",
-											"//now get the node's JSON inline\r",
-											"const options = {\r",
-											"    method: 'GET',\r",
-											"    url: pm.variables.get(\"NodeSelfLink\").replace(/localhost/g,MgmtIP),\r",
-											"    header: 'ContentType: application/json',\r",
-											"    header: 'X-F5-Auth-Token: '+pm.variables.get(\"AuthToken\"),\r",
-											"    body: \"\"\r",
-											"};\r",
-											"\r",
-											"pm.sendRequest(options, (error, response) => {\r",
-											"    if (error) {\r",
-											"        throw new Error(error);\r",
-											"    } else {\r",
-											"        console.log(\"Found JSON for Node, storing in Environment variable 'NodeJSON'\")\r",
-											"        postman.setEnvironmentVariable(\"NodeJSON\", response.text())\r",
-											"        console.log(pm.variables.get(\"NodeSelfLink\"))\r",
-											"        console.log(pm.variables.get(\"NodeJSON\"))\r",
-											"    }\r",
-											"});\r",
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-F5-Auth-Token",
-										"value": "{{AuthToken}}",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/node?$filter=name eq '{{SearchNodeName}}'",
-									"protocol": "https",
-									"host": [
-										"{{BIGIQ_Mgmt}}"
-									],
-									"path": [
-										"mgmt",
-										"cm",
-										"adc-core",
-										"working-config",
-										"ltm",
-										"node"
-									],
-									"query": [
-										{
-											"key": "$filter",
-											"value": "name eq '{{SearchNodeName}}'"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Create Node From Environment",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
-											"\r",
-											"\r",
-											"\r",
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"/*\r",
-											"Inputs:\r",
-											"    SearchNodeName        - User Input\r",
-											"    NodeDescription - User Input\r",
-											"    DeviceSelfLink  - From \"Get Device by Address\"\r",
-											"\r",
-											"Outputs:\r",
-											"    NodeID          - \r",
-											"    NodeName        - \r",
-											"    NodeSelfLink    - \r",
-											"    NodeSelfURI     - \r",
-											"    NodeDescription - \r",
-											"    NodeName        - \r",
-											"    NodeJSON        - \r",
-											"\r",
-											"*/\r",
-											"\r",
-											"//begin parsing\r",
-											"var jsonData = JSON.parse(responseBody)\r",
-											"\r",
-											"searchname = pm.variables.get(\"SearchNodeName\")\r",
-											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
-											"\r",
-											"var jsonData = JSON.parse(responseBody)\r",
-											"\r",
-											"    nodeid=jsonData.id\r",
-											"    postman.setEnvironmentVariable(\"NodeID\", nodeid);\r",
-											"    postman.setEnvironmentVariable(\"NodeSelfLink\", jsonData.selfLink);\r",
-											"    postman.setEnvironmentVariable(\"NodeSelfURI\", jsonData.selfLink.replace(/localhost/g,bigiqmgmt));\r",
-											"    postman.setEnvironmentVariable(\"NodeDescription\", jsonData.description);\r",
-											"    postman.setEnvironmentVariable(\"NodeName\", jsonData.name);\r",
-											"    postman.setEnvironmentVariable(\"NodeJSON\", responseBody)\r",
-											"    console.log(\"Found JSON for Node, storing in Environment variable 'NodeJSON'\")\r",
-											"    //log data saved\r",
-											"    console.log (\"Created \"+searchname+\": Now you may continue to get the specific node's json from the REST API.\")\r",
-											"    //log if verbose set to greater than 0, do not log if set to 0\r",
-											"    if (pm.variables.get(\"BeVerbose\")) {\r",
-											"        //console.log(\"\")\r",
-											"        console.log(\"Updated the following environmental information:\")\r",
-											"        console.log(\"Set node ID to: \"+pm.variables.get(\"NodeID\"))\r",
-											"        console.log(\"Set node Self Link to: \"+pm.variables.get(\"NodeSelfLink\"))\r",
-											"        console.log(\"Set node Self Link to: \"+pm.variables.get(\"NodeSelfURI\"))\r",
-											"    }\r",
-											"    console.log (\"Gathering the specific node's json from the REST API.\")\r",
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-F5-Auth-Token",
-										"value": "{{AuthToken}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n\t\"kind\": \"cm:adc-core:working-config:ltm:node:adcnodestate\",\r\n\t\"name\": \"{{SearchNodeName}}\",\r\n\t\"ratio\": 1,\r\n\t\"address\": \"{{SearchNodeName}}\",\r\n\t\"partition\": \"Common\",\r\n\t\"rateLimit\": \"disabled\",\r\n\t\"generation\": 1,\r\n\t\"description\": \"{{NodeDescription}}\",\r\n\t\"isEphemeral\": false,\r\n\t\"stateConfig\": \"user-up\",\r\n\t\"sessionConfig\": \"user-enabled\",\r\n\t\"connectionLimit\": 0,\r\n\t\"deviceReference\": {\r\n\t\t\"link\": \"{{DeviceSelfLink}}\"\r\n\t}\r\n}\r\n"
-								},
-								"url": {
-									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/node/",
-									"protocol": "https",
-									"host": [
-										"{{BIGIQ_Mgmt}}"
-									],
-									"path": [
-										"mgmt",
-										"cm",
-										"adc-core",
-										"working-config",
-										"ltm",
-										"node",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Delete Node From Environment",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
-											"\r",
-											"\r",
-											"\r",
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"/*\r",
-											"Inputs:\r",
-											"    NodeID        - Programatic input (from another REST call)\r",
-											"\r",
-											"Outputs:\r",
-											"    NodeID          - Set to Blank\r",
-											"    NodeName        - Set to Blank\r",
-											"    NodeSelfLink    - Set to Blank\r",
-											"    NodeSelfURI     - Set to Blank\r",
-											"    NodeJSON        - Set to Blank\r",
-											"    NodeDescription - Set to Blank\r",
-											"*/\r",
-											"\r",
-											"//begin parsing\r",
-											"var jsonData = JSON.parse(responseBody)\r",
-											"\r",
-											"searchname = pm.variables.get(\"SearchNodeName\")\r",
-											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
-											"\r",
-											"    nodeid=jsonData.id\r",
-											"    //gather data for environment Variables related to the object\r",
-											"    postman.setEnvironmentVariable(\"NodeID\", \"\");\r",
-											"    postman.setEnvironmentVariable(\"NodeName\", \"\")\r",
-											"    postman.setEnvironmentVariable(\"NodeSelfLink\", \"\")\r",
-											"    postman.setEnvironmentVariable(\"NodeSelfURI\", \"\")\r",
-											"    postman.setEnvironmentVariable(\"NodeJSON\", \"\")\r",
-											"    postman.setEnvironmentVariable(\"NodeDescription\", \"\")\r",
-											"    //log data saved\r",
-											"    console.log (\"Deleted \"+searchname+\".\")\r",
-											"    //log if verbose set to greater than 0, do not log if set to 0\r",
-											"    if (pm.variables.get(\"BeVerbose\")) {\r",
-											"        //console.log(\"\")\r",
-											"        console.log(\"updated the following environmental information:\")\r",
-											"        console.log(\"Set node ID to: \"+pm.variables.get(\"NodeID\"))\r",
-											"        console.log(\"Set node Self Link to: \"+pm.variables.get(\"NodeSelfLink\"))\r",
-											"        console.log(\"Set node Self URI to: \"+pm.variables.get(\"NodeSelfURI\"))\r",
-											"        console.log(\"Set node NodeJSON Link to: \"+pm.variables.get(\"NodeJSON\"))\r",
-											"        console.log(\"Set node NodeDescription to: \"+pm.variables.get(\"NodeDescription\"))\r",
-											"    }\r",
-											"    console.log (\"Gathering the specific node's json from the REST API.\")\r",
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-F5-Auth-Token",
-										"value": "{{AuthToken}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/node/{{NodeID}}",
-									"protocol": "https",
-									"host": [
-										"{{BIGIQ_Mgmt}}"
-									],
-									"path": [
-										"mgmt",
-										"cm",
-										"adc-core",
-										"working-config",
-										"ltm",
-										"node",
-										"{{NodeID}}"
 									]
 								}
 							},
@@ -1782,6 +1782,1247 @@
 										"pool",
 										"{{PoolID}}",
 										"members"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Profile Functions",
+					"item": [
+						{
+							"name": "Get serverssl Profile by Name",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"//begin parsing\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"let profiles = pm.globals.get(\"itemOfArray\");\r",
+											"\r",
+											"profiles = jsonData.items;\r",
+											"//console.log (profiles)\r",
+											"\r",
+											"//console.log(\"Items: \"+jsonData.items[1].name)\r",
+											"searchname = pm.variables.get(\"ProfileSearchName\")\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"for (profile in profiles){\r",
+											"    if (jsonData.items[profile].name == searchname) {\r",
+											"        profileid=jsonData.items[profile].id\r",
+											"        //gather data for environment Variables related to the object\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLID\", profileid);\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLName\", jsonData.items[profile].name);\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLSelfLink\", jsonData.items[profile].selfLink);\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLSelfURI\", jsonData.items[profile].selfLink.replace(/localhost/g,bigiqmgmt));\r",
+											"\r",
+											"        //log data saved\r",
+											"        console.log (\"Found \"+searchname+\": Now you may continue to get the specific profile's json from the REST API.\")\r",
+											"        //log if verbose set to greater than 0, do not log if set to 0\r",
+											"        if (pm.variables.get(\"BeVerbose\")) {\r",
+											"            //console.log(\"\")\r",
+											"            console.log(\"updated the following environmental information:\")\r",
+											"            console.log(\"Set profile name to: \"+pm.variables.get(\"ProfileServerSSLName\"))\r",
+											"            console.log(\"Set profile ID to: \"+pm.variables.get(\"ProfileServerSSLID\"))\r",
+											"            console.log(\"Set profile Self Link to: \"+pm.variables.get(\"ProfileServerSSLSelfLink\"))\r",
+											"            console.log(\"Set profile Self URI to: \"+pm.variables.get(\"ProfileServerSSLSelfURI\"))\r",
+											"        }\r",
+											"        //console.log (\"Gathering the specific profile's json from the REST API.\")\r",
+											"    }\r",
+											"}\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/profile/server-ssl?$filter=name eq '*{{ProfileSearchName}}*'",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"profile",
+										"server-ssl"
+									],
+									"query": [
+										{
+											"key": "$filter",
+											"value": "name eq '*{{ProfileSearchName}}*'"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get clientssl Profile by Name",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"//begin parsing\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"let profiles = pm.globals.get(\"itemOfArray\");\r",
+											"\r",
+											"profiles = jsonData.items;\r",
+											"//console.log (profiles)\r",
+											"\r",
+											"//console.log(\"Items: \"+jsonData.items[1].name)\r",
+											"searchname = pm.variables.get(\"ProfileSearchName\")\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"for (profile in profiles){\r",
+											"    if (jsonData.items[profile].name == searchname) {\r",
+											"        profileid=jsonData.items[profile].id\r",
+											"        //gather data for environment Variables related to the object\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLID\", profileid);\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLName\", jsonData.items[profile].name);\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLSelfLink\", jsonData.items[profile].selfLink);\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLSelfURI\", jsonData.items[profile].selfLink.replace(/localhost/g,bigiqmgmt));\r",
+											"\r",
+											"        //log data saved\r",
+											"        console.log (\"Found \"+searchname+\": Now you may continue to get the specific profile's json from the REST API.\")\r",
+											"        //log if verbose set to greater than 0, do not log if set to 0\r",
+											"        if (pm.variables.get(\"BeVerbose\")) {\r",
+											"            //console.log(\"\")\r",
+											"            console.log(\"updated the following environmental information:\")\r",
+											"            console.log(\"updated the following environmental information:\")\r",
+											"            console.log(\"Set profile name to: \"+pm.variables.get(\"ProfileClientSSLName\"))\r",
+											"            console.log(\"Set profile ID to: \"+pm.variables.get(\"ProfileClientSSLID\"))\r",
+											"            console.log(\"Set profile Self Link to: \"+pm.variables.get(\"ProfileClientSSLSelfLink\"))\r",
+											"            console.log(\"Set profile Self URI to: \"+pm.variables.get(\"ProfileClientSSLSelfURI\"))\r",
+											"        }\r",
+											"        //console.log (\"Gathering the specific profile's json from the REST API.\")\r",
+											"    }\r",
+											"}\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/profile/client-ssl?$filter=name eq '*{{ProfileSearchName}}*'",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"profile",
+										"client-ssl"
+									],
+									"query": [
+										{
+											"key": "$filter",
+											"value": "name eq '*{{ProfileSearchName}}*'"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get TCP Profile by Name",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"//begin parsing\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"let profiles = pm.globals.get(\"itemOfArray\");\r",
+											"\r",
+											"profiles = jsonData.items;\r",
+											"//console.log (profiles)\r",
+											"\r",
+											"//console.log(\"Items: \"+jsonData.items[1].name)\r",
+											"searchname = pm.variables.get(\"ProfileSearchName\")\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"for (profile in profiles){\r",
+											"    if (jsonData.items[profile].name == searchname) {\r",
+											"        profileid=jsonData.items[profile].id\r",
+											"        //gather data for environment Variables related to the object\r",
+											"        \r",
+											"        // Handle TCP Profile specific functions\r",
+											"        if (jsonData.items[profile].defaultsFromReference.name == \"tcp\" || jsonData.items[profile].defaultsFromReference.name == \"tcp-legacy\") {\r",
+											"            postman.setEnvironmentVariable(\"ProfileTCPID\", profileid);\r",
+											"            postman.setEnvironmentVariable(\"ProfileTCPName\", jsonData.items[profile].name);\r",
+											"            postman.setEnvironmentVariable(\"ProfileTCPSelfLink\", jsonData.items[profile].selfLink);\r",
+											"            postman.setEnvironmentVariable(\"ProfileTCPSelfURI\", jsonData.items[profile].selfLink.replace(/localhost/g,bigiqmgmt));\r",
+											"            postman.setEnvironmentVariable(\"NewProfileType\", \"tcp\");\r",
+											"            postman.setEnvironmentVariable(\"NewProfileParent\", jsonData.items[profile].defaultsFromReference.name);\r",
+											"            postman.setEnvironmentVariable(\"ProfileTCPParent\", jsonData.items[profile].defaultsFromReference.name);\r",
+											"            postman.setEnvironmentVariable(\"ProfileTCPParentLink\", jsonData.items[profile].defaultsFromReference.link);\r",
+											"            postman.setEnvironmentVariable(\"ProfileTCPParentURI\", jsonData.items[profile].defaultsFromReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"\r",
+											"            //profile customizations\r",
+											"            ProfileTCPidleTimeout = jsonData.items[profile].idleTimeout;\r",
+											"            ProfileTCPisNoWrite = jsonData.items[profile].isNoWrite;\r",
+											"            ProfileTCPisFastOpen = jsonData.items[profile].isFastOpen;\r",
+											"            ProfileTCPisVerifiedAccept = jsonData.items[profile].isVerifiedAccept;\r",
+											"\r",
+											"            //support idletimeout setting, 300 is the default for both tcp and tcp-legacy\r",
+											"            // ** Note: if the parent profile is something other than tcp or tcp legacy-- this could break! **\r",
+											"            if (ProfileTCPidleTimeout == \"300\" || ProfileTCPidleTimeout == undefined || ProfileTCPidleTimeout == \"\" ) {\r",
+											"                postman.setEnvironmentVariable(\"ProfileTCPidleTimeout\",\"\");\r",
+											"                postman.setEnvironmentVariable(\"ProfileTCPidleTimeoutJSON\",\"\");\r",
+											"            }\r",
+											"            else\r",
+											"            {\r",
+											"                postman.setEnvironmentVariable(\"ProfileTCPidleTimeout\",ProfileTCPidleTimeout);\r",
+											"                postman.setEnvironmentVariable(\"ProfileTCPidleTimeoutJSON\",  \"      \\\"idleTimeout\\\": \"+ProfileTCPidleTimeout+\",\");\r",
+											"            }\r",
+											"\r",
+											"            //support isVerifiedAccept setting, false is the default. This is a dangerous setting since it changes the packet order and flow. See the context specific help in the TM UI for more details.\r",
+											"            if (ProfileTCPisVerifiedAccept == false || ProfileTCPisVerifiedAccept == undefined || ProfileTCPisVerifiedAccept == \"\" ) {\r",
+											"                postman.setEnvironmentVariable(\"ProfileTCPisVerifiedAccept\",\"\");\r",
+											"            }\r",
+											"            else\r",
+											"            {\r",
+											"                postman.setEnvironmentVariable(\"ProfileTCPisVerifiedAccept\", ProfileTCPisVerifiedAccept);\r",
+											"                postman.setEnvironmentVariable(\"ProfileTCPisVerifiedAcceptJSON\",  \"      \\\"isVerifiedAccept\\\": \"+ProfileTCPisVerifiedAccept+\",\");\r",
+											"            }\r",
+											"        }\r",
+											"\r",
+											"        //log data saved\r",
+											"        console.log (\"Found \"+searchname+\": Now you may continue to get the specific profile's json from the REST API.\")\r",
+											"        //log if verbose set to greater than 0, do not log if set to 0\r",
+											"        if (pm.variables.get(\"BeVerbose\")) {\r",
+											"            //console.log(\"\")\r",
+											"            console.log(\"updated the following environmental information:\")\r",
+											"            console.log(\"updated the following environmental information:\")\r",
+											"            console.log(\"Set profile name to: \"+pm.variables.get(\"ProfileTCPName\"))\r",
+											"            console.log(\"Set profile ID to: \"+pm.variables.get(\"ProfileTCPID\"))\r",
+											"            console.log(\"Set profile Self Link to: \"+pm.variables.get(\"ProfileTCPSelfLink\"))\r",
+											"            console.log(\"Set profile Self URI to: \"+pm.variables.get(\"ProfileTCPSelfURI\"))\r",
+											"            console.log(\"Set New Profile Type to: \"+pm.variables.get(\"NewProfileType\"))\r",
+											"            console.log(\"Set New Profile Parent to: \"+pm.variables.get(\"NewProfileParent\"))\r",
+											"            console.log(\"Set profile TCP Parent to: \"+pm.variables.get(\"ProfileTCPParent\"))\r",
+											"\r",
+											"        }\r",
+											"        //console.log (\"Gathering the specific profile's json from the REST API.\")\r",
+											"    }\r",
+											"}\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "        {\r\n            \"kind\": \"cm:adc-core:working-config:ltm:profile:tcp:adcprofiletcpstate\",\r\n            \"name\": \"{{ProfileTCPName}}\",\r\n            \"isNoWrite\": false,\r\n            \"partition\": \"Common\",\r\n            \"generation\": 1,\r\n            \"isFastOpen\": false,\r\n            \"isNoDelete\": false,\r\n            \"isVerifiedAccept\": true,\r\n            \"defaultsFromReference\": {\r\n                \"id\": \"d613006c-c02c-30f1-bc2f-a2597da24beb\",\r\n                \"kind\": \"cm:adc-core:working-config:ltm:profile:tcp:adcprofiletcpstate\",\r\n                \"link\": \"https://localhost/mgmt/cm/adc-core/working-config/ltm/profile/tcp/d613006c-c02c-30f1-bc2f-a2597da24beb\",\r\n                \"name\": \"tcp-legacy\",\r\n                \"partition\": \"Common\"\r\n            }\r\n        }"
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/profile/tcp/",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"profile",
+										"tcp",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create TCP Profile",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/*\r",
+											"Need to update Environment for id and selfLink/URI after creation of teh profile\r",
+											" */\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"postman.setEnvironmentVariable(\"ProfileTCPID\", jsonData.id);\r",
+											"postman.setEnvironmentVariable(\"ProfileTCPSelfLink\", jsonData.selfLink)\r",
+											"postman.setEnvironmentVariable(\"ProfileTCPSelfURI\", jsonData.selfLink.replace(/localhost/g,bigiqmgmt))\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"kind\": \"cm:adc-core:working-config:ltm:profile:tcp:adcprofiletcpstate\",\r\n    \"name\": \"{{ProfileTCPName}}\",\r\n    \"partition\": \"Common\",\r\n    {{ProfileTCPidleTimeoutJSON}}\r\n    {{ProfileTCPisVerifiedAcceptJSON}}\r\n    \"defaultsFromReference\": {\r\n        \"link\": \"{{ProfileTCPParentLink}}\",\r\n        \"name\": \"{{ProfileTCPParent}}\"\r\n    }\r\n}"
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/profile/{{NewProfileType}}/",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"profile",
+										"{{NewProfileType}}",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete tcp Profile from Environment variables",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"postman.setEnvironmentVariable(\"ProfileTCPID\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileTCPName\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileTCPSelfLink\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileTCPSelfURI\", \"\");\r",
+											"postman.setEnvironmentVariable(\"NewProfileType\", \"\");\r",
+											"postman.setEnvironmentVariable(\"NewProfileParent\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileTCPParent\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileTCPParentLink\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileTCPParentURI\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileTCPidleTimeout\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileTCPidleTimeoutJSON\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileTCPisVerifiedAccept\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileTCPisVerifiedAcceptJSON\", \"\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/profile/tcp/{{ProfileTCPID}}",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"profile",
+										"tcp",
+										"{{ProfileTCPID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get FastL4 Profile by Name",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"//begin parsing\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"let profiles = pm.globals.get(\"itemOfArray\");\r",
+											"\r",
+											"profiles = jsonData.items;\r",
+											"//console.log (profiles)\r",
+											"\r",
+											"//console.log(\"Items: \"+jsonData.items[1].name)\r",
+											"searchname = pm.variables.get(\"ProfileSearchName\")\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"for (profile in profiles){\r",
+											"    if (jsonData.items[profile].name == searchname) {\r",
+											"        profileid=jsonData.items[profile].id\r",
+											"        //gather data for environment Variables related to the object\r",
+											"        \r",
+											"        // Handle TCP Profile specific functions\r",
+											"            postman.setEnvironmentVariable(\"ProfileFastL4ID\", profileid);\r",
+											"            postman.setEnvironmentVariable(\"ProfileFastL4Name\", jsonData.items[profile].name);\r",
+											"            postman.setEnvironmentVariable(\"ProfileFastL4SelfLink\", jsonData.items[profile].selfLink);\r",
+											"            postman.setEnvironmentVariable(\"ProfileFastL4SelfURI\", jsonData.items[profile].selfLink.replace(/localhost/g,bigiqmgmt));\r",
+											"            postman.setEnvironmentVariable(\"NewProfileType\", \"fastl4\");\r",
+											"            postman.setEnvironmentVariable(\"NewProfileParent\", jsonData.items[profile].defaultsFromReference.name);\r",
+											"            postman.setEnvironmentVariable(\"ProfileFastL4Parent\", jsonData.items[profile].defaultsFromReference.name);\r",
+											"            postman.setEnvironmentVariable(\"ProfileFastL4ParentLink\", jsonData.items[profile].defaultsFromReference.link);\r",
+											"            postman.setEnvironmentVariable(\"ProfileFastL4ParentURI\", jsonData.items[profile].defaultsFromReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"\r",
+											"            //profile customizations\r",
+											"            ProfileFastL4idleTimeout = jsonData.items[profile].idleTimeout;\r",
+											"//            ProfileFastL4isNoWrite = jsonData.items[profile].isNoWrite;\r",
+											"//            ProfileFastL4isFastOpen = jsonData.items[profile].isFastOpen;\r",
+											"//            ProfileFastL4isVerifiedAccept = jsonData.items[profile].isVerifiedAccept;\r",
+											"\r",
+											"            if (ProfileFastL4idleTimeout == \"300\" || ProfileFastL4idleTimeout == undefined || ProfileFastL4idleTimeout == \"\" ) {\r",
+											"                postman.setEnvironmentVariable(\"ProfileFastL4idleTimeout\",\"\");\r",
+											"                postman.setEnvironmentVariable(\"ProfileFastL4idleTimeoutJSON\",\"\");\r",
+											"            }\r",
+											"            else\r",
+											"            {\r",
+											"                postman.setEnvironmentVariable(\"ProfileFastL4idleTimeout\",ProfileFastL4idleTimeout);\r",
+											"                postman.setEnvironmentVariable(\"ProfileFastL4idleTimeoutJSON\",  \"      \\\"idleTimeout\\\": \"+ProfileFastL4idleTimeout+\",\");\r",
+											"            }\r",
+											"\r",
+											"\r",
+											"        //log data saved\r",
+											"        console.log (\"Found \"+searchname+\": Now you may continue to get the specific profile's json from the REST API.\")\r",
+											"        //log if verbose set to greater than 0, do not log if set to 0\r",
+											"        if (pm.variables.get(\"BeVerbose\")) {\r",
+											"            //console.log(\"\")\r",
+											"            console.log(\"updated the following environmental information:\")\r",
+											"            console.log(\"updated the following environmental information:\")\r",
+											"            console.log(\"Set profile name to: \"+pm.variables.get(\"ProfileFastL4Name\"))\r",
+											"            console.log(\"Set profile ID to: \"+pm.variables.get(\"ProfileFastL4ID\"))\r",
+											"            console.log(\"Set profile Self Link to: \"+pm.variables.get(\"ProfileFastL4SelfLink\"))\r",
+											"            console.log(\"Set profile Self URI to: \"+pm.variables.get(\"ProfileFastL4SelfURI\"))\r",
+											"            console.log(\"Set New Profile Type to: \"+pm.variables.get(\"NewProfileType\"))\r",
+											"            console.log(\"Set New Profile Parent to: \"+pm.variables.get(\"NewProfileParent\"))\r",
+											"            console.log(\"Set profile FastL4 Parent to: \"+pm.variables.get(\"ProfileFastL4Parent\"))\r",
+											"\r",
+											"        }\r",
+											"        //console.log (\"Gathering the specific profile's json from the REST API.\")\r",
+											"    }\r",
+											"}\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/profile/fastl4/",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"profile",
+										"fastl4",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create FastL4 Profile",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/*\r",
+											"Need to update Environment for id and selfLink/URI after creation of teh profile\r",
+											" */\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"postman.setEnvironmentVariable(\"ProfileFastL4ID\", jsonData.id);\r",
+											"postman.setEnvironmentVariable(\"ProfileFastL4SelfLink\", jsonData.selfLink)\r",
+											"postman.setEnvironmentVariable(\"ProfileFastL4SelfURI\", jsonData.selfLink.replace(/localhost/g,bigiqmgmt))"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "        {\r\n            \"kind\": \"cm:adc-core:working-config:ltm:profile:fastl4:adcprofilefastl4state\",\r\n            \"name\": \"{{ProfileFastL4Name}}\",\r\n            \"partition\": \"Common\",\r\n            \"isNoDelete\": false,\r\n            {{ProfileFastL4idleTimeoutJSON}}\r\n            \"defaultsFromReference\": {\r\n                \"link\": \"{{ProfileFastL4ParentLink}}\",\r\n                \"name\": \"{{ProfileFastL4Parent}}\"\r\n            }\r\n        }"
+								},
+								"url": {
+									"raw": "https://10.155.111.64/mgmt/cm/adc-core/working-config/ltm/profile/{{NewProfileType}}/",
+									"protocol": "https",
+									"host": [
+										"10",
+										"155",
+										"111",
+										"64"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"profile",
+										"{{NewProfileType}}",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete FastL4 Profile from Environment variables",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"postman.setEnvironmentVariable(\"ProfileFastL4ID\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileFastL4Name\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileFastL4SelfLink\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileFastL4SelfURI\", \"\");\r",
+											"postman.setEnvironmentVariable(\"NewProfileType\", \"\");\r",
+											"postman.setEnvironmentVariable(\"NewProfileParent\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileFastL4Parent\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileFastL4ParentLink\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileFastL4ParentURI\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileFastL4idleTimeout\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileFastL4idleTimeoutJSON\", \"\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/profile/fastl4/{{ProfileFastL4ID}}",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"profile",
+										"fastl4",
+										"{{ProfileFastL4ID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get HTTP Profile by Name",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"//begin parsing\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"let profiles = pm.globals.get(\"itemOfArray\");\r",
+											"\r",
+											"profiles = jsonData.items;\r",
+											"//console.log (profiles)\r",
+											"\r",
+											"//console.log(\"Items: \"+jsonData.items[1].name)\r",
+											"searchname = pm.variables.get(\"ProfileSearchName\")\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"for (profile in profiles){\r",
+											"    if (jsonData.items[profile].name == searchname) {\r",
+											"        profileid=jsonData.items[profile].id\r",
+											"        //gather data for environment Variables related to the object\r",
+											"        \r",
+											"        // Handle HTTP Profile specific functions\r",
+											"            postman.setEnvironmentVariable(\"ProfileHTTPID\", profileid);\r",
+											"            postman.setEnvironmentVariable(\"ProfileHTTPName\", jsonData.items[profile].name);\r",
+											"            postman.setEnvironmentVariable(\"ProfileHTTPSelfLink\", jsonData.items[profile].selfLink);\r",
+											"            postman.setEnvironmentVariable(\"ProfileHTTPSelfURI\", jsonData.items[profile].selfLink.replace(/localhost/g,bigiqmgmt));\r",
+											"            postman.setEnvironmentVariable(\"NewProfileType\", \"http\");\r",
+											"            postman.setEnvironmentVariable(\"NewProfileParent\", jsonData.items[profile].defaultsFromReference.name);\r",
+											"            postman.setEnvironmentVariable(\"ProfileHTTPParent\", jsonData.items[profile].defaultsFromReference.name);\r",
+											"            postman.setEnvironmentVariable(\"ProfileHTTPParentLink\", jsonData.items[profile].defaultsFromReference.link);\r",
+											"            postman.setEnvironmentVariable(\"ProfileHTTPParentURI\", jsonData.items[profile].defaultsFromReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"            postman.setEnvironmentVariable(\"ProfileHTTPXFF\", jsonData.items[profile].isInsertXforwardedForEnabled);\r",
+											"            //profile customizations\r",
+											"            \r",
+											"        //log data saved\r",
+											"        console.log (\"Found \"+searchname+\": Now you may continue to get the specific profile's json from the REST API.\")\r",
+											"        //log if verbose set to greater than 0, do not log if set to 0\r",
+											"        if (pm.variables.get(\"BeVerbose\")) {\r",
+											"            //console.log(\"\")\r",
+											"            console.log(\"updated the following environmental information:\")\r",
+											"            console.log(\"updated the following environmental information:\")\r",
+											"            console.log(\"Set profile name to: \"+pm.variables.get(\"ProfileHTTPName\"))\r",
+											"            console.log(\"Set profile ID to: \"+pm.variables.get(\"ProfileHTTPID\"))\r",
+											"            console.log(\"Set profile Self Link to: \"+pm.variables.get(\"ProfileHTTPSelfLink\"))\r",
+											"            console.log(\"Set profile Self URI to: \"+pm.variables.get(\"ProfileHTTPSelfURI\"))\r",
+											"            console.log(\"Set New Profile Type to: \"+pm.variables.get(\"NewProfileType\"))\r",
+											"            console.log(\"Set New Profile Parent to: \"+pm.variables.get(\"NewProfileParent\"))\r",
+											"            console.log(\"Set profile FastL4 Parent to: \"+pm.variables.get(\"ProfileHTTPParent\"))\r",
+											"\r",
+											"        }\r",
+											"        //console.log (\"Gathering the specific profile's json from the REST API.\")\r",
+											"    }\r",
+											"}\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/profile/http/?$filter=name eq '*{{ProfileSearchName}}*'",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"profile",
+										"http",
+										""
+									],
+									"query": [
+										{
+											"key": "$filter",
+											"value": "name eq '*{{ProfileSearchName}}*'"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create HTTP Profile",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/*\r",
+											"Pre-Reqs:\r",
+											"\r",
+											"Inputs:\r",
+											"    ProfileHTTPName\r",
+											"    ProfileHTTPXFF\r",
+											"Outputs:\r",
+											"    ProfileHTTPID\r",
+											"    ProfileHTTPName\r",
+											"    ProfileHTTPSelfLink\r",
+											"    ProfileHTTPSelfURI\r",
+											"*/\r",
+											"\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"var bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPID\", jsonData.id);\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPName\", jsonData.name);\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPSelfLink\", jsonData.selfLink);\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPSelfURI\", jsonData.selfLink.replace(/localhost/g,bigiqmgmt));\r",
+											"postman.setEnvironmentVariable(\"NewProfileType\", \"http\");\r",
+											"postman.setEnvironmentVariable(\"NewProfileParent\", jsonData.defaultsFromReference.name);\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPParent\", jsonData.defaultsFromReference.name);\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPParentLink\", jsonData.defaultsFromReference.link);\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPParentURI\", jsonData.defaultsFromReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPXFF\", jsonData.isInsertXforwardedForEnabled);\r",
+											"\r",
+											"//postman.setEnvironmentVariable(\"xxxxx\", jsonData.xxxx);\r",
+											"\r",
+											"\r",
+											"if (pm.variables.get(\"BeVerbose\")) {\r",
+											"    console.log(\"Created http Profile with the following properties:\")\r",
+											"    console.log(\"Name: \"+jsonData.name)\r",
+											"    console.log(\"ID: \"+pm.variables.get(\"ProfileHTTPID\"))\r",
+											"    console.log(\"SelfLink\"+pm.variables.get(\"ProfileHTTPSelfLink\"))\r",
+											"    console.log(\"SelfURI\"+pm.variables.get(\"ProfileHTTPSelfURI\"))\r",
+											"}\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "       {\r\n            \"kind\": \"cm:adc-core:working-config:ltm:profile:http:adcprofilehttpstate\",\r\n            \"name\": \"{{ProfileHTTPName}}\",\r\n            \"partition\": \"Common\",\r\n            \"isInsertXforwardedForEnabled\": {{ProfileHTTPXFF}}\r\n        }"
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/profile/http/",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"profile",
+										"http",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete HTTP Profile from Environment variables",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"postman.setEnvironmentVariable(\"ProfileHTTPID\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPName\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPSelfLink\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPSelfURI\", \"\");\r",
+											"postman.setEnvironmentVariable(\"NewProfileType\", \"\");\r",
+											"postman.setEnvironmentVariable(\"NewProfileParent\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPParent\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPParentLink\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPParentURI\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileHTTPXFF\", \"\");\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/profile/http/{{ProfileHTTPID}}",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"profile",
+										"http",
+										"{{ProfileHTTPID}}"
 									]
 								}
 							},
@@ -3115,1032 +4356,6 @@
 									"key": "$filter",
 									"value": "name eq '*{{SearchVirtualName}}*'"
 								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Profile Functions",
-			"item": [
-				{
-					"name": "Create HTTP Profile",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
-									"\r",
-									"\r",
-									"\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"/*\r",
-									"Pre-Reqs:\r",
-									"\r",
-									"Inputs:\r",
-									"\r",
-									"Outputs:\r",
-									"\r",
-									"*/\r",
-									"\r",
-									"var jsonData = JSON.parse(responseBody)\r",
-									"var bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
-									"\r",
-									"postman.setEnvironmentVariable(\"ProfileHTTPID\", jsonData.id);\r",
-									"postman.setEnvironmentVariable(\"ProfileHTTPName\", jsonData.name);\r",
-									"postman.setEnvironmentVariable(\"ProfileHTTPSelfLink\", jsonData.selfLink);\r",
-									"postman.setEnvironmentVariable(\"ProfileHTTPSelfURI\", jsonData.selfLink.replace(/localhost/g,bigiqmgmt));\r",
-									"//postman.setEnvironmentVariable(\"xxxxx\", jsonData.xxxx);\r",
-									"\r",
-									"\r",
-									"if (pm.variables.get(\"BeVerbose\")) {\r",
-									"    console.log(\"Created http Profile with the following properties:\")\r",
-									"    console.log(\"Name: \"+jsonData.name)\r",
-									"    console.log(\"ID: \"+pm.variables.get(\"ProfileHTTPID\"))\r",
-									"    console.log(\"SelfLink\"+pm.variables.get(\"ProfileHTTPSelfLink\"))\r",
-									"    console.log(\"SelfURI\"+pm.variables.get(\"ProfileHTTPSelfURI\"))\r",
-									"}\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "1chnl!",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								},
-								{
-									"key": "saveHelperData",
-									"value": false,
-									"type": "boolean"
-								},
-								{
-									"key": "showPassword",
-									"value": false,
-									"type": "boolean"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "X-F5-Auth-Token",
-								"value": "{{AuthToken}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "       {\r\n            \"kind\": \"cm:adc-core:working-config:ltm:profile:http:adcprofilehttpstate\",\r\n            \"name\": \"{{NewHTTPProfileName}}\",\r\n            \"partition\": \"Common\",\r\n            \"proxyType\": \"reverse\",\r\n            \"isNoDelete\": false,\r\n            \"viaRequest\": \"preserve\",\r\n            \"enforcement\": {\r\n                \"pipeline\": \"allow\",\r\n                \"maxRequests\": 0.0,\r\n                \"knownMethods\": [\r\n                    \"CONNECT\",\r\n                    \"DELETE\",\r\n                    \"GET\",\r\n                    \"HEAD\",\r\n                    \"LOCK\",\r\n                    \"OPTIONS\",\r\n                    \"POST\",\r\n                    \"PROPFIND\",\r\n                    \"PUT\",\r\n                    \"TRACE\",\r\n                    \"UNLOCK\"\r\n                ],\r\n                \"maxHeaderSize\": 32768.0,\r\n                \"unknownMethod\": \"allow\",\r\n                \"maxHeaderCount\": 64.0,\r\n                \"excessClientHeaders\": \"reject\",\r\n                \"excessServerHeaders\": \"reject\",\r\n                \"oversizeClientHeaders\": \"reject\",\r\n                \"oversizeServerHeaders\": \"reject\",\r\n                \"isTruncatedRedirectsEnabled\": false\r\n            },\r\n            \"headerErase\": \"\",\r\n            \"viaHostName\": \"\",\r\n            \"viaResponse\": \"preserve\",\r\n            \"fallbackHost\": \"\",\r\n            \"headerInsert\": \"\",\r\n            \"lwsSeparator\": \"\",\r\n            \"explicitProxy\": {\r\n                \"hostNames\": [],\r\n                \"tunnelName\": \"\",\r\n                \"dnsResolver\": \"none\",\r\n                \"routeDomain\": \"\",\r\n                \"dnsErrorMessage\": \"\",\r\n                \"badRequestMessage\": \"\",\r\n                \"badResponseMessage\": \"\",\r\n                \"connectErrorMessage\": \"\",\r\n                \"defaultConnectHandling\": \"deny\"\r\n            },\r\n            \"basicAuthRealm\": \"\",\r\n            \"encryptCookies\": [],\r\n            \"redirectRewrite\": \"none\",\r\n            \"requestChunking\": \"sustain\",\r\n            \"serverAgentName\": \"BigIP\",\r\n            \"responseChunking\": \"sustain\",\r\n            \"isAcceptXffEnabled\": false,\r\n            \"encryptCookieSecret\": \"\",\r\n            \"fallbackStatusCodes\": [],\r\n            \"xffAlternativeNames\": [],\r\n            \"responseHeadersPermitted\": [],\r\n            \"isInsertXforwardedForEnabled\": {{NewHTTPProfileXFF}},\r\n            \"isOneconnectTransformationsEnabled\": true\r\n        }"
-						},
-						"url": {
-							"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/profile/http/",
-							"protocol": "https",
-							"host": [
-								"{{BIGIQ_Mgmt}}"
-							],
-							"path": [
-								"mgmt",
-								"cm",
-								"adc-core",
-								"working-config",
-								"ltm",
-								"profile",
-								"http",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get serverssl Profile by Name",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
-									"\r",
-									"\r",
-									"\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"//begin parsing\r",
-									"var jsonData = JSON.parse(responseBody)\r",
-									"\r",
-									"let profiles = pm.globals.get(\"itemOfArray\");\r",
-									"\r",
-									"profiles = jsonData.items;\r",
-									"//console.log (profiles)\r",
-									"\r",
-									"//console.log(\"Items: \"+jsonData.items[1].name)\r",
-									"searchname = pm.variables.get(\"ProfileSearchName\")\r",
-									"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
-									"\r",
-									"for (profile in profiles){\r",
-									"    if (jsonData.items[profile].name == searchname) {\r",
-									"        profileid=jsonData.items[profile].id\r",
-									"        //gather data for environment Variables related to the object\r",
-									"        postman.setEnvironmentVariable(\"ProfileServerSSLID\", profileid);\r",
-									"        postman.setEnvironmentVariable(\"ProfileServerSSLName\", jsonData.items[profile].name);\r",
-									"        postman.setEnvironmentVariable(\"ProfileServerSSLSelfLink\", jsonData.items[profile].selfLink);\r",
-									"        postman.setEnvironmentVariable(\"ProfileServerSSLSelfURI\", jsonData.items[profile].selfLink.replace(/localhost/g,bigiqmgmt));\r",
-									"\r",
-									"        //log data saved\r",
-									"        console.log (\"Found \"+searchname+\": Now you may continue to get the specific profile's json from the REST API.\")\r",
-									"        //log if verbose set to greater than 0, do not log if set to 0\r",
-									"        if (pm.variables.get(\"BeVerbose\")) {\r",
-									"            //console.log(\"\")\r",
-									"            console.log(\"updated the following environmental information:\")\r",
-									"            console.log(\"Set profile name to: \"+pm.variables.get(\"ProfileServerSSLName\"))\r",
-									"            console.log(\"Set profile ID to: \"+pm.variables.get(\"ProfileServerSSLID\"))\r",
-									"            console.log(\"Set profile Self Link to: \"+pm.variables.get(\"ProfileServerSSLSelfLink\"))\r",
-									"            console.log(\"Set profile Self URI to: \"+pm.variables.get(\"ProfileServerSSLSelfURI\"))\r",
-									"        }\r",
-									"        //console.log (\"Gathering the specific profile's json from the REST API.\")\r",
-									"    }\r",
-									"}\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "1chnl!",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								},
-								{
-									"key": "saveHelperData",
-									"value": false,
-									"type": "boolean"
-								},
-								{
-									"key": "showPassword",
-									"value": false,
-									"type": "boolean"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "X-F5-Auth-Token",
-								"value": "{{AuthToken}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/profile/server-ssl?$filter=name eq '*{{ProfileSearchName}}*'",
-							"protocol": "https",
-							"host": [
-								"{{BIGIQ_Mgmt}}"
-							],
-							"path": [
-								"mgmt",
-								"cm",
-								"adc-core",
-								"working-config",
-								"ltm",
-								"profile",
-								"server-ssl"
-							],
-							"query": [
-								{
-									"key": "$filter",
-									"value": "name eq '*{{ProfileSearchName}}*'"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get clientssl Profile by Name",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
-									"\r",
-									"\r",
-									"\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"//begin parsing\r",
-									"var jsonData = JSON.parse(responseBody)\r",
-									"\r",
-									"let profiles = pm.globals.get(\"itemOfArray\");\r",
-									"\r",
-									"profiles = jsonData.items;\r",
-									"//console.log (profiles)\r",
-									"\r",
-									"//console.log(\"Items: \"+jsonData.items[1].name)\r",
-									"searchname = pm.variables.get(\"ProfileSearchName\")\r",
-									"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
-									"\r",
-									"for (profile in profiles){\r",
-									"    if (jsonData.items[profile].name == searchname) {\r",
-									"        profileid=jsonData.items[profile].id\r",
-									"        //gather data for environment Variables related to the object\r",
-									"        postman.setEnvironmentVariable(\"ProfileClientSSLID\", profileid);\r",
-									"        postman.setEnvironmentVariable(\"ProfileClientSSLName\", jsonData.items[profile].name);\r",
-									"        postman.setEnvironmentVariable(\"ProfileClientSSLSelfLink\", jsonData.items[profile].selfLink);\r",
-									"        postman.setEnvironmentVariable(\"ProfileClientSSLSelfURI\", jsonData.items[profile].selfLink.replace(/localhost/g,bigiqmgmt));\r",
-									"\r",
-									"        //log data saved\r",
-									"        console.log (\"Found \"+searchname+\": Now you may continue to get the specific profile's json from the REST API.\")\r",
-									"        //log if verbose set to greater than 0, do not log if set to 0\r",
-									"        if (pm.variables.get(\"BeVerbose\")) {\r",
-									"            //console.log(\"\")\r",
-									"            console.log(\"updated the following environmental information:\")\r",
-									"            console.log(\"updated the following environmental information:\")\r",
-									"            console.log(\"Set profile name to: \"+pm.variables.get(\"ProfileClientSSLName\"))\r",
-									"            console.log(\"Set profile ID to: \"+pm.variables.get(\"ProfileClientSSLID\"))\r",
-									"            console.log(\"Set profile Self Link to: \"+pm.variables.get(\"ProfileClientSSLSelfLink\"))\r",
-									"            console.log(\"Set profile Self URI to: \"+pm.variables.get(\"ProfileClientSSLSelfURI\"))\r",
-									"        }\r",
-									"        //console.log (\"Gathering the specific profile's json from the REST API.\")\r",
-									"    }\r",
-									"}\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "1chnl!",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								},
-								{
-									"key": "saveHelperData",
-									"value": false,
-									"type": "boolean"
-								},
-								{
-									"key": "showPassword",
-									"value": false,
-									"type": "boolean"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "X-F5-Auth-Token",
-								"value": "{{AuthToken}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/profile/client-ssl?$filter=name eq '*{{ProfileSearchName}}*'",
-							"protocol": "https",
-							"host": [
-								"{{BIGIQ_Mgmt}}"
-							],
-							"path": [
-								"mgmt",
-								"cm",
-								"adc-core",
-								"working-config",
-								"ltm",
-								"profile",
-								"client-ssl"
-							],
-							"query": [
-								{
-									"key": "$filter",
-									"value": "name eq '*{{ProfileSearchName}}*'"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get TCP Profile by Name",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
-									"\r",
-									"\r",
-									"\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"//begin parsing\r",
-									"var jsonData = JSON.parse(responseBody)\r",
-									"\r",
-									"let profiles = pm.globals.get(\"itemOfArray\");\r",
-									"\r",
-									"profiles = jsonData.items;\r",
-									"//console.log (profiles)\r",
-									"\r",
-									"//console.log(\"Items: \"+jsonData.items[1].name)\r",
-									"searchname = pm.variables.get(\"ProfileSearchName\")\r",
-									"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
-									"\r",
-									"for (profile in profiles){\r",
-									"    if (jsonData.items[profile].name == searchname) {\r",
-									"        profileid=jsonData.items[profile].id\r",
-									"        //gather data for environment Variables related to the object\r",
-									"        \r",
-									"        // Handle TCP Profile specific functions\r",
-									"        if (jsonData.items[profile].defaultsFromReference.name == \"tcp\" || jsonData.items[profile].defaultsFromReference.name == \"tcp-legacy\") {\r",
-									"            postman.setEnvironmentVariable(\"ProfileTCPID\", profileid);\r",
-									"            postman.setEnvironmentVariable(\"ProfileTCPName\", jsonData.items[profile].name);\r",
-									"            postman.setEnvironmentVariable(\"ProfileTCPSelfLink\", jsonData.items[profile].selfLink);\r",
-									"            postman.setEnvironmentVariable(\"ProfileTCPSelfURI\", jsonData.items[profile].selfLink.replace(/localhost/g,bigiqmgmt));\r",
-									"            postman.setEnvironmentVariable(\"NewProfileType\", \"tcp\");\r",
-									"            postman.setEnvironmentVariable(\"NewProfileParent\", jsonData.items[profile].defaultsFromReference.name);\r",
-									"            postman.setEnvironmentVariable(\"ProfileTCPParent\", jsonData.items[profile].defaultsFromReference.name);\r",
-									"            postman.setEnvironmentVariable(\"ProfileTCPParentLink\", jsonData.items[profile].defaultsFromReference.link);\r",
-									"            postman.setEnvironmentVariable(\"ProfileTCPParentURI\", jsonData.items[profile].defaultsFromReference.link.replace(/localhost/g,bigiqmgmt));\r",
-									"\r",
-									"            //profile customizations\r",
-									"            ProfileTCPidleTimeout = jsonData.items[profile].idleTimeout;\r",
-									"            ProfileTCPisNoWrite = jsonData.items[profile].isNoWrite;\r",
-									"            ProfileTCPisFastOpen = jsonData.items[profile].isFastOpen;\r",
-									"            ProfileTCPisVerifiedAccept = jsonData.items[profile].isVerifiedAccept;\r",
-									"\r",
-									"            //support idletimeout setting, 300 is the default for both tcp and tcp-legacy\r",
-									"            // ** Note: if the parent profile is something other than tcp or tcp legacy-- this could break! **\r",
-									"            if (ProfileTCPidleTimeout == \"300\" || ProfileTCPidleTimeout == undefined || ProfileTCPidleTimeout == \"\" ) {\r",
-									"                postman.setEnvironmentVariable(\"ProfileTCPidleTimeout\",\"\");\r",
-									"                postman.setEnvironmentVariable(\"ProfileTCPidleTimeoutJSON\",\"\");\r",
-									"            }\r",
-									"            else\r",
-									"            {\r",
-									"                postman.setEnvironmentVariable(\"ProfileTCPidleTimeout\",ProfileTCPidleTimeout);\r",
-									"                postman.setEnvironmentVariable(\"ProfileTCPidleTimeoutJSON\",  \"      \\\"idleTimeout\\\": \"+ProfileTCPidleTimeout+\",\");\r",
-									"            }\r",
-									"\r",
-									"            //support isVerifiedAccept setting, false is the default. This is a dangerous setting since it changes the packet order and flow. See the context specific help in the TM UI for more details.\r",
-									"            if (ProfileTCPisVerifiedAccept == false || ProfileTCPisVerifiedAccept == undefined || ProfileTCPisVerifiedAccept == \"\" ) {\r",
-									"                postman.setEnvironmentVariable(\"ProfileTCPisVerifiedAccept\",\"\");\r",
-									"            }\r",
-									"            else\r",
-									"            {\r",
-									"                postman.setEnvironmentVariable(\"ProfileTCPisVerifiedAccept\", ProfileTCPisVerifiedAccept);\r",
-									"                postman.setEnvironmentVariable(\"ProfileTCPisVerifiedAcceptJSON\",  \"      \\\"isVerifiedAccept\\\": \"+ProfileTCPisVerifiedAccept+\",\");\r",
-									"            }\r",
-									"        }\r",
-									"\r",
-									"        //log data saved\r",
-									"        console.log (\"Found \"+searchname+\": Now you may continue to get the specific profile's json from the REST API.\")\r",
-									"        //log if verbose set to greater than 0, do not log if set to 0\r",
-									"        if (pm.variables.get(\"BeVerbose\")) {\r",
-									"            //console.log(\"\")\r",
-									"            console.log(\"updated the following environmental information:\")\r",
-									"            console.log(\"updated the following environmental information:\")\r",
-									"            console.log(\"Set profile name to: \"+pm.variables.get(\"ProfileTCPName\"))\r",
-									"            console.log(\"Set profile ID to: \"+pm.variables.get(\"ProfileTCPID\"))\r",
-									"            console.log(\"Set profile Self Link to: \"+pm.variables.get(\"ProfileTCPSelfLink\"))\r",
-									"            console.log(\"Set profile Self URI to: \"+pm.variables.get(\"ProfileTCPSelfURI\"))\r",
-									"            console.log(\"Set New Profile Type to: \"+pm.variables.get(\"NewProfileType\"))\r",
-									"            console.log(\"Set New Profile Parent to: \"+pm.variables.get(\"NewProfileParent\"))\r",
-									"            console.log(\"Set profile TCP Parent to: \"+pm.variables.get(\"ProfileTCPParent\"))\r",
-									"\r",
-									"        }\r",
-									"        //console.log (\"Gathering the specific profile's json from the REST API.\")\r",
-									"    }\r",
-									"}\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "1chnl!",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								},
-								{
-									"key": "saveHelperData",
-									"value": false,
-									"type": "boolean"
-								},
-								{
-									"key": "showPassword",
-									"value": false,
-									"type": "boolean"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "X-F5-Auth-Token",
-								"value": "{{AuthToken}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "        {\r\n            \"kind\": \"cm:adc-core:working-config:ltm:profile:tcp:adcprofiletcpstate\",\r\n            \"name\": \"{{ProfileTCPName}}\",\r\n            \"isNoWrite\": false,\r\n            \"partition\": \"Common\",\r\n            \"generation\": 1,\r\n            \"isFastOpen\": false,\r\n            \"isNoDelete\": false,\r\n            \"isVerifiedAccept\": true,\r\n            \"defaultsFromReference\": {\r\n                \"id\": \"d613006c-c02c-30f1-bc2f-a2597da24beb\",\r\n                \"kind\": \"cm:adc-core:working-config:ltm:profile:tcp:adcprofiletcpstate\",\r\n                \"link\": \"https://localhost/mgmt/cm/adc-core/working-config/ltm/profile/tcp/d613006c-c02c-30f1-bc2f-a2597da24beb\",\r\n                \"name\": \"tcp-legacy\",\r\n                \"partition\": \"Common\"\r\n            }\r\n        }"
-						},
-						"url": {
-							"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/profile/tcp/",
-							"protocol": "https",
-							"host": [
-								"{{BIGIQ_Mgmt}}"
-							],
-							"path": [
-								"mgmt",
-								"cm",
-								"adc-core",
-								"working-config",
-								"ltm",
-								"profile",
-								"tcp",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create TCP Profile",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
-									"\r",
-									"\r",
-									"\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"/*\r",
-									"Need to update Environment for id and selfLink/URI after creation of teh profile\r",
-									" */\r",
-									"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
-									"\r",
-									"var jsonData = JSON.parse(responseBody)\r",
-									"\r",
-									"postman.setEnvironmentVariable(\"ProfileTCPID\", jsonData.id);\r",
-									"postman.setEnvironmentVariable(\"ProfileTCPSelfLink\", jsonData.selfLink)\r",
-									"postman.setEnvironmentVariable(\"ProfileTCPSelfURI\", jsonData.selfLink.replace(/localhost/g,bigiqmgmt))\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "1chnl!",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								},
-								{
-									"key": "saveHelperData",
-									"value": false,
-									"type": "boolean"
-								},
-								{
-									"key": "showPassword",
-									"value": false,
-									"type": "boolean"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "X-F5-Auth-Token",
-								"value": "{{AuthToken}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"kind\": \"cm:adc-core:working-config:ltm:profile:tcp:adcprofiletcpstate\",\r\n    \"name\": \"{{ProfileTCPName}}\",\r\n    \"partition\": \"Common\",\r\n    {{ProfileTCPidleTimeoutJSON}}\r\n    {{ProfileTCPisVerifiedAcceptJSON}}\r\n    \"defaultsFromReference\": {\r\n        \"link\": \"{{ProfileTCPParentLink}}\",\r\n        \"name\": \"{{ProfileTCPParent}}\"\r\n    }\r\n}"
-						},
-						"url": {
-							"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/profile/{{NewProfileType}}/",
-							"protocol": "https",
-							"host": [
-								"{{BIGIQ_Mgmt}}"
-							],
-							"path": [
-								"mgmt",
-								"cm",
-								"adc-core",
-								"working-config",
-								"ltm",
-								"profile",
-								"{{NewProfileType}}",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete tcp Profile from Environment variables",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"postman.setEnvironmentVariable(\"ProfileTCPID\", \"\");\r",
-									"postman.setEnvironmentVariable(\"ProfileTCPName\", \"\");\r",
-									"postman.setEnvironmentVariable(\"ProfileTCPSelfLink\", \"\");\r",
-									"postman.setEnvironmentVariable(\"ProfileTCPSelfURI\", \"\");\r",
-									"postman.setEnvironmentVariable(\"NewProfileType\", \"\");\r",
-									"postman.setEnvironmentVariable(\"NewProfileParent\", \"\");\r",
-									"postman.setEnvironmentVariable(\"ProfileTCPParent\", \"\");\r",
-									"postman.setEnvironmentVariable(\"ProfileTCPParentLink\", \"\");\r",
-									"postman.setEnvironmentVariable(\"ProfileTCPParentURI\", \"\");\r",
-									"postman.setEnvironmentVariable(\"ProfileTCPidleTimeout\", \"\");\r",
-									"postman.setEnvironmentVariable(\"ProfileTCPidleTimeoutJSON\", \"\");\r",
-									"postman.setEnvironmentVariable(\"ProfileTCPisVerifiedAccept\", \"\");\r",
-									"postman.setEnvironmentVariable(\"ProfileTCPisVerifiedAcceptJSON\", \"\");"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "X-F5-Auth-Token",
-								"value": "{{AuthToken}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/profile/tcp/{{ProfileTCPID}}",
-							"protocol": "https",
-							"host": [
-								"{{BIGIQ_Mgmt}}"
-							],
-							"path": [
-								"mgmt",
-								"cm",
-								"adc-core",
-								"working-config",
-								"ltm",
-								"profile",
-								"tcp",
-								"{{ProfileTCPID}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get FastL4 Profile by Name",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
-									"\r",
-									"\r",
-									"\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"//begin parsing\r",
-									"var jsonData = JSON.parse(responseBody)\r",
-									"\r",
-									"let profiles = pm.globals.get(\"itemOfArray\");\r",
-									"\r",
-									"profiles = jsonData.items;\r",
-									"//console.log (profiles)\r",
-									"\r",
-									"//console.log(\"Items: \"+jsonData.items[1].name)\r",
-									"searchname = pm.variables.get(\"ProfileSearchName\")\r",
-									"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
-									"\r",
-									"for (profile in profiles){\r",
-									"    if (jsonData.items[profile].name == searchname) {\r",
-									"        profileid=jsonData.items[profile].id\r",
-									"        //gather data for environment Variables related to the object\r",
-									"        \r",
-									"        // Handle TCP Profile specific functions\r",
-									"            postman.setEnvironmentVariable(\"ProfileFastL4ID\", profileid);\r",
-									"            postman.setEnvironmentVariable(\"ProfileFastL4Name\", jsonData.items[profile].name);\r",
-									"            postman.setEnvironmentVariable(\"ProfileFastL4SelfLink\", jsonData.items[profile].selfLink);\r",
-									"            postman.setEnvironmentVariable(\"ProfileFastL4SelfURI\", jsonData.items[profile].selfLink.replace(/localhost/g,bigiqmgmt));\r",
-									"            postman.setEnvironmentVariable(\"NewProfileType\", \"fastl4\");\r",
-									"            postman.setEnvironmentVariable(\"NewProfileParent\", jsonData.items[profile].defaultsFromReference.name);\r",
-									"            postman.setEnvironmentVariable(\"ProfileFastL4Parent\", jsonData.items[profile].defaultsFromReference.name);\r",
-									"            postman.setEnvironmentVariable(\"ProfileFastL4ParentLink\", jsonData.items[profile].defaultsFromReference.link);\r",
-									"            postman.setEnvironmentVariable(\"ProfileFastL4ParentURI\", jsonData.items[profile].defaultsFromReference.link.replace(/localhost/g,bigiqmgmt));\r",
-									"\r",
-									"            //profile customizations\r",
-									"            ProfileFastL4idleTimeout = jsonData.items[profile].idleTimeout;\r",
-									"//            ProfileFastL4isNoWrite = jsonData.items[profile].isNoWrite;\r",
-									"//            ProfileFastL4isFastOpen = jsonData.items[profile].isFastOpen;\r",
-									"//            ProfileFastL4isVerifiedAccept = jsonData.items[profile].isVerifiedAccept;\r",
-									"\r",
-									"            if (ProfileFastL4idleTimeout == \"300\" || ProfileFastL4idleTimeout == undefined || ProfileFastL4idleTimeout == \"\" ) {\r",
-									"                postman.setEnvironmentVariable(\"ProfileFastL4idleTimeout\",\"\");\r",
-									"                postman.setEnvironmentVariable(\"ProfileFastL4idleTimeoutJSON\",\"\");\r",
-									"            }\r",
-									"            else\r",
-									"            {\r",
-									"                postman.setEnvironmentVariable(\"ProfileFastL4idleTimeout\",ProfileFastL4idleTimeout);\r",
-									"                postman.setEnvironmentVariable(\"ProfileFastL4idleTimeoutJSON\",  \"      \\\"idleTimeout\\\": \"+ProfileFastL4idleTimeout+\",\");\r",
-									"            }\r",
-									"\r",
-									"\r",
-									"        //log data saved\r",
-									"        console.log (\"Found \"+searchname+\": Now you may continue to get the specific profile's json from the REST API.\")\r",
-									"        //log if verbose set to greater than 0, do not log if set to 0\r",
-									"        if (pm.variables.get(\"BeVerbose\")) {\r",
-									"            //console.log(\"\")\r",
-									"            console.log(\"updated the following environmental information:\")\r",
-									"            console.log(\"updated the following environmental information:\")\r",
-									"            console.log(\"Set profile name to: \"+pm.variables.get(\"ProfileFastL4Name\"))\r",
-									"            console.log(\"Set profile ID to: \"+pm.variables.get(\"ProfileFastL4ID\"))\r",
-									"            console.log(\"Set profile Self Link to: \"+pm.variables.get(\"ProfileFastL4SelfLink\"))\r",
-									"            console.log(\"Set profile Self URI to: \"+pm.variables.get(\"ProfileFastL4SelfURI\"))\r",
-									"            console.log(\"Set New Profile Type to: \"+pm.variables.get(\"NewProfileType\"))\r",
-									"            console.log(\"Set New Profile Parent to: \"+pm.variables.get(\"NewProfileParent\"))\r",
-									"            console.log(\"Set profile FastL4 Parent to: \"+pm.variables.get(\"ProfileFastL4Parent\"))\r",
-									"\r",
-									"        }\r",
-									"        //console.log (\"Gathering the specific profile's json from the REST API.\")\r",
-									"    }\r",
-									"}\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "1chnl!",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								},
-								{
-									"key": "saveHelperData",
-									"value": false,
-									"type": "boolean"
-								},
-								{
-									"key": "showPassword",
-									"value": false,
-									"type": "boolean"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "X-F5-Auth-Token",
-								"value": "{{AuthToken}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/profile/fastl4/",
-							"protocol": "https",
-							"host": [
-								"{{BIGIQ_Mgmt}}"
-							],
-							"path": [
-								"mgmt",
-								"cm",
-								"adc-core",
-								"working-config",
-								"ltm",
-								"profile",
-								"fastl4",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create FastL4 Profile",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
-									"\r",
-									"\r",
-									"\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"/*\r",
-									"Need to update Environment for id and selfLink/URI after creation of teh profile\r",
-									" */\r",
-									"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
-									"\r",
-									"var jsonData = JSON.parse(responseBody)\r",
-									"\r",
-									"postman.setEnvironmentVariable(\"ProfileFastL4ID\", jsonData.id);\r",
-									"postman.setEnvironmentVariable(\"ProfileFastL4SelfLink\", jsonData.selfLink)\r",
-									"postman.setEnvironmentVariable(\"ProfileFastL4SelfURI\", jsonData.selfLink.replace(/localhost/g,bigiqmgmt))"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "1chnl!",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								},
-								{
-									"key": "saveHelperData",
-									"value": false,
-									"type": "boolean"
-								},
-								{
-									"key": "showPassword",
-									"value": false,
-									"type": "boolean"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "X-F5-Auth-Token",
-								"value": "{{AuthToken}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "        {\r\n            \"kind\": \"cm:adc-core:working-config:ltm:profile:fastl4:adcprofilefastl4state\",\r\n            \"name\": \"{{ProfileFastL4Name}}\",\r\n            \"partition\": \"Common\",\r\n            \"isNoDelete\": false,\r\n            {{ProfileFastL4idleTimeoutJSON}}\r\n            \"defaultsFromReference\": {\r\n                \"link\": \"{{ProfileFastL4ParentLink}}\",\r\n                \"name\": \"{{ProfileFastL4Parent}}\"\r\n            }\r\n        }"
-						},
-						"url": {
-							"raw": "https://10.155.111.64/mgmt/cm/adc-core/working-config/ltm/profile/{{NewProfileType}}/",
-							"protocol": "https",
-							"host": [
-								"10",
-								"155",
-								"111",
-								"64"
-							],
-							"path": [
-								"mgmt",
-								"cm",
-								"adc-core",
-								"working-config",
-								"ltm",
-								"profile",
-								"{{NewProfileType}}",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete FastL4 Profile from Environment variables",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"postman.setEnvironmentVariable(\"ProfileFastL4ID\", \"\");\r",
-									"postman.setEnvironmentVariable(\"ProfileFastL4Name\", \"\");\r",
-									"postman.setEnvironmentVariable(\"ProfileFastL4SelfLink\", \"\");\r",
-									"postman.setEnvironmentVariable(\"ProfileFastL4SelfURI\", \"\");\r",
-									"postman.setEnvironmentVariable(\"NewProfileType\", \"\");\r",
-									"postman.setEnvironmentVariable(\"NewProfileParent\", \"\");\r",
-									"postman.setEnvironmentVariable(\"ProfileFastL4Parent\", \"\");\r",
-									"postman.setEnvironmentVariable(\"ProfileFastL4ParentLink\", \"\");\r",
-									"postman.setEnvironmentVariable(\"ProfileFastL4ParentURI\", \"\");\r",
-									"postman.setEnvironmentVariable(\"ProfileFastL4idleTimeout\", \"\");\r",
-									"postman.setEnvironmentVariable(\"ProfileFastL4idleTimeoutJSON\", \"\");"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "X-F5-Auth-Token",
-								"value": "{{AuthToken}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/profile/fastl4/{{ProfileFastL4ID}}",
-							"protocol": "https",
-							"host": [
-								"{{BIGIQ_Mgmt}}"
-							],
-							"path": [
-								"mgmt",
-								"cm",
-								"adc-core",
-								"working-config",
-								"ltm",
-								"profile",
-								"fastl4",
-								"{{ProfileFastL4ID}}"
 							]
 						}
 					},
