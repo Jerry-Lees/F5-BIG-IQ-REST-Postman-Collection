@@ -931,7 +931,7 @@
 							"response": []
 						},
 						{
-							"name": "Find monitor from Name",
+							"name": "Get monitor from Name",
 							"event": [
 								{
 									"listen": "test",
@@ -1832,6 +1832,9 @@
 											"        postman.setEnvironmentVariable(\"ProfileServerSSLName\", jsonData.items[profile].name);\r",
 											"        postman.setEnvironmentVariable(\"ProfileServerSSLSelfLink\", jsonData.items[profile].selfLink);\r",
 											"        postman.setEnvironmentVariable(\"ProfileServerSSLSelfURI\", jsonData.items[profile].selfLink.replace(/localhost/g,bigiqmgmt));\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLParent\", jsonData.items[profile].defaultsFromReference.name);\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLParentLink\", jsonData.items[profile].defaultsFromReference.link);\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLParentURI\", jsonData.items[profile].defaultsFromReference.link.replace(/localhost/g,bigiqmgmt));\r",
 											"\r",
 											"        //log data saved\r",
 											"        console.log (\"Found \"+searchname+\": Now you may continue to get the specific profile's json from the REST API.\")\r",
@@ -1964,6 +1967,18 @@
 											"        postman.setEnvironmentVariable(\"ProfileClientSSLName\", jsonData.items[profile].name);\r",
 											"        postman.setEnvironmentVariable(\"ProfileClientSSLSelfLink\", jsonData.items[profile].selfLink);\r",
 											"        postman.setEnvironmentVariable(\"ProfileClientSSLSelfURI\", jsonData.items[profile].selfLink.replace(/localhost/g,bigiqmgmt));\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLParent\", jsonData.items[profile].defaultsFromReference.name)\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLParentLink\", jsonData.items[profile].defaultsFromReference.link)\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLParentURI\", jsonData.items[profile].defaultsFromReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLChain\", jsonData.items[profile].certKeyChain[0].chainReference.name);\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLChainLink\", jsonData.items[profile].certKeyChain[0].chainReference.link);\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLChainURI\", jsonData.items[profile].certKeyChain[0].chainReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLKey\", jsonData.items[profile].certKeyChain[0].keyReference.name);\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLKeyLink\", jsonData.items[profile].certKeyChain[0].keyReference.link);\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLKeyURI\", jsonData.items[profile].certKeyChain[0].keyReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLCert\", jsonData.items[profile].certKeyChain[0].certReference.name);\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLCertLink\", jsonData.items[profile].certKeyChain[0].certReference.link);\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLCertURI\", jsonData.items[profile].certKeyChain[0].certReference.link.replace(/localhost/g,bigiqmgmt));\r",
 											"\r",
 											"        //log data saved\r",
 											"        console.log (\"Found \"+searchname+\": Now you may continue to get the specific profile's json from the REST API.\")\r",
@@ -2052,6 +2067,256 @@
 											"key": "$filter",
 											"value": "name eq '*{{ProfileSearchName}}*'"
 										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Client SSL Profile",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"//begin parsing\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"let profiles = pm.globals.get(\"itemOfArray\");\r",
+											"\r",
+											"profiles = jsonData.items;\r",
+											"//console.log (profiles)\r",
+											"\r",
+											"//console.log(\"Items: \"+jsonData.items[1].name)\r",
+											"searchname = pm.variables.get(\"ProfileSearchName\")\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"for (profile in profiles){\r",
+											"    if (jsonData.items[profile].name == searchname) {\r",
+											"        profileid=jsonData.items[profile].id\r",
+											"        //gather data for environment Variables related to the object\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLID\", profileid);\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLName\", jsonData.items[profile].name);\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLSelfLink\", jsonData.items[profile].selfLink);\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLSelfURI\", jsonData.items[profile].selfLink.replace(/localhost/g,bigiqmgmt));\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLParent\", jsonData.items[profile].defaultsFromReference.name)\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLParentLink\", jsonData.items[profile].defaultsFromReference.link)\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLParentURI\", jsonData.items[profile].defaultsFromReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLChainLink\", jsonData.items[profile].certKeyChain[0].chainReference.link);\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLChainURI\", jsonData.items[profile].certKeyChain[0].chainReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLKeyLink\", jsonData.items[profile].certKeyChain[0].keyReference.link);\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLKeyURI\", jsonData.items[profile].certKeyChain[0].keyReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLCertLink\", jsonData.items[profile].certKeyChain[0].certReference.link);\r",
+											"        postman.setEnvironmentVariable(\"ProfileClientSSLCertURI\", jsonData.items[profile].certKeyChain[0].certReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"\r",
+											"\r",
+											"//        postman.setEnvironmentVariable(\"\", jsonData.items[profile].certKeyChain.xxx.link);\r",
+											"//        postman.setEnvironmentVariable(\"\", jsonData.items[profile].certKeyChain.xxx.link.replace(/localhost/g,bigiqmgmt));\r",
+											"\r",
+											"        //log data saved\r",
+											"        console.log (\"Found \"+searchname+\": Now you may continue to get the specific profile's json from the REST API.\")\r",
+											"        //log if verbose set to greater than 0, do not log if set to 0\r",
+											"        if (pm.variables.get(\"BeVerbose\")) {\r",
+											"            //console.log(\"\")\r",
+											"            console.log(\"updated the following environmental information:\")\r",
+											"            console.log(\"updated the following environmental information:\")\r",
+											"            console.log(\"Set profile name to: \"+pm.variables.get(\"ProfileClientSSLName\"))\r",
+											"            console.log(\"Set profile ID to: \"+pm.variables.get(\"ProfileClientSSLID\"))\r",
+											"            console.log(\"Set profile Self Link to: \"+pm.variables.get(\"ProfileClientSSLSelfLink\"))\r",
+											"            console.log(\"Set profile Self URI to: \"+pm.variables.get(\"ProfileClientSSLSelfURI\"))\r",
+											"        }\r",
+											"        //console.log (\"Gathering the specific profile's json from the REST API.\")\r",
+											"    }\r",
+											"}\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\r\n            \"partition\": \"Common\",\r\n            \"kind\": \"cm:adc-core:working-config:ltm:profile:client-ssl:adcprofileclientsslstate\",\r\n            \"defaultsFromReference\": {\r\n                \"link\": \"{{ProfileClientSSLParentLink}}\",\r\n                \"name\": \"{{ProfileClientSSLParent}}\"\r\n            },\r\n            \"certKeyChain\": [\r\n                {\r\n                    \"keyReference\": {\r\n                        \"link\": \"{{ProfileClientSSLKeyLink}}\",\r\n                        \"name\": \"{{ProfileClientSSLKeyLink}}\"\r\n                    },\r\n                    \"name\": \"{{ProfileClientSSLChain}}\",\r\n                    \"chainReference\": {\r\n                        \"link\": \"{{ProfileClientSSLChainLink}}\",\r\n                        \"name\": \"{{ProfileClientSSLChainLink}}\"\r\n                    },\r\n                    \"certReference\": {\r\n                        \"link\": \"{{ProfileClientSSLCertLink}}\",\r\n                        \"name\": \"{{ProfileClientSSLCertLink}}\"\r\n                    }\r\n                }\r\n            ],\r\n            \"name\": \"{{ProfileClientSSLName}}\"\r\n        }"
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/profile/client-ssl/",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"profile",
+										"client-ssl",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Client SSL Profile from Environment Variables",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"postman.setEnvironmentVariable(\"ProfileClientSSLID\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileClientSSLName\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileClientSSLSelfLink\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileClientSSLSelfURI\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileClientSSLParent\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileClientSSLParentLink\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileClientSSLParentURI\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileClientSSLChainLink\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileClientSSLChainURI\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileClientSSLKeyLink\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileClientSSLKeyURI\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileClientSSLCertLink\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileClientSSLCertURI\", \"\");\r",
+											"\r",
+											"if (pm.variables.get(\"BeVerbose\")) {\r",
+											"    //console.log(\"\")\r",
+											"    console.log(\"updated the following environmental information:\")\r",
+											"    console.log(\"Set profile name to: \"+pm.variables.get(\"ProfileClientSSLName\"))\r",
+											"    console.log(\"Set profile ID to: \"+pm.variables.get(\"ProfileClientSSLID\"))\r",
+											"    console.log(\"Set profile Self Link to: \"+pm.variables.get(\"ProfileClientSSLSelfLink\"))\r",
+											"    console.log(\"Set profile Self URI to: \"+pm.variables.get(\"ProfileClientSSLSelfURI\"))\r",
+											"}\r",
+											"//console.log (\"Gathering the specific profile's json from the REST API.\")\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/profile/client-ssl/{{ProfileClientSSLID}}",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"profile",
+										"client-ssl",
+										"{{ProfileClientSSLID}}"
 									]
 								}
 							},
@@ -4367,6 +4632,483 @@
 			"name": "Development Requests Area - !Non-working!",
 			"item": [
 				{
+					"name": "Example REST Request Body Templates",
+					"item": [
+						{
+							"name": "Get Node Example",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://10.155.111.64/mgmt/cm/adc-core/working-config/ltm/node/example",
+									"protocol": "https",
+									"host": [
+										"10",
+										"155",
+										"111",
+										"64"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"node",
+										"example"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "** Get Monitor Example",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://10.155.111.64/mgmt/cm/adc-core/working-config/ltm/monitor/http/example",
+									"protocol": "https",
+									"host": [
+										"10",
+										"155",
+										"111",
+										"64"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"monitor",
+										"http",
+										"example"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Pool Example",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://10.155.111.64/mgmt/cm/adc-core/working-config/ltm/pool/example",
+									"protocol": "https",
+									"host": [
+										"10",
+										"155",
+										"111",
+										"64"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"pool",
+										"example"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "** Get HTTP Profile Example",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://10.155.111.64/mgmt/cm/adc-core/working-config/ltm/profile/http/example",
+									"protocol": "https",
+									"host": [
+										"10",
+										"155",
+										"111",
+										"64"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"profile",
+										"http",
+										"example"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Virtual Example",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://10.155.111.64/mgmt/cm/adc-core/working-config/ltm/virtual/example",
+									"protocol": "https",
+									"host": [
+										"10",
+										"155",
+										"111",
+										"64"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"virtual",
+										"example"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "Deploy Functions",
 					"item": [
 						{
@@ -4458,6 +5200,632 @@
 					]
 				},
 				{
+					"name": "SSL Certificate Management",
+					"item": [
+						{
+							"name": "** Upload File",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"Content= pm.variables.get(\"NewFileUploadContent\")\r",
+											"ContentSize = Content.length\r",
+											"console.log(\"Content size is: \"+ ContentSize)\r",
+											"console.log(\"The file's contents are below:\")\r",
+											"console.log(Content)\r",
+											"// NOTE: Request Body's greater than 1,048,575 bytes are not supported by this Postman request. requests greater than 1MB (1,048,576 bytes) must be chunked in seperate requests.\r",
+											"\r",
+											"// *MAGIC NUMBER ALERT* 131 is the size in bytes (plus 5 'mystery bytes') of the provided example REST payload with a blank file content. 127 is that same number plus 1 byte. Changing the body in this request requires changing both values accordingly.\r",
+											"\r",
+											"postman.setEnvironmentVariable(\"NewFileUploadSize\", ContentSize);\r",
+											"postman.setEnvironmentVariable(\"NewFileUploadRequestSize\",ContentSize+131);\r",
+											"UploadRequestSize = pm.variables.get(\"NewFileUploadRequestSize\")\r",
+											"postman.setEnvironmentVariable(\"NewFileUploadContent-Range\",\"0-\"+UploadRequestSize+\"/\"+UploadRequestSize);\r",
+											"\r",
+											"console.log(\"ContentRange Header set to: \"+pm.variables.get(\"NewFileUploadContent-Range\"));\r",
+											"pm.request.headers.remove('Content-Type')\r",
+											"pm.request.headers.add({\r",
+											"    key: \"Content-Type\",\r",
+											"    value:\"application/octet-stream\"\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Range",
+										"value": "{{NewFileUploadContent-Range}}",
+										"type": "string"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"payload\": {\r\n        \"content\": \"{{NewFileUploadContent}}\"\r\n    },\r\n    \"headers\": {\r\n          \"Content-Type\": \"application/octet-stream\"\r\n    }\r\n}"
+								},
+								"url": {
+									"raw": "https://10.155.111.64/mgmt/shared/file-transfer/uploads/{{NewFileUploadName}}",
+									"protocol": "https",
+									"host": [
+										"10",
+										"155",
+										"111",
+										"64"
+									],
+									"path": [
+										"mgmt",
+										"shared",
+										"file-transfer",
+										"uploads",
+										"{{NewFileUploadName}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "** Create Key from Uploaded File",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"Content= pm.variables.get(\"NewFileUploadContent\")\r",
+											"ContentSize = Content.length\r",
+											"console.log(\"Content size is: \"+ ContentSize)\r",
+											"// NOTE: Request Body's greater than 1,048,575 bytes are not supported by this Postman request. requests greater than 1MB (1,048,576 bytes) must be chunked in seperate requests.\r",
+											"\r",
+											"// *MAGIC NUMBER ALERT* 131 is the size in bytes (plus 5 'mystery bytes') of the provided example REST payload with a blank file content. 127 is that same number plus 1 byte. Changing the body in this request requires changing both values accordingly.\r",
+											"\r",
+											"\r",
+											"pm.variables.set(\"NewFileUploadContent-Range\",\"0-\"+(ContentSize+131)+\"/\"+(ContentSize+132));\r",
+											"console.log(\"ContentRange Header set to: \"+pm.variables.get(\"NewFileUploadContent-Range\"));\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"\r",
+											"//begin parsing\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"MgmtIP = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"RequestID = jsonData.id\r",
+											"RequestStatus = jsonData.status\r",
+											"postman.setEnvironmentVariable(\"NewFileUploadID\",RequestID)\r",
+											"StatusURL = \"https://\"+MgmtIP+\"/mgmt/cm/adc-core/tasks/certificate-management/\"+RequestID;\r",
+											"RequestCount = 0;\r",
+											"console.log(\"Requesting Status from '\"+StatusURL+\"'\");\r",
+											"\r",
+											"/*\r",
+											"setTimeout(5000) //wait 5 seconds\r",
+											"\r",
+											"const options = {\r",
+											"    method: 'GET',\r",
+											"    url: StatusURL,\r",
+											"    header: 'ContentType: application/json',\r",
+											"    header: 'X-F5-Auth-Token: '+pm.variables.get(\"AuthToken\"),\r",
+											"    body: \"\"\r",
+											"};\r",
+											"\r",
+											"//while (RequestStatus != \"FINISHED\" && RequestCount < 2){\r",
+											"\r",
+											"    pm.sendRequest(options, (error, response) => {\r",
+											"        if (error) {\r",
+											"            throw new Error(error);\r",
+											"        } else {\r",
+											"            var jsonData2 = response.json();\r",
+											"            RequestStatus = jsonData2.status;\r",
+											"            console.log(\"Status is now \"+RequestStatus+\".\");\r",
+											"            console.log(jsonData2.progress);\r",
+											"            RequestCount++;\r",
+											"            if (RequestStatus == \"FAILED\") {\r",
+											"                RequestCount = 100000 //force it to die\r",
+											"                console.log (\"Request failed with error code: \"+jsonData2.errorMessage)\r",
+											"            }\r",
+											"        }\r",
+											"    });\r",
+											"//}\r",
+											"*/"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"filePath\": \"/var/config/rest/downloads/{{NewFileUploadName}}\",\r\n    \"itemName\": \"{{NewFileUploadName}}\",\r\n    \"itemPartition\": \"Common\",\r\n    \"command\": \"ADD_KEY\"\r\n}"
+								},
+								"url": {
+									"raw": "https://10.155.111.64/mgmt/cm/adc-core/tasks/certificate-management",
+									"protocol": "https",
+									"host": [
+										"10",
+										"155",
+										"111",
+										"64"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"tasks",
+										"certificate-management"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "** Create CRT from Uploaded File",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"Content= pm.variables.get(\"NewFileUploadContent\")\r",
+											"ContentSize = Content.length\r",
+											"console.log(\"Content size is: \"+ ContentSize)\r",
+											"// NOTE: Request Body's greater than 1,048,575 bytes are not supported by this Postman request. requests greater than 1MB (1,048,576 bytes) must be chunked in seperate requests.\r",
+											"\r",
+											"// *MAGIC NUMBER ALERT* 131 is the size in bytes (plus 5 'mystery bytes') of the provided example REST payload with a blank file content. 127 is that same number plus 1 byte. Changing the body in this request requires changing both values accordingly.\r",
+											"\r",
+											"\r",
+											"pm.variables.set(\"NewFileUploadContent-Range\",\"0-\"+(ContentSize+131)+\"/\"+(ContentSize+132));\r",
+											"console.log(\"ContentRange Header set to: \"+pm.variables.get(\"NewFileUploadContent-Range\"));\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"\r",
+											"//begin parsing\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"MgmtIP = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"RequestID = jsonData.id\r",
+											"RequestStatus = jsonData.status\r",
+											"postman.setEnvironmentVariable(\"NewFileUploadID\",RequestID)\r",
+											"\r",
+											"StatusURL = \"https://\"+MgmtIP+\"/mgmt/cm/adc-core/tasks/certificate-management/\"+RequestID;\r",
+											"RequestCount = 0;\r",
+											"console.log(\"Requesting Status from '\"+StatusURL+\"'\");\r",
+											"\r",
+											"/*\r",
+											"setTimeout(5000) //wait 5 seconds\r",
+											"\r",
+											"const options = {\r",
+											"    method: 'GET',\r",
+											"    url: StatusURL,\r",
+											"    header: 'ContentType: application/json',\r",
+											"    header: 'X-F5-Auth-Token: '+pm.variables.get(\"AuthToken\"),\r",
+											"    body: \"\"\r",
+											"};\r",
+											"\r",
+											"//while (RequestStatus != \"FINISHED\" && RequestCount < 2){\r",
+											"\r",
+											"    pm.sendRequest(options, (error, response) => {\r",
+											"        if (error) {\r",
+											"            throw new Error(error);\r",
+											"        } else {\r",
+											"            var jsonData2 = response.json();\r",
+											"            RequestStatus = jsonData2.status;\r",
+											"            console.log(\"Status is now \"+RequestStatus+\".\");\r",
+											"            console.log(jsonData2.progress);\r",
+											"            RequestCount++;\r",
+											"            if (RequestStatus == \"FAILED\") {\r",
+											"                RequestCount = 100000 //force it to die\r",
+											"                console.log (\"Request failed with error code: \"+jsonData2.errorMessage)\r",
+											"            }\r",
+											"        }\r",
+											"    });\r",
+											"//}\r",
+											"*/"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"filePath\": \"/var/config/rest/downloads/{{NewFileUploadName}}\",\r\n    \"itemName\": \"{{NewFileUploadName}}\",\r\n    \"itemPartition\": \"Common\",\r\n    \"command\": \"ADD_CERT\"\r\n}"
+								},
+								"url": {
+									"raw": "https://10.155.111.64/mgmt/cm/adc-core/tasks/certificate-management",
+									"protocol": "https",
+									"host": [
+										"10",
+										"155",
+										"111",
+										"64"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"tasks",
+										"certificate-management"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "** Get SSL Object Creation Status",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://10.155.111.64/mgmt/cm/adc-core/tasks/certificate-management/{{NewFileUploadID}}",
+									"protocol": "https",
+									"host": [
+										"10",
+										"155",
+										"111",
+										"64"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"tasks",
+										"certificate-management",
+										"{{NewFileUploadID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "**Create Server SSL Profile",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"//begin parsing\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"let profiles = pm.globals.get(\"itemOfArray\");\r",
+											"\r",
+											"profiles = jsonData.items;\r",
+											"//console.log (profiles)\r",
+											"\r",
+											"//console.log(\"Items: \"+jsonData.items[1].name)\r",
+											"searchname = pm.variables.get(\"ProfileSearchName\")\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"for (profile in profiles){\r",
+											"    if (jsonData.items[profile].name == searchname) {\r",
+											"        profileid=jsonData.items[profile].id\r",
+											"        //gather data for environment Variables related to the object\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLID\", profileid);\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLName\", jsonData.items[profile].name);\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLSelfLink\", jsonData.items[profile].selfLink);\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLSelfURI\", jsonData.items[profile].selfLink.replace(/localhost/g,bigiqmgmt));\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLParent\", jsonData.items[profile].defaultsFromReference.name);\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLParentLink\", jsonData.items[profile].defaultsFromReference.link);\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLParentURI\", jsonData.items[profile].defaultsFromReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"\r",
+											"        //log data saved\r",
+											"        console.log (\"Found \"+searchname+\": Now you may continue to get the specific profile's json from the REST API.\")\r",
+											"        //log if verbose set to greater than 0, do not log if set to 0\r",
+											"        if (pm.variables.get(\"BeVerbose\")) {\r",
+											"            //console.log(\"\")\r",
+											"            console.log(\"updated the following environmental information:\")\r",
+											"            console.log(\"Set profile name to: \"+pm.variables.get(\"ProfileServerSSLName\"))\r",
+											"            console.log(\"Set profile ID to: \"+pm.variables.get(\"ProfileServerSSLID\"))\r",
+											"            console.log(\"Set profile Self Link to: \"+pm.variables.get(\"ProfileServerSSLSelfLink\"))\r",
+											"            console.log(\"Set profile Self URI to: \"+pm.variables.get(\"ProfileServerSSLSelfURI\"))\r",
+											"        }\r",
+											"        //console.log (\"Gathering the specific profile's json from the REST API.\")\r",
+											"    }\r",
+											"}\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/profile/server-ssl?$filter=name eq '*{{ProfileSearchName}}*'",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"profile",
+										"server-ssl"
+									],
+									"query": [
+										{
+											"key": "$filter",
+											"value": "name eq '*{{ProfileSearchName}}*'"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "Scratch",
 					"item": [
 						{
@@ -4530,10 +5898,10 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"name\": \"clientssl\",\r\n  \"partition\": \"Common\",\r\n        \"profileClientsslReference\": {\r\n            \"kind\": \"cm:adc-core:working-config:ltm:profile:client-ssl:adcprofileclientsslstate\",\r\n            \"link\": \"https://localhost/mgmt/cm/adc-core/working-config/ltm/profile/client-ssl/08fa86e3-b807-36b5-a595-1e2457c88321\",\r\n            \"name\": \"devsso-2020-client\"\r\n        },\r\n    \"context\": \"all\"\r\n}"
+									"raw": ""
 								},
 								"url": {
-									"raw": "https://10.155.111.64/mgmt/cm/adc-core/working-config/ltm/profile/fastl4/45406ec6-65ba-3c2d-a2c1-49e0c7d46dfd",
+									"raw": "https://10.155.111.64/mgmt/cm/adc-core/tasks/certificate-management/{{NewFileUploadID}}",
 									"protocol": "https",
 									"host": [
 										"10",
@@ -4545,11 +5913,191 @@
 										"mgmt",
 										"cm",
 										"adc-core",
-										"working-config",
-										"ltm",
-										"profile",
-										"fastl4",
-										"45406ec6-65ba-3c2d-a2c1-49e0c7d46dfd"
+										"tasks",
+										"certificate-management",
+										"{{NewFileUploadID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "** Create Self Signed Managed Certificate",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"issuer\": \"Self\",\r\n    \"itemName\": \"TestCert1.crt\",\r\n    \"itemPartition\": \"Common\",\r\n    \"durationInDays\": 365,\r\n    \"country\": \"US\",\r\n    \"commonName\": \"TestCert1CommonName\",\r\n    \"division\": \"ADC\",\r\n    \"organization\": \"BIG-IQ\",\r\n    \"locality\": \"Seattle\",\r\n    \"state\": \"WA\",\r\n    \"email\": \"j.doe@company.com\",\r\n    \"subjectAlternativeName\": \"DNS:company.com\",\r\n    \"securityType\": \"password\",\r\n    \"keyType\": \"RSA\",\r\n    \"keySize\": 2048,\r\n    \"keyPassphrase\": \"123\",\r\n    \"administratorEmail\": \"\",\r\n    \"challengePassword\": \"\",\r\n    \"command\": \"GENERATE_CERT\"\r\n}"
+								},
+								"url": {
+									"raw": "https://10.155.111.64/mgmt/cm/adc-core/tasks/certificate-management",
+									"protocol": "https",
+									"host": [
+										"10",
+										"155",
+										"111",
+										"64"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"tasks",
+										"certificate-management"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "** check Upload File status",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Range",
+										"value": "{{NewFileUploadContent-Range}}",
+										"type": "string"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://10.155.111.64/mgmt/shared/file-transfer/uploads/",
+									"protocol": "https",
+									"host": [
+										"10",
+										"155",
+										"111",
+										"64"
+									],
+									"path": [
+										"mgmt",
+										"shared",
+										"file-transfer",
+										"uploads",
+										""
 									]
 								}
 							},
@@ -5030,6 +6578,28 @@
 									"postman.setEnvironmentVariable(\"ProfileFastL4ParentURI\",\"\")\r",
 									"postman.setEnvironmentVariable(\"ProfileFastL4idleTimeout\",\"\")\r",
 									"postman.setEnvironmentVariable(\"ProfileFastL4idleTimeoutJSON\",\"\")\r",
+									"postman.setEnvironmentVariable(\"ProfileClientSSLParent\",\"\")\r",
+									"postman.setEnvironmentVariable(\"ProfileClientSSLParentLink\",\"\")\r",
+									"postman.setEnvironmentVariable(\"ProfileClientSSLParentURI\",\"\")\r",
+									"postman.setEnvironmentVariable(\"ProfileClientSSLChain\",\"\")\r",
+									"postman.setEnvironmentVariable(\"ProfileClientSSLChainLink\",\"\")\r",
+									"postman.setEnvironmentVariable(\"ProfileClientSSLChainURI\",\"\")\r",
+									"postman.setEnvironmentVariable(\"ProfileClientSSLKey\",\"\")\r",
+									"postman.setEnvironmentVariable(\"ProfileClientSSLKeyLink\",\"\")\r",
+									"postman.setEnvironmentVariable(\"ProfileClientSSLKeyURI\",\"\")\r",
+									"postman.setEnvironmentVariable(\"ProfileClientSSLCert\",\"\")\r",
+									"postman.setEnvironmentVariable(\"ProfileClientSSLCertLink\",\"\")\r",
+									"postman.setEnvironmentVariable(\"ProfileClientSSLCertURI\",\"\")\r",
+									"postman.setEnvironmentVariable(\"ProfileServerSSLParent\",\"\")\r",
+									"postman.setEnvironmentVariable(\"ProfileServerSSLParentLink\",\"\")\r",
+									"postman.setEnvironmentVariable(\"ProfileServerSSLParentURI\",\"\")\r",
+									"\r",
+									"postman.setEnvironmentVariable(\"NewFileUploadName\",\"\")\r",
+									"postman.setEnvironmentVariable(\"NewFileUploadContent\",\"\")\r",
+									"postman.setEnvironmentVariable(\"NewFileUploadSize\",\"\")\r",
+									"postman.setEnvironmentVariable(\"NewFileUploadContent-Range\",\"\")\r",
+									"postman.setEnvironmentVariable(\"NewFileUploadRequestSize\",\"\")\r",
+									"postman.setEnvironmentVariable(\"NewFileUploadID\",\"\")\r",
 									"//postman.setEnvironmentVariable(\"\",\"\")\r",
 									"\r",
 									"//clear normally not cleared Environment variables\r",
@@ -5048,7 +6618,6 @@
 									"postman.setEnvironmentVariable(\"Password\",\"\")\r",
 									"postman.setEnvironmentVariable(\"UserName\",\"\")\r",
 									"postman.setEnvironmentVariable(\"BIGIQ_Mgmt\",\"\")\r",
-									"\r",
 									"postman.setEnvironmentVariable(\"ObjectID\",\"\")\r",
 									"postman.setEnvironmentVariable(\"VirtualName\",\"\")\r",
 									"postman.setEnvironmentVariable(\"VirtualMask\",\"\")\r",
