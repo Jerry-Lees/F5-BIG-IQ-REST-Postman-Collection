@@ -14,6 +14,10 @@ This is not for the faint at heart, care must be taken to issue commands in the 
 
 Download the file in the repository and import into your postman installation.
 
+Alternatively, you could link the repository to your local collection by following the tutorial below at postman's site:
+
+https://learning.postman.com/docs/getting-started/importing-and-exporting-data/#importing-via-github-repositories
+
 ------------
 
 ## Getting Started
