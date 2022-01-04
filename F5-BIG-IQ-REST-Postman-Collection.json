@@ -1836,6 +1836,64 @@
 											"        postman.setEnvironmentVariable(\"ProfileServerSSLParentLink\", jsonData.items[profile].defaultsFromReference.link);\r",
 											"        postman.setEnvironmentVariable(\"ProfileServerSSLParentURI\", jsonData.items[profile].defaultsFromReference.link.replace(/localhost/g,bigiqmgmt));\r",
 											"\r",
+											"        try {\r",
+											"            postman.setEnvironmentVariable(\"ProfileServerSSLChain\", jsonData.items[profile].chainReference.name);\r",
+											"            postman.setEnvironmentVariable(\"ProfileServerSSLChainLink\", jsonData.items[profile].chainReference.link);\r",
+											"            postman.setEnvironmentVariable(\"ProfileServerSSLChainURI\", jsonData.items[profile].chainReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"        } catch (error) {\r",
+											"            console.log (\"No Chain Found.\");\r",
+											"        }\r",
+											"\r",
+											"        try {\r",
+											"            postman.setEnvironmentVariable(\"ProfileServerSSLKey\", jsonData.items[profile].keyReference.name);\r",
+											"            postman.setEnvironmentVariable(\"ProfileServerSSLKeyLink\", jsonData.items[profile].keyReference.link);\r",
+											"            postman.setEnvironmentVariable(\"ProfileServerSSLKeyURI\", jsonData.items[profile].keyReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"        } catch (error) {\r",
+											"            console.log (\"No Key Found.\");\r",
+											"        }\r",
+											"\r",
+											"        try {\r",
+											"            postman.setEnvironmentVariable(\"ProfileServerSSLCert\", jsonData.items[profile].certReference.name);\r",
+											"            postman.setEnvironmentVariable(\"ProfileServerSSLCertLink\", jsonData.items[profile].certReference.link);\r",
+											"            postman.setEnvironmentVariable(\"ProfileServerSSLCertURI\", jsonData.items[profile].certReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"        } catch (error) {\r",
+											"            console.log (\"No Cert Found.\");\r",
+											"        }\r",
+											"\r",
+											"        try {\r",
+											"            postman.setEnvironmentVariable(\"ProfileServerSSLPassPhrase\", jsonData.items[profile].passphrase);\r",
+											"        } catch {\r",
+											"            console.log (\"No Passphrase Found.\");\r",
+											"        }\r",
+											"\r",
+											"\r",
+											"//create JSON\r",
+											"if (pm.variables.get(\"ProfileServerSSLChain\") != \"\" || pm.variables.get(\"ProfileServerSSLChain\") != undefined ) {\r",
+											"\r",
+											"//chain reference\r",
+											"    postman.setEnvironmentVariable(\"ProfileServerSSLChainJSON\", \"\\\"certReference\\\": { \\\"name\\\": \\\"\"+pm.variables.get(\"ProfileServerSSLChain\")+\"\\\", \\\"kind\\\": \\\"cm:adc-core:working-config:sys:file:ssl-cert:adcsslcertstate\\\", \\\"link\\\": \\\"\"+pm.variables.get(\"ProfileServerSSLChainLink\")+\"\\\" },\");\r",
+											"\r",
+											"} else {\r",
+											"    postman.setEnvironmentVariable(\"ProfileServerSSLChainJSON\",\"\")\r",
+											"}\r",
+											"\r",
+											"if (pm.variables.get(\"ProfileServerSSLCert\") != \"\" || pm.variables.get(\"ProfileServerSSLCert\") != undefined ) {\r",
+											"\r",
+											"//cert reference\r",
+											"    postman.setEnvironmentVariable(\"ProfileServerSSLCertJSON\", \"\\\"certReference\\\": { \\\"name\\\": \\\"\"+pm.variables.get(\"ProfileServerSSLCert\")+\"\\\", \\\"kind\\\": \\\"cm:adc-core:working-config:sys:file:ssl-cert:adcsslcertstate\\\", \\\"link\\\": \\\"\"+pm.variables.get(\"ProfileServerSSLCertLink\")+\"\\\" },\");\r",
+											"\r",
+											"} else {\r",
+											"    postman.setEnvironmentVariable(\"ProfileServerSSLCertJSON\",\"\");\r",
+											"}\r",
+											"\r",
+											"if (pm.variables.get(\"ProfileServerSSLKey\") != \"\" || pm.variables.get(\"ProfileServerSSLKey\") != undefined ) {\r",
+											"//key reference\r",
+											"    postman.setEnvironmentVariable(\"ProfileServerSSLKeyJSON\",\"\\\"keyReference\\\": { \\\"name\\\": \\\"\"+pm.variables.get(\"ProfileServerSSLKey\")+\"\\\", \\\"kind\\\": \\\"cm:adc-core:working-config:sys:file:ssl-key:adcsslkeystate\\\", \\\"link\\\": \\\"\"+pm.variables.get(\"ProfileServerSSLKeyLink\")+\"\\\" },\");\r",
+											"\r",
+											"} else {\r",
+											"    postman.setEnvironmentVariable(\"ProfileServerSSLKeyJSON\",\"\");\r",
+											"}\r",
+											"\r",
 											"        //log data saved\r",
 											"        console.log (\"Found \"+searchname+\": Now you may continue to get the specific profile's json from the REST API.\")\r",
 											"        //log if verbose set to greater than 0, do not log if set to 0\r",
@@ -1922,6 +1980,283 @@
 											"key": "$filter",
 											"value": "name eq '*{{ProfileSearchName}}*'"
 										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Server SSL Profile",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"//begin parsing\r",
+											"var jsonData = JSON.parse(responseBody)\r",
+											"\r",
+											"let profiles = pm.globals.get(\"itemOfArray\");\r",
+											"\r",
+											"profiles = jsonData.items;\r",
+											"//console.log (profiles)\r",
+											"\r",
+											"//console.log(\"Items: \"+jsonData.items[1].name)\r",
+											"searchname = pm.variables.get(\"ProfileSearchName\")\r",
+											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+											"\r",
+											"for (profile in profiles){\r",
+											"    if (jsonData.items[profile].name == searchname) {\r",
+											"        profileid=jsonData.items[profile].id\r",
+											"        //gather data for environment Variables related to the object\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLID\", profileid);\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLName\", jsonData.items[profile].name);\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLSelfLink\", jsonData.items[profile].selfLink);\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLSelfURI\", jsonData.items[profile].selfLink.replace(/localhost/g,bigiqmgmt));\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLParent\", jsonData.items[profile].defaultsFromReference.name);\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLParentLink\", jsonData.items[profile].defaultsFromReference.link);\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLParentURI\", jsonData.items[profile].defaultsFromReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLChain\", jsonData.items[profile].chainReference.name);\r",
+											"        console.log(\"ProfileServerSSLChain is : \"+pm.variables.get(\"ProfileServerSSLChain\"));\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLChainLink\", jsonData.items[profile].chainReference.link);\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLChainURI\", jsonData.items[profile].chainReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLKey\", jsonData.items[profile].keyReference.name);\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLKeyLink\", jsonData.items[profile].keyReference.link);\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLKeyURI\", jsonData.items[profile].keyReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLCert\", jsonData.items[profile].certReference.name);\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLCertLink\", jsonData.items[profile].certReference.link);\r",
+											"        postman.setEnvironmentVariable(\"ProfileServerSSLCertURI\", jsonData.items[profile].certReference.link.replace(/localhost/g,bigiqmgmt));\r",
+											"\r",
+											"\r",
+											"//create JSON\r",
+											"if (pm.variables.get(\"ProfileServerSSLChain\") != \"\" || pm.variables.get(\"ProfileServerSSLChain\") != undefined ) {\r",
+											"\r",
+											"//chain reference\r",
+											"    postman.setEnvironmentVariable(\"ProfileServerSSLChainJSON\",\"\\\"chainReference\\\": { \\\"kind\\\": \\\"cm:adc-core:working-config:sys:file:ssl-cert:adcsslcertstate\\\", \\\"link\\\": \\\"\"+pm.variables.get(\"ProfileServerSSLChainLink\")+\"\\\", \\\"name\\\": \\\"\"+pm.variables.get(\"ProfileServerSSLChain\")+\"\\\" },\");\r",
+											"\r",
+											"} else {\r",
+											"    postman.setEnvironmentVariable(\"ProfileServerSSLChainJSON\",\"\")\r",
+											"}\r",
+											"\r",
+											"if (pm.variables.get(\"ProfileServerSSLCert\") != \"\" || pm.variables.get(\"ProfileServerSSLCert\") != undefined ) {\r",
+											"\r",
+											"//cert reference\r",
+											"    postman.setEnvironmentVariable(\"ProfileServerSSLCertJSON\", \"\\\"certReference\\\": { \\\"name\\\": \\\"\"+pm.variables.get(\"ProfileServerSSLCert\")+\"\\\", \\\"kind\\\": \\\"cm:adc-core:working-config:sys:file:ssl-cert:adcsslcertstate\\\", \\\"link\\\": \\\" \"+pm.variables.get(\"ProfileServerSSLChainLink\")+\"\\\" },\");\r",
+											"\r",
+											"} else {\r",
+											"    postman.setEnvironmentVariable(\"ProfileServerSSLCertJSON\",\"\");\r",
+											"}\r",
+											"\r",
+											"if (pm.variables.get(\"ProfileServerSSLKey\") != \"\" || pm.variables.get(\"ProfileServerSSLKey\") != undefined ) {\r",
+											"//key reference\r",
+											"    postman.setEnvironmentVariable(\"ProfileServerSSLKeyJSON\",\"\\\"keyReference\\\": { \\\"name\\\": \\\"\"+pm.variables.get(\"ProfileServerSSLKey\")+\"\\\", \\\"kind\\\": \\\"cm:adc-core:working-config:sys:file:ssl-key:adcsslkeystate\\\", \\\"link\\\": \\\"\"+pm.variables.get(\"ProfileServerSSLKeyLink\")+\"\\\" },\");\r",
+											"\r",
+											"} else {\r",
+											"    postman.setEnvironmentVariable(\"ProfileServerSSLKeyJSON\",\"\");\r",
+											"}\r",
+											"\r",
+											"\r",
+											"        //log data saved\r",
+											"        console.log (\"Found \"+searchname+\": Now you may continue to get the specific profile's json from the REST API.\")\r",
+											"        //log if verbose set to greater than 0, do not log if set to 0\r",
+											"        if (pm.variables.get(\"BeVerbose\")) {\r",
+											"            //console.log(\"\")\r",
+											"            console.log(\"updated the following environmental information:\")\r",
+											"            console.log(\"Set profile name to: \"+pm.variables.get(\"ProfileServerSSLName\"))\r",
+											"            console.log(\"Set profile ID to: \"+pm.variables.get(\"ProfileServerSSLID\"))\r",
+											"            console.log(\"Set profile Self Link to: \"+pm.variables.get(\"ProfileServerSSLSelfLink\"))\r",
+											"            console.log(\"Set profile Self URI to: \"+pm.variables.get(\"ProfileServerSSLSelfURI\"))\r",
+											"        }\r",
+											"        //console.log (\"Gathering the specific profile's json from the REST API.\")\r",
+											"    }\r",
+											"}\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n            \"partition\": \"Common\",\r\n            \"ciphers\": \"DEFAULT\",\r\n            \"kind\": \"cm:adc-core:working-config:ltm:profile:server-ssl:adcprofileserversslstate\",\r\n            {{ProfileServerSSLKeyJSON}}\r\n            {{ProfileServerSSLCertJSON}}\r\n            {{ProfileServerSSLChainJSON}}\r\n            \"passphrase\": \"{{ProfileServerSSLPassPhrase}}\",\r\n            \"defaultsFromReference\": {\r\n                \"kind\": \"cm:adc-core:working-config:ltm:profile:server-ssl:adcprofileserversslstate\",\r\n                \"link\": \"{{ProfileServerSSLParentLink}}\",\r\n                \"name\": \"{{ProfileServerSSLParent}}\"\r\n            },\r\n            \"name\": \"{{ProfileServerSSLName}}\"\r\n        }"
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/profile/server-ssl/",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"profile",
+										"server-ssl",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Server SSL Profile",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"profileid=jsonData.items[profile].id\r",
+											"//gather data for environment Variables related to the object\r",
+											"postman.setEnvironmentVariable(\"ProfileServerSSLID\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileServerSSLName\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileServerSSLSelfLink\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileServerSSLSelfURI\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileServerSSLParent\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileServerSSLParentLink\", \"\");\r",
+											"postman.setEnvironmentVariable(\"ProfileServerSSLParentURI\", \"\");\r",
+											"\r",
+											"//log data saved\r",
+											"console.log (\"Found \"+searchname+\": Now you may continue to get the specific profile's json from the REST API.\")\r",
+											"//log if verbose set to greater than 0, do not log if set to 0\r",
+											"if (pm.variables.get(\"BeVerbose\")) {\r",
+											"    //console.log(\"\")\r",
+											"    console.log(\"updated the following environmental information:\")\r",
+											"    console.log(\"Set profile name to: \"+pm.variables.get(\"ProfileServerSSLName\"))\r",
+											"    console.log(\"Set profile ID to: \"+pm.variables.get(\"ProfileServerSSLID\"))\r",
+											"    console.log(\"Set profile Self Link to: \"+pm.variables.get(\"ProfileServerSSLSelfLink\"))\r",
+											"    console.log(\"Set profile Self URI to: \"+pm.variables.get(\"ProfileServerSSLSelfURI\"))\r",
+											"}\r",
+											"//console.log (\"Gathering the specific profile's json from the REST API.\")\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/profile/server-ssl/{{ProfileServerSSLID}}",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"profile",
+										"server-ssl",
+										"{{ProfileServerSSLID}}"
 									]
 								}
 							},
@@ -5683,141 +6018,6 @@
 										"tasks",
 										"certificate-management",
 										"{{NewFileUploadID}}"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "**Create Server SSL Profile",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
-											"\r",
-											"\r",
-											"\r",
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"//begin parsing\r",
-											"var jsonData = JSON.parse(responseBody)\r",
-											"\r",
-											"let profiles = pm.globals.get(\"itemOfArray\");\r",
-											"\r",
-											"profiles = jsonData.items;\r",
-											"//console.log (profiles)\r",
-											"\r",
-											"//console.log(\"Items: \"+jsonData.items[1].name)\r",
-											"searchname = pm.variables.get(\"ProfileSearchName\")\r",
-											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
-											"\r",
-											"for (profile in profiles){\r",
-											"    if (jsonData.items[profile].name == searchname) {\r",
-											"        profileid=jsonData.items[profile].id\r",
-											"        //gather data for environment Variables related to the object\r",
-											"        postman.setEnvironmentVariable(\"ProfileServerSSLID\", profileid);\r",
-											"        postman.setEnvironmentVariable(\"ProfileServerSSLName\", jsonData.items[profile].name);\r",
-											"        postman.setEnvironmentVariable(\"ProfileServerSSLSelfLink\", jsonData.items[profile].selfLink);\r",
-											"        postman.setEnvironmentVariable(\"ProfileServerSSLSelfURI\", jsonData.items[profile].selfLink.replace(/localhost/g,bigiqmgmt));\r",
-											"        postman.setEnvironmentVariable(\"ProfileServerSSLParent\", jsonData.items[profile].defaultsFromReference.name);\r",
-											"        postman.setEnvironmentVariable(\"ProfileServerSSLParentLink\", jsonData.items[profile].defaultsFromReference.link);\r",
-											"        postman.setEnvironmentVariable(\"ProfileServerSSLParentURI\", jsonData.items[profile].defaultsFromReference.link.replace(/localhost/g,bigiqmgmt));\r",
-											"\r",
-											"        //log data saved\r",
-											"        console.log (\"Found \"+searchname+\": Now you may continue to get the specific profile's json from the REST API.\")\r",
-											"        //log if verbose set to greater than 0, do not log if set to 0\r",
-											"        if (pm.variables.get(\"BeVerbose\")) {\r",
-											"            //console.log(\"\")\r",
-											"            console.log(\"updated the following environmental information:\")\r",
-											"            console.log(\"Set profile name to: \"+pm.variables.get(\"ProfileServerSSLName\"))\r",
-											"            console.log(\"Set profile ID to: \"+pm.variables.get(\"ProfileServerSSLID\"))\r",
-											"            console.log(\"Set profile Self Link to: \"+pm.variables.get(\"ProfileServerSSLSelfLink\"))\r",
-											"            console.log(\"Set profile Self URI to: \"+pm.variables.get(\"ProfileServerSSLSelfURI\"))\r",
-											"        }\r",
-											"        //console.log (\"Gathering the specific profile's json from the REST API.\")\r",
-											"    }\r",
-											"}\r",
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-F5-Auth-Token",
-										"value": "{{AuthToken}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/profile/server-ssl?$filter=name eq '*{{ProfileSearchName}}*'",
-									"protocol": "https",
-									"host": [
-										"{{BIGIQ_Mgmt}}"
-									],
-									"path": [
-										"mgmt",
-										"cm",
-										"adc-core",
-										"working-config",
-										"ltm",
-										"profile",
-										"server-ssl"
-									],
-									"query": [
-										{
-											"key": "$filter",
-											"value": "name eq '*{{ProfileSearchName}}*'"
-										}
 									]
 								}
 							},
