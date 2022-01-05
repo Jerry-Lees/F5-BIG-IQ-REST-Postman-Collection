@@ -1120,16 +1120,15 @@
 										"exec": [
 											"/*\r",
 											"Inputs:\r",
-											"    NewMonitorTypeName     - User Supplied value for the type of monitor being created.\r",
-											"    NewMonitorName         - The name of teh new monitor.\r",
-											"    NewMonitorRecvString   - The Receive string for the monitor.\r",
-											"    NewMonitorSendString   - The Send strin for the monitor.\r",
+											"    MonitorTypeName     - User Supplied value for the type of monitor being created.\r",
+											"    MonitorName         - The name of the new monitor.\r",
+											"    MonitorRecvString   - The Receive string for the monitor. (ensure that \\r\\n is entered as \\\\r\\\\n to escape the \\, otherwise it won't work)\r",
+											"    MonitorSendString   - The Send strin for the monitor. (ensure that \\r\\n is entered as \\\\r\\\\n to escape the \\, otherwise it won't work)\r",
 											"\r",
 											"Outputs:\r",
 											"    MonitorID           - The ID of the monitor created\r",
 											"    MonitorSelfLink     - The link to the monitor for adding to JSON documents\r",
 											"    MonitorSelfURI      - The link to the monitor used in REST calls\r",
-											"    NewMonitorLink      - The link to the monitor used in REST calls\r",
 											"\tMonitorTypeString\t- Programmatically populated value, The string of the path used to reference the type in a JSON document.\r",
 											"\tMonitorTypeName\t\t- Programmatically populated value, The string used to reference the type in a JSON document.\r",
 											"*/\r",
@@ -1141,13 +1140,10 @@
 											"postman.setEnvironmentVariable(\"MonitorID\", jsonData.id);\r",
 											"postman.setEnvironmentVariable(\"MonitorSelfLink\", jsonData.selfLink);\r",
 											"postman.setEnvironmentVariable(\"MonitorSelfURI\", jsonData.selfLink.replace(/localhost/g,bigiqmgmt));\r",
-											"postman.setEnvironmentVariable(\"NewMonitorLink\", jsonData.selfLink);\r",
 											"var monitortype = jsonData.kind\r",
 											"\r",
 											"postman.setEnvironmentVariable(\"MonitorType\", monitortype);\r",
-											"postman.setEnvironmentVariable(\"NewMonitorType\", monitortype);\r",
 											"postman.setEnvironmentVariable(\"MonitorJSON\", responseBody);\r",
-											"postman.setEnvironmentVariable(\"NewMonitorLink\", jsonData.selfLink);\r",
 											"postman.setEnvironmentVariable(\"MonitorSelfLink\", jsonData.selfLink);\r",
 											"postman.setEnvironmentVariable(\"MonitorSelfURI\", jsonData.selfLink.replace(/localhost/g,bigiqmgmt));\r",
 											"\r",
@@ -1175,12 +1171,10 @@
 									"script": {
 										"exec": [
 											"\r",
-											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
-											"//console.log(bigiqmgmt)\r",
-											"//console.log(pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'))\r",
-											"//console.log(pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'))\r",
-											"//postman.setEnvironmentVariable(\"NewMonitorLink\", pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'));\r",
-											"//postman.setEnvironmentVariable(\"NewDeviceLink\", pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'));\r",
+											"RecvString = JSON.stringify(pm.variables.get(\"MonitorRecvString\"));\r",
+											"SendString = JSON.stringify(pm.variables.get(\"MonitorSendString\"));\r",
+											"//postman.setEnvironmentVariable(\"MonitorRecvString\", RecvString.replace(/\\r\\n/g, \"\\\\r\\\\n\"));\r",
+											"//postman.setEnvironmentVariable(\"MonitorSendString\", SendString.replace(/\\r\\n/g, \"\\\\r\\\\n\"));\r",
 											""
 										],
 										"type": "text/javascript"
@@ -1228,10 +1222,10 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"kind\": \"cm:adc-core:working-config:ltm:monitor:{{NewMonitorTypeName}}:adcmonitor{{NewMonitorTypeName}}state\",\r\n    \"name\": \"{{NewMonitorName}}\",\r\n    \"recv\": \"{{NewMonitorRecvString}}\",\r\n    \"send\": \"{{NewMonitorSendString}}\",\r\n    \"timeout\": 16,\r\n    \"interval\": 5,\r\n    \"partition\": \"Common\",\r\n    \"defaultsFromReference\": {\r\n        \"name\": \"{{NewMonitorTypeName}}\"\r\n    }\r\n}"
+									"raw": "{\r\n    \"kind\": \"cm:adc-core:working-config:ltm:monitor:{{MonitorTypeName}}:adcmonitor{{MonitorTypeName}}state\",\r\n    \"name\": \"{{MonitorName}}\",\r\n    \"recv\": \"{{MonitorRecvString}}\",\r\n    \"send\": \"{{MonitorSendString}}\",\r\n    \"timeout\": 16,\r\n    \"interval\": 5,\r\n    \"partition\": \"Common\",\r\n    \"defaultsFromReference\": {\r\n        \"name\": \"{{MonitorTypeName}}\"\r\n    }\r\n}"
 								},
 								"url": {
-									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/monitor/{{NewMonitorTypeName}}/",
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/monitor/{{MonitorTypeName}}/",
 									"protocol": "https",
 									"host": [
 										"{{BIGIQ_Mgmt}}"
@@ -1243,7 +1237,7 @@
 										"working-config",
 										"ltm",
 										"monitor",
-										"{{NewMonitorTypeName}}",
+										"{{MonitorTypeName}}",
 										""
 									]
 								}
@@ -1270,12 +1264,11 @@
 										"exec": [
 											"/*\r",
 											"Inputs:\r",
-											"    NewMonitorTypeName  - User Supplied value for the type of monitor being created, is programatically updated from monitor get calls in this collection as well.\r",
+											"    MonitorTypeName  - User Supplied value for the type of monitor being created, is programatically updated from monitor get calls in this collection as well.\r",
 											"    MonitorID           - The ID of the monitor deleted.\r",
 											"Outputs:\r",
 											"    MonitorID           - The ID of the monitor created, set to \"\".\r",
 											"    MonitorSelfLink     - The link to the monitor for adding to JSON documents, set to \"\".\r",
-											"    NewMonitorLink      - The link to the monitor used in REST calls, set to \"\".\r",
 											"    MonitorType         - The \"kind\" of monitor, set to \"\".\r",
 											"    MonitorSelfURI      - The link to the monitor used in REST calls, set to \"\".\r",
 											"\tMonitorTypeString\t- Programmatically populated value, The string of the path used to reference the type in a JSON document, set to \"\".\r",
@@ -1289,7 +1282,6 @@
 											"postman.setEnvironmentVariable(\"MonitorID\", \"\");\r",
 											"postman.setEnvironmentVariable(\"MonitorSelfLink\", \"\");\r",
 											"postman.setEnvironmentVariable(\"MonitorSelfURI\", \"\");\r",
-											"postman.setEnvironmentVariable(\"NewMonitorLink\", \"\");\r",
 											"postman.setEnvironmentVariable(\"MonitorType\", \"\");\r",
 											"postman.setEnvironmentVariable(\"MonitorTypeString\", \"\")\r",
 											"postman.setEnvironmentVariable(\"MonitorTypeName\", \"\")\r",
@@ -1360,7 +1352,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/monitor/{{NewMonitorTypeName}}/{{MonitorID}}",
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/monitor/{{MonitorTypeName}}/{{MonitorID}}",
 									"protocol": "https",
 									"host": [
 										"{{BIGIQ_Mgmt}}"
@@ -1372,7 +1364,7 @@
 										"working-config",
 										"ltm",
 										"monitor",
-										"{{NewMonitorTypeName}}",
+										"{{MonitorTypeName}}",
 										"{{MonitorID}}"
 									]
 								}
@@ -1398,6 +1390,7 @@
 											"\tMonitorTypeName\t\t- Programmatically populated value, The string used to reference the type in a JSON document. This is teh same as a TMOS Command would use, \"http\" for a http monitor etc.\r",
 											"    MonitorSelfLink     - The link to the monitor for adding to JSON documents sent in the request body. (has \"localhost\" for the hostname in the URL.)\r",
 											"    MonitorSelfURI      - The link to the monitor used to make REST calls. (Has teh IP address of the BIG-IQ in the URL.)\r",
+											"    MonitorName         - The name of the moinitor.\r",
 											"*/\r",
 											"\r",
 											"//begin parsing\r",
@@ -1422,7 +1415,17 @@
 											"        //set monitor variables\r",
 											"        postman.setEnvironmentVariable(\"MonitorTypeString\", MonitorTypeString.Get(jsonData));\r",
 											"        postman.setEnvironmentVariable(\"MonitorTypeName\", MonitorTypeName.Get(jsonData));\r",
+											"        postman.setEnvironmentVariable(\"MonitorName\", jsonData.items[monitor].name)\r",
 											"\r",
+											"        RecvString = JSON.stringify(jsonData.items[monitor].recv).replace('\"','').replace('\"','');\r",
+											"        SendString = JSON.stringify(jsonData.items[monitor].send).replace('\"','').replace('\"','');\r",
+											"        console.log(RecvString.replace(\"\\r\\n\", '\\\\\\\\r\\\\\\\\n'))\r",
+											"        console.log(SendString.replace('\\r\\n', '\\\\\\\\r\\\\\\\\n'))\r",
+											"        console.log(JSON.stringify(jsonData.items[monitor].send).replace('\"',''));\r",
+											" \r",
+											"        postman.setEnvironmentVariable(\"MonitorRecvString\", RecvString);\r",
+											"        postman.setEnvironmentVariable(\"MonitorSendString\", SendString);\r",
+											"        \r",
 											"        //Save MonitorJSON\r",
 											"        postman.setEnvironmentVariable(\"MonitorSelfLink\", jsonData.items[monitor].selfLink);\r",
 											"        postman.setEnvironmentVariable(\"MonitorSelfURI\", jsonData.items[monitor].selfLink.replace(/localhost/g,bigiqmgmt));\r",
@@ -1470,13 +1473,6 @@
 									"listen": "prerequest",
 									"script": {
 										"exec": [
-											"\r",
-											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
-											"//console.log(bigiqmgmt)\r",
-											"//console.log(pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'))\r",
-											"//console.log(pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'))\r",
-											"//postman.setEnvironmentVariable(\"NewMonitorLink\", pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'));\r",
-											"//postman.setEnvironmentVariable(\"NewDeviceLink\", pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'));\r",
 											""
 										],
 										"type": "text/javascript"
@@ -1701,12 +1697,13 @@
 											"    Previously populated monitor information is required, as is a device reference.\r",
 											"\r",
 											"Inputs:\r",
-											"    PoolDescription      - User Input\r",
+											"    PoolDescription     - User Input\r",
 											"        This is User Supplied if creating a new Pool, Programatic Supplied if modifying a new pool.\r",
 											"    NewDeviceLink       - Programatic input (from another REST call) or User Input\r",
 											"        This is generally progamatically populated, it is a selfLink specifying the target Device that is managed.\r",
-											"    PoolName         - User Input\r",
+											"    PoolName            - User Input\r",
 											"        This is User Supplied if creating a new Pool, Programatic Supplied if modifying a new pool.\r",
+											"    MonitorSelfLink     - The link to the monitor. (has \"localhost\" in URL)\r",
 											"    MonitorTypeString   - Programatic input (from another REST call) or User Input\r",
 											"        This should be programatically populated. This is the string identifier in the JSON that specifies the type of monitor to/from REST.\r",
 											"        This iss NOT the same string as is used in a TMSH command; monitorHttpReferences, monitorHttpsReferences, monitorTcpReferences, etc\r",
@@ -1759,7 +1756,6 @@
 											"console.log(bigiqmgmt)\r",
 											"console.log(pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'))\r",
 											"console.log(pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'))\r",
-											"postman.setEnvironmentVariable(\"NewMonitorLink\", pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'));\r",
 											"postman.setEnvironmentVariable(\"NewDeviceLink\", pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'));\r",
 											""
 										],
@@ -1808,7 +1804,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"allowNat\":true,\r\n   \"allowSnat\":true,\r\n   \"description\":\"{{PoolDescription}}\",\r\n   \"ignorePersistedWeight\":false,\r\n   \"ipTosToClient\":null,\r\n   \"ipTosToServer\":null,\r\n   \"linkQosToClient\":65535,\r\n   \"linkQosToServer\":65535,\r\n   \"loadBalancingMode\":\"round-robin\",\r\n   \"monitorReferences\":[],\r\n   \"minActiveMembers\":0,\r\n   \"minUpMembers\":null,\r\n   \"queueDepthLimit\":0,\r\n   \"enableQueueOnConnectionLimit\":false,\r\n   \"queueTimeLimit\":0,\r\n   \"serviceDownAction\":\"none\",\r\n   \"slowRampTime\":10,\r\n   \"reselectTries\":0,\r\n   \"membersReference\":{\r\n      \"link\":\"\"\r\n   },\r\n   \"profiles\":[],\r\n   \"requestQueueTimeLimit\":0,\r\n   \"deviceReference\":{\r\n      \"link\":\"{{NewDeviceLink}}\"\r\n   },\r\n   \"partition\":\"Common\",\r\n   \"kind\":\"cm:adc-core:working-config:ltm:pool:adcpoolstate\",\r\n   \"name\":\"{{PoolName}}\",\r\n   \"{{MonitorTypeString}}\":[\r\n      {\r\n         \"name\":\"{{MonitorTypeName}}\",\r\n         \"partition\":\"Common\",\r\n         \"link\":\"{{NewMonitorLink}}\"\r\n      }\r\n   ],\r\n   \"ipTosToClientControl\":\"pass-through\",\r\n   \"ipTosToServerControl\":\"pass-through\"\r\n}"
+									"raw": "{\r\n    \"allowNat\":true,\r\n   \"allowSnat\":true,\r\n   \"description\":\"{{PoolDescription}}\",\r\n   \"ignorePersistedWeight\":false,\r\n   \"ipTosToClient\":null,\r\n   \"ipTosToServer\":null,\r\n   \"linkQosToClient\":65535,\r\n   \"linkQosToServer\":65535,\r\n   \"loadBalancingMode\":\"round-robin\",\r\n   \"monitorReferences\":[],\r\n   \"minActiveMembers\":0,\r\n   \"minUpMembers\":null,\r\n   \"queueDepthLimit\":0,\r\n   \"enableQueueOnConnectionLimit\":false,\r\n   \"queueTimeLimit\":0,\r\n   \"serviceDownAction\":\"none\",\r\n   \"slowRampTime\":10,\r\n   \"reselectTries\":0,\r\n   \"membersReference\":{\r\n      \"link\":\"\"\r\n   },\r\n   \"profiles\":[],\r\n   \"requestQueueTimeLimit\":0,\r\n   \"deviceReference\":{\r\n      \"link\":\"{{NewDeviceLink}}\"\r\n   },\r\n   \"partition\":\"Common\",\r\n   \"kind\":\"cm:adc-core:working-config:ltm:pool:adcpoolstate\",\r\n   \"name\":\"{{PoolName}}\",\r\n   \"{{MonitorTypeString}}\":[\r\n      {\r\n         \"name\":\"{{MonitorTypeName}}\",\r\n         \"partition\":\"Common\",\r\n         \"link\":\"{{MonitorSelfLink}}\"\r\n      }\r\n   ],\r\n   \"ipTosToClientControl\":\"pass-through\",\r\n   \"ipTosToServerControl\":\"pass-through\"\r\n}"
 								},
 								"url": {
 									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/pool",
@@ -1936,7 +1932,6 @@
 											"console.log(bigiqmgmt)\r",
 											"console.log(pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'))\r",
 											"console.log(pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'))\r",
-											"postman.setEnvironmentVariable(\"NewMonitorLink\", pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'));\r",
 											"postman.setEnvironmentVariable(\"NewDeviceLink\", pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'));\r",
 											""
 										],
@@ -2059,7 +2054,6 @@
 											"console.log(bigiqmgmt)\r",
 											"console.log(pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'))\r",
 											"console.log(pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'))\r",
-											"postman.setEnvironmentVariable(\"NewMonitorLink\", pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'));\r",
 											"postman.setEnvironmentVariable(\"NewDeviceLink\", pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'));\r",
 											""
 										],
@@ -4569,7 +4563,6 @@
 											"postman.setEnvironmentVariable(\"MonitorJSON\",\"\")\r",
 											"postman.setEnvironmentVariable(\"MonitorTypeString\",\"\")\r",
 											"postman.setEnvironmentVariable(\"MonitorTypeName\",\"\")\r",
-											"postman.setEnvironmentVariable(\"NewMonitorLink\",\"\")\r",
 											"postman.setEnvironmentVariable(\"NewDeviceLink\",\"\")\r",
 											"postman.setEnvironmentVariable(\"DeviceID\",\"\")\r",
 											"postman.setEnvironmentVariable(\"DeviceSelfURI\",\"\")\r",
@@ -5331,7 +5324,6 @@
 									"postman.setEnvironmentVariable(\"MonitorJSON\",\"\")\r",
 									"postman.setEnvironmentVariable(\"MonitorTypeString\",\"\")\r",
 									"postman.setEnvironmentVariable(\"MonitorTypeName\",\"\")\r",
-									"postman.setEnvironmentVariable(\"NewMonitorLink\",\"\")\r",
 									"postman.setEnvironmentVariable(\"NewDeviceLink\",\"\")\r",
 									"postman.setEnvironmentVariable(\"DeviceID\",\"\")\r",
 									"postman.setEnvironmentVariable(\"DeviceSelfURI\",\"\")\r",
@@ -6768,7 +6760,9 @@
 									"postman.setEnvironmentVariable(\"MonitorJSON\",\"\")\r",
 									"postman.setEnvironmentVariable(\"MonitorTypeString\",\"\")\r",
 									"postman.setEnvironmentVariable(\"MonitorTypeName\",\"\")\r",
-									"postman.setEnvironmentVariable(\"NewMonitorLink\",\"\")\r",
+									"postman.setEnvironmentVariable(\"MonitorSendString\",\"\")\r",
+									"postman.setEnvironmentVariable(\"MonitorRecvString\",\"\")\r",
+									"postman.setEnvironmentVariable(\"MonitorName\",\"\")\r",
 									"postman.setEnvironmentVariable(\"NewDeviceLink\",\"\")\r",
 									"postman.setEnvironmentVariable(\"DeviceID\",\"\")\r",
 									"postman.setEnvironmentVariable(\"DeviceSelfURI\",\"\")\r",
@@ -6889,11 +6883,6 @@
 									"//clear normally not cleared Environment variables\r",
 									"postman.setEnvironmentVariable(\"ProfileSearchName\",\"\")\r",
 									"postman.setEnvironmentVariable(\"DeployName\",\"\")\r",
-									"postman.setEnvironmentVariable(\"NewMonitorType\",\"\")\r",
-									"postman.setEnvironmentVariable(\"NewMonitorRecvString\",\"\")\r",
-									"postman.setEnvironmentVariable(\"NewMonitorSendString\",\"\")\r",
-									"postman.setEnvironmentVariable(\"NewMonitorTypeName\",\"\")\r",
-									"postman.setEnvironmentVariable(\"NewMonitorName\",\"\")\r",
 									"postman.setEnvironmentVariable(\"SearchDeviceAddress\",\"\")\r",
 									"/postman.setEnvironmentVariable(\"SearchVirtualName\",\"\")\r",
 									"postman.setEnvironmentVariable(\"AuthTokenTimeoutTime\",\"\")\r",
