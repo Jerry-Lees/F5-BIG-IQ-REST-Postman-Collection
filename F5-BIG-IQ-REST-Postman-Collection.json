@@ -847,7 +847,7 @@
 							"response": []
 						},
 						{
-							"name": "Create Node From Environment",
+							"name": "Create Node From Environment Variables",
 							"event": [
 								{
 									"listen": "prerequest",
