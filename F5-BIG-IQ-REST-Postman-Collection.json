@@ -1380,7 +1380,7 @@
 							"response": []
 						},
 						{
-							"name": "Get monitor from Name",
+							"name": "Get Monitor from Name",
 							"event": [
 								{
 									"listen": "test",
