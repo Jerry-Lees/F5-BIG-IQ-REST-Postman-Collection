@@ -389,7 +389,7 @@
 										"exec": [
 											"/*\r",
 											"Input:\r",
-											"    NewFileUploadID - The ID of a previous file upload request.\r",
+											"    NewFileUploadID - The ID of a previous SSL Object Creation request.\r",
 											"Output:\r",
 											"    None, REST is returned with status and, potentially, error information.\r",
 											"*/"
