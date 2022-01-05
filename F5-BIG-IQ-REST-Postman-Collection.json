@@ -464,99 +464,6 @@
 								}
 							},
 							"response": []
-						},
-						{
-							"name": "Check Upload File Status",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-F5-Auth-Token",
-										"value": "{{AuthToken}}",
-										"type": "text"
-									},
-									{
-										"key": "Content-Range",
-										"value": "{{NewFileUploadContent-Range}}",
-										"type": "string"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://10.155.111.64/mgmt/shared/file-transfer/uploads/",
-									"protocol": "https",
-									"host": [
-										"10",
-										"155",
-										"111",
-										"64"
-									],
-									"path": [
-										"mgmt",
-										"shared",
-										"file-transfer",
-										"uploads",
-										""
-									]
-								}
-							},
-							"response": []
 						}
 					]
 				},
@@ -583,7 +490,12 @@
 									"listen": "test",
 									"script": {
 										"exec": [
-											""
+											"/*\r",
+											"Input:\r",
+											"    none\r",
+											"Output:\r",
+											"    None, REST is returned with information about all imported devices.\r",
+											"*/"
 										],
 										"type": "text/javascript"
 									}
@@ -696,10 +608,6 @@
 											"        postman.setEnvironmentVariable(\"DeviceSelfLink\", jsonData.items[device].selfLink);\r",
 											"        postman.setEnvironmentVariable(\"DeviceSelfURI\", jsonData.items[device].selfLink.replace(/localhost/g,bigiqmgmt));\r",
 											"        postman.setEnvironmentVariable(\"NewDeviceLink\", jsonData.items[device].selfLink);\r",
-											"        //postman.setEnvironmentVariable(\"PoolSelfLink\", jsonData.items[device].poolReference.link.replace(/localhost/g,bigiqmgmt));\r",
-											"        //postman.setEnvironmentVariable(\"deviceDeviceLink\", jsonData.items[device].deviceReference.link.replace(/localhost/g,bigiqmgmt));\r",
-											"        //postman.setEnvironmentVariable(\"DeviceSelfLink\", jsonData.items[device].deviceReference.link.replace(/localhost/g,bigiqmgmt));\r",
-											"        //postman.setEnvironmentVariable(\"deviceProfilesLink\", jsonData.items[device].profilesCollectionReference.link.replace(/localhost/g,bigiqmgmt));\r",
 											"\r",
 											"        //log data saved\r",
 											"        console.log (\"Found device with address \"+searchname+\": Now you may continue to get the specific device's json from the REST API.\")\r",
@@ -6705,6 +6613,99 @@
 										"file",
 										"ssl-key",
 										"7628ab5b-8a08-3aba-bf12-107c0a73d259"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "**Check Upload File Status",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "1chnl!",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"value": false,
+											"type": "boolean"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Range",
+										"value": "{{NewFileUploadContent-Range}}",
+										"type": "string"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://10.155.111.64/mgmt/shared/file-transfer/uploads/",
+									"protocol": "https",
+									"host": [
+										"10",
+										"155",
+										"111",
+										"64"
+									],
+									"path": [
+										"mgmt",
+										"shared",
+										"file-transfer",
+										"uploads",
+										""
 									]
 								}
 							},
