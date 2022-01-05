@@ -1258,12 +1258,7 @@
 									"script": {
 										"exec": [
 											"\r",
-											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
-											"//console.log(bigiqmgmt)\r",
-											"//console.log(pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'))\r",
-											"//console.log(pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'))\r",
-											"//postman.setEnvironmentVariable(\"NewMonitorLink\", pm.variables.get(\"MonitorSelfLink\").replace(bigiqmgmt,'localhost'));\r",
-											"//postman.setEnvironmentVariable(\"NewDeviceLink\", pm.variables.get(\"DeviceSelfLink\").replace(bigiqmgmt,'localhost'));\r",
+											"\r",
 											""
 										],
 										"type": "text/javascript"
@@ -1275,11 +1270,11 @@
 										"exec": [
 											"/*\r",
 											"Inputs:\r",
-											"    NewMonitorTypeName  - User Supplied value for the type of monitor being created\r",
-											"    MonitorID           - The ID of the monitor created\r",
+											"    NewMonitorTypeName  - User Supplied value for the type of monitor being created, is programatically updated from monitor get calls in this collection as well.\r",
+											"    MonitorID           - The ID of the monitor deleted.\r",
 											"Outputs:\r",
-											"    MonitorID           - The ID of teh monitor created, set to \"\".\r",
-											"    MonitorSelfLink     - The link to teh monitor for adding to JSON documents, set to \"\".\r",
+											"    MonitorID           - The ID of the monitor created, set to \"\".\r",
+											"    MonitorSelfLink     - The link to the monitor for adding to JSON documents, set to \"\".\r",
 											"    NewMonitorLink      - The link to the monitor used in REST calls, set to \"\".\r",
 											"    MonitorType         - The \"kind\" of monitor, set to \"\".\r",
 											"    MonitorSelfURI      - The link to the monitor used in REST calls, set to \"\".\r",
