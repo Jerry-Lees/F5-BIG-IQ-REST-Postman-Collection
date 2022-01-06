@@ -1958,7 +1958,7 @@
 							"response": []
 						},
 						{
-							"name": "Add Pool Member from Environment variables",
+							"name": "Add Pool Member from Environment Variables",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -1989,12 +1989,8 @@
 											"    NodeDescription - User supplied value. The description for the Node.\r",
 											"\r",
 											"Outputs:\r",
-											"    NodeID          - The ID of the found node.\r",
-											"    NodeSelfLink    - The Self Link to the Node.\r",
-											"    NodeSelfURI     - The URI for the node to make changes via REST calls.\r",
-											"    NodeDescription - The description for the Node.\r",
-											"    NodeName        - The Name of the Node.\r",
-											"    NodeJSON        - The JSON for the Node reference.\r",
+											"    PoolMemberLink  - The link used in REST calls to refer to the Pool Members Collection, used in request bodies. (has \"localhost\" in the URL)\r",
+											"    PoolMemberID    - The ID of the pool member.\r",
 											"*/\r",
 											"\r",
 											"var jsonData = JSON.parse(responseBody)\r",
@@ -2080,7 +2076,7 @@
 							"response": []
 						},
 						{
-							"name": "Delete Pool member from Environment variables",
+							"name": "Delete Pool Member from Environment Variables",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -2110,17 +2106,20 @@
 											"    PoolMemberID    - The ID of the pool member you wish to delete.\r",
 											"\r",
 											"Outputs:\r",
-											"    None\r",
+											"    PoolMemberID    - The ID for the Pool Member that was deleted.\r",
 											"*/\r",
+											"\r",
 											"var jsonData = JSON.parse(responseBody)\r",
 											"\r",
 											"if (pm.variables.get(\"BeVerbose\")) {\r",
-											"    console.log(\"Deleted Node from the Pool with the following properties:\")\r",
-											"    console.log(\"Name: \"+jsonData.name)\r",
-											"    console.log(\"Pool ID: \"+pm.variables.get(\"PoolID\"))\r",
-											"    console.log(\"Pool Device Link \"+pm.variables.get(\"PoolDeviceLink\"))\r",
-											"    console.log(\"Pool Members Link \"+pm.variables.get(\"PoolMembersLink\"))\r",
+											"    console.log(\"Deleted Node from the Pool Member with the following properties:\");\r",
+											"    console.log(\"Name: \"+jsonData.name);\r",
+											"    console.log(\"Pool Member ID: \"+pm.variables.get(\"PoolMemberID\")+\" (setting to blank)\");\r",
+											"    console.log(\"Pool Device Link \"+pm.variables.get(\"PoolDeviceLink\"));\r",
+											"    console.log(\"Pool Members Link \"+pm.variables.get(\"PoolMembersLink\"));\r",
 											"}\r",
+											"\r",
+											"postman.setEnvironmentVariable(\"PoolMemberID\",\"\");\r",
 											"\r",
 											""
 										],
