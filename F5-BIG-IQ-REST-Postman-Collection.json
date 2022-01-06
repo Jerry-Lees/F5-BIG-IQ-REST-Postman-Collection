@@ -2289,7 +2289,7 @@
 					"name": "Profile Functions",
 					"item": [
 						{
-							"name": "Get serverssl Profile by Name",
+							"name": "Get ServerSSL Profile by Name",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -2308,6 +2308,34 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"/*\r",
+											"Inputs:\r",
+											"    ProfileSearchName   - The name of the Profile being searched for.\r",
+											"\r",
+											"Outputs:\r",
+											"    ProfileServerSSLID          - The ID of the requested profile.\r",
+											"    ProfileServerSSLName        - The Name of the requested profile.\r",
+											"    ProfileServerSSLSelfLink    - A link, usable in the REST call's JSON in the request body, referring to the requested profile. (the URL contains \"local host\")\r",
+											"    ProfileServerSSLSelfURI     - A link, usable in making REST calls, referring to the requested profile. (the URL contains the IP address of the BIG-IQ device)\r",
+											"    ProfileServerSSLParent      - The name of the parent profile to the profile requested.\r",
+											"    ProfileServerSSLParentLink  - A link, usable in the REST call's JSON in the request body, referring to the requested profile's parent profile. (the URL contains \"local host\")\r",
+											"    ProfileServerSSLParentURI   - A link, usable in making REST calls, referring to the requested profile's parent profile. (the URL contains the IP address of the BIG-IQ device)\r",
+											"    ProfileServerSSLChain       - The name of the Chain Certificate for the SSL/Key Pair assigned to the profile.\r",
+											"    ProfileServerSSLChainLink   - A link, usable in the REST call's JSON in the request body, referring to the requested profile's assigned Chain Certificate. (the URL contains \"local host\")\r",
+											"    ProfileServerSSLChainURI    - A link, usable in making REST calls, referring to the requested profile's assigned Chain Certificate. (the URL contains the IP address of the BIG-IQ device)\r",
+											"    ProfileServerSSLChainJSON   - The JSON to be inserted, if created or modified, into the request body to add a Chain Cert. This shoule be blank if there is no Chain Certificate.\r",
+											"    ProfileServerSSLKey         - The name of the SSL Key assigned to the profile.\r",
+											"    ProfileServerSSLKeyLink     - A link, usable in the REST call's JSON in the request body, referring to the requested profile's assigned SSL Key. (the URL contains \"local host\")\r",
+											"    ProfileServerSSLKeyURI      - A link, usable in making REST calls, referring to the requested profile's assigned SSL Key. (the URL contains the IP address of the BIG-IQ device)\r",
+											"    ProfileServerSSLKeyJSON     - The JSON to be inserted, if created or modified, into the request body to add a Key. This shoule be blank if there is no SSL Key. (This should never happen for a serverssl profile)\r",
+											"    ProfileServerSSLCert        - The name of the SSL Cert assigned to the profile.\r",
+											"    ProfileServerSSLCertLink    - A link, usable in the REST call's JSON in the request body, referring to the requested profile's assigned SSL Cert. (the URL contains \"local host\")\r",
+											"    ProfileServerSSLCertURI     - A link, usable in making REST calls, referring to the requested profile's assigned SSL Cert. (the URL contains the IP address of the BIG-IQ device)\r",
+											"    ProfileServerSSLCertJSON    - The JSON to be inserted, if created or modified, into the request body to add a Cert. This shoule be blank if there is no SSL Key. (This should never happen for a serverssl profile)\r",
+											"    ProfileServerSSLPassPhrase  - The passphrase for the certificate.\r",
+											"\r",
+											"*/\r",
+											"\r",
 											"//begin parsing\r",
 											"var jsonData = JSON.parse(responseBody)\r",
 											"\r",
