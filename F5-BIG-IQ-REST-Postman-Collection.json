@@ -3383,6 +3383,27 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"/*\r",
+											"Inputs:\r",
+											"    ProfileSearchName          - The Name of the requested profile.\r",
+											"\r",
+											"Outputs:\r",
+											"    ProfileTCPID                    - The TCP Profile's ID\r",
+											"    ProfileTCPName                  - The Name of the TCP Profile\r",
+											"    ProfileTCPSelfLink              - A link, usable in the REST call's JSON in the request body, referring to the requested profile. (the URL contains \"local host\")\r",
+											"    ProfileTCPSelfURI               - A link, usable in making REST calls, referring to the requested profile. (the URL contains the IP address of the BIG-IQ device)\r",
+											"    NewProfileType                  - The type of Profile to create, always \"tcp\" for TCP profiles.\r",
+											"    NewProfileParent                - The name of the new profile\r",
+											"    ProfileTCPParent                - The name of the Parent Profile.\r",
+											"    ProfileTCPParentLink            - A link, usable in the REST call's JSON in the request body, referring to the requested PARENT profile. (the URL contains \"local host\")\r",
+											"    ProfileTCPParentURI             - A link, usable in making REST calls, referring to the requested PARENT profile. (the URL contains the IP address of the BIG-IQ device)\r",
+											"    ProfileTCPidleTimeout           - The Idle Timeout value for teh profile, default is 300\r",
+											"    ProfileTCPidleTimeoutJSON       - The JSON to use in the request body if the timeout is different than 300.\r",
+											"    ProfileTCPisVerifiedAccept      - The value of the Verified Accept setting in the profile. Not, enabling this is not a recommended setting. This chnages the order of packet flow and could impact iRules negatively.\r",
+											"    ProfileTCPisVerifiedAcceptJSON  - The JSON to use in the request body if the Verified Accept setting is enabled.\r",
+											"\r",
+											"*/\r",
+											"\r",
 											"//begin parsing\r",
 											"var jsonData = JSON.parse(responseBody)\r",
 											"\r",
@@ -3510,7 +3531,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "        {\r\n            \"kind\": \"cm:adc-core:working-config:ltm:profile:tcp:adcprofiletcpstate\",\r\n            \"name\": \"{{ProfileTCPName}}\",\r\n            \"isNoWrite\": false,\r\n            \"partition\": \"Common\",\r\n            \"generation\": 1,\r\n            \"isFastOpen\": false,\r\n            \"isNoDelete\": false,\r\n            \"isVerifiedAccept\": true,\r\n            \"defaultsFromReference\": {\r\n                \"id\": \"d613006c-c02c-30f1-bc2f-a2597da24beb\",\r\n                \"kind\": \"cm:adc-core:working-config:ltm:profile:tcp:adcprofiletcpstate\",\r\n                \"link\": \"https://localhost/mgmt/cm/adc-core/working-config/ltm/profile/tcp/d613006c-c02c-30f1-bc2f-a2597da24beb\",\r\n                \"name\": \"tcp-legacy\",\r\n                \"partition\": \"Common\"\r\n            }\r\n        }"
+									"raw": ""
 								},
 								"url": {
 									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/profile/tcp/",
