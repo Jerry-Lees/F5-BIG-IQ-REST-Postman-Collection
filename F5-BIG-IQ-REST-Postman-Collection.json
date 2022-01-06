@@ -2192,12 +2192,22 @@
 							"response": []
 						},
 						{
-							"name": "Get pool's members JSON",
+							"name": "Get a Pool's Members JSON",
 							"event": [
 								{
 									"listen": "test",
 									"script": {
 										"exec": [
+											"/*\r",
+											"Note: This request currently has little value and may go away soon.\r",
+											"\r",
+											"Inputs:\r",
+											"    PoolID          - The ID of the pool you wish to modify a pool member.\r",
+											"\r",
+											"Outputs:\r",
+											"    PoolMemberJSON    - The JSON for the Pool Members Collection.\r",
+											"*/\r",
+											"\r",
 											"console.log(\"Now modify the following JSON (inside the quotes)to post back to REST for modifying a pool after editing the JSON.\")\r",
 											"console.log(responseBody)\r",
 											"postman.setEnvironmentVariable(\"PoolMemberJSON\", responseBody);\r",
