@@ -3681,12 +3681,34 @@
 							"response": []
 						},
 						{
-							"name": "Delete tcp Profile from Environment variables",
+							"name": "Delete TCP Profile from Environment Variables",
 							"event": [
 								{
 									"listen": "test",
 									"script": {
 										"exec": [
+											"/*\r",
+											"Inputs:\r",
+											"    ProfileTCPID                    - The TCP Profile's ID\r",
+											"\r",
+											"Outputs:\r",
+											"    Sets teh following to blank:\r",
+											"    ProfileTCPID                    - The TCP Profile's ID\r",
+											"    ProfileTCPName                  - The Name of the TCP Profile\r",
+											"    ProfileTCPSelfLink              - A link, usable in the REST call's JSON in the request body, referring to the requested profile. (the URL contains \"local host\")\r",
+											"    ProfileTCPSelfURI               - A link, usable in making REST calls, referring to the requested profile. (the URL contains the IP address of the BIG-IQ device)\r",
+											"    NewProfileType                  - The type of profile, always \"tcp\" for TCP Profiles.\r",
+											"    NewProfileParent                - The name of the new profile\r",
+											"    ProfileTCPParent                - The name of the Parent Profile.\r",
+											"    ProfileTCPParentLink            - A link, usable in the REST call's JSON in the request body, referring to the requested PARENT profile. (the URL contains \"local host\")\r",
+											"    ProfileTCPParentURI             - A link, usable in making REST calls, referring to the requested PARENT profile. (the URL contains the IP address of the BIG-IQ device)\r",
+											"    ProfileTCPidleTimeout           - The Idle Timeout value for teh profile, default is 300\r",
+											"    ProfileTCPidleTimeoutJSON       - The JSON to use in the request body if the timeout is different than 300.\r",
+											"    ProfileTCPisVerifiedAccept      - The value of the Verified Accept setting in the profile. Not, enabling this is not a recommended setting. This chnages the order of packet flow and could impact iRules negatively.\r",
+											"    ProfileTCPisVerifiedAcceptJSON  - The JSON to use in the request body if the Verified Accept setting is enabled.\r",
+											"\r",
+											"*/\r",
+											"\r",
 											"postman.setEnvironmentVariable(\"ProfileTCPID\", \"\");\r",
 											"postman.setEnvironmentVariable(\"ProfileTCPName\", \"\");\r",
 											"postman.setEnvironmentVariable(\"ProfileTCPSelfLink\", \"\");\r",
