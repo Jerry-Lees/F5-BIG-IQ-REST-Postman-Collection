@@ -1112,7 +1112,7 @@
 					"name": "Monitor Functions",
 					"item": [
 						{
-							"name": "Create new monitor from Environment variables",
+							"name": "Create New Monitor from Environment Variables",
 							"event": [
 								{
 									"listen": "test",
@@ -1245,7 +1245,7 @@
 							"response": []
 						},
 						{
-							"name": "Delete monitor from Environment variables",
+							"name": "Delete Monitor from Environment Variables",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -1686,7 +1686,7 @@
 							"response": []
 						},
 						{
-							"name": "Create Pool from Environment variables",
+							"name": "Create Pool from Environment Variables",
 							"event": [
 								{
 									"listen": "test",
@@ -1833,7 +1833,7 @@
 							"response": []
 						},
 						{
-							"name": "Delete Pool from Environment variables",
+							"name": "Delete Pool from Environment Variables",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -1855,11 +1855,40 @@
 											"    PoolID          - Programatic input (from another REST call) or User Input\r",
 											"\r",
 											"Outputs:\r",
-											"    None\r",
+											"    PoolName        - \r",
+											"    PoolDescription - \r",
+											"    PoolID          - \r",
+											"    PoolJSON        - \r",
+											"    PoolSelfLink    - \r",
+											"    PoolSelfURI     - \r",
+											"    PoolDeviceLink  - \r",
+											"    PoolMembersLink - \r",
+											"    PoolMembersURI  - \r",
+											"    PoolMemberJSON  - \r",
+											"    PoolMemberPort  - \r",
+											"    PoolMemberID    - \r",
+											"    PoolMonitorLink - \r",
+											"    PoolMonitorURI  - \r",
+											"\r",
 											"*/\r",
 											"\r",
 											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
 											"console.log(\"Deleted Pool ID \"+pm.variables.get(\"PoolID\")+\" from BIGIQ device: \"+bigiqmgmt)\r",
+											"\r",
+											"postman.setEnvironmentVariable(\"PoolName\",\"\");\r",
+											"postman.setEnvironmentVariable(\"PoolDescription\",\"\");\r",
+											"postman.setEnvironmentVariable(\"PoolID\",\"\");\r",
+											"postman.setEnvironmentVariable(\"PoolJSON\",\"\");\r",
+											"postman.setEnvironmentVariable(\"PoolSelfLink\",\"\");\r",
+											"postman.setEnvironmentVariable(\"PoolSelfURI\",\"\");\r",
+											"postman.setEnvironmentVariable(\"PoolDeviceLink\",\"\");\r",
+											"postman.setEnvironmentVariable(\"PoolMembersLink\",\"\");\r",
+											"postman.setEnvironmentVariable(\"PoolMembersURI\",\"\");\r",
+											"postman.setEnvironmentVariable(\"PoolMemberJSON\",\"\");\r",
+											"postman.setEnvironmentVariable(\"PoolMemberPort\",\"\");\r",
+											"postman.setEnvironmentVariable(\"PoolMemberID\",\"\");\r",
+											"postman.setEnvironmentVariable(\"PoolMonitorLink\",\"\");\r",
+											"postman.setEnvironmentVariable(\"PoolMonitorURI\",\"\");\r",
 											""
 										],
 										"type": "text/javascript"
