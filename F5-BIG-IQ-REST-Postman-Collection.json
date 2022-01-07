@@ -5620,6 +5620,18 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"/*\r",
+											"\r",
+											"Inputs:\r",
+											"\tPoolMembersURI\t\t- Programmatically populated value, The link used to make requests about the Pool Members in REST Calls\r",
+											"\r",
+											"Outputs:\r",
+											"    MonitorJSON         - The JSON for the monitor.\r",
+											"    PoolMemberJSON      - The JSON for pool members.\r",
+											"    SearchMonitorName   - The name of the monitor associated with the pool associated with the virtual server.\r",
+											"\r",
+											"*/\r",
+											"\r",
 											"//begin parsing\r",
 											"var jsonData = JSON.parse(responseBody)\r",
 											"\r",
