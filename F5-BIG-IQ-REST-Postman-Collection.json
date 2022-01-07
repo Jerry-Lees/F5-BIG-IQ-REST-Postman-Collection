@@ -3957,15 +3957,37 @@
 									"script": {
 										"exec": [
 											"/*\r",
-											"Need to update Environment for id and selfLink/URI after creation of teh profile\r",
-											" */\r",
+											"Inputs:\r",
+											"    NewProfileType\r",
+											"    ProfileFastL4Name               - The Name of the fastl4 profile found.\r",
+											"    ProfileFastL4idleTimeoutJSON    - The JSON to use in the request body if the timeout is different than 300.\r",
+											"    ProfileFastL4Parent             - The name of the parent profile.\r",
+											"    ProfileFastL4ParentLink         - A link, usable in the REST call's JSON in the request body, referring to the requested PARENT profile. (the URL contains \"local host\")\r",
+											"    \r",
+											"Outputs:\r",
+											"    ProfileFastL4ID                 - The ID of the fastl4 profile being searched for.\r",
+											"    ProfileFastL4Name               - The Name of the fastl4 profile found.\r",
+											"    ProfileFastL4SelfLink           - A link, usable in the REST call's JSON in the request body, referring to the requested profile. (the URL contains \"local host\")\r",
+											"    ProfileFastL4SelfURI            - A link, usable in making REST calls, referring to the requested profile. (the URL contains the IP address of the BIG-IQ device)\r",
+											"\r",
+											"It currently does NOT update the following:\r",
+											"    NewProfileType                  - The type of Profile to create, always \"fastl4\" for fastl4 profiles.\r",
+											"    NewProfileParent                - The name of the parent profile for the new profile.\r",
+											"    ProfileFastL4Parent             - The name of the parent profile.\r",
+											"    ProfileFastL4ParentLink         - A link, usable in the REST call's JSON in the request body, referring to the requested PARENT profile. (the URL contains \"local host\")\r",
+											"    ProfileFastL4ParentURI          - A link, usable in making REST calls, referring to the requested PARENT profile. (the URL contains the IP address of the BIG-IQ device)\r",
+											"    ProfileFastL4idleTimeout        - The Idle Timeout value for the profile, default is 300\r",
+											"    ProfileFastL4idleTimeoutJSON    - The JSON to use in the request body if the timeout is different than 300.\r",
+											"*/\r",
 											"bigiqmgmt = pm.variables.get(\"BIGIQ_Mgmt\")\r",
 											"\r",
 											"var jsonData = JSON.parse(responseBody)\r",
 											"\r",
 											"postman.setEnvironmentVariable(\"ProfileFastL4ID\", jsonData.id);\r",
-											"postman.setEnvironmentVariable(\"ProfileFastL4SelfLink\", jsonData.selfLink)\r",
-											"postman.setEnvironmentVariable(\"ProfileFastL4SelfURI\", jsonData.selfLink.replace(/localhost/g,bigiqmgmt))"
+											"postman.setEnvironmentVariable(\"ProfileFastL4SelfLink\", jsonData.selfLink);\r",
+											"postman.setEnvironmentVariable(\"ProfileFastL4SelfURI\", jsonData.selfLink.replace(/localhost/g,bigiqmgmt));\r",
+											"postman.setEnvironmentVariable(\"ProfileFastL4Name\", jsonData.name);\r",
+											""
 										],
 										"type": "text/javascript"
 									}
@@ -4038,12 +4060,34 @@
 							"response": []
 						},
 						{
-							"name": "Delete FastL4 Profile from Environment variables",
+							"name": "Delete FastL4 Profile From Environment Variables",
 							"event": [
 								{
 									"listen": "test",
 									"script": {
 										"exec": [
+											"/*\r",
+											"Inputs:\r",
+											"    ProfileFastL4ID                 - The ID of the fastl4 profile being searched for.\r",
+											"    \r",
+											"Outputs:\r",
+											"\r",
+											"    Sets the following to blank:\r",
+											"        ProfileFastL4ID                 - The ID of the fastl4 profile being searched for.\r",
+											"        ProfileFastL4Name               - The Name of the fastl4 profile found.\r",
+											"        ProfileFastL4SelfLink           - A link, usable in the REST call's JSON in the request body, referring to the requested profile. (the URL contains \"local host\")\r",
+											"        ProfileFastL4SelfURI            - A link, usable in making REST calls, referring to the requested profile. (the URL contains the IP address of the BIG-IQ device)\r",
+											"        NewProfileType                  - The type of Profile to create, always \"fastl4\" for fastl4 profiles.\r",
+											"        ProfileFastL4Parent             - The name of the parent profile.\r",
+											"        ProfileFastL4ParentLink         - A link, usable in the REST call's JSON in the request body, referring to the requested PARENT profile. (the URL contains \"local host\")\r",
+											"        ProfileFastL4ParentURI          - A link, usable in making REST call's JSON, referring to the requested PARENT profile. (the URL contains the IP address of the BIG-IQ device.)\r",
+											"        ProfileFastL4ID                 - The ID of the fastl4 profile being searched for.\r",
+											"        ProfileFastL4Name               - The Name of the fastl4 profile found.\r",
+											"        ProfileFastL4idleTimeoutJSON    - The JSON to use in the request body if the timeout is different than 300.\r",
+											"        ProfileFastL4idleTimeout        - The Idle Timeout value for the profile, default is 300\r",
+											"\r",
+											"*/\r",
+											"\r",
 											"postman.setEnvironmentVariable(\"ProfileFastL4ID\", \"\");\r",
 											"postman.setEnvironmentVariable(\"ProfileFastL4Name\", \"\");\r",
 											"postman.setEnvironmentVariable(\"ProfileFastL4SelfLink\", \"\");\r",
@@ -4054,7 +4098,9 @@
 											"postman.setEnvironmentVariable(\"ProfileFastL4ParentLink\", \"\");\r",
 											"postman.setEnvironmentVariable(\"ProfileFastL4ParentURI\", \"\");\r",
 											"postman.setEnvironmentVariable(\"ProfileFastL4idleTimeout\", \"\");\r",
-											"postman.setEnvironmentVariable(\"ProfileFastL4idleTimeoutJSON\", \"\");"
+											"postman.setEnvironmentVariable(\"ProfileFastL4idleTimeoutJSON\", \"\");\r",
+											"postman.setEnvironmentVariable(\"NewProfileParent\", \"\");\r",
+											""
 										],
 										"type": "text/javascript"
 									}
