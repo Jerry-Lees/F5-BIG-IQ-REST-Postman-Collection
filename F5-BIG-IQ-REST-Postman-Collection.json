@@ -5601,7 +5601,7 @@
 							"response": []
 						},
 						{
-							"name": "Get remaining Virtual Information",
+							"name": "Get Remaining Virtual Information",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -5734,7 +5734,25 @@
 							"response": []
 						},
 						{
-							"name": "Delete Virtual Server  from Environment variables",
+							"name": "Delete Virtual Server From Environment Variables",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/*\r",
+											"Inputs:\r",
+											"    VirtualID   - The ID of the virtual server.\r",
+											"\r",
+											"Outputs:\r",
+											"    None\r",
+											"\r",
+											"*/"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "DELETE",
 								"header": [
