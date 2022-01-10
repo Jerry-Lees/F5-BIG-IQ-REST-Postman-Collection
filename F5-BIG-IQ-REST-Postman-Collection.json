@@ -63,29 +63,7 @@
 							],
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "POST",
 								"header": [
@@ -191,29 +169,7 @@
 							],
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "POST",
 								"header": [
@@ -306,29 +262,7 @@
 							],
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "POST",
 								"header": [
@@ -403,29 +337,7 @@
 							},
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "GET",
 								"header": [
@@ -503,29 +415,7 @@
 							],
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "GET",
 								"header": [
@@ -631,29 +521,7 @@
 							],
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "GET",
 								"header": [
@@ -785,29 +653,7 @@
 							],
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "GET",
 								"header": [
@@ -918,29 +764,7 @@
 							],
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "POST",
 								"header": [
@@ -1046,29 +870,7 @@
 							],
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "DELETE",
 								"header": [
@@ -1183,29 +985,7 @@
 							],
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "POST",
 								"header": [
@@ -1310,29 +1090,7 @@
 							],
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "DELETE",
 								"header": [
@@ -1484,29 +1242,7 @@
 							},
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "GET",
 								"header": [
@@ -1619,29 +1355,7 @@
 							},
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "GET",
 								"header": [
@@ -1773,29 +1487,7 @@
 							],
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "POST",
 								"header": [
@@ -1897,29 +1589,7 @@
 							],
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "DELETE",
 								"header": [
@@ -2014,29 +1684,7 @@
 							],
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "POST",
 								"header": [
@@ -2129,29 +1777,7 @@
 							],
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "DELETE",
 								"header": [
@@ -2222,29 +1848,7 @@
 							},
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "GET",
 								"header": [
@@ -2443,29 +2047,7 @@
 							},
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "GET",
 								"header": [
@@ -2649,29 +2231,7 @@
 							],
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "POST",
 								"header": [
@@ -2796,29 +2356,7 @@
 							],
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "DELETE",
 								"header": [
@@ -2974,29 +2512,7 @@
 							},
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "GET",
 								"header": [
@@ -3152,29 +2668,7 @@
 							],
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "POST",
 								"header": [
@@ -3302,29 +2796,7 @@
 							],
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "DELETE",
 								"header": [
@@ -3492,29 +2964,7 @@
 							},
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "GET",
 								"header": [
@@ -3619,29 +3069,7 @@
 							],
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "POST",
 								"header": [
@@ -3728,6 +3156,9 @@
 								}
 							],
 							"request": {
+								"auth": {
+									"type": "noauth"
+								},
 								"method": "DELETE",
 								"header": [
 									{
@@ -3875,29 +3306,7 @@
 							},
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "GET",
 								"header": [
@@ -3995,29 +3404,7 @@
 							],
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "POST",
 								"header": [
@@ -4107,6 +3494,9 @@
 								}
 							],
 							"request": {
+								"auth": {
+									"type": "noauth"
+								},
 								"method": "DELETE",
 								"header": [
 									{
@@ -4238,29 +3628,7 @@
 							},
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "GET",
 								"header": [
@@ -4376,29 +3744,7 @@
 							],
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "POST",
 								"header": [
@@ -4479,6 +3825,9 @@
 								}
 							],
 							"request": {
+								"auth": {
+									"type": "noauth"
+								},
 								"method": "DELETE",
 								"header": [
 									{
@@ -4887,29 +4236,7 @@
 							],
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "POST",
 								"header": [
@@ -5539,29 +4866,7 @@
 							],
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "GET",
 								"header": [
@@ -5687,29 +4992,7 @@
 							],
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "GET",
 								"header": [
@@ -5754,6 +5037,9 @@
 								}
 							],
 							"request": {
+								"auth": {
+									"type": "noauth"
+								},
 								"method": "DELETE",
 								"header": [
 									{
@@ -5975,29 +5261,7 @@
 					],
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "1chnl!",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								},
-								{
-									"key": "saveHelperData",
-									"value": false,
-									"type": "boolean"
-								},
-								{
-									"key": "showPassword",
-									"value": false,
-									"type": "boolean"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "GET",
 						"header": [
@@ -6075,29 +5339,7 @@
 							},
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "GET",
 								"header": [
@@ -6169,29 +5411,7 @@
 							},
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "GET",
 								"header": [
@@ -6264,29 +5484,7 @@
 							},
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "GET",
 								"header": [
@@ -6358,29 +5556,7 @@
 							},
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "GET",
 								"header": [
@@ -6453,29 +5629,7 @@
 							},
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "GET",
 								"header": [
@@ -6549,29 +5703,7 @@
 							],
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "POST",
 								"header": [
@@ -6643,29 +5775,7 @@
 							},
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "GET",
 								"header": [
@@ -6733,29 +5843,7 @@
 							],
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "POST",
 								"header": [
@@ -6825,29 +5913,7 @@
 							},
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "GET",
 								"header": [
@@ -6917,29 +5983,7 @@
 							],
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "GET",
 								"header": [
@@ -6977,29 +6021,7 @@
 							"name": "** Modify Specific Virtual",
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "PUT",
 								"header": [
@@ -7068,29 +6090,7 @@
 							},
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "GET",
 								"header": [
@@ -7156,29 +6156,7 @@
 							},
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "1chnl!",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "saveHelperData",
-											"value": false,
-											"type": "boolean"
-										},
-										{
-											"key": "showPassword",
-											"value": false,
-											"type": "boolean"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "GET",
 								"header": [
@@ -7433,29 +6411,7 @@
 					],
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "1chnl!",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								},
-								{
-									"key": "saveHelperData",
-									"value": false,
-									"type": "boolean"
-								},
-								{
-									"key": "showPassword",
-									"value": false,
-									"type": "boolean"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "GET",
 						"header": [
