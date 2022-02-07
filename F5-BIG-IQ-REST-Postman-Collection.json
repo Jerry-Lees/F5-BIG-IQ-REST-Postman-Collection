@@ -9,6 +9,523 @@
 			"name": "Completed",
 			"item": [
 				{
+					"name": "Deploy Functions",
+					"item": [
+						{
+							"name": "Create Pool Deployment without deploy",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"postman.setEnvironmentVariable(\"DeployName\", \"AutoDeploy-\"+Date.now())\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"console.log(\"The deployment named \"+pm.variables.get(\"DeployName\")+\" was created.\")"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"skipVerifyConfig\":false,\r\n   \"skipDistribution\":true,\r\n   \"name\":\"{{DeployName}}\",\r\n   \"deviceReferences\":[\r\n      {\r\n         \"link\":\"{{DeviceSelfLink}}\"\r\n      }\r\n   ],\r\n   \"objectsToDeployReferences\":[\r\n      {\r\n         \"link\":\"{{PoolSelfLink}}\"\r\n      }],\r\n   \"deploySpecifiedObjectsOnly\":false\r\n}"
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/tasks/deploy-configuration",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"tasks",
+										"deploy-configuration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Virtual Deployment without deploy",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"postman.setEnvironmentVariable(\"DeployName\", \"AutoDeploy-\"+Date.now())\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"console.log(\"The deployment named \"+pm.variables.get(\"DeployName\")+\" was created.\")"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"skipVerifyConfig\":false,\r\n   \"skipDistribution\":true,\r\n   \"name\":\"{{DeployName}}\",\r\n   \"deviceReferences\":[\r\n      {\r\n         \"link\":\"{{DeviceSelfLink}}\"\r\n      }\r\n   ],\r\n   \"objectsToDeployReferences\":[\r\n      {\r\n         \"link\":\"{{VirtualSelfLink}}\"\r\n      }],\r\n   \"deploySpecifiedObjectsOnly\":false\r\n}"
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/tasks/deploy-configuration",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"tasks",
+										"deploy-configuration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create HTTP Profile Deployment without deploy",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"postman.setEnvironmentVariable(\"DeployName\", \"AutoDeploy-\"+Date.now())\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"console.log(\"The deployment named \"+pm.variables.get(\"DeployName\")+\" was created.\")"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"skipVerifyConfig\":false,\r\n   \"skipDistribution\":true,\r\n   \"name\":\"{{DeployName}}\",\r\n   \"deviceReferences\":[\r\n      {\r\n         \"link\":\"{{DeviceSelfLink}}\"\r\n      }\r\n   ],\r\n   \"objectsToDeployReferences\":[\r\n      {\r\n         \"link\":\"{{ProfileHTTPSelfLink}}\"\r\n      }],\r\n   \"deploySpecifiedObjectsOnly\":false\r\n}"
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/tasks/deploy-configuration",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"tasks",
+										"deploy-configuration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Server SSL Profile Deployment without deploy",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"postman.setEnvironmentVariable(\"DeployName\", \"AutoDeploy-\"+Date.now())\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"console.log(\"The deployment named \"+pm.variables.get(\"DeployName\")+\" was created.\")"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"skipVerifyConfig\":false,\r\n   \"skipDistribution\":true,\r\n   \"name\":\"{{DeployName}}\",\r\n   \"deviceReferences\":[\r\n      {\r\n         \"link\":\"{{DeviceSelfLink}}\"\r\n      }\r\n   ],\r\n   \"objectsToDeployReferences\":[\r\n      {\r\n         \"link\":\"{{ProfileServerSSLSelfLink}}\"\r\n      }],\r\n   \"deploySpecifiedObjectsOnly\":false\r\n}"
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/tasks/deploy-configuration",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"tasks",
+										"deploy-configuration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Client SSL Profile Deployment without deploy",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"postman.setEnvironmentVariable(\"DeployName\", \"AutoDeploy-\"+Date.now())\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"console.log(\"The deployment named \"+pm.variables.get(\"DeployName\")+\" was created.\")"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"skipVerifyConfig\":false,\r\n   \"skipDistribution\":true,\r\n   \"name\":\"{{DeployName}}\",\r\n   \"deviceReferences\":[\r\n      {\r\n         \"link\":\"{{DeviceSelfLink}}\"\r\n      }\r\n   ],\r\n   \"objectsToDeployReferences\":[\r\n      {\r\n         \"link\":\"{{ProfileClientSSLSelfLink}}\"\r\n      }],\r\n   \"deploySpecifiedObjectsOnly\":false\r\n}"
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/tasks/deploy-configuration",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"tasks",
+										"deploy-configuration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create FastL4 Profile Deployment without deploy",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"postman.setEnvironmentVariable(\"DeployName\", \"AutoDeploy-\"+Date.now())\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"console.log(\"The deployment named \"+pm.variables.get(\"DeployName\")+\" was created.\")"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"skipVerifyConfig\":false,\r\n   \"skipDistribution\":true,\r\n   \"name\":\"{{DeployName}}\",\r\n   \"deviceReferences\":[\r\n      {\r\n         \"link\":\"{{DeviceSelfLink}}\"\r\n      }\r\n   ],\r\n   \"objectsToDeployReferences\":[\r\n      {\r\n         \"link\":\"{{ProfileFastL4SelfLink}}\"\r\n      }],\r\n   \"deploySpecifiedObjectsOnly\":false\r\n}"
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/tasks/deploy-configuration",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"tasks",
+										"deploy-configuration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create TCP Profile Deployment without deploy",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"postman.setEnvironmentVariable(\"DeployName\", \"AutoDeploy-\"+Date.now())\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"console.log(\"The deployment named \"+pm.variables.get(\"DeployName\")+\" was created.\")"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"skipVerifyConfig\":false,\r\n   \"skipDistribution\":true,\r\n   \"name\":\"{{DeployName}}\",\r\n   \"deviceReferences\":[\r\n      {\r\n         \"link\":\"{{DeviceSelfLink}}\"\r\n      }\r\n   ],\r\n   \"objectsToDeployReferences\":[\r\n      {\r\n         \"link\":\"{{ProfileTCPSelfLink}}\"\r\n      }],\r\n   \"deploySpecifiedObjectsOnly\":false\r\n}"
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/tasks/deploy-configuration",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"tasks",
+										"deploy-configuration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Node Deployment without deploy",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+											"postman.setEnvironmentVariable(\"DeployName\", \"AutoDeploy-\"+Date.now())\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"console.log(\"The deployment named \"+pm.variables.get(\"DeployName\")+\" was created.\")"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"skipVerifyConfig\":false,\r\n   \"skipDistribution\":true,\r\n   \"name\":\"{{DeployName}}\",\r\n   \"deviceReferences\":[\r\n      {\r\n         \"link\":\"{{DeviceSelfLink}}\"\r\n      }\r\n   ],\r\n   \"objectsToDeployReferences\":[\r\n      {\r\n         \"link\":\"{{NodeSelfLink}}\"\r\n      }],\r\n   \"deploySpecifiedObjectsOnly\":false\r\n}"
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/tasks/deploy-configuration",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"tasks",
+										"deploy-configuration"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "SSL Certificate Management",
 					"item": [
 						{
@@ -5665,75 +6182,6 @@
 										"ltm",
 										"virtual",
 										"example"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Deploy Functions",
-					"item": [
-						{
-							"name": "**Create Pool Deployment without deploy",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
-											"postman.setEnvironmentVariable(\"DeployName\", \"AutoDeploy-\"+Date.now())\r",
-											"\r",
-											"\r",
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"console.log(\"The deployment named \"+pm.variables.get(\"DeployName\")+\" was created.\")"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-F5-Auth-Token",
-										"value": "{{AuthToken}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n   \"skipVerifyConfig\":false,\r\n   \"skipDistribution\":true,\r\n   \"name\":\"{{DeployName}}\",\r\n   \"deviceReferences\":[\r\n      {\r\n         \"link\":\"{{DeviceSelfLink}}\"\r\n      }\r\n   ],\r\n   \"objectsToDeployReferences\":[\r\n      {\r\n         \"link\":\"{{PoolSelfLink}}\"\r\n      }],\r\n   \"deploySpecifiedObjectsOnly\":false\r\n}"
-								},
-								"url": {
-									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/tasks/deploy-configuration",
-									"protocol": "https",
-									"host": [
-										"{{BIGIQ_Mgmt}}"
-									],
-									"path": [
-										"mgmt",
-										"cm",
-										"adc-core",
-										"tasks",
-										"deploy-configuration"
 									]
 								}
 							},
