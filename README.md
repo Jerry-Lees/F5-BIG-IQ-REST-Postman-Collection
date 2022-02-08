@@ -58,7 +58,7 @@ To get familiar with the variables in the environment and to test your setup, fo
 
 ### Troubleshooting
 
-1. Always check the pre-requisits for the request that had an error and ensure that the appropriate environments have correct values
+1. Always check the pre-requisits for the request that had an error and ensure that the appropriate environment variables have correct values
 
 2. Most requests run multiple requests in the javascript in the tests and/or pre-request scripts section of the request, both in the script itself and at the collection level.
 
@@ -103,7 +103,15 @@ After running this, take a look at the environment variables. You should find th
 
 Next, run "Gather information to start/Get remaining Virtual Information" and look at the variables again. You should see that more information is populated about the pool.
 
-(add more here)
+Next, change the IP Address in "VirtualDestinationAddress" to an unused IP address, 1.1.1.1 should work fine. Also change the description in "VirtualDescription" and the Name of the virtual server in "VirtualName".
+
+Run the "Create Virtual Server from Environment Variables" request and review the created virtual in the BIG-IQ interface.
+
+Next, update the information stored in the environment to reflect the new virtual server by placing the name of teh virtual you created into "SearchVirtualName" and run "NEW-cloudops_3-11430_2_vs". Run "Get Remaining Virtual Information" as well, if you modified/changed pool information.
+
+Finally, create a deployment for the virtual server by runnning the "Create Virtual Deployment without deploy" request. When successful, look at the deployment and ensure there are no unexpected conflicts. Deploy from the GUI. (Note: You CAN deploy from REST, this is not implemented in early releases of this collection on purpose to add a layer of protection.)
+
+You could also modify the virtual server configuration by changing the values, the description or Destination address for example after the running of "Gather information to start/Get remaining Virtual Information" and then running the "Modify Specific Virtual" request followed by a deployment like above.
 
 ## Getting to work
 
