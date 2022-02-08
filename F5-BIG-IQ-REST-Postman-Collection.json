@@ -5592,6 +5592,48 @@
 					]
 				},
 				{
+					"name": "Modify Specific Virtual",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{AuthToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"{{VirtualID}}\",\r\n    \"kind\": \"cm:adc-core:working-config:ltm:virtual:adcvirtualstate\",\r\n    \"mask\": \"{{VirtualMask}}\",\r\n    \"name\": \"{{VirtualName}}\",\r\n    \"nat64\": \"disabled\",\r\n    \"state\": \"enabled\",\r\n    \"mirror\": \"disabled\",\r\n    \"policies\": [],\r\n    \"selfLink\": \"{{VirtualSelfLink}}\",\r\n    \"partition\": \"Common\",\r\n    \"rateLimit\": \"disabled\",\r\n    \"ipProtocol\": \"tcp\",\r\n    \"properties\": {\r\n        \"virtual-address\": {\r\n            \"name\": \"{{VirtualDestinationAddress}}\",\r\n            \"address\": \"{{VirtualDestinationAddress}}\",\r\n            \"floating\": \"enabled\",\r\n            \"partition\": \"Common\",\r\n            \"trafficGroup\": \"/Common/traffic-group-1\",\r\n            \"deviceReference\": {\r\n                \"link\": \"{{DeviceSelfLink}}\"\r\n            }\r\n        }\r\n    },\r\n    \"sourcePort\": \"preserve\",\r\n    \"autoLasthop\": \"default\",\r\n    \"description\": \"{{VirtualDescription}}\",\r\n    \"vlansEnabled\": \"disabled\",\r\n    \"addressStatus\": \"yes\",\r\n    \"poolReference\": {\r\n        \"id\": \"{{PoolID}}\",\r\n        \"kind\": \"cm:adc-core:working-config:ltm:pool:adcpoolstate\",\r\n        \"link\": \"{{PoolSelfLink}}\",\r\n        \"partition\": \"Common\"\r\n    },\r\n    \"rateLimitMode\": \"object\",\r\n    \"sourceAddress\": \"{{VirtualSourceAddress}}\",\r\n    \"translatePort\": \"enabled\",\r\n    \"connectionLimit\": 0,\r\n    \"destinationPort\": \"{{VirtualPort}}\",\r\n    \"deviceReference\": {\r\n        \"kind\": \"shared:resolver:device-groups:restdeviceresolverdevicestate\",\r\n        \"link\": \"{{DeviceSelfLink}}\"\r\n    },\r\n    \"translateAddress\": \"enabled\",\r\n    \"destinationAddress\": \"{{VirtualDestinationAddress}}\",\r\n    \"sourceAddressTranslation\": {\r\n        \"type\": \"{{VirtualSNATType}}\",\r\n        \"snatpoolReference\": {\r\n            \"id\": \"{{VirtualSNATPoolID}}\",\r\n            \"kind\": \"cm:adc-core:working-config:ltm:snatpool:adcsnatpoolstate\",\r\n            \"link\": \"{{VirtualSNATPoolSelfLink}}\",\r\n            \"name\": \"{{VirtualSNATPoolName}}\",\r\n            \"partition\": \"Common\"\r\n        }\r\n    },\r\n    \"profilesCollectionReference\": {\r\n        \"link\": \"{{VirtualProfilesLink}}\",\r\n        \"isSubcollection\": true\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/virtual/{{VirtualID}}",
+							"protocol": "https",
+							"host": [
+								"{{BIGIQ_Mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"cm",
+								"adc-core",
+								"working-config",
+								"ltm",
+								"virtual",
+								"{{VirtualID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Clear Environment",
 					"event": [
 						{
@@ -6460,48 +6502,6 @@
 										"ltm",
 										"pool",
 										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "** Modify Specific Virtual",
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-F5-Auth-Token",
-										"value": "{{AuthToken}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"id\": \"{{VirtualID}}\",\r\n    \"kind\": \"cm:adc-core:working-config:ltm:virtual:adcvirtualstate\",\r\n    \"mask\": \"{{VirtualMask}}\",\r\n    \"name\": \"{{VirtualName}}\",\r\n    \"nat64\": \"disabled\",\r\n    \"state\": \"enabled\",\r\n    \"mirror\": \"disabled\",\r\n    \"policies\": [],\r\n    \"selfLink\": \"{{VirtualSelfLink}}\",\r\n    \"partition\": \"Common\",\r\n    \"rateLimit\": \"disabled\",\r\n    \"ipProtocol\": \"tcp\",\r\n    \"properties\": {\r\n        \"virtual-address\": {\r\n            \"name\": \"{{VirtualDestinationAddress}}\",\r\n            \"address\": \"{{VirtualDestinationAddress}}\",\r\n            \"floating\": \"enabled\",\r\n            \"partition\": \"Common\",\r\n            \"trafficGroup\": \"/Common/traffic-group-1\",\r\n            \"deviceReference\": {\r\n                \"link\": \"{{DeviceSelfLink}}\"\r\n            }\r\n        }\r\n    },\r\n    \"sourcePort\": \"preserve\",\r\n    \"autoLasthop\": \"default\",\r\n    \"description\": \"{{VirtualDescription}}\",\r\n    \"vlansEnabled\": \"disabled\",\r\n    \"addressStatus\": \"yes\",\r\n    \"poolReference\": {\r\n        \"id\": \"{{PoolID}}\",\r\n        \"kind\": \"cm:adc-core:working-config:ltm:pool:adcpoolstate\",\r\n        \"link\": \"{{PoolSelfLink}}\",\r\n        \"partition\": \"Common\"\r\n    },\r\n    \"rateLimitMode\": \"object\",\r\n    \"sourceAddress\": \"{{VirtualSourceAddress}}\",\r\n    \"translatePort\": \"enabled\",\r\n    \"connectionLimit\": 0,\r\n    \"destinationPort\": \"{{VirtualPort}}\",\r\n    \"deviceReference\": {\r\n        \"kind\": \"shared:resolver:device-groups:restdeviceresolverdevicestate\",\r\n        \"link\": \"{{DeviceSelfLink}}\"\r\n    },\r\n    \"translateAddress\": \"enabled\",\r\n    \"destinationAddress\": \"{{VirtualDestinationAddress}}\",\r\n    \"sourceAddressTranslation\": {\r\n        \"type\": \"{{VirtualSNATType}}\",\r\n        \"snatpoolReference\": {\r\n            \"id\": \"{{VirtualSNATPoolID}}\",\r\n            \"kind\": \"cm:adc-core:working-config:ltm:snatpool:adcsnatpoolstate\",\r\n            \"link\": \"{{VirtualSNATPoolSelfLink}}\",\r\n            \"name\": \"{{VirtualSNATPoolName}}\",\r\n            \"partition\": \"Common\"\r\n        }\r\n    },\r\n    \"profilesCollectionReference\": {\r\n        \"link\": \"{{VirtualProfilesLink}}\",\r\n        \"isSubcollection\": true\r\n    }\r\n}"
-								},
-								"url": {
-									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/virtual/{{VirtualID}}",
-									"protocol": "https",
-									"host": [
-										"{{BIGIQ_Mgmt}}"
-									],
-									"path": [
-										"mgmt",
-										"cm",
-										"adc-core",
-										"working-config",
-										"ltm",
-										"virtual",
-										"{{VirtualID}}"
 									]
 								}
 							},
