@@ -898,11 +898,71 @@ Outputs:
 
 more to be added
 
-### Deployment Tasks
+### Deploy Tasks
 
-#### "" Request
+#### "Create Pool Deployment without deploy" Request
 
 The inputs and outputs of the request are explained below:
+
+    DeployName
+    DeviceSelfLink
+    PoolSelfLink
+
+#### "Create Virtual Deployment without deploy" Request
+
+The inputs and outputs of the request are explained below:
+
+    DeployName
+    DeviceSelfLink
+    VirtualSelfLink
+
+#### "Create HTTP Profile Deployment without deploy" Request
+
+The inputs and outputs of the request are explained below:
+
+    DeployName
+    DeviceSelfLink
+    ProfileHTTPSelfLink
+
+#### "Create Server SSL Profile Deployment without deploy" Request
+
+The inputs and outputs of the request are explained below:
+
+    DeployName
+    DeviceSelfLink
+    ProfileServerSSLSelfLink
+
+#### "Create Client SSL Profile Deployment without deploy" Request
+
+The inputs and outputs of the request are explained below:
+
+    DeployName
+    DeviceSelfLink
+    ProfileClientSSLSelfLink
+
+#### "Create FastL4 Profile Deployment without deploy" Request
+
+The inputs and outputs of the request are explained below:
+
+    DeployName
+    DeviceSelfLink
+    ProfileFastL4SelfLink
+
+#### "Create TCP Profile Deployment without deploy" Request
+
+The inputs and outputs of the request are explained below:
+
+    DeployName
+    DeviceSelfLink
+    ProfileTCPSelfLink
+
+#### "Create Node Deployment without deploy" Request
+
+The inputs and outputs of the request are explained below:
+
+    DeployName
+    DeviceSelfLink
+    NodeSelfLink
 
 more to be added
 
