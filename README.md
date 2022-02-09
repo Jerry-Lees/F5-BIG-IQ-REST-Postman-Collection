@@ -167,17 +167,54 @@ Outputs:
 
 ### Node Tasks
 
-#### "" Request
+The Node tasks section of the collection contains requests that will create, retrieve, and delete a node from the configuration. Depending on the request, this is done by the "NodeID" or Node Name (IP Address if your nodes do not have names). Like with monitors, it is recommended to utilize the exact node name and review the environment variables before continuing.
+
+#### "Get Node ID From IP Address" Request
 
 The inputs and outputs of the request are explained below:
 
-#### "" Request
+Inputs:
+    SearchNodeName - The name of the node to find in all nodes.
+Outputs:
+    NodeID          - The ID of the found node.
+    NodeSelfLink    - The link to the node's configuration to use in JSON Documents used to make a REST call
+    NodeSelfURI     - The link to a node's configuration to use when making a REST call.
+    NodeDescription - The node's description.
+    NodeName        - The name of the Node, automatically the same as the IP address.
+    NodeJSON        - The JSON output representing the Node3's configuration.
+
+#### "Create Node From Environment Variables" Request
 
 The inputs and outputs of the request are explained below:
 
-#### "" Request
+Inputs:
+    SearchNodeName  - User Input, The name (IP, if names were not provided at node creation) of the node.
+    NodeDescription - User Input, The description of teh new node to be created.
+    DeviceSelfLink  - Programatic input, From "Get Device by Address".
+
+Outputs:
+    NodeID          - The ID of the created Node.
+    NodeName        - The Name of teh created node.
+    NodeSelfLink    - The Link reference for future REST calls. (This has localhost as the hostname, it is for teh Request body of future rest calls. If you need to call teh object itself use NodeSelfURI instead)
+    NodeSelfURI     - The URI with IP address of the BIG-IQ to use to make future REST calls. (Do not use in a request body)
+    NodeDescription - The Description of the node.
+    NodeName        - The Name of the node.
+    NodeJSON        - The JSON describing the node.
+
+#### "Delete Node From Environment" Request
 
 The inputs and outputs of the request are explained below:
+
+Inputs:
+    NodeID        - Programatic input (from another REST call)
+
+Outputs:
+    NodeID          - Set to Blank
+    NodeName        - Set to Blank
+    NodeSelfLink    - Set to Blank
+    NodeSelfURI     - Set to Blank
+    NodeJSON        - Set to Blank
+    NodeDescription - Set to Blank
 
 more to be added
 
