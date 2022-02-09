@@ -220,9 +220,115 @@ more to be added
 
 ### Pool Tasks
 
-#### "" Request
+#### "Get Pool Information from Name" Request
 
 The inputs and outputs of the request are explained below:
+
+Inputs:
+    SearchPoolName  - The name of the pool to find.
+
+Outputs:
+    PoolID          - The ID of the pool.
+    PoolSelfLink    - The Link to the Pool information stored, for use inside REST request bodies. (has "localhost" in the URL)
+    PoolSelfURI     - The URL to the pool information stored, for use in making REST requests. (has the IP address of the BIG-IQ device in the URL.)
+    PoolMembersLink - The Link to the Pool MEMBER information stored, for use inside REST request bodies. (has "localhost" in the URL)
+    PoolMembersURI  - The URL to the pool MEMBER information stored, for use in making REST requests. (has the IP address of the BIG-IQ device in the URL.)
+    PoolDeviceLink  - The Link to the BIG-IP device with the configuration, for use inside REST request bodies. (has "localhost" in the URL)
+    PoolDeviceURI   - The URL to the BIG-IP device with the configuration, for use in making REST calls. (has the IP address of the BIG-IQ device in the URL.)
+    PoolName        - The name of the pool.
+
+#### "Create Pool from Environment Variables" Request
+
+The inputs and outputs of the request are explained below:
+
+Pre-Reqs:
+    Previously populated monitor information is required, as is a device reference.
+
+Inputs:
+    PoolDescription     - User Input
+        This is User Supplied if creating a new Pool, Programatic Supplied if modifying a new pool.
+    NewDeviceLink       - Programatic input (from another REST call) or User Input
+        This is generally progamatically populated, it is a selfLink specifying the target Device that is managed.
+    PoolName            - User Input
+        This is User Supplied if creating a new Pool, Programatic Supplied if modifying a new pool.
+    MonitorSelfLink     - The link to the monitor. (has "localhost" in URL)
+    MonitorTypeString   - Programatic input (from another REST call) or User Input
+        This should be programatically populated. This is the string identifier in the JSON that specifies the type of monitor to/from REST.
+        This iss NOT the same string as is used in a TMSH command; monitorHttpReferences, monitorHttpsReferences, monitorTcpReferences, etc
+    MonitorTypeName     - Programatic input (from another REST call) or User Input
+        This can be user provided, in a search for example, or is programatically provided. It is the type of monitor. 
+        Unlike above, this is teh same string used in a tmsh command; http, https, tcp, etc
+
+Outputs:
+    PoolID          - The ID for the pool.
+    PoolDeviceLink  - A Link referring to the device the configuration should be on, used in JSON documents in the request body for REST calls. (has localhost in the URL)
+    PoolMembersLink - A Link referring to the pool members collection, used in JSON documents in the request body for REST calls. (has localhost in the URL)
+    PoolSelfLink    - A Link referring to the pool itself, used in JSON documents in the request body for REST calls. (has localhost in the URL)
+    PoolSelfURI     - A URL, with the IP address of the BIG-IQ device, referring to the device the configuration should be on, used in JSON documents to make REST calls.
+    PoolJSON        -
+
+#### "Delete Pool from Environment Variables" Request
+
+The inputs and outputs of the request are explained below:
+
+Inputs:
+    PoolID          - Programatic input (from another REST call) or User Input
+
+Outputs:
+    PoolName        -
+    PoolDescription -
+    PoolID          -
+    PoolJSON        -
+    PoolSelfLink    -
+    PoolSelfURI     -
+    PoolDeviceLink  -
+    PoolMembersLink -
+    PoolMembersURI  -
+    PoolMemberJSON  -
+    PoolMemberPort  -
+    PoolMemberID    -
+    PoolMonitorLink -
+    PoolMonitorURI  -
+
+#### "Add Pool Member from Environment Variables" Request
+
+The inputs and outputs of the request are explained below:
+
+Inputs:
+    PoolID          - The ID of the pool you wish to add a pool member to.
+    NodeSelfLink    - The Self Link to the node you wish to add as a pool member
+    NodeName        - The Name of the Node.
+    PoolMemberPort  - User supplied value. The port tehNode is listening on.
+    NodeDescription - User supplied value. The description for the Node.
+
+Outputs:
+    PoolMemberLink  - The link used in REST calls to refer to the Pool Members Collection, used in request bodies. (has "localhost" in the URL)
+    PoolMemberID    - The ID of the pool member.
+
+#### "Delete Pool Member from Environment Variables" Request
+
+The inputs and outputs of the request are explained below:
+
+Note, this doesn't currently work, it doesn't have the pool member ID from a node look up. This is a known issue.
+
+Inputs:
+    PoolID          - The ID of the pool you wish to modify a pool member.
+    PoolMemberID    - The ID of the pool member you wish to delete.
+
+Outputs:
+    PoolMemberID    - The ID for the Pool Member that was deleted.
+
+#### "Get a Pool's Members JSON" Request
+
+The inputs and outputs of the request are explained below:
+
+Note: This request currently has little value and may go away soon. This request should be considered depricated.
+
+Inputs:
+    PoolID          - The ID of the pool you wish to modify a pool member.
+
+Outputs:
+    PoolMemberJSON    - The JSON for the Pool Members Collection.
 
 more to be added
 
