@@ -334,9 +334,403 @@ more to be added
 
 ### Profile Tasks
 
-#### "" Request
+#### "Get ServerSSL Profile by Name" Request
 
 The inputs and outputs of the request are explained below:
+
+Inputs:
+    ProfileSearchName   - The name of the Profile being searched for.
+
+Outputs:
+    ProfileServerSSLID          - The ID of the requested profile.
+    ProfileServerSSLName        - The Name of the requested profile.
+    ProfileServerSSLSelfLink    - A link, usable in the REST call's JSON in the request body, referring to the requested profile. (the URL contains "local host")
+    ProfileServerSSLSelfURI     - A link, usable in making REST calls, referring to the requested profile. (the URL contains the IP address of the BIG-IQ device)
+    ProfileServerSSLParent      - The name of the parent profile to the profile requested.
+    ProfileServerSSLParentLink  - A link, usable in the REST call's JSON in the request body, referring to the requested profile's parent profile. (the URL contains "local host")
+    ProfileServerSSLParentURI   - A link, usable in making REST calls, referring to the requested profile's parent profile. (the URL contains the IP address of the BIG-IQ device)
+    ProfileServerSSLChain       - The name of the Chain Certificate for the SSL/Key Pair assigned to the profile.
+    ProfileServerSSLChainLink   - A link, usable in the REST call's JSON in the request body, referring to the requested profile's assigned Chain Certificate. (the URL contains "local host")
+    ProfileServerSSLChainURI    - A link, usable in making REST calls, referring to the requested profile's assigned Chain Certificate. (the URL contains the IP address of the BIG-IQ device)
+    ProfileServerSSLChainJSON   - The JSON to be inserted, if created or modified, into the request body to add a Chain Cert. This shoule be blank if there is no Chain Certificate.
+    ProfileServerSSLKey         - The name of the SSL Key assigned to the profile.
+    ProfileServerSSLKeyLink     - A link, usable in the REST call's JSON in the request body, referring to the requested profile's assigned SSL Key. (the URL contains "local host")
+    ProfileServerSSLKeyURI      - A link, usable in making REST calls, referring to the requested profile's assigned SSL Key. (the URL contains the IP address of the BIG-IQ device)
+    ProfileServerSSLKeyJSON     - The JSON to be inserted, if created or modified, into the request body to add a Key. This shoule be blank if there is no SSL Key. (This should never happen for a serverssl profile)
+    ProfileServerSSLCert        - The name of the SSL Cert assigned to the profile.
+    ProfileServerSSLCertLink    - A link, usable in the REST call's JSON in the request body, referring to the requested profile's assigned SSL Cert. (the URL contains "local host")
+    ProfileServerSSLCertURI     - A link, usable in making REST calls, referring to the requested profile's assigned SSL Cert. (the URL contains the IP address of the BIG-IQ device)
+    ProfileServerSSLCertJSON    - The JSON to be inserted, if created or modified, into the request body to add a Cert. This shoule be blank if there is no SSL Key. (This should never happen for a serverssl profile)
+    ProfileServerSSLPassPhrase  - The passphrase for the certificate.
+
+#### "Create Server SSL Profile" Request
+
+The inputs and outputs of the request are explained below:
+
+Inputs:
+    ProfileServerSSLChainJSON   - The JSON to be inserted, if created or modified, into the request body to add a Chain Cert. This shoule be blank if there is no Chain Certificate.
+    ProfileServerSSLKeyJSON     - The JSON to be inserted, if created or modified, into the request body to add a Key. This shoule be blank if there is no SSL Key. (This should never happen for a serverssl profile)
+    ProfileServerSSLCertJSON    - The JSON to be inserted, if created or modified, into the request body to add a Cert. This shoule be blank if there is no SSL Key. (This should never happen for a serverssl profile)
+    ProfileServerSSLPassPhrase  - The passphrase for the certificate.
+    ProfileServerSSLParent      - The name of the parent profile to the profile requested.
+    ProfileServerSSLParentLink  - A link, usable in the REST call's JSON in the request body, referring to the requested profile's parent profile. (the URL contains "local host")
+    ProfileServerSSLName        - The Name of the requested profile.
+
+Outputs:
+    ProfileServerSSLChainJSON   - The JSON to be inserted, if created or modified, into the request body to add a Chain Cert. This shoule be blank if there is no Chain Certificate.
+    ProfileServerSSLKeyJSON     - The JSON to be inserted, if created or modified, into the request body to add a Key. This shoule be blank if there is no SSL Key. (This should never happen for a serverssl profile)
+    ProfileServerSSLCertJSON    - The JSON to be inserted, if created or modified, into the request body to add a Cert. This shoule be blank if there is no SSL Key. (This should never happen for a serverssl profile)
+    ProfileServerSSLPassPhrase  - The passphrase for the certificate.
+    ProfileServerSSLParent      - The name of the parent profile to the profile requested.
+    ProfileServerSSLParentLink  - A link, usable in the REST call's JSON in the request body, referring to the requested profile's parent profile. (the URL contains "local host")
+    ProfileServerSSLName        - The Name of the requested profile.
+    ProfileServerSSLID          - The ID of the requested profile.
+    ProfileServerSSLSelfLink    - A link, usable in the REST call's JSON in the request body, referring to the requested profile. (the URL contains "local host")
+    ProfileServerSSLSelfURI     - A link, usable in making REST calls, referring to the requested profile. (the URL contains the IP address of the BIG-IQ device)
+    ProfileServerSSLParentURI   - A link, usable in making REST calls, referring to the requested profile's parent profile. (the URL contains the IP address of the BIG-IQ device)
+    ProfileServerSSLChain       - The name of the Chain Certificate for the SSL/Key Pair assigned to the profile.
+    ProfileServerSSLChainLink   - A link, usable in the REST call's JSON in the request body, referring to the requested profile's assigned Chain Certificate. (the URL contains "local host")
+    ProfileServerSSLChainURI    - A link, usable in making REST calls, referring to the requested profile's assigned Chain Certificate. (the URL contains the IP address of the BIG-IQ device)
+    ProfileServerSSLKey         - The name of the SSL Key assigned to the profile.
+    ProfileServerSSLKeyLink     - A link, usable in the REST call's JSON in the request body, referring to the requested profile's assigned SSL Key. (the URL contains "local host")
+    ProfileServerSSLKeyURI      - A link, usable in making REST calls, referring to the requested profile's assigned SSL Key. (the URL contains the IP address of the BIG-IQ device)
+    ProfileServerSSLKeyJSON     - The JSON to be inserted, if created or modified, into the request body to add a Key. This shoule be blank if there is no SSL Key. (This should never happen for a serverssl profile)
+    ProfileServerSSLCert        - The name of the SSL Cert assigned to the profile.
+    ProfileServerSSLCertLink    - A link, usable in the REST call's JSON in the request body, referring to the requested profile's assigned SSL Cert. (the URL contains "local host")
+    ProfileServerSSLCertURI     - A link, usable in making REST calls, referring to the requested profile's assigned SSL Cert. (the URL contains the IP address of the BIG-IQ device)
+
+#### "Delete Server SSL Profile" Request
+
+The inputs and outputs of the request are explained below:
+
+Inputs:
+    ProfileServerSSLID          - The ID of the requested profile.
+
+Outputs:
+    None, Set to blank the following:
+    ProfileServerSSLID          - The ID of the requested profile.
+    ProfileServerSSLName        - The Name of the requested profile.
+    ProfileServerSSLParent      - The name of the parent profile to the profile requested.
+    ProfileServerSSLParentLink  - A link, usable in the REST call's JSON in the request body, referring to the requested profile's parent profile. (the URL contains "local host")
+    ProfileServerSSLSelfLink    - A link, usable in the REST call's JSON in the request body, referring to the requested profile. (the URL contains "local host")
+    ProfileServerSSLSelfURI     - A link, usable in making REST calls, referring to the requested profile. (the URL contains the IP address of the BIG-IQ device)
+    ProfileServerSSLParentURI   - A link, usable in making REST calls, referring to the requested profile's parent profile. (the URL contains the IP address of the BIG-IQ device)
+ 
+    Currently does NOT blank the following:
+
+    ProfileServerSSLChainJSON   - The JSON to be inserted, if created or modified, into the request body to add a Chain Cert. This shoule be blank if there is no Chain Certificate.
+    ProfileServerSSLKeyJSON     - The JSON to be inserted, if created or modified, into the request body to add a Key. This shoule be blank if there is no SSL Key. (This should never happen for a serverssl profile)
+    ProfileServerSSLCertJSON    - The JSON to be inserted, if created or modified, into the request body to add a Cert. This shoule be blank if there is no SSL Key. (This should never happen for a serverssl profile)
+    ProfileServerSSLPassPhrase  - The passphrase for the certificate.
+    ProfileServerSSLChain       - The name of the Chain Certificate for the SSL/Key Pair assigned to the profile.
+    ProfileServerSSLChainLink   - A link, usable in the REST call's JSON in the request body, referring to the requested profile's assigned Chain Certificate. (the URL contains "local host")
+    ProfileServerSSLChainURI    - A link, usable in making REST calls, referring to the requested profile's assigned Chain Certificate. (the URL contains the IP address of the BIG-IQ device)
+    ProfileServerSSLKey         - The name of the SSL Key assigned to the profile.
+    ProfileServerSSLKeyLink     - A link, usable in the REST call's JSON in the request body, referring to the requested profile's assigned SSL Key. (the URL contains "local host")
+    ProfileServerSSLKeyURI      - A link, usable in making REST calls, referring to the requested profile's assigned SSL Key. (the URL contains the IP address of the BIG-IQ device)
+    ProfileServerSSLKeyJSON     - The JSON to be inserted, if created or modified, into the request body to add a Key. This shoule be blank if there is no SSL Key. (This should never happen for a serverssl profile)
+    ProfileServerSSLCert        - The name of the SSL Cert assigned to the profile.
+    ProfileServerSSLCertLink    - A link, usable in the REST call's JSON in the request body, referring to the requested profile's assigned SSL Cert. (the URL contains "local host")
+    ProfileServerSSLCertURI     - A link, usable in making REST calls, referring to the requested profile's assigned SSL Cert. (the URL contains the IP address of the BIG-IQ device)
+
+#### "Get Client SSL Profile by Name" Request
+
+The inputs and outputs of the request are explained below:
+
+Inputs:
+    ProfileSearchName           - The name of the profile being searched for.
+
+Outputs:
+    ProfileClientSSLID          - The ID of the requested profile.
+    ProfileClientSSLName        - The Name of the requested profile.
+    ProfileClientSSLParent      - The name of the parent profile to the profile requested.
+    ProfileClientSSLParentLink  - A link, usable in the REST call's JSON in the request body, referring to the requested profile's parent profile. (the URL contains "local host")
+    ProfileClientSSLSelfLink    - A link, usable in the REST call's JSON in the request body, referring to the requested profile. (the URL contains "local host")
+    ProfileClientSSLSelfURI     - A link, usable in making REST calls, referring to the requested profile. (the URL contains the IP address of the BIG-IQ device)
+    ProfileClientSSLParentURI   - A link, usable in making REST calls, referring to the requested profile's parent profile. (the URL contains the IP address of the BIG-IQ device)
+    ProfileClientSSLChainJSON   - The JSON to be inserted, if created or modified, into the request body to add a Chain Cert. This shoule be blank if there is no Chain Certificate.
+    ProfileClientSSLKeyJSON     - The JSON to be inserted, if created or modified, into the request body to add a Key. This shoule be blank if there is no SSL Key. (This should never happen for a Clientssl profile)
+    ProfileClientSSLCertJSON    - The JSON to be inserted, if created or modified, into the request body to add a Cert. This shoule be blank if there is no SSL Key. (This should never happen for a Clientssl profile)
+    ProfileClientSSLPassPhrase  - The passphrase for the certificate.
+    ProfileClientSSLChain       - The name of the Chain Certificate for the SSL/Key Pair assigned to the profile.
+    ProfileClientSSLChainLink   - A link, usable in the REST call's JSON in the request body, referring to the requested profile's assigned Chain Certificate. (the URL contains "local host")
+    ProfileClientSSLChainURI    - A link, usable in making REST calls, referring to the requested profile's assigned Chain Certificate. (the URL contains the IP address of the BIG-IQ device)
+    ProfileClientSSLKey         - The name of the SSL Key assigned to the profile.
+    ProfileClientSSLKeyLink     - A link, usable in the REST call's JSON in the request body, referring to the requested profile's assigned SSL Key. (the URL contains "local host")
+    ProfileClientSSLKeyURI      - A link, usable in making REST calls, referring to the requested profile's assigned SSL Key. (the URL contains the IP address of the BIG-IQ device)
+    ProfileClientSSLKeyJSON     - The JSON to be inserted, if created or modified, into the request body to add a Key. This shoule be blank if there is no SSL Key. (This should never happen for a Clientssl profile)
+    ProfileClientSSLCert        - The name of the SSL Cert assigned to the profile.
+    ProfileClientSSLCertLink    - A link, usable in the REST call's JSON in the request body, referring to the requested profile's assigned SSL Cert. (the URL contains "local host")
+    ProfileClientSSLCertURI     - A link, usable in making REST calls, referring to the requested profile's assigned SSL Cert. (the URL contains the IP address of the BIG-IQ device)
+
+#### "Create Client SSL Profile" Request
+
+The inputs and outputs of the request are explained below:
+
+Inputs:
+    ProfileClientSSLPassPhrase  - The passphrase for the certificate.
+    ProfileClientSSLParent      - The name of the parent profile to the profile requested.
+    ProfileClientSSLParentLink  - A link, usable in the REST call's JSON in the request body, referring to the requested profile's parent profile. (the URL contains "local host")
+    ProfileClientSSLName        - The Name of the requested profile.
+    ProfileClientSSLParentLink  - A link, usable in the REST call's JSON in the request body, referring to the requested profile's parent profile. (the URL contains "local host")
+    ProfileClientSSLChainLink   - A link, usable in the REST call's JSON in the request body, referring to the requested profile's assigned Chain Certificate. (the URL contains "local host")
+    ProfileClientSSLKeyLink     - A link, usable in the REST call's JSON in the request body, referring to the requested profile's assigned SSL Key. (the URL contains "local host")
+    ProfileClientSSLCertLink    - A link, usable in the REST call's JSON in the request body, referring to the requested profile's assigned SSL Cert. (the URL contains "local host")
+    ProfileClientSSLPassPhrase  - The passphrase for the certificate.
+    ProfileClientSSLParent      - The name of the parent profile to the profile requested.
+    ProfileClientSSLName        - The Name of the requested profile.
+    ProfileClientSSLChain       - The name of the Chain Certificate for the SSL/Key Pair assigned to the profile.
+    ProfileClientSSLKey         - The name of the SSL Key assigned to the profile.
+    ProfileClientSSLCert        - The name of the SSL Cert assigned to the profile.
+
+Outputs:
+
+    ProfileClientSSLName        - The Name of the requested profile.
+    ProfileClientSSLID          - The ID of the requested profile.
+    ProfileClientSSLSelfLink    - A link, usable in the REST call's JSON in the request body, referring to the requested profile. (the URL contains "local host")
+    ProfileClientSSLSelfURI     - A link, usable in making REST calls, referring to the requested profile. (the URL contains the IP address of the BIG-IQ device)
+    ProfileClientSSLParent      - The name of the parent profile to the profile requested.
+    ProfileClientSSLParentLink  - A link, usable in the REST call's JSON in the request body, referring to the requested profile's parent profile. (the URL contains "local host")
+    ProfileClientSSLParentURI   - A link, usable in making REST calls, referring to the requested profile's parent profile. (the URL contains the IP address of the BIG-IQ device)
+    ProfileClientSSLChainLink   - A link, usable in the REST call's JSON in the request body, referring to the requested profile's assigned Chain Certificate. (the URL contains "local host")
+    ProfileClientSSLKeyLink     - A link, usable in the REST call's JSON in the request body, referring to the requested profile's assigned SSL Key. (the URL contains "local host")
+    ProfileClientSSLCertLink    - A link, usable in the REST call's JSON in the request body, referring to the requested profile's assigned SSL Cert. (the URL contains "local host")
+    ProfileClientSSLChainURI    - A link, usable in making REST calls, referring to the requested profile's assigned Chain Certificate. (the URL contains the IP address of the BIG-IQ device)
+    ProfileClientSSLKeyURI      - A link, usable in making REST calls, referring to the requested profile's assigned SSL Key. (the URL contains the IP address of the BIG-IQ device)
+    ProfileClientSSLCertURI     - A link, usable in making REST calls, referring to the requested profile's assigned SSL Cert. (the URL contains the IP address of the BIG-IQ device)
+
+Currently does not populate the following:
+    ProfileClientSSLKeyJSON     - The JSON to be inserted, if created or modified, into the request body to add a Key. This shoule be blank if there is no SSL Key. (This should never happen for a Clientssl profile)
+    ProfileClientSSLChainJSON   - The JSON to be inserted, if created or modified, into the request body to add a Chain Cert. This shoule be blank if there is no Chain Certificate.
+    ProfileClientSSLKeyJSON     - The JSON to be inserted, if created or modified, into the request body to add a Key. This shoule be blank if there is no SSL Key. (This should never happen for a Clientssl profile)
+    ProfileClientSSLCertJSON    - The JSON to be inserted, if created or modified, into the request body to add a Cert. This shoule be blank if there is no SSL Key. (This should never happen for a Clientssl profile)
+
+#### "Delete Client SSL Profile from Environment Variables" Request
+
+The inputs and outputs of the request are explained below:
+
+Inputs:
+    ProfileClientSSLID          - The ID of the requested profile.
+
+Outputs:
+    Blanks out the following:
+    ProfileClientSSLID          - The ID of the requested profile.
+    ProfileClientSSLName        - The Name of the requested profile.
+    ProfileClientSSLSelfLink    - A link, usable in the REST call's JSON in the request body, referring to the requested profile. (the URL contains "local host")
+    ProfileClientSSLSelfURI     - A link, usable in making REST calls, referring to the requested profile. (the URL contains the IP address of the BIG-IQ device)
+    ProfileClientSSLParent      - The name of the parent profile to the profile requested.
+    ProfileClientSSLParentLink  - A link, usable in the REST call's JSON in the request body, referring to the requested profile's parent profile. (the URL contains "local host")
+    ProfileClientSSLParentURI   - A link, usable in making REST calls, referring to the requested profile's parent profile. (the URL contains the IP address of the BIG-IQ device)
+    ProfileClientSSLChainLink   - A link, usable in the REST call's JSON in the request body, referring to the requested profile's assigned Chain Certificate. (the URL contains "local host")
+    ProfileClientSSLChainURI    - A link, usable in making REST calls, referring to the requested profile's assigned Chain Certificate. (the URL contains the IP address of the BIG-IQ device)
+    ProfileClientSSLKeyLink     - A link, usable in the REST call's JSON in the request body, referring to the requested profile's assigned SSL Key. (the URL contains "local host")
+    ProfileClientSSLKeyURI      - A link, usable in making REST calls, referring to the requested profile's assigned SSL Key. (the URL contains the IP address of the BIG-IQ device)
+    ProfileClientSSLCertLink    - A link, usable in the REST call's JSON in the request body, referring to the requested profile's assigned SSL Cert. (the URL contains "local host")
+    ProfileClientSSLCertURI     - A link, usable in making REST calls, referring to the requested profile's assigned SSL Cert. (the URL contains the IP address of the BIG-IQ device)
+    ProfileClientSSLChainJSON   - The JSON to be inserted, if created or modified, into the request body to add a Chain Cert. This shoule be blank if there is no Chain Certificate.
+    ProfileClientSSLKeyJSON     - The JSON to be inserted, if created or modified, into the request body to add a Key. This shoule be blank if there is no SSL Key. (This should never happen for a Clientssl profile)
+    ProfileClientSSLCertJSON    - The JSON to be inserted, if created or modified, into the request body to add a Cert. This shoule be blank if there is no SSL Key. (This should never happen for a Clientssl profile)
+    ProfileClientSSLPassPhrase  - The passphrase for the certificate.
+    ProfileClientSSLChain       - The name of the Chain Certificate for the SSL/Key Pair assigned to the profile.
+    ProfileClientSSLKey         - The name of the SSL Key assigned to the profile.
+    ProfileClientSSLKeyJSON     - The JSON to be inserted, if created or modified, into the request body to add a Key. This should be blank if there is no SSL Key. (This should never happen for a Clientssl profile)
+    ProfileClientSSLCert        - The name of the SSL Cert assigned to the profile.
+
+#### "Get TCP Profile by Name" Request
+
+The inputs and outputs of the request are explained below:
+
+Inputs:
+    ProfileSearchName          - The Name of the requested profile.
+
+Outputs:
+    ProfileTCPID                    - The TCP Profile's ID
+    ProfileTCPName                  - The Name of the TCP Profile
+    ProfileTCPSelfLink              - A link, usable in the REST call's JSON in the request body, referring to the requested profile. (the URL contains "local host")
+    ProfileTCPSelfURI               - A link, usable in making REST calls, referring to the requested profile. (the URL contains the IP address of the BIG-IQ device)
+    NewProfileType                  - The type of Profile to create, always "tcp" for TCP profiles.
+    NewProfileParent                - The name of the new profile
+    ProfileTCPParent                - The name of the Parent Profile.
+    ProfileTCPParentLink            - A link, usable in the REST call's JSON in the request body, referring to the requested PARENT profile. (the URL contains "local host")
+    ProfileTCPParentURI             - A link, usable in making REST calls, referring to the requested PARENT profile. (the URL contains the IP address of the BIG-IQ device)
+    ProfileTCPidleTimeout           - The Idle Timeout value for the profile, default is 300
+    ProfileTCPidleTimeoutJSON       - The JSON to use in the request body if the timeout is different than 300.
+    ProfileTCPisVerifiedAccept      - The value of the Verified Accept setting in the profile. Not, enabling this is not a recommended setting. This chnages the order of packet flow and could impact iRules negatively.
+    ProfileTCPisVerifiedAcceptJSON  - The JSON to use in the request body if the Verified Accept setting is enabled.
+
+#### "Create TCP Profile" Request
+
+The inputs and outputs of the request are explained below:
+
+Inputs:
+    NewProfileType                  - The type of Profile to create, always "tcp" for TCP profiles.
+
+Outputs:
+    ProfileTCPID                    - The TCP Profile's ID
+    ProfileTCPName                  - The Name of the TCP Profile
+    ProfileTCPSelfLink              - A link, usable in the REST call's JSON in the request body, referring to the requested profile. (the URL contains "local host")
+    ProfileTCPSelfURI               - A link, usable in making REST calls, referring to the requested profile. (the URL contains the IP address of the BIG-IQ device)
+    NewProfileParent                - The name of the new profile
+    ProfileTCPParent                - The name of the Parent Profile.
+    ProfileTCPParentLink            - A link, usable in the REST call's JSON in the request body, referring to the requested PARENT profile. (the URL contains "local host")
+    ProfileTCPParentURI             - A link, usable in making REST calls, referring to the requested PARENT profile. (the URL contains the IP address of the BIG-IQ device)
+    ProfileTCPidleTimeout           - The Idle Timeout value for teh profile, default is 300
+    ProfileTCPidleTimeoutJSON       - The JSON to use in the request body if the timeout is different than 300.
+    ProfileTCPisVerifiedAccept      - The value of the Verified Accept setting in the profile. Not, enabling this is not a recommended setting. This chnages the order of packet flow and could impact iRules negatively.
+    ProfileTCPisVerifiedAcceptJSON  - The JSON to use in the request body if the Verified Accept setting is enabled.
+
+#### "Delete TCP Profile from Environment Variables" Request
+
+The inputs and outputs of the request are explained below:
+
+Inputs:
+    ProfileTCPID                    - The TCP Profile's ID
+
+Outputs:
+    Sets teh following to blank:
+    ProfileTCPID                    - The TCP Profile's ID
+    ProfileTCPName                  - The Name of the TCP Profile
+    ProfileTCPSelfLink              - A link, usable in the REST call's JSON in the request body, referring to the requested profile. (the URL contains "local host")
+    ProfileTCPSelfURI               - A link, usable in making REST calls, referring to the requested profile. (the URL contains the IP address of the BIG-IQ device)
+    NewProfileType                  - The type of profile, always "tcp" for TCP Profiles.
+    NewProfileParent                - The name of the new profile
+    ProfileTCPParent                - The name of the Parent Profile.
+    ProfileTCPParentLink            - A link, usable in the REST call's JSON in the request body, referring to the requested PARENT profile. (the URL contains "local host")
+    ProfileTCPParentURI             - A link, usable in making REST calls, referring to the requested PARENT profile. (the URL contains the IP address of the BIG-IQ device)
+    ProfileTCPidleTimeout           - The Idle Timeout value for the profile, default is 300
+    ProfileTCPidleTimeoutJSON       - The JSON to use in the request body if the timeout is different than 300.
+    ProfileTCPisVerifiedAccept      - The value of the Verified Accept setting in the profile. Not, enabling this is not a recommended setting. This chnages the order of packet flow and could impact iRules negatively.
+    ProfileTCPisVerifiedAcceptJSON  - The JSON to use in the request body if the Verified Accept setting is enabled.
+
+#### "Get FastL4 Profile by Name" Request
+
+The inputs and outputs of the request are explained below:
+
+Inputs:
+    ProfileSearchName                    - The name of the fastl4 profile being searched for by name.
+
+Outputs:
+    ProfileFastL4ID                 - The ID of the fastl4 profile being searched for.
+    ProfileFastL4Name               - The Name of the fastl4 profile found.
+    ProfileFastL4SelfLink           - A link, usable in the REST call's JSON in the request body, referring to the requested profile. (the URL contains "local host")
+    ProfileFastL4SelfURI            - A link, usable in making REST calls, referring to the requested profile. (the URL contains the IP address of the BIG-IQ device)
+    NewProfileType                  - The type of Profile to create, always "fastl4" for fastl4 profiles.
+    NewProfileParent                - The name of the parent profile for the new profile.
+    ProfileFastL4Parent             - The name of the parent profile.
+    ProfileFastL4ParentLink         - A link, usable in the REST call's JSON in the request body, referring to the requested PARENT profile. (the URL contains "local host")
+    ProfileFastL4ParentURI          - A link, usable in making REST calls, referring to the requested PARENT profile. (the URL contains the IP address of the BIG-IQ device)
+    ProfileFastL4idleTimeout        - The Idle Timeout value for the profile, default is 300
+    ProfileFastL4idleTimeoutJSON    - The JSON to use in the request body if the timeout is different than 300.
+
+#### "Create FastL4 Profile" Request
+
+The inputs and outputs of the request are explained below:
+
+Inputs:
+    NewProfileType
+    ProfileFastL4Name               - The Name of the fastl4 profile found.
+    ProfileFastL4idleTimeoutJSON    - The JSON to use in the request body if the timeout is different than 300.
+    ProfileFastL4Parent             - The name of the parent profile.
+    ProfileFastL4ParentLink         - A link, usable in the REST call's JSON in the request body, referring to the requested PARENT profile. (the URL contains "local host")
+
+Outputs:
+    ProfileFastL4ID                 - The ID of the fastl4 profile being searched for.
+    ProfileFastL4Name               - The Name of the fastl4 profile found.
+    ProfileFastL4SelfLink           - A link, usable in the REST call's JSON in the request body, referring to the requested profile. (the URL contains "local host")
+    ProfileFastL4SelfURI            - A link, usable in making REST calls, referring to the requested profile. (the URL contains the IP address of the BIG-IQ device)
+
+It currently does NOT update the following:
+    NewProfileType                  - The type of Profile to create, always "fastl4" for fastl4 profiles.
+    NewProfileParent                - The name of the parent profile for the new profile.
+    ProfileFastL4Parent             - The name of the parent profile.
+    ProfileFastL4ParentLink         - A link, usable in the REST call's JSON in the request body, referring to the requested PARENT profile. (the URL contains "local host")
+    ProfileFastL4ParentURI          - A link, usable in making REST calls, referring to the requested PARENT profile. (the URL contains the IP address of the BIG-IQ device)
+    ProfileFastL4idleTimeout        - The Idle Timeout value for the profile, default is 300
+    ProfileFastL4idleTimeoutJSON    - The JSON to use in the request body if the timeout is different than 300.
+
+#### "Delete FastL4 Profile From Environment Variables" Request
+
+The inputs and outputs of the request are explained below:
+
+Inputs:
+    ProfileFastL4ID                 - The ID of the fastl4 profile being searched for.
+
+Outputs:
+
+    Sets the following to blank:
+        ProfileFastL4ID                 - The ID of the fastl4 profile being searched for.
+        ProfileFastL4Name               - The Name of the fastl4 profile found.
+        ProfileFastL4SelfLink           - A link, usable in the REST call's JSON in the request body, referring to the requested profile. (the URL contains "local host")
+        ProfileFastL4SelfURI            - A link, usable in making REST calls, referring to the requested profile. (the URL contains the IP address of the BIG-IQ device)
+        NewProfileType                  - The type of Profile to create, always "fastl4" for fastl4 profiles.
+        ProfileFastL4Parent             - The name of the parent profile.
+        ProfileFastL4ParentLink         - A link, usable in the REST call's JSON in the request body, referring to the requested PARENT profile. (the URL contains "local host")
+        ProfileFastL4ParentURI          - A link, usable in making REST call's JSON, referring to the requested PARENT profile. (the URL contains the IP address of the BIG-IQ device.)
+        ProfileFastL4ID                 - The ID of the fastl4 profile being searched for.
+        ProfileFastL4Name               - The Name of the fastl4 profile found.
+        ProfileFastL4idleTimeoutJSON    - The JSON to use in the request body if the timeout is different than 300.
+        ProfileFastL4idleTimeout        - The Idle Timeout value for the profile, default is 300
+
+#### "Get HTTP Profile by Name" Request
+
+The inputs and outputs of the request are explained below:
+
+Inputs:
+    ProfileSearchName                    - The name of the HTTP profile being searched for by name.
+
+Outputs:
+    ProfileHTTPID           - The ID of the HTTP profile being searched for.
+    ProfileHTTPName         - The Name of the HTTP profile found.
+    ProfileHTTPSelfLink     - A link, usable in the REST call's JSON in the request body, referring to the requested profile. (the URL contains "local host")
+    ProfileHTTPSelfURI      - A link, usable in making REST calls, referring to the requested profile. (the URL contains the IP address of the BIG-IQ device)
+    NewProfileType          - The type of Profile to create, always "HTTP" for HTTP profiles.
+    NewProfileParent        - The name of the parent profile for the new profile.
+    ProfileHTTPParent       - The name of the parent profile.
+    ProfileHTTPParentLink   - A link, usable in the REST call's JSON in the request body, referring to the requested PARENT profile. (the URL contains "local host")
+    ProfileHTTPParentURI    - A link, usable in making REST calls, referring to the requested PARENT profile. (the URL contains the IP address of the BIG-IQ device)
+    ProfileHTTPXFF          - The state of the InsertXFF setting that, when enabled, inserts the client source address into the HTTP Headers of teh Server side connection.
+
+#### "Create HTTP Profile" Request
+
+The inputs and outputs of the request are explained below:
+
+Pre-Reqs:
+
+Inputs:
+    ProfileHTTPName         - The Name of the HTTP profile found.
+    ProfileHTTPXFF          - The state of the InsertXFF setting that, when enabled, inserts the client source address into the HTTP Headers of teh Server side connection.
+Outputs:
+    ProfileHTTPID           - The ID of the HTTP profile being searched for.
+    ProfileHTTPName         - The Name of the HTTP profile found.
+    ProfileHTTPSelfLink     - A link, usable in the REST call's JSON in the request body, referring to the requested profile. (the URL contains "local host")
+    ProfileHTTPSelfURI      - A link, usable in making REST calls, referring to the requested profile. (the URL contains the IP address of the BIG-IQ device)
+    NewProfileType          - The type of Profile to create, always "HTTP" for HTTP profiles.
+    NewProfileParent        - The name of the parent profile for the new profile.
+    ProfileHTTPParent       - The name of the parent profile.
+    ProfileHTTPParentLink   - A link, usable in the REST call's JSON in the request body, referring to the requested PARENT profile. (the URL contains "local host")
+    ProfileHTTPParentURI    - A link, usable in making REST calls, referring to the requested PARENT profile. (the URL contains the IP address of the BIG-IQ device)
+    ProfileHTTPID           - The ID of the HTTP profile being searched for.
+
+#### "Delete HTTP Profile From Environment Variables" Request
+
+The inputs and outputs of the request are explained below:
+
+Pre-Reqs:
+
+Inputs:
+    ProfileHTTPID           - The ID of the HTTP profile being searched for.
+Outputs:
+    Sets teh following to Blank:
+        ProfileHTTPID           - The ID of the HTTP profile being searched for.
+        ProfileHTTPName         - The Name of the HTTP profile found.
+        ProfileHTTPSelfLink     - A link, usable in the REST call's JSON in the request body, referring to the requested profile. (the URL contains "local host")
+        ProfileHTTPSelfURI      - A link, usable in making REST calls, referring to the requested profile. (the URL contains the IP address of the BIG-IQ device)
+        NewProfileType          - The type of Profile to create, always "HTTP" for HTTP profiles.
+        NewProfileParent        - The name of the parent profile for the new profile.
+        ProfileHTTPParent       - The name of the parent profile.
+        ProfileHTTPParentLink   - A link, usable in the REST call's JSON in the request body, referring to the requested PARENT profile. (the URL contains "local host")
+        ProfileHTTPParentURI    - A link, usable in making REST calls, referring to the requested PARENT profile. (the URL contains the IP address of the BIG-IQ device)
+        ProfileHTTPXFF          - The state of the InsertXFF setting that, when enabled, inserts the client source address into the HTTP Headers of teh Server side connection.
 
 more to be added
 
