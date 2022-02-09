@@ -76,7 +76,7 @@ Next, change the IP Address in "VirtualDestinationAddress" to an unused IP addre
 
 Run the "Create Virtual Server from Environment Variables" request and review the created virtual in the BIG-IQ interface.
 
-Next, update the information stored in the environment to reflect the new virtual server by placing the name of teh virtual you created into "SearchVirtualName" and run "NEW-cloudops_3-11430_2_vs". Run "Get Remaining Virtual Information" as well, if you modified/changed pool information.
+Next, update the information stored in the environment to reflect the new virtual server by placing the name of the virtual you created into "SearchVirtualName" and run "NEW-cloudops_3-11430_2_vs". Run "Get Remaining Virtual Information" as well, if you modified/changed pool information.
 
 Finally, create a deployment for the virtual server by runnning the "Create Virtual Deployment without deploy" request. When successful, look at the deployment and ensure there are no unexpected conflicts. Deploy from the GUI. (Note: You CAN completely deploy from REST as well, this is not implemented in early releases of this collection on purpose to add a layer of protection.)
 
@@ -112,8 +112,8 @@ The monitor tasks section of the collection retrieves, creates, and deletes moni
 
 #### "Get Monitor from Name" Request
 
-This request pulls a specific monitor based on it's "MonitorTypeName". The strings for "MonitorTypeName" are teh same as the ones used in a tmsh command. For example, "tmsh list ltm monitor http".
-It also uses the "SearchMonitorName" variable which should be teh exact name of the monitor you are looking for. As with all Searches in this collection, it is best to use the EXACT name of the monitor you desire. Not doing so could return several monitors and the wrong monitor could be populated. For example, you have a two monitors; "Test-www.widgets.com" and "Prod-www.widgets.com". Using the SearchMonitorName of "www.widgets.com" would return 2 results. This can potentially lead to unpredictable results, even though there are checks for this scenario in the collection.
+This request pulls a specific monitor based on it's "MonitorTypeName". The strings for "MonitorTypeName" are the same as the ones used in a tmsh command. For example, "tmsh list ltm monitor http".
+It also uses the "SearchMonitorName" variable which should be the exact name of the monitor you are looking for. As with all Searches in this collection, it is best to use the EXACT name of the monitor you desire. Not doing so could return several monitors and the wrong monitor could be populated. For example, you have a two monitors; "Test-www.widgets.com" and "Prod-www.widgets.com". Using the SearchMonitorName of "www.widgets.com" would return 2 results. This can potentially lead to unpredictable results, even though there are checks for this scenario in the collection.
 
 The inputs and outputs of the request are explained below:
 
@@ -127,9 +127,9 @@ Outputs:
     MonitorID           - The ID of the monitor created
     MonitorType         - The name for the type of monitor. (This is the 'kind' from the rest response body)
     MonitorTypeString   - Programmatically populated value, The string of the monitortype in a response or request body. Used in a section of it's own, unique to each monitor type. I.E. "monitorHttpReferences" for http monitors.
-    MonitorTypeName     - Programmatically populated value, The string used to reference the type in a JSON document. This is teh same as a TMOS Command would use, "http" for a http monitor etc.
+    MonitorTypeName     - Programmatically populated value, The string used to reference the type in a JSON document. This is the same as a TMOS Command would use, "http" for a http monitor etc.
     MonitorSelfLink     - The link to the monitor for adding to JSON documents sent in the request body. (has "localhost" for the hostname in the URL.)
-    MonitorSelfURI      - The link to the monitor used to make REST calls. (Has teh IP address of the BIG-IQ in the URL.)
+    MonitorSelfURI      - The link to the monitor used to make REST calls. (Has the IP address of the BIG-IQ in the URL.)
     MonitorName         - The name of the moinitor.
 
 #### "Create New Monitor from Environment Variables" Request
@@ -178,6 +178,8 @@ The Node tasks section of the collection contains requests that will create, ret
 
 #### "Get Node ID From IP Address" Request
 
+This request populates all teh required information about a Node. You would typically use this request as a pre-request to add a pool member to a pool.
+
 The inputs and outputs of the request are explained below:
 
 Inputs:
@@ -194,25 +196,29 @@ Outputs:
 
 #### "Create Node From Environment Variables" Request
 
+This request creates a new node in the configuration, with the node name being the IP address.
+
 The inputs and outputs of the request are explained below:
 
 Inputs:
 
     SearchNodeName  - User Input, The name (IP, if names were not provided at node creation) of the node.
-    NodeDescription - User Input, The description of teh new node to be created.
+    NodeDescription - User Input, The description of the new node to be created.
     DeviceSelfLink  - Programatic input, From "Get Device by Address".
 
 Outputs:
 
     NodeID          - The ID of the created Node.
-    NodeName        - The Name of teh created node.
-    NodeSelfLink    - The Link reference for future REST calls. (This has localhost as the hostname, it is for teh Request body of future rest calls. If you need to call teh object itself use NodeSelfURI instead)
+    NodeName        - The Name of the created node.
+    NodeSelfLink    - The Link reference for future REST calls. (This has localhost as the hostname, it is for the Request body of future rest calls. If you need to call the object itself use NodeSelfURI instead)
     NodeSelfURI     - The URI with IP address of the BIG-IQ to use to make future REST calls. (Do not use in a request body)
     NodeDescription - The Description of the node.
     NodeName        - The Name of the node.
     NodeJSON        - The JSON describing the node.
 
 #### "Delete Node From Environment" Request
+
+This request will delete a node from the configuration and blank out all node related environment variables.
 
 The inputs and outputs of the request are explained below:
 
@@ -274,7 +280,7 @@ Inputs:
         This iss NOT the same string as is used in a TMSH command; monitorHttpReferences, monitorHttpsReferences, monitorTcpReferences, etc
     MonitorTypeName     - Programatic input (from another REST call) or User Input
         This can be user provided, in a search for example, or is programatically provided. It is the type of monitor. 
-        Unlike above, this is teh same string used in a tmsh command; http, https, tcp, etc
+        Unlike above, this is the same string used in a tmsh command; http, https, tcp, etc
 
 Outputs:
 
@@ -319,7 +325,7 @@ Inputs:
     PoolID          - The ID of the pool you wish to add a pool member to.
     NodeSelfLink    - The Self Link to the node you wish to add as a pool member
     NodeName        - The Name of the Node.
-    PoolMemberPort  - User supplied value. The port tehNode is listening on.
+    PoolMemberPort  - User supplied value. The port theNode is listening on.
     NodeDescription - User supplied value. The description for the Node.
 
 Outputs:
@@ -616,7 +622,7 @@ Outputs:
     ProfileTCPParent                - The name of the Parent Profile.
     ProfileTCPParentLink            - A link, usable in the REST call's JSON in the request body, referring to the requested PARENT profile. (the URL contains "local host")
     ProfileTCPParentURI             - A link, usable in making REST calls, referring to the requested PARENT profile. (the URL contains the IP address of the BIG-IQ device)
-    ProfileTCPidleTimeout           - The Idle Timeout value for teh profile, default is 300
+    ProfileTCPidleTimeout           - The Idle Timeout value for the profile, default is 300
     ProfileTCPidleTimeoutJSON       - The JSON to use in the request body if the timeout is different than 300.
     ProfileTCPisVerifiedAccept      - The value of the Verified Accept setting in the profile. Not, enabling this is not a recommended setting. This chnages the order of packet flow and could impact iRules negatively.
     ProfileTCPisVerifiedAcceptJSON  - The JSON to use in the request body if the Verified Accept setting is enabled.
@@ -631,7 +637,7 @@ Inputs:
 
 Outputs:
 
-Sets teh following to blank:
+Sets the following to blank:
 
     ProfileTCPID                    - The TCP Profile's ID
     ProfileTCPName                  - The Name of the TCP Profile
@@ -742,7 +748,7 @@ Outputs:
     ProfileHTTPParent       - The name of the parent profile.
     ProfileHTTPParentLink   - A link, usable in the REST call's JSON in the request body, referring to the requested PARENT profile. (the URL contains "local host")
     ProfileHTTPParentURI    - A link, usable in making REST calls, referring to the requested PARENT profile. (the URL contains the IP address of the BIG-IQ device)
-    ProfileHTTPXFF          - The state of the InsertXFF setting that, when enabled, inserts the client source address into the HTTP Headers of teh Server side connection.
+    ProfileHTTPXFF          - The state of the InsertXFF setting that, when enabled, inserts the client source address into the HTTP Headers of the Server side connection.
 
 #### "Create HTTP Profile" Request
 
@@ -751,7 +757,7 @@ The inputs and outputs of the request are explained below:
 Inputs:
 
     ProfileHTTPName         - The Name of the HTTP profile found.
-    ProfileHTTPXFF          - The state of the InsertXFF setting that, when enabled, inserts the client source address into the HTTP Headers of teh Server side connection.
+    ProfileHTTPXFF          - The state of the InsertXFF setting that, when enabled, inserts the client source address into the HTTP Headers of the Server side connection.
 Outputs:
 
     ProfileHTTPID           - The ID of the HTTP profile being searched for.
@@ -774,7 +780,7 @@ Inputs:
     ProfileHTTPID           - The ID of the HTTP profile being searched for.
 Outputs:
 
-Sets teh following to Blank:
+Sets the following to Blank:
 
         ProfileHTTPID           - The ID of the HTTP profile being searched for.
         ProfileHTTPName         - The Name of the HTTP profile found.
@@ -785,7 +791,7 @@ Sets teh following to Blank:
         ProfileHTTPParent       - The name of the parent profile.
         ProfileHTTPParentLink   - A link, usable in the REST call's JSON in the request body, referring to the requested PARENT profile. (the URL contains "local host")
         ProfileHTTPParentURI    - A link, usable in making REST calls, referring to the requested PARENT profile. (the URL contains the IP address of the BIG-IQ device)
-        ProfileHTTPXFF          - The state of the InsertXFF setting that, when enabled, inserts the client source address into the HTTP Headers of teh Server side connection.
+        ProfileHTTPXFF          - The state of the InsertXFF setting that, when enabled, inserts the client source address into the HTTP Headers of the Server side connection.
 
 more to be added
 
@@ -872,19 +878,19 @@ Outputs:
     PoolSelfLink                - Programmatically populated value, The link to use in JSON documents to reference the Pool 
     PoolSelfURI         - Programmatically populated value, The link used to make requests about the Pool assigned in REST Calls
     PoolID                      - Programmatically populated value, The ID that references the Pool Associated with the virtual server.
-    PoolDeviceLink              - Programmatically populated value, The link to use in JSON documents to reference the Device containnig teh Pool configuration.
+    PoolDeviceLink              - Programmatically populated value, The link to use in JSON documents to reference the Device containnig the Pool configuration.
     PoolDeviceURI               - Programmatically populated value, The link used to make requests about the device containing the Pool configuration in REST Calls
     PoolMembersLink             - Programmatically populated value, The link to use in JSON documents to reference the Pool Members
     PoolMembersURI              - Programmatically populated value, The link used to make requests about the Pool Members in REST Calls
     PoolMonitorLink             - Programmatically populated value, The link to use in JSON documents to reference the Monitor assigned to the pool
-    PoolMonitorURI              - Programmatically populated value, The link used to make requests about the monitor assigend to teh pool in REST Calls
+    PoolMonitorURI              - Programmatically populated value, The link used to make requests about the monitor assigend to the pool in REST Calls
     MonitorSelfLink             - Programmatically populated value, The link to use in JSON documents to reference the Monitor assigned
     MonitorSelfURI              - Programmatically populated value, The link used to make requests about the monitor assigned in REST Calls
     MonitorID                   - Programmatically populated value, The ID that represents the monitor.
     MonitorType                 - Programmatically populated value, The type of monitor
     MonitorTypeString           - Programmatically populated value, The string of the path used to reference the type in a JSON document.
     MonitorTypeName             - Programmatically populated value, The string used to reference the type in a JSON document.
-    DeviceSelfURI               - Programmatically populated value, The link used to make requests about the Device containing teh configuration in REST Calls
+    DeviceSelfURI               - Programmatically populated value, The link used to make requests about the Device containing the configuration in REST Calls
     PoolName                    - Programmatically populated value, The Name of the pool attached to the virtual server.
     DeviceID                    - Programmatically populated value, The ID of the BIG-IP device the configuration is on.
     DeviceSelfLink              - Programmatically populated value, A link, usable in the REST call's JSON in the request body, referring to the device the configuration is on. (the URL contains "local host")
@@ -1066,7 +1072,7 @@ Input:
 
 Output:
 
-    NewFileUploadID             - The ID of the file upload, can be used later to check on the status of teh key creation. Ideally, it is "FINISHED"-- but if not it can provide some troubleshooting information.
+    NewFileUploadID             - The ID of the file upload, can be used later to check on the status of the key creation. Ideally, it is "FINISHED"-- but if not it can provide some troubleshooting information.
 
 #### "Create Cert from Uploaded File" Request
 
@@ -1079,7 +1085,7 @@ Input:
 
 Output:
 
-    NewFileUploadID             - The ID of the file upload, can be used later to check on the status of teh key creation. Ideally, it is "FINISHED"-- but if not it can provide some troubleshooting information.
+    NewFileUploadID             - The ID of the file upload, can be used later to check on the status of the key creation. Ideally, it is "FINISHED"-- but if not it can provide some troubleshooting information.
 
 #### "Get SSL Object Creation Status" Request
 
