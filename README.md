@@ -980,6 +980,43 @@ Outputs:
 
 more to be added
 
+### SSL Certificate Management Tasks
+
+#### "Upload File" Request
+
+The inputs and outputs of the request are explained below:
+
+    NewFileUploadContent
+
+#### "Create Key from Uploaded File" Request
+
+The inputs and outputs of the request are explained below:
+
+Input:
+    NewFileUploadName       - The name of the file that was uploaded to /var/config/rest/downloads/ from the "Upload File" request or directly via scp or some other means.
+    NewFileUploadContent    - The content being uploaded so calculations for size and Content-Range can be calculated. 
+Output:
+    NewFileUploadID             - The ID of the file upload, can be used later to check on the status of teh key creation. Ideally, it is "FINISHED"-- but if not it can provide some troubleshooting information.
+
+#### "Create Cert from Uploaded File" Request
+
+The inputs and outputs of the request are explained below:
+
+Input:
+    NewFileUploadName       - The name of the file that was uploaded to /var/config/rest/downloads/ from the "Upload File" request or directly via scp or some other means.
+    NewFileUploadContent    - The content being uploaded so calculations for size and Content-Range can be calculated. 
+Output:
+    NewFileUploadID             - The ID of the file upload, can be used later to check on the status of teh key creation. Ideally, it is "FINISHED"-- but if not it can provide some troubleshooting information.
+
+#### "Get SSL Object Creation Status" Request
+
+The inputs and outputs of the request are explained below:
+
+    Input:
+        NewFileUploadID - The ID of a previous SSL Object Creation request.
+    Output:
+        None, REST is returned with status and, potentially, error information.
+
 ### Troubleshooting
 
 1. Always check the pre-requisits for the request that had an error and ensure that the appropriate environment variables have correct values
