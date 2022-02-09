@@ -801,31 +801,31 @@ Inputs:
     SearchVirtualName           - User Input, the name of the virtual to search for and gather information about.
 
 Outputs:
-	VirtualName                 - Programmatically populated value, The name of the virtual server
-    VirtualID			        - Programmatically populated value, The ID that references the virtual server
-	VirtualSelfLink		        - Programmatically populated value, The link to use in JSON documents to reference the Virtual Server
-	VirtualSelfURI		        - Programmatically populated value, The link used to make requests about the virtual server in REST Calls
-	VirtualDeviceLink	        - Programmatically populated value, The link to use in JSON documents to reference the Device the virtual server is on.
-	VirtualDeviceURI	        - Programmatically populated value, The link used to make requests about the Device containing the configuration in REST Calls
-	VirtualProfilesLink	        - Programmatically populated value, The link to use in JSON documents to reference the Profiles assigned to the virtual server.
-	VirtualProfilesURI	        - Programmatically populated value, The link used to make requests about the Profiles assigend in REST Calls
-	VirtualJSON			        - Programmatically populated value, The JSON that references the Virtual Server 
-	PoolSelfLink		        - Programmatically populated value, The link to use in JSON documents to reference the Pool 
-	PoolSelfURI			        - Programmatically populated value, The link used to make requests about the Pool assigned in REST Calls
-	PoolID				        - Programmatically populated value, The ID that references the Pool Associated with the virtual server.
-	PoolDeviceLink		        - Programmatically populated value, The link to use in JSON documents to reference the Device containnig teh Pool configuration.
-	PoolDeviceURI		        - Programmatically populated value, The link used to make requests about the device containing the Pool configuration in REST Calls
-	PoolMembersLink		        - Programmatically populated value, The link to use in JSON documents to reference the Pool Members
-	PoolMembersURI		        - Programmatically populated value, The link used to make requests about the Pool Members in REST Calls
-	PoolMonitorLink		        - Programmatically populated value, The link to use in JSON documents to reference the Monitor assigned to the pool
-	PoolMonitorURI		        - Programmatically populated value, The link used to make requests about the monitor assigend to teh pool in REST Calls
-	MonitorSelfLink		        - Programmatically populated value, The link to use in JSON documents to reference the Monitor assigned
-	MonitorSelfURI		        - Programmatically populated value, The link used to make requests about the monitor assigned in REST Calls
-	MonitorID			        - Programmatically populated value, The ID that represents the monitor.
-	MonitorType			        - Programmatically populated value, The type of monitor
-	MonitorTypeString	        - Programmatically populated value, The string of the path used to reference the type in a JSON document.
-	MonitorTypeName		        - Programmatically populated value, The string used to reference the type in a JSON document.
-	DeviceSelfURI		        - Programmatically populated value, The link used to make requests about the Device containing teh configuration in REST Calls
+    VirtualName                 - Programmatically populated value, The name of the virtual server
+    VirtualID                   - Programmatically populated value, The ID that references the virtual server
+    VirtualSelfLink             - Programmatically populated value, The link to use in JSON documents to reference the Virtual Server
+    VirtualSelfURI              - Programmatically populated value, The link used to make requests about the virtual server in REST Calls
+    VirtualDeviceLink           - Programmatically populated value, The link to use in JSON documents to reference the Device the virtual server is on.
+    VirtualDeviceURI            - Programmatically populated value, The link used to make requests about the Device containing the configuration in REST Calls
+    VirtualProfilesLink         - Programmatically populated value, The link to use in JSON documents to reference the Profiles assigned to the virtual server.
+    VirtualProfilesURI          - Programmatically populated value, The link used to make requests about the Profiles assigend in REST Calls
+    VirtualJSON                 - Programmatically populated value, The JSON that references the Virtual Server 
+    PoolSelfLink                - Programmatically populated value, The link to use in JSON documents to reference the Pool 
+    PoolSelfURI         - Programmatically populated value, The link used to make requests about the Pool assigned in REST Calls
+    PoolID                      - Programmatically populated value, The ID that references the Pool Associated with the virtual server.
+    PoolDeviceLink              - Programmatically populated value, The link to use in JSON documents to reference the Device containnig teh Pool configuration.
+    PoolDeviceURI               - Programmatically populated value, The link used to make requests about the device containing the Pool configuration in REST Calls
+    PoolMembersLink             - Programmatically populated value, The link to use in JSON documents to reference the Pool Members
+    PoolMembersURI              - Programmatically populated value, The link used to make requests about the Pool Members in REST Calls
+    PoolMonitorLink             - Programmatically populated value, The link to use in JSON documents to reference the Monitor assigned to the pool
+    PoolMonitorURI              - Programmatically populated value, The link used to make requests about the monitor assigend to teh pool in REST Calls
+    MonitorSelfLink             - Programmatically populated value, The link to use in JSON documents to reference the Monitor assigned
+    MonitorSelfURI              - Programmatically populated value, The link used to make requests about the monitor assigned in REST Calls
+    MonitorID                   - Programmatically populated value, The ID that represents the monitor.
+    MonitorType                 - Programmatically populated value, The type of monitor
+    MonitorTypeString           - Programmatically populated value, The string of the path used to reference the type in a JSON document.
+    MonitorTypeName             - Programmatically populated value, The string used to reference the type in a JSON document.
+    DeviceSelfURI               - Programmatically populated value, The link used to make requests about the Device containing teh configuration in REST Calls
     PoolName                    - Programmatically populated value, The Name of the pool attached to the virtual server.
     DeviceID                    - Programmatically populated value, The ID of the BIG-IP device the configuration is on.
     DeviceSelfLink              - Programmatically populated value, A link, usable in the REST call's JSON in the request body, referring to the device the configuration is on. (the URL contains "local host")
