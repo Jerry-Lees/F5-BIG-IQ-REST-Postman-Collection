@@ -65,6 +65,7 @@ Run this section *ONLY* against a test environment. This mini-guide will take yo
 Once the above variables are populated for your environment, you can run "Gather information to start/Get Virtual Information from name" by populating the following variable:
 
 -SearchVirtualName
+
     This is the virtual server you wish to search for. This would be typically used to populate variables and/or to get the configuration for a virtual server you wish to modify.
 
 After running this, take a look at the environment variables. You should find that a great deal of information is populated about the virtual server its pool, pool's monitor, and the device it is configured on.
@@ -117,10 +118,12 @@ It also uses the "SearchMonitorName" variable which should be teh exact name of 
 The inputs and outputs of the request are explained below:
 
 Inputs:
+
     MonitorTypeName     - User Supplied value for the type of monitor being created
     SearchMonitorName   - The name of the monitor to find
 
 Outputs:
+
     MonitorID           - The ID of the monitor created
     MonitorType         - The name for the type of monitor. (This is the 'kind' from the rest response body)
     MonitorTypeString   - Programmatically populated value, The string of the monitortype in a response or request body. Used in a section of it's own, unique to each monitor type. I.E. "monitorHttpReferences" for http monitors.
@@ -136,12 +139,14 @@ This request creates a monitor from the values in the environment variables ment
 The inputs and outputs of the request are explained below:
 
 Inputs:
+
     MonitorTypeName     - User Supplied value for the type of monitor being created.
     MonitorName         - The name of the new monitor.
     MonitorRecvString   - The Receive string for the monitor. (ensure that \r\n is entered as \\r\\n to escape the \, otherwise it won't work)
     MonitorSendString   - The Send strin for the monitor. (ensure that \r\n is entered as \\r\\n to escape the \, otherwise it won't work)
 
 Outputs:
+
     MonitorID           - The ID of the monitor created
     MonitorSelfLink     - The link to the monitor for adding to JSON documents
     MonitorSelfURI      - The link to the monitor used in REST calls
@@ -155,9 +160,11 @@ This request deletes a pool for later deployment (and deletion) to the BIG-IP Co
 The inputs and outputs of the request are explained below:
 
 Inputs:
+
     MonitorTypeName  - User Supplied value for the type of monitor being created, is programatically updated from monitor get calls in this collection as well.
     MonitorID           - The ID of the monitor deleted.
 Outputs:
+
     MonitorID           - The ID of the monitor created, set to "".
     MonitorSelfLink     - The link to the monitor for adding to JSON documents, set to "".
     MonitorType         - The "kind" of monitor, set to "".
@@ -174,8 +181,10 @@ The Node tasks section of the collection contains requests that will create, ret
 The inputs and outputs of the request are explained below:
 
 Inputs:
+
     SearchNodeName - The name of the node to find in all nodes.
 Outputs:
+
     NodeID          - The ID of the found node.
     NodeSelfLink    - The link to the node's configuration to use in JSON Documents used to make a REST call
     NodeSelfURI     - The link to a node's configuration to use when making a REST call.
@@ -188,11 +197,13 @@ Outputs:
 The inputs and outputs of the request are explained below:
 
 Inputs:
+
     SearchNodeName  - User Input, The name (IP, if names were not provided at node creation) of the node.
     NodeDescription - User Input, The description of teh new node to be created.
     DeviceSelfLink  - Programatic input, From "Get Device by Address".
 
 Outputs:
+
     NodeID          - The ID of the created Node.
     NodeName        - The Name of teh created node.
     NodeSelfLink    - The Link reference for future REST calls. (This has localhost as the hostname, it is for teh Request body of future rest calls. If you need to call teh object itself use NodeSelfURI instead)
@@ -206,9 +217,11 @@ Outputs:
 The inputs and outputs of the request are explained below:
 
 Inputs:
+
     NodeID        - Programatic input (from another REST call)
 
 Outputs:
+
     NodeID          - Set to Blank
     NodeName        - Set to Blank
     NodeSelfLink    - Set to Blank
@@ -225,9 +238,11 @@ more to be added
 The inputs and outputs of the request are explained below:
 
 Inputs:
+
     SearchPoolName  - The name of the pool to find.
 
 Outputs:
+
     PoolID          - The ID of the pool.
     PoolSelfLink    - The Link to the Pool information stored, for use inside REST request bodies. (has "localhost" in the URL)
     PoolSelfURI     - The URL to the pool information stored, for use in making REST requests. (has the IP address of the BIG-IQ device in the URL.)
@@ -242,9 +257,11 @@ Outputs:
 The inputs and outputs of the request are explained below:
 
 Pre-Reqs:
+
     Previously populated monitor information is required, as is a device reference.
 
 Inputs:
+
     PoolDescription     - User Input
         This is User Supplied if creating a new Pool, Programatic Supplied if modifying a new pool.
     NewDeviceLink       - Programatic input (from another REST call) or User Input
@@ -260,6 +277,7 @@ Inputs:
         Unlike above, this is teh same string used in a tmsh command; http, https, tcp, etc
 
 Outputs:
+
     PoolID          - The ID for the pool.
     PoolDeviceLink  - A Link referring to the device the configuration should be on, used in JSON documents in the request body for REST calls. (has localhost in the URL)
     PoolMembersLink - A Link referring to the pool members collection, used in JSON documents in the request body for REST calls. (has localhost in the URL)
@@ -272,9 +290,11 @@ Outputs:
 The inputs and outputs of the request are explained below:
 
 Inputs:
+
     PoolID          - Programatic input (from another REST call) or User Input
 
 Outputs:
+
     PoolName        -
     PoolDescription -
     PoolID          -
@@ -295,6 +315,7 @@ Outputs:
 The inputs and outputs of the request are explained below:
 
 Inputs:
+
     PoolID          - The ID of the pool you wish to add a pool member to.
     NodeSelfLink    - The Self Link to the node you wish to add as a pool member
     NodeName        - The Name of the Node.
@@ -302,6 +323,7 @@ Inputs:
     NodeDescription - User supplied value. The description for the Node.
 
 Outputs:
+
     PoolMemberLink  - The link used in REST calls to refer to the Pool Members Collection, used in request bodies. (has "localhost" in the URL)
     PoolMemberID    - The ID of the pool member.
 
@@ -312,10 +334,12 @@ The inputs and outputs of the request are explained below:
 Note, this doesn't currently work, it doesn't have the pool member ID from a node look up. This is a known issue.
 
 Inputs:
+
     PoolID          - The ID of the pool you wish to modify a pool member.
     PoolMemberID    - The ID of the pool member you wish to delete.
 
 Outputs:
+
     PoolMemberID    - The ID for the Pool Member that was deleted.
 
 #### "Get a Pool's Members JSON" Request
@@ -325,9 +349,11 @@ The inputs and outputs of the request are explained below:
 Note: This request currently has little value and may go away soon. This request should be considered depricated.
 
 Inputs:
+
     PoolID          - The ID of the pool you wish to modify a pool member.
 
 Outputs:
+
     PoolMemberJSON    - The JSON for the Pool Members Collection.
 
 more to be added
@@ -339,9 +365,11 @@ more to be added
 The inputs and outputs of the request are explained below:
 
 Inputs:
+
     ProfileSearchName   - The name of the Profile being searched for.
 
 Outputs:
+
     ProfileServerSSLID          - The ID of the requested profile.
     ProfileServerSSLName        - The Name of the requested profile.
     ProfileServerSSLSelfLink    - A link, usable in the REST call's JSON in the request body, referring to the requested profile. (the URL contains "local host")
@@ -368,6 +396,7 @@ Outputs:
 The inputs and outputs of the request are explained below:
 
 Inputs:
+
     ProfileServerSSLChainJSON   - The JSON to be inserted, if created or modified, into the request body to add a Chain Cert. This shoule be blank if there is no Chain Certificate.
     ProfileServerSSLKeyJSON     - The JSON to be inserted, if created or modified, into the request body to add a Key. This shoule be blank if there is no SSL Key. (This should never happen for a serverssl profile)
     ProfileServerSSLCertJSON    - The JSON to be inserted, if created or modified, into the request body to add a Cert. This shoule be blank if there is no SSL Key. (This should never happen for a serverssl profile)
@@ -377,6 +406,7 @@ Inputs:
     ProfileServerSSLName        - The Name of the requested profile.
 
 Outputs:
+
     ProfileServerSSLChainJSON   - The JSON to be inserted, if created or modified, into the request body to add a Chain Cert. This shoule be blank if there is no Chain Certificate.
     ProfileServerSSLKeyJSON     - The JSON to be inserted, if created or modified, into the request body to add a Key. This shoule be blank if there is no SSL Key. (This should never happen for a serverssl profile)
     ProfileServerSSLCertJSON    - The JSON to be inserted, if created or modified, into the request body to add a Cert. This shoule be blank if there is no SSL Key. (This should never happen for a serverssl profile)
@@ -404,9 +434,11 @@ Outputs:
 The inputs and outputs of the request are explained below:
 
 Inputs:
+
     ProfileServerSSLID          - The ID of the requested profile.
 
 Outputs:
+
     None, Set to blank the following:
     ProfileServerSSLID          - The ID of the requested profile.
     ProfileServerSSLName        - The Name of the requested profile.
@@ -438,9 +470,11 @@ Outputs:
 The inputs and outputs of the request are explained below:
 
 Inputs:
+
     ProfileSearchName           - The name of the profile being searched for.
 
 Outputs:
+
     ProfileClientSSLID          - The ID of the requested profile.
     ProfileClientSSLName        - The Name of the requested profile.
     ProfileClientSSLParent      - The name of the parent profile to the profile requested.
@@ -468,6 +502,7 @@ Outputs:
 The inputs and outputs of the request are explained below:
 
 Inputs:
+
     ProfileClientSSLPassPhrase  - The passphrase for the certificate.
     ProfileClientSSLParent      - The name of the parent profile to the profile requested.
     ProfileClientSSLParentLink  - A link, usable in the REST call's JSON in the request body, referring to the requested profile's parent profile. (the URL contains "local host")
@@ -500,6 +535,7 @@ Outputs:
     ProfileClientSSLCertURI     - A link, usable in making REST calls, referring to the requested profile's assigned SSL Cert. (the URL contains the IP address of the BIG-IQ device)
 
 Currently does not populate the following:
+
     ProfileClientSSLKeyJSON     - The JSON to be inserted, if created or modified, into the request body to add a Key. This shoule be blank if there is no SSL Key. (This should never happen for a Clientssl profile)
     ProfileClientSSLChainJSON   - The JSON to be inserted, if created or modified, into the request body to add a Chain Cert. This shoule be blank if there is no Chain Certificate.
     ProfileClientSSLKeyJSON     - The JSON to be inserted, if created or modified, into the request body to add a Key. This shoule be blank if there is no SSL Key. (This should never happen for a Clientssl profile)
@@ -510,9 +546,11 @@ Currently does not populate the following:
 The inputs and outputs of the request are explained below:
 
 Inputs:
+
     ProfileClientSSLID          - The ID of the requested profile.
 
 Outputs:
+
     Blanks out the following:
     ProfileClientSSLID          - The ID of the requested profile.
     ProfileClientSSLName        - The Name of the requested profile.
@@ -541,9 +579,11 @@ Outputs:
 The inputs and outputs of the request are explained below:
 
 Inputs:
+
     ProfileSearchName          - The Name of the requested profile.
 
 Outputs:
+
     ProfileTCPID                    - The TCP Profile's ID
     ProfileTCPName                  - The Name of the TCP Profile
     ProfileTCPSelfLink              - A link, usable in the REST call's JSON in the request body, referring to the requested profile. (the URL contains "local host")
@@ -563,9 +603,11 @@ Outputs:
 The inputs and outputs of the request are explained below:
 
 Inputs:
+
     NewProfileType                  - The type of Profile to create, always "tcp" for TCP profiles.
 
 Outputs:
+
     ProfileTCPID                    - The TCP Profile's ID
     ProfileTCPName                  - The Name of the TCP Profile
     ProfileTCPSelfLink              - A link, usable in the REST call's JSON in the request body, referring to the requested profile. (the URL contains "local host")
@@ -584,10 +626,13 @@ Outputs:
 The inputs and outputs of the request are explained below:
 
 Inputs:
+
     ProfileTCPID                    - The TCP Profile's ID
 
 Outputs:
-    Sets teh following to blank:
+
+Sets teh following to blank:
+
     ProfileTCPID                    - The TCP Profile's ID
     ProfileTCPName                  - The Name of the TCP Profile
     ProfileTCPSelfLink              - A link, usable in the REST call's JSON in the request body, referring to the requested profile. (the URL contains "local host")
@@ -607,9 +652,11 @@ Outputs:
 The inputs and outputs of the request are explained below:
 
 Inputs:
+
     ProfileSearchName                    - The name of the fastl4 profile being searched for by name.
 
 Outputs:
+
     ProfileFastL4ID                 - The ID of the fastl4 profile being searched for.
     ProfileFastL4Name               - The Name of the fastl4 profile found.
     ProfileFastL4SelfLink           - A link, usable in the REST call's JSON in the request body, referring to the requested profile. (the URL contains "local host")
@@ -627,6 +674,7 @@ Outputs:
 The inputs and outputs of the request are explained below:
 
 Inputs:
+
     NewProfileType
     ProfileFastL4Name               - The Name of the fastl4 profile found.
     ProfileFastL4idleTimeoutJSON    - The JSON to use in the request body if the timeout is different than 300.
@@ -634,12 +682,14 @@ Inputs:
     ProfileFastL4ParentLink         - A link, usable in the REST call's JSON in the request body, referring to the requested PARENT profile. (the URL contains "local host")
 
 Outputs:
+
     ProfileFastL4ID                 - The ID of the fastl4 profile being searched for.
     ProfileFastL4Name               - The Name of the fastl4 profile found.
     ProfileFastL4SelfLink           - A link, usable in the REST call's JSON in the request body, referring to the requested profile. (the URL contains "local host")
     ProfileFastL4SelfURI            - A link, usable in making REST calls, referring to the requested profile. (the URL contains the IP address of the BIG-IQ device)
 
 It currently does NOT update the following:
+
     NewProfileType                  - The type of Profile to create, always "fastl4" for fastl4 profiles.
     NewProfileParent                - The name of the parent profile for the new profile.
     ProfileFastL4Parent             - The name of the parent profile.
@@ -653,11 +703,13 @@ It currently does NOT update the following:
 The inputs and outputs of the request are explained below:
 
 Inputs:
+
     ProfileFastL4ID                 - The ID of the fastl4 profile being searched for.
 
 Outputs:
 
-    Sets the following to blank:
+Sets the following to blank:
+
         ProfileFastL4ID                 - The ID of the fastl4 profile being searched for.
         ProfileFastL4Name               - The Name of the fastl4 profile found.
         ProfileFastL4SelfLink           - A link, usable in the REST call's JSON in the request body, referring to the requested profile. (the URL contains "local host")
@@ -676,9 +728,11 @@ Outputs:
 The inputs and outputs of the request are explained below:
 
 Inputs:
+
     ProfileSearchName                    - The name of the HTTP profile being searched for by name.
 
 Outputs:
+
     ProfileHTTPID           - The ID of the HTTP profile being searched for.
     ProfileHTTPName         - The Name of the HTTP profile found.
     ProfileHTTPSelfLink     - A link, usable in the REST call's JSON in the request body, referring to the requested profile. (the URL contains "local host")
@@ -694,12 +748,12 @@ Outputs:
 
 The inputs and outputs of the request are explained below:
 
-Pre-Reqs:
-
 Inputs:
+
     ProfileHTTPName         - The Name of the HTTP profile found.
     ProfileHTTPXFF          - The state of the InsertXFF setting that, when enabled, inserts the client source address into the HTTP Headers of teh Server side connection.
 Outputs:
+
     ProfileHTTPID           - The ID of the HTTP profile being searched for.
     ProfileHTTPName         - The Name of the HTTP profile found.
     ProfileHTTPSelfLink     - A link, usable in the REST call's JSON in the request body, referring to the requested profile. (the URL contains "local host")
@@ -715,12 +769,13 @@ Outputs:
 
 The inputs and outputs of the request are explained below:
 
-Pre-Reqs:
-
 Inputs:
+
     ProfileHTTPID           - The ID of the HTTP profile being searched for.
 Outputs:
-    Sets teh following to Blank:
+
+Sets teh following to Blank:
+
         ProfileHTTPID           - The ID of the HTTP profile being searched for.
         ProfileHTTPName         - The Name of the HTTP profile found.
         ProfileHTTPSelfLink     - A link, usable in the REST call's JSON in the request body, referring to the requested profile. (the URL contains "local host")
@@ -759,6 +814,7 @@ Pre-Reqs:
         "FastL4" Virtual Server - 16
 
 Inputs:
+
     VirtualMask                 -
     VirtualName                 - The Name of the Virtual Server
     VirtualDestinationAddress   - Programmatically populated value, The Listener (or destination) address of the virtual server.
@@ -769,6 +825,7 @@ Inputs:
     VirtualPort                 - Programmatically populated value, The Port the Virtual Server listens on.
     DeviceSelfLink              - Programmatically populated value, A link, usable in the REST call's JSON in the request body, referring to the device the configuration is on. (the URL contains "local host")
     ProfileHTTPID           - The ID of the HTTP profile being searched for.
+
 Outputs:
 
     VirtualName                 - The Name of the Virtual Server
@@ -798,9 +855,11 @@ Outputs:
 The inputs and outputs of the request are explained below:
 
 Inputs:
+
     SearchVirtualName           - User Input, the name of the virtual to search for and gather information about.
 
 Outputs:
+
     VirtualName                 - Programmatically populated value, The name of the virtual server
     VirtualID                   - Programmatically populated value, The ID that references the virtual server
     VirtualSelfLink             - Programmatically populated value, The link to use in JSON documents to reference the Virtual Server
@@ -869,9 +928,11 @@ Outputs:
 The inputs and outputs of the request are explained below:
 
 Inputs:
+
     PoolMembersURI      - Programmatically populated value, The link used to make requests about the Pool Members in REST Calls
 
 Outputs:
+
     MonitorJSON         - The JSON for the monitor.
     PoolMemberJSON      - The JSON for pool members.
     SearchMonitorName   - The name of the monitor associated with the pool associated with the virtual server.
@@ -881,9 +942,11 @@ Outputs:
 The inputs and outputs of the request are explained below:
 
 Inputs:
+
     VirtualID   - The ID of the virtual server.
 
 Outputs:
+
     None
 
 #### "Modify Specific Virtual" Request
@@ -891,9 +954,11 @@ Outputs:
 The inputs and outputs of the request are explained below:
 
 Inputs:
+
     VirtualID      - the ID of the virtual server you want to delete.
 
 Outputs:
+
     None, no values are changed in the environemnt variables.
 
 more to be added
@@ -973,9 +1038,11 @@ more to be added
 The inputs and outputs of the request are explained below:
 
 Inputs:
+
     None.
 
 Outputs:
+
     None, clears the environment variables.
 
 more to be added
@@ -993,9 +1060,12 @@ The inputs and outputs of the request are explained below:
 The inputs and outputs of the request are explained below:
 
 Input:
+
     NewFileUploadName       - The name of the file that was uploaded to /var/config/rest/downloads/ from the "Upload File" request or directly via scp or some other means.
     NewFileUploadContent    - The content being uploaded so calculations for size and Content-Range can be calculated. 
+
 Output:
+
     NewFileUploadID             - The ID of the file upload, can be used later to check on the status of teh key creation. Ideally, it is "FINISHED"-- but if not it can provide some troubleshooting information.
 
 #### "Create Cert from Uploaded File" Request
@@ -1003,9 +1073,12 @@ Output:
 The inputs and outputs of the request are explained below:
 
 Input:
+
     NewFileUploadName       - The name of the file that was uploaded to /var/config/rest/downloads/ from the "Upload File" request or directly via scp or some other means.
     NewFileUploadContent    - The content being uploaded so calculations for size and Content-Range can be calculated. 
+
 Output:
+
     NewFileUploadID             - The ID of the file upload, can be used later to check on the status of teh key creation. Ideally, it is "FINISHED"-- but if not it can provide some troubleshooting information.
 
 #### "Get SSL Object Creation Status" Request
@@ -1013,8 +1086,11 @@ Output:
 The inputs and outputs of the request are explained below:
 
     Input:
+
         NewFileUploadID - The ID of a previous SSL Object Creation request.
+
     Output:
+
         None, REST is returned with status and, potentially, error information.
 
 ### Troubleshooting
