@@ -906,6 +906,20 @@ The inputs and outputs of the request are explained below:
 
 more to be added
 
+### Utility Tasks
+
+#### "Clear Environment" Request
+
+The inputs and outputs of the request are explained below:
+
+Inputs:
+    None.
+
+Outputs:
+    None, clears the environment variables.
+
+more to be added
+
 ### Troubleshooting
 
 1. Always check the pre-requisits for the request that had an error and ensure that the appropriate environment variables have correct values
