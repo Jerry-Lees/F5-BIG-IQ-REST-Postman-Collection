@@ -736,9 +736,165 @@ more to be added
 
 ### Virtual Server Tasks
 
-#### "" Request
+#### "Create Virtual Server from Environment Variables" Request
 
 The inputs and outputs of the request are explained below:
+
+Pre-Reqs:
+
+    You will want to be certain to set the variable NewVirtualTemplate before running this, This is done automatically when a Get of configuration is done. However, if attempting by hand (not recommended) then you will have to set the bit mask manually. 
+    
+    The value is an integer that is a bitmask and the bits are:
+    1 - TCP Profile (or 1)
+    2 - HTTP Profile (or 2)
+    3 - Client SSL Profile (or 4)
+    4 - Server SSL Profile (or 8)
+    5 = FastL4 Profile  (or 16)
+
+    The following values will give you the type of virtual server referenced:
+        "TCP" Virtual Server - 1
+        "HTTP" Virtual Server - 3
+        "SSL Offload" Virtual Server - 7 
+        "SSL Bridge" Virtual Server - 15
+        "FastL4" Virtual Server - 16
+
+Inputs:
+    VirtualMask                 -
+    VirtualName                 - The Name of the Virtual Server
+    VirtualDestinationAddress   - Programmatically populated value, The Listener (or destination) address of the virtual server.
+    NewDescription              - The description for the new virtual server.
+    PoolID                      - The ID for the pool associated with the virtual server.
+    PoolSelfLink                - Programmatically populated value, The link to use in JSON documents to reference the Pool 
+    VirtualSourceAddress        - Programmatically populated value, The Source addresses allowed to connect. (generally, 0.0.0.0/0)
+    VirtualPort                 - Programmatically populated value, The Port the Virtual Server listens on.
+    DeviceSelfLink              - Programmatically populated value, A link, usable in the REST call's JSON in the request body, referring to the device the configuration is on. (the URL contains "local host")
+    ProfileHTTPID           - The ID of the HTTP profile being searched for.
+Outputs:
+
+    VirtualName                 - The Name of the Virtual Server
+    VirtualID                   - The ID of the virtual server.
+    VirtualSelfLink             - Programmatically populated value, The link to use in JSON documents to reference the Virtual Server
+    VirtualSelfURI              - Programmatically populated value, The link used to make requests about the virtual server in REST Calls
+    PoolSelfLink                - Programmatically populated value, The link to use in JSON documents to reference the Pool 
+    PoolSelfURI                 - Programmatically populated value, The link used to make requests about the Pool assigned in REST Calls
+    VirtualDeviceLink           - Programmatically populated value, The link to use in JSON documents to reference the Device the virtual server is on.
+    VirtualDeviceURI            - Programmatically populated value, The link used to make requests about the Device containing the configuration in REST Calls
+    DeviceID                    - Programmatically populated value, The ID of the BIG-IP device the configuration is on.
+    DeviceSelfLink              - Programmatically populated value, A link, usable in the REST call's JSON in the request body, referring to the device the configuration is on. (the URL contains "local host")
+    DeviceSelfURI               - Programmatically populated value, A link, usable in making REST calls, referring to the device the configuration is on. (the URL contains the IP address of the BIG-IQ device)
+    VirtualProfilesLink         - Programmatically populated value, A link, usable in the REST call's JSON in the request body, referring to the Profiles assigned to the virtual server. (the URL contains "local host")
+    VirtualProfilesURI          - Programmatically populated value, A link, usable in making REST calls, referring to the 
+    VirtualDestinationAddress   - Programmatically populated value, The Listener (or destination) address of the virtual server.
+    VirtualMask                 - Programmatically populated value, The subnet mask for the destination address.
+    VirtualSNATType             - Programmatically populated value, The Type of SNAT. automap, pool, etc
+    VirtualSNATPoolName         - Programmatically populated value, The name of the SNAT Pool, if a pool.
+    VirtualSNATPoolID           - Programmatically populated value, The ID of the SNAT Pool, if a pool.
+    VirtualSNATPoolSelfLink     - Programmatically populated value, A link, usable in the REST call's JSON in the request body, referring to the SNAT Pool assigned to the virtual server. (the URL contains "local host")
+    VirtualSNATPoolSelfURI      - Programmatically populated value, A link, usable in making REST calls, referring to the SNAT Pool assigned to the virtual server. (the URL contains the IP address of the BIG-IQ device)
+    VirtualJSON                 - Programmatically populated value, The JSON that references the Virtual Server 
+
+#### "Get Virtual Information From Name" Request
+
+The inputs and outputs of the request are explained below:
+
+Inputs:
+    SearchVirtualName           - User Input, the name of the virtual to search for and gather information about.
+
+Outputs:
+	VirtualName                 - Programmatically populated value, The name of the virtual server
+    VirtualID			        - Programmatically populated value, The ID that references the virtual server
+	VirtualSelfLink		        - Programmatically populated value, The link to use in JSON documents to reference the Virtual Server
+	VirtualSelfURI		        - Programmatically populated value, The link used to make requests about the virtual server in REST Calls
+	VirtualDeviceLink	        - Programmatically populated value, The link to use in JSON documents to reference the Device the virtual server is on.
+	VirtualDeviceURI	        - Programmatically populated value, The link used to make requests about the Device containing the configuration in REST Calls
+	VirtualProfilesLink	        - Programmatically populated value, The link to use in JSON documents to reference the Profiles assigned to the virtual server.
+	VirtualProfilesURI	        - Programmatically populated value, The link used to make requests about the Profiles assigend in REST Calls
+	VirtualJSON			        - Programmatically populated value, The JSON that references the Virtual Server 
+	PoolSelfLink		        - Programmatically populated value, The link to use in JSON documents to reference the Pool 
+	PoolSelfURI			        - Programmatically populated value, The link used to make requests about the Pool assigned in REST Calls
+	PoolID				        - Programmatically populated value, The ID that references the Pool Associated with the virtual server.
+	PoolDeviceLink		        - Programmatically populated value, The link to use in JSON documents to reference the Device containnig teh Pool configuration.
+	PoolDeviceURI		        - Programmatically populated value, The link used to make requests about the device containing the Pool configuration in REST Calls
+	PoolMembersLink		        - Programmatically populated value, The link to use in JSON documents to reference the Pool Members
+	PoolMembersURI		        - Programmatically populated value, The link used to make requests about the Pool Members in REST Calls
+	PoolMonitorLink		        - Programmatically populated value, The link to use in JSON documents to reference the Monitor assigned to the pool
+	PoolMonitorURI		        - Programmatically populated value, The link used to make requests about the monitor assigend to teh pool in REST Calls
+	MonitorSelfLink		        - Programmatically populated value, The link to use in JSON documents to reference the Monitor assigned
+	MonitorSelfURI		        - Programmatically populated value, The link used to make requests about the monitor assigned in REST Calls
+	MonitorID			        - Programmatically populated value, The ID that represents the monitor.
+	MonitorType			        - Programmatically populated value, The type of monitor
+	MonitorTypeString	        - Programmatically populated value, The string of the path used to reference the type in a JSON document.
+	MonitorTypeName		        - Programmatically populated value, The string used to reference the type in a JSON document.
+	DeviceSelfURI		        - Programmatically populated value, The link used to make requests about the Device containing teh configuration in REST Calls
+    PoolName                    - Programmatically populated value, The Name of the pool attached to the virtual server.
+    DeviceID                    - Programmatically populated value, The ID of the BIG-IP device the configuration is on.
+    DeviceSelfLink              - Programmatically populated value, A link, usable in the REST call's JSON in the request body, referring to the device the configuration is on. (the URL contains "local host")
+    DeviceSelfURI               - Programmatically populated value, A link, usable in making REST calls, referring to the device the configuration is on. (the URL contains the IP address of the BIG-IQ device)
+    VirtualProfilesLink         - Programmatically populated value, A link, usable in the REST call's JSON in the request body, referring to the Profiles assigned to the virtual server. (the URL contains "local host")
+    VirtualProfilesURI          - Programmatically populated value, A link, usable in making REST calls, referring to the 
+    VirtualDestinationAddress   - Programmatically populated value, The Listener (or destination) address of the virtual server.
+    VirtualMask                 - Programmatically populated value, The subnet mask for the destination address.
+    VirtualSNATType             - Programmatically populated value, The Type of SNAT. automap, pool, etc
+    VirtualSNATPoolName         - Programmatically populated value, The name of the SNAT Pool, if a pool.
+    VirtualSNATPoolID           - Programmatically populated value, The ID of the SNAT Pool, if a pool.
+    VirtualSNATPoolSelfLink     - Programmatically populated value, A link, usable in the REST call's JSON in the request body, referring to the SNAT Pool assigned to the virtual server. (the URL contains "local host")
+    VirtualSNATPoolSelfURI      - Programmatically populated value, A link, usable in making REST calls, referring to the SNAT Pool assigned to the virtual server. (the URL contains the IP address of the BIG-IQ device)
+    VirtualPort                 - Programmatically populated value, The Port the Virtual Server listens on.
+    VirtualSourceAddress        - Programmatically populated value, The Source addresses allowed to connect. (generally, 0.0.0.0/0)
+    PoolJSON                    - Programmatically populated value, The JSON for the pool.
+    ProfileClientSSLID          - Programmatically populated value, The ID for the Client SSL Profile.
+    ProfileClientSSLName        - Programmatically populated value, The name for the Client SSL Profile.
+    ProfileClientSSLSelfLink    - Programmatically populated value, A link, usable in the REST call's JSON in the request body, referring to the Client SSL Profile assigned to the virtual server. (the URL contains "local host")
+    ProfileClientSSLSelfURI     - Programmatically populated value, A link, usable in making REST calls, referring to the Client SSL Profile assigned to the virtual server. (the URL contains the IP address of the BIG-IQ device)
+    ProfileServerSSLID          - Programmatically populated value, The ID for the Server SSL Profile.
+    ProfileServerSSLName        - Programmatically populated value, The name for the Server SSL Profile.
+    ProfileServerSSLSelfLink    - Programmatically populated value, A link, usable in the REST call's JSON in the request body, referring to the Server SSL Profile assigned to the virtual server. (the URL contains "local host")
+    ProfileServerSSLSelfURI     - Programmatically populated value, A link, usable in making REST calls, referring to the Server SSL Profile assigned to the virtual server. (the URL contains the IP address of the BIG-IQ device)
+    ProfileHTTPID               - Programmatically populated value, The ID for the HTTP Profile.
+    ProfileHTTPName             - Programmatically populated value, The name for the HTTP Profile.
+    ProfileHTTPSelfLink         - Programmatically populated value, A link, usable in the REST call's JSON in the request body, referring to the HTTP Profile assigned to the virtual server. (the URL contains "local host")
+    ProfileHTTPSelfURI          - Programmatically populated value, A link, usable in making REST calls, referring to the HTTP Profile assigned to the virtual server. (the URL contains the IP address of the BIG-IQ device)
+    ProfileTCPID                - Programmatically populated value, The ID for the TCP Profile.
+    ProfileTCPName              - Programmatically populated value, The name for the TCP Profile.
+    ProfileTCPSelfLink          - Programmatically populated value, A link, usable in the REST call's JSON in the request body, referring to the TCP Profile assigned to the virtual server. (the URL contains "local host")
+    ProfileTCPSelfURI           - Programmatically populated value, A link, usable in making REST calls, referring to the TCP Profile assigned to the virtual server. (the URL contains the IP address of the BIG-IQ device)
+    ProfileFastL4ID             - Programmatically populated value, The ID for the fastl4 Profile.
+    ProfileFastL4Name           - Programmatically populated value, The name for the fastl4 Profile.
+    ProfileFastL4SelfLink       - Programmatically populated value, A link, usable in the REST call's JSON in the request body, referring to the 
+    ProfileFastL4SelfURI        - Programmatically populated value, A link, usable in making REST calls, referring to the fastl4 profile assigned to the virtual server. (the URL contains the IP address of the BIG-IQ device)
+    NewVirtualTemplate          - Programmatically populated value, the Template mask to use to determine which profiles are applied.
+
+#### "Get Remaining Virtual Information" Request
+
+The inputs and outputs of the request are explained below:
+
+Inputs:
+    PoolMembersURI      - Programmatically populated value, The link used to make requests about the Pool Members in REST Calls
+
+Outputs:
+    MonitorJSON         - The JSON for the monitor.
+    PoolMemberJSON      - The JSON for pool members.
+    SearchMonitorName   - The name of the monitor associated with the pool associated with the virtual server.
+
+#### "Delete Virtual Server From Environment Variables" Request
+
+The inputs and outputs of the request are explained below:
+
+Inputs:
+    VirtualID   - The ID of the virtual server.
+
+Outputs:
+    None
+
+#### "Modify Specific Virtual" Request
+
+The inputs and outputs of the request are explained below:
+
+Inputs:
+    VirtualID      - the ID of the virtual server you want to delete.
+
+Outputs:
+    None, no values are changed in the environemnt variables.
 
 more to be added
 
