@@ -2064,20 +2064,20 @@
 											"    PoolID          - Programatic input (from another REST call) or User Input\r",
 											"\r",
 											"Outputs:\r",
-											"    PoolName        - \r",
-											"    PoolDescription - \r",
-											"    PoolID          - \r",
-											"    PoolJSON        - \r",
-											"    PoolSelfLink    - \r",
-											"    PoolSelfURI     - \r",
-											"    PoolDeviceLink  - \r",
-											"    PoolMembersLink - \r",
-											"    PoolMembersURI  - \r",
-											"    PoolMemberJSON  - \r",
-											"    PoolMemberPort  - \r",
-											"    PoolMemberID    - \r",
-											"    PoolMonitorLink - \r",
-											"    PoolMonitorURI  - \r",
+											"    PoolName        - Set to Blank.\r",
+											"    PoolDescription - Set to Blank.\r",
+											"    PoolID          - Set to Blank.\r",
+											"    PoolJSON        - Set to Blank.\r",
+											"    PoolSelfLink    - Set to Blank.\r",
+											"    PoolSelfURI     - Set to Blank.\r",
+											"    PoolDeviceLink  - Set to Blank.\r",
+											"    PoolMembersLink - Set to Blank.\r",
+											"    PoolMembersURI  - Set to Blank.\r",
+											"    PoolMemberJSON  - Set to Blank.\r",
+											"    PoolMemberPort  - Set to Blank.\r",
+											"    PoolMemberID    - Set to Blank.\r",
+											"    PoolMonitorLink - Set to Blank.\r",
+											"    PoolMonitorURI  - Set to Blank.\r",
 											"\r",
 											"*/\r",
 											"\r",
@@ -2171,8 +2171,8 @@
 											"Inputs:\r",
 											"    PoolID          - The ID of the pool you wish to add a pool member to.\r",
 											"    NodeSelfLink    - The Self Link to the node you wish to add as a pool member\r",
-											"    NodeName        - The Name of the Node.\r",
-											"    PoolMemberPort  - User supplied value. The port tehNode is listening on.\r",
+											"    NodeName        - The name of the node.\r",
+											"    PoolMemberPort  - User supplied value. The port the node is listening on.\r",
 											"    NodeDescription - User supplied value. The description for the Node.\r",
 											"\r",
 											"Outputs:\r",
@@ -2262,9 +2262,6 @@
 									"listen": "test",
 									"script": {
 										"exec": [
-											"\r",
-											"// this doesn't currently work, it doesn't have the pool member ID from a node look up.\r",
-											"\r",
 											"/*\r",
 											"Inputs:\r",
 											"    PoolID          - The ID of the pool you wish to modify a pool member.\r",
@@ -3269,7 +3266,7 @@
 											"    ProfileClientSSLPassPhrase  - The passphrase for the certificate.\r",
 											"    ProfileClientSSLChain       - The name of the Chain Certificate for the SSL/Key Pair assigned to the profile.\r",
 											"    ProfileClientSSLKey         - The name of the SSL Key assigned to the profile.\r",
-											"    ProfileClientSSLKeyJSON     - The JSON to be inserted, if created or modified, into the request body to add a Key. This shoule be blank if there is no SSL Key. (This should never happen for a Clientssl profile)\r",
+											"    ProfileClientSSLKeyJSON     - The JSON to be inserted, if created or modified, into the request body to add a Key. This should be blank if there is no SSL Key. (This should never happen for a Clientssl profile)\r",
 											"    ProfileClientSSLCert        - The name of the SSL Cert assigned to the profile.\r",
 											"\r",
 											"*/\r",
@@ -5588,50 +5585,68 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Modify Specific Virtual",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/*\r",
+											"Inputs:\r",
+											"    VirtualID      - the ID of the virtual server you want to delete.\r",
+											"\r",
+											"Outputs:\r",
+											"    None, no values are changed in the environemnt variables.\r",
+											"\r",
+											"*/"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-F5-Auth-Token",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"{{VirtualID}}\",\r\n    \"kind\": \"cm:adc-core:working-config:ltm:virtual:adcvirtualstate\",\r\n    \"mask\": \"{{VirtualMask}}\",\r\n    \"name\": \"{{VirtualName}}\",\r\n    \"nat64\": \"disabled\",\r\n    \"state\": \"enabled\",\r\n    \"mirror\": \"disabled\",\r\n    \"policies\": [],\r\n    \"selfLink\": \"{{VirtualSelfLink}}\",\r\n    \"partition\": \"Common\",\r\n    \"rateLimit\": \"disabled\",\r\n    \"ipProtocol\": \"tcp\",\r\n    \"properties\": {\r\n        \"virtual-address\": {\r\n            \"name\": \"{{VirtualDestinationAddress}}\",\r\n            \"address\": \"{{VirtualDestinationAddress}}\",\r\n            \"floating\": \"enabled\",\r\n            \"partition\": \"Common\",\r\n            \"trafficGroup\": \"/Common/traffic-group-1\",\r\n            \"deviceReference\": {\r\n                \"link\": \"{{DeviceSelfLink}}\"\r\n            }\r\n        }\r\n    },\r\n    \"sourcePort\": \"preserve\",\r\n    \"autoLasthop\": \"default\",\r\n    \"description\": \"{{VirtualDescription}}\",\r\n    \"vlansEnabled\": \"disabled\",\r\n    \"addressStatus\": \"yes\",\r\n    \"poolReference\": {\r\n        \"id\": \"{{PoolID}}\",\r\n        \"kind\": \"cm:adc-core:working-config:ltm:pool:adcpoolstate\",\r\n        \"link\": \"{{PoolSelfLink}}\",\r\n        \"partition\": \"Common\"\r\n    },\r\n    \"rateLimitMode\": \"object\",\r\n    \"sourceAddress\": \"{{VirtualSourceAddress}}\",\r\n    \"translatePort\": \"enabled\",\r\n    \"connectionLimit\": 0,\r\n    \"destinationPort\": \"{{VirtualPort}}\",\r\n    \"deviceReference\": {\r\n        \"kind\": \"shared:resolver:device-groups:restdeviceresolverdevicestate\",\r\n        \"link\": \"{{DeviceSelfLink}}\"\r\n    },\r\n    \"translateAddress\": \"enabled\",\r\n    \"destinationAddress\": \"{{VirtualDestinationAddress}}\",\r\n    \"sourceAddressTranslation\": {\r\n        \"type\": \"{{VirtualSNATType}}\",\r\n        \"snatpoolReference\": {\r\n            \"id\": \"{{VirtualSNATPoolID}}\",\r\n            \"kind\": \"cm:adc-core:working-config:ltm:snatpool:adcsnatpoolstate\",\r\n            \"link\": \"{{VirtualSNATPoolSelfLink}}\",\r\n            \"name\": \"{{VirtualSNATPoolName}}\",\r\n            \"partition\": \"Common\"\r\n        }\r\n    },\r\n    \"profilesCollectionReference\": {\r\n        \"link\": \"{{VirtualProfilesLink}}\",\r\n        \"isSubcollection\": true\r\n    }\r\n}"
+								},
+								"url": {
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/virtual/{{VirtualID}}",
+									"protocol": "https",
+									"host": [
+										"{{BIGIQ_Mgmt}}"
+									],
+									"path": [
+										"mgmt",
+										"cm",
+										"adc-core",
+										"working-config",
+										"ltm",
+										"virtual",
+										"{{VirtualID}}"
+									]
+								}
+							},
+							"response": []
 						}
 					]
-				},
-				{
-					"name": "Modify Specific Virtual",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "X-F5-Auth-Token",
-								"value": "{{AuthToken}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"{{VirtualID}}\",\r\n    \"kind\": \"cm:adc-core:working-config:ltm:virtual:adcvirtualstate\",\r\n    \"mask\": \"{{VirtualMask}}\",\r\n    \"name\": \"{{VirtualName}}\",\r\n    \"nat64\": \"disabled\",\r\n    \"state\": \"enabled\",\r\n    \"mirror\": \"disabled\",\r\n    \"policies\": [],\r\n    \"selfLink\": \"{{VirtualSelfLink}}\",\r\n    \"partition\": \"Common\",\r\n    \"rateLimit\": \"disabled\",\r\n    \"ipProtocol\": \"tcp\",\r\n    \"properties\": {\r\n        \"virtual-address\": {\r\n            \"name\": \"{{VirtualDestinationAddress}}\",\r\n            \"address\": \"{{VirtualDestinationAddress}}\",\r\n            \"floating\": \"enabled\",\r\n            \"partition\": \"Common\",\r\n            \"trafficGroup\": \"/Common/traffic-group-1\",\r\n            \"deviceReference\": {\r\n                \"link\": \"{{DeviceSelfLink}}\"\r\n            }\r\n        }\r\n    },\r\n    \"sourcePort\": \"preserve\",\r\n    \"autoLasthop\": \"default\",\r\n    \"description\": \"{{VirtualDescription}}\",\r\n    \"vlansEnabled\": \"disabled\",\r\n    \"addressStatus\": \"yes\",\r\n    \"poolReference\": {\r\n        \"id\": \"{{PoolID}}\",\r\n        \"kind\": \"cm:adc-core:working-config:ltm:pool:adcpoolstate\",\r\n        \"link\": \"{{PoolSelfLink}}\",\r\n        \"partition\": \"Common\"\r\n    },\r\n    \"rateLimitMode\": \"object\",\r\n    \"sourceAddress\": \"{{VirtualSourceAddress}}\",\r\n    \"translatePort\": \"enabled\",\r\n    \"connectionLimit\": 0,\r\n    \"destinationPort\": \"{{VirtualPort}}\",\r\n    \"deviceReference\": {\r\n        \"kind\": \"shared:resolver:device-groups:restdeviceresolverdevicestate\",\r\n        \"link\": \"{{DeviceSelfLink}}\"\r\n    },\r\n    \"translateAddress\": \"enabled\",\r\n    \"destinationAddress\": \"{{VirtualDestinationAddress}}\",\r\n    \"sourceAddressTranslation\": {\r\n        \"type\": \"{{VirtualSNATType}}\",\r\n        \"snatpoolReference\": {\r\n            \"id\": \"{{VirtualSNATPoolID}}\",\r\n            \"kind\": \"cm:adc-core:working-config:ltm:snatpool:adcsnatpoolstate\",\r\n            \"link\": \"{{VirtualSNATPoolSelfLink}}\",\r\n            \"name\": \"{{VirtualSNATPoolName}}\",\r\n            \"partition\": \"Common\"\r\n        }\r\n    },\r\n    \"profilesCollectionReference\": {\r\n        \"link\": \"{{VirtualProfilesLink}}\",\r\n        \"isSubcollection\": true\r\n    }\r\n}"
-						},
-						"url": {
-							"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/working-config/ltm/virtual/{{VirtualID}}",
-							"protocol": "https",
-							"host": [
-								"{{BIGIQ_Mgmt}}"
-							],
-							"path": [
-								"mgmt",
-								"cm",
-								"adc-core",
-								"working-config",
-								"ltm",
-								"virtual",
-								"{{VirtualID}}"
-							]
-						}
-					},
-					"response": []
 				},
 				{
 					"name": "Clear Environment",
