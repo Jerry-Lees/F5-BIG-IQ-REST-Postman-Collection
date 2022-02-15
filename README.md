@@ -235,11 +235,13 @@ Outputs:
     NodeJSON        - Set to Blank
     NodeDescription - Set to Blank
 
-more to be added
-
 ### Pool Tasks
 
+The pool tasks section of the Postman collection preforms common tasks susch as creating, retrieving, and deleting pools in the configuration, updating environment variables appropriatly as requests are made for use in subsiquent requests.
+
 #### "Get Pool Information from Name" Request
+
+This request pulls current configuration about a pool into the environment variable for future requests that may; modify a pool's members, associate it with a virtual server, delete it, add/change monitors, or some other pool related task.
 
 The inputs and outputs of the request are explained below:
 
@@ -259,6 +261,8 @@ Outputs:
     PoolName        - The name of the pool.
 
 #### "Create Pool from Environment Variables" Request
+
+This request will create a pool in the configuration from the values in the environment variables.
 
 The inputs and outputs of the request are explained below:
 
@@ -293,6 +297,8 @@ Outputs:
 
 #### "Delete Pool from Environment Variables" Request
 
+This request will delete a pool from the configuration. The environment variables relating to pools are set to blank.
+
 The inputs and outputs of the request are explained below:
 
 Inputs:
@@ -301,22 +307,24 @@ Inputs:
 
 Outputs:
 
-    PoolName        -
-    PoolDescription -
-    PoolID          -
-    PoolJSON        -
-    PoolSelfLink    -
-    PoolSelfURI     -
-    PoolDeviceLink  -
-    PoolMembersLink -
-    PoolMembersURI  -
-    PoolMemberJSON  -
-    PoolMemberPort  -
-    PoolMemberID    -
-    PoolMonitorLink -
-    PoolMonitorURI  -
+    PoolName        - Set to Blank.
+    PoolDescription - Set to Blank.
+    PoolID          - Set to Blank.
+    PoolJSON        - Set to Blank.
+    PoolSelfLink    - Set to Blank.
+    PoolSelfURI     - Set to Blank.
+    PoolDeviceLink  - Set to Blank.
+    PoolMembersLink - Set to Blank.
+    PoolMembersURI  - Set to Blank.
+    PoolMemberJSON  - Set to Blank.
+    PoolMemberPort  - Set to Blank.
+    PoolMemberID    - Set to Blank.
+    PoolMonitorLink - Set to Blank.
+    PoolMonitorURI  - Set to Blank.
 
 #### "Add Pool Member from Environment Variables" Request
+
+This requests adds a node to a pool as a pool member using the NodeName and PoolMemberPort vatiables.
 
 The inputs and outputs of the request are explained below:
 
@@ -324,8 +332,8 @@ Inputs:
 
     PoolID          - The ID of the pool you wish to add a pool member to.
     NodeSelfLink    - The Self Link to the node you wish to add as a pool member
-    NodeName        - The Name of the Node.
-    PoolMemberPort  - User supplied value. The port theNode is listening on.
+    NodeName        - The name of the node.
+    PoolMemberPort  - User supplied value. The port the node is listening on.
     NodeDescription - User supplied value. The description for the Node.
 
 Outputs:
@@ -335,9 +343,9 @@ Outputs:
 
 #### "Delete Pool Member from Environment Variables" Request
 
-The inputs and outputs of the request are explained below:
+This request will delete a pool member from a pool. The pool and it's remaining members are otherwise unchanged.
 
-Note, this doesn't currently work, it doesn't have the pool member ID from a node look up. This is a known issue.
+The inputs and outputs of the request are explained below:
 
 Inputs:
 
@@ -350,6 +358,8 @@ Outputs:
 
 #### "Get a Pool's Members JSON" Request
 
+This request pulls the JSON for the pool's members. The response contains all the pool members for the pool. The output is not used in other calls, but has some value in being able to programatically review what pool members are assigned to the pool.
+
 The inputs and outputs of the request are explained below:
 
 Note: This request currently has little value and may go away soon. This request should be considered depricated.
@@ -361,8 +371,6 @@ Inputs:
 Outputs:
 
     PoolMemberJSON    - The JSON for the Pool Members Collection.
-
-more to be added
 
 ### Profile Tasks
 
