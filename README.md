@@ -1039,7 +1039,15 @@ more to be added
 
 ### Deploy Tasks
 
+The requests in the "Deploy Functions" area of the Postman Collection are for creating a deployment (and evaluation) for the changes you have created in the configuration. The requests do not by design actually preform the deployment, this currently must be done manually from the BIG-IQ GUI. The logic behind this is that you should inspect the changes in the GUI to ensure it is what you desire and to make certain that there are no conflicting changes.
+
+This can be changed, but isn't currently recommended, by changing the line in the request body's JSO that says ""skipDistribution":true," to ""skipDistribution":false,". This would be at your own risk, ensure that you are certain everything is in order with your changes if you do this.
+
+It should also be noted that the setting of "deploySpecifiedObjectsOnly" is set to false in the requests. This has the side effect of allowing BIG-IQ to gather all the sub-changes and deploying them as well in one deployment. So, you could create profiles, nodes, and pools through a series of calls then associate them to a virtual server and deploy the virtual and BIG-IQ will deploy all the sub-configuration items.
+
 #### "Create Pool Deployment without deploy" Request
+
+This request will create a deployment for a pool (and any sub-items).
 
 The inputs and outputs of the request are explained below:
 
@@ -1049,6 +1057,8 @@ The inputs and outputs of the request are explained below:
 
 #### "Create Virtual Deployment without deploy" Request
 
+This request will create a deployment for a virtual server (and any sub-items).
+
 The inputs and outputs of the request are explained below:
 
     DeployName
@@ -1056,6 +1066,8 @@ The inputs and outputs of the request are explained below:
     VirtualSelfLink
 
 #### "Create HTTP Profile Deployment without deploy" Request
+
+This request will create a deployment for a HTTP Profile (and any sub-items).
 
 The inputs and outputs of the request are explained below:
 
@@ -1065,6 +1077,8 @@ The inputs and outputs of the request are explained below:
 
 #### "Create Server SSL Profile Deployment without deploy" Request
 
+This request will create a deployment for a ServerSSL Profile (and any sub-items).
+
 The inputs and outputs of the request are explained below:
 
     DeployName
@@ -1072,6 +1086,8 @@ The inputs and outputs of the request are explained below:
     ProfileServerSSLSelfLink
 
 #### "Create Client SSL Profile Deployment without deploy" Request
+
+This request will create a deployment for a clientSSL profile (and any sub-items).
 
 The inputs and outputs of the request are explained below:
 
@@ -1081,6 +1097,8 @@ The inputs and outputs of the request are explained below:
 
 #### "Create FastL4 Profile Deployment without deploy" Request
 
+This request will create a deployment for a FastL4 Profile (and any sub-items).
+
 The inputs and outputs of the request are explained below:
 
     DeployName
@@ -1088,6 +1106,8 @@ The inputs and outputs of the request are explained below:
     ProfileFastL4SelfLink
 
 #### "Create TCP Profile Deployment without deploy" Request
+
+This request will create a deployment for a TCP Profile (and any sub-items).
 
 The inputs and outputs of the request are explained below:
 
@@ -1097,13 +1117,13 @@ The inputs and outputs of the request are explained below:
 
 #### "Create Node Deployment without deploy" Request
 
+This request will create a deployment for a node.
+
 The inputs and outputs of the request are explained below:
 
     DeployName
     DeviceSelfLink
     NodeSelfLink
-
-more to be added
 
 ### Utility Tasks
 
