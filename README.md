@@ -374,7 +374,11 @@ Outputs:
 
 ### Profile Tasks
 
+The "Profile Functions" folder contains the requests used to manage supported profile types. Each profile has it's own idiosyncrasies and settings that can be modified. Not all profile options are supported to be set or changed.
+
 #### "Get ServerSSL Profile by Name" Request
+
+This request retrieves a ServerSSL Profile on a device from it's name and populates the required environment variables for future calls, associating the profile with a virtual server for example.
 
 The inputs and outputs of the request are explained below:
 
@@ -406,6 +410,8 @@ Outputs:
     ProfileServerSSLPassPhrase  - The passphrase for the certificate.
 
 #### "Create Server SSL Profile" Request
+
+This request creates a Server SSL Profile from the environment variables populated from previous calls. It is recommended that these variables be populated programatically, not by hand, since there are a high number of links to other configuration items in the request body. The request builds the JSON (or lack of it) inline for the SSL Certificate, Key, and Chain configuration items from prior calls to get or create SSL Certificate and Key configuration items.
 
 The inputs and outputs of the request are explained below:
 
@@ -445,6 +451,8 @@ Outputs:
 
 #### "Delete Server SSL Profile" Request
 
+This request will delete a Server SSL profile and set some, but not all, environment variables to blank.
+
 The inputs and outputs of the request are explained below:
 
 Inputs:
@@ -481,6 +489,8 @@ Outputs:
 
 #### "Get Client SSL Profile by Name" Request
 
+This request retrieves a CLientSSL profile for later use in subseqent calls, like associating it wit a virtual server.
+
 The inputs and outputs of the request are explained below:
 
 Inputs:
@@ -512,6 +522,8 @@ Outputs:
     ProfileClientSSLCertURI     - A link, usable in making REST calls, referring to the requested profile's assigned SSL Cert. (the URL contains the IP address of the BIG-IQ device)
 
 #### "Create Client SSL Profile" Request
+
+This request will create a Client SSL Profile from the environment variables' values. it populates other environment variables related to the profile for future use as well.
 
 The inputs and outputs of the request are explained below:
 
@@ -557,6 +569,8 @@ Currently does not populate the following:
 
 #### "Delete Client SSL Profile from Environment Variables" Request
 
+This request deletes a ClientSSL profile from the configuration.
+
 The inputs and outputs of the request are explained below:
 
 Inputs:
@@ -590,6 +604,8 @@ Outputs:
 
 #### "Get TCP Profile by Name" Request
 
+This request retrieves the named TCP profile and it's supported settings into environment variables for future use or modification.
+
 The inputs and outputs of the request are explained below:
 
 Inputs:
@@ -614,6 +630,8 @@ Outputs:
 
 #### "Create TCP Profile" Request
 
+This request creates a new TCP profile in the configuration based on the values in the environment variables.
+
 The inputs and outputs of the request are explained below:
 
 Inputs:
@@ -635,7 +653,27 @@ Outputs:
     ProfileTCPisVerifiedAccept      - The value of the Verified Accept setting in the profile. Not, enabling this is not a recommended setting. This chnages the order of packet flow and could impact iRules negatively.
     ProfileTCPisVerifiedAcceptJSON  - The JSON to use in the request body if the Verified Accept setting is enabled.
 
+A couple notes on Verified Accept, generally it is NOT recommended to turn this functionality to enabled. This setting specifies, when checked (enabled), that the system can actually communicate with the server before establishing a client connection. The following was taken from the TMUI's inline context sensitive help:
+
+    To determine this, the system sends the server a SYN packet before responding to the client's SYN with a SYN-ACK. When unchecked, the system accepts the client connection before selecting a server to talk to. By default, this setting is disabled.
+
+    Note: Enabling this setting is not compatible with APM, as APM must send SYN-ACK for authentication. Although the iRules framework and implementation within TMM might not depend on the typical order of events, most iRules you write likely do depend on a typical ordering of events. Enabling Verified Accept changes the normal sequence of client and server events in the proxying of the connection.
+
+    For example, LB_.* and SERVER_CONNECTED events fire before L7 events. Given the potential complexity and power of iRules to implement solutions, it is not possible to ensure that iRules executed when Verified Accept is enabled will operate as expected.
+
+    For example, given an HTTP virtual server, the order of events changes.
+
+    Verified Accept disabled: CLIENT_ACCEPTED -> HTTP_REQUEST -> LB_SELECTED -> SERVER_CONNECTED -> HTTP_REQUEST_SEND
+
+    Verified Accept enabled: CLIENT_ACCEPTED -> LB_SELECTED -> SERVER_CONNECTED -> HTTP_REQUEST -> HTTP_REQUEST_SEND
+
+    A typical iRule might expect that HTTP_REQUEST is always run before LB_SELECTED. That expectation is not valid when Verified Accept is enabled.
+
+    Similarly, an iRule might try to make a load-balancing/persist-related decision in HTTP_REQUEST, which might fail because a serverside connection is already established at that point. If you enable Verified Accept without considering the implications, you might see iRule errors/traffic failures as a result. Therefore, depending on the content of your iRules you might need to change the order of some events so that they work as you expect.
+
 #### "Delete TCP Profile from Environment Variables" Request
+
+This request will delete a TCP Profile from the configuration based on the values in the environment variables.
 
 The inputs and outputs of the request are explained below:
 
@@ -663,6 +701,8 @@ Sets the following to blank:
 
 #### "Get FastL4 Profile by Name" Request
 
+This request will retrieve the named FastL4 profile into the environment variables for future use or modification.
+
 The inputs and outputs of the request are explained below:
 
 Inputs:
@@ -684,6 +724,8 @@ Outputs:
     ProfileFastL4idleTimeoutJSON    - The JSON to use in the request body if the timeout is different than 300.
 
 #### "Create FastL4 Profile" Request
+
+This request will create a new FastL4 profile from the values in the environment variables.
 
 The inputs and outputs of the request are explained below:
 
@@ -714,6 +756,8 @@ It currently does NOT update the following:
 
 #### "Delete FastL4 Profile From Environment Variables" Request
 
+This request will delete the FastL4 profile specified in the environment variables and blank the variables.
+
 The inputs and outputs of the request are explained below:
 
 Inputs:
@@ -739,6 +783,8 @@ Sets the following to blank:
 
 #### "Get HTTP Profile by Name" Request
 
+This request will retrieve the HTTP profile specified into the environment variables for later use or modification.
+
 The inputs and outputs of the request are explained below:
 
 Inputs:
@@ -759,6 +805,8 @@ Outputs:
     ProfileHTTPXFF          - The state of the InsertXFF setting that, when enabled, inserts the client source address into the HTTP Headers of the Server side connection.
 
 #### "Create HTTP Profile" Request
+
+This request will create a new HTTP profile in the configuration and popu;ate teh environment variables with it's settings for use in additional requests.
 
 The inputs and outputs of the request are explained below:
 
@@ -781,6 +829,8 @@ Outputs:
 
 #### "Delete HTTP Profile From Environment Variables" Request
 
+This request will delete the HTTP profile specified from the configuration and blank out the environment variables.
+
 The inputs and outputs of the request are explained below:
 
 Inputs:
@@ -800,8 +850,6 @@ Sets the following to Blank:
         ProfileHTTPParentLink   - A link, usable in the REST call's JSON in the request body, referring to the requested PARENT profile. (the URL contains "local host")
         ProfileHTTPParentURI    - A link, usable in making REST calls, referring to the requested PARENT profile. (the URL contains the IP address of the BIG-IQ device)
         ProfileHTTPXFF          - The state of the InsertXFF setting that, when enabled, inserts the client source address into the HTTP Headers of the Server side connection.
-
-more to be added
 
 ### Virtual Server Tasks
 
