@@ -853,7 +853,11 @@ Sets the following to Blank:
 
 ### Virtual Server Tasks
 
+The requests in the "Virtual Server Functions" section of the collection contains a collection of requests to create, modify, update, and/or delete virtual server configuration items. They contain a sort of template method to ensure that appropriate profiles are assigned to make the desired type of virtual server; SSL Offload, Bridging, FastL4, TCP only, etc.
+
 #### "Create Virtual Server from Environment Variables" Request
+
+This request will create a new virtual server from the values in the environment variables. All of these environment variables are certainly important, but the NewVirtualTemplate environment variable is crucial to have correct for the type of virtual you wish to create and in getting the proper profiles assigned in the Request Body's JSON. This does not have to be computed by hand, other calls for similar virtual servers will populate this, but if you are trying to do this manually (not recommended) then you will want to take note of the below information to properly create teh virtual server.
 
 The inputs and outputs of the request are explained below:
 
@@ -913,6 +917,8 @@ Outputs:
     VirtualJSON                 - Programmatically populated value, The JSON that references the Virtual Server 
 
 #### "Get Virtual Information From Name" Request
+
+This request will populate the configuration settings for a named virtual server from the configuration. This request is handy to create similarly configured virtual servers and one strategy could be to use it to essentially clone virtual servers by getting a template virtual server's configuration and changing the things you would like to be different; the name and IP addresses, for example, then call the create virtual request to create the new virtual server.
 
 The inputs and outputs of the request are explained below:
 
@@ -987,6 +993,8 @@ Outputs:
 
 #### "Get Remaining Virtual Information" Request
 
+This request pulls monitor and additional pool information. Most of the information is not needed to create new Virtual servers (it is populated with other calls), however, it may be helpful in troublesyhooting and is left in the collection for that reason in case information needs to be gathered.
+
 The inputs and outputs of the request are explained below:
 
 Inputs:
@@ -1001,6 +1009,8 @@ Outputs:
 
 #### "Delete Virtual Server From Environment Variables" Request
 
+This request will delete the specified virtual server from the configuration. It DOES NOT blank all the variables though, since it is possible that one could want to create it again possibly on another LTM device.
+
 The inputs and outputs of the request are explained below:
 
 Inputs:
@@ -1012,6 +1022,8 @@ Outputs:
     None
 
 #### "Modify Specific Virtual" Request
+
+This request simply preforms a update of the specified Vitual ID with information that is in the environment variables. It is useful to potentially modify profils or pools assigned or to change some other configuation item.
 
 The inputs and outputs of the request are explained below:
 
