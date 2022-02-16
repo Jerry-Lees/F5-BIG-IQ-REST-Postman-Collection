@@ -1127,7 +1127,11 @@ The inputs and outputs of the request are explained below:
 
 ### Utility Tasks
 
+The utility tasks section of the collection really is currently only one "request" that simply clears out the environment variables' values so that you can start fresh with no change of cross contaminantion between sets of calls. This is handy if you mess up some environment variables and just need to start from a clean slate to ensure success.
+
 #### "Clear Environment" Request
+
+This request clears commonly changed environment variables so that new fresh requests can be made without the worry of previously populated data contaminating the environment. It is a good idea to clear this each time a new set of configurations are being made.
 
 The inputs and outputs of the request are explained below:
 
@@ -1138,8 +1142,6 @@ Inputs:
 Outputs:
 
     None, clears the environment variables.
-
-more to be added
 
 ### SSL Certificate Management Tasks
 
