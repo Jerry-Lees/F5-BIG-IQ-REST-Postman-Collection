@@ -56,7 +56,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n   \"skipVerifyConfig\":false,\r\n   \"skipDistribution\":true,\r\n   \"name\":\"{{DeployName}}\",\r\n   \"deviceReferences\":[\r\n      {\r\n         \"link\":\"{{DeviceSelfLink}}\"\r\n      }\r\n   ],\r\n   \"objectsToDeployReferences\":[\r\n      {\r\n         \"link\":\"{{PoolSelfLink}}\"\r\n      }],\r\n   \"deploySpecifiedObjectsOnly\":false\r\n}"
+									"raw": "{\r\n   \"skipVerifyConfig\":false,\r\n   \"skipDistribution\":true,\r\n   \"name\":\"{{DeployName}}\",\r\n{{DeviceReferenceJSON}}\r\n   \"objectsToDeployReferences\":[\r\n      {\r\n         \"link\":\"{{PoolSelfLink}}\"\r\n      }],\r\n   \"deploySpecifiedObjectsOnly\":false\r\n}"
 								},
 								"url": {
 									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/tasks/deploy-configuration",
@@ -120,7 +120,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n   \"skipVerifyConfig\":false,\r\n   \"skipDistribution\":true,\r\n   \"name\":\"{{DeployName}}\",\r\n   \"deviceReferences\":[\r\n      {\r\n         \"link\":\"{{DeviceSelfLink}}\"\r\n      }\r\n   ],\r\n   \"objectsToDeployReferences\":[\r\n      {\r\n         \"link\":\"{{VirtualSelfLink}}\"\r\n      }],\r\n   \"deploySpecifiedObjectsOnly\":false\r\n}"
+									"raw": "{\r\n   \"skipVerifyConfig\":false,\r\n   \"skipDistribution\":true,\r\n   \"name\":\"{{DeployName}}\",\r\n{{DeviceReferenceJSON}}\r\n   \"objectsToDeployReferences\":[\r\n      {\r\n         \"link\":\"{{VirtualSelfLink}}\"\r\n      }],\r\n   \"deploySpecifiedObjectsOnly\":false\r\n}"
 								},
 								"url": {
 									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/tasks/deploy-configuration",
@@ -184,7 +184,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n   \"skipVerifyConfig\":false,\r\n   \"skipDistribution\":true,\r\n   \"name\":\"{{DeployName}}\",\r\n   \"deviceReferences\":[\r\n      {\r\n         \"link\":\"{{DeviceSelfLink}}\"\r\n      }\r\n   ],\r\n   \"objectsToDeployReferences\":[\r\n      {\r\n         \"link\":\"{{ProfileHTTPSelfLink}}\"\r\n      }],\r\n   \"deploySpecifiedObjectsOnly\":false\r\n}"
+									"raw": "{\r\n   \"skipVerifyConfig\":false,\r\n   \"skipDistribution\":true,\r\n   \"name\":\"{{DeployName}}\",\r\n{{DeviceReferenceJSON}}\r\n   \"objectsToDeployReferences\":[\r\n      {\r\n         \"link\":\"{{ProfileHTTPSelfLink}}\"\r\n      }],\r\n   \"deploySpecifiedObjectsOnly\":false\r\n}"
 								},
 								"url": {
 									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/tasks/deploy-configuration",
@@ -248,7 +248,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n   \"skipVerifyConfig\":false,\r\n   \"skipDistribution\":true,\r\n   \"name\":\"{{DeployName}}\",\r\n   \"deviceReferences\":[\r\n      {\r\n         \"link\":\"{{DeviceSelfLink}}\"\r\n      }\r\n   ],\r\n   \"objectsToDeployReferences\":[\r\n      {\r\n         \"link\":\"{{ProfileServerSSLSelfLink}}\"\r\n      }],\r\n   \"deploySpecifiedObjectsOnly\":false\r\n}"
+									"raw": "{\r\n   \"skipVerifyConfig\":false,\r\n   \"skipDistribution\":true,\r\n   \"name\":\"{{DeployName}}\",\r\n{{DeviceReferenceJSON}}\r\n   \"objectsToDeployReferences\":[\r\n      {\r\n         \"link\":\"{{ProfileServerSSLSelfLink}}\"\r\n      }],\r\n   \"deploySpecifiedObjectsOnly\":false\r\n}"
 								},
 								"url": {
 									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/tasks/deploy-configuration",
@@ -312,7 +312,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n   \"skipVerifyConfig\":false,\r\n   \"skipDistribution\":true,\r\n   \"name\":\"{{DeployName}}\",\r\n   \"deviceReferences\":[\r\n      {\r\n         \"link\":\"{{DeviceSelfLink}}\"\r\n      }\r\n   ],\r\n   \"objectsToDeployReferences\":[\r\n      {\r\n         \"link\":\"{{ProfileClientSSLSelfLink}}\"\r\n      }],\r\n   \"deploySpecifiedObjectsOnly\":false\r\n}"
+									"raw": "{\r\n   \"skipVerifyConfig\":false,\r\n   \"skipDistribution\":true,\r\n   \"name\":\"{{DeployName}}\",\r\n{{DeviceReferenceJSON}}\r\n   \"objectsToDeployReferences\":[\r\n      {\r\n         \"link\":\"{{ProfileClientSSLSelfLink}}\"\r\n      }],\r\n   \"deploySpecifiedObjectsOnly\":false\r\n}"
 								},
 								"url": {
 									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/tasks/deploy-configuration",
@@ -376,7 +376,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n   \"skipVerifyConfig\":false,\r\n   \"skipDistribution\":true,\r\n   \"name\":\"{{DeployName}}\",\r\n   \"deviceReferences\":[\r\n      {\r\n         \"link\":\"{{DeviceSelfLink}}\"\r\n      }\r\n   ],\r\n   \"objectsToDeployReferences\":[\r\n      {\r\n         \"link\":\"{{ProfileFastL4SelfLink}}\"\r\n      }],\r\n   \"deploySpecifiedObjectsOnly\":false\r\n}"
+									"raw": "{\r\n   \"skipVerifyConfig\":false,\r\n   \"skipDistribution\":true,\r\n   \"name\":\"{{DeployName}}\",\r\n{{DeviceReferenceJSON}}\r\n   \"objectsToDeployReferences\":[\r\n      {\r\n         \"link\":\"{{ProfileFastL4SelfLink}}\"\r\n      }],\r\n   \"deploySpecifiedObjectsOnly\":false\r\n}"
 								},
 								"url": {
 									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/tasks/deploy-configuration",
@@ -440,7 +440,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n   \"skipVerifyConfig\":false,\r\n   \"skipDistribution\":true,\r\n   \"name\":\"{{DeployName}}\",\r\n   \"deviceReferences\":[\r\n      {\r\n         \"link\":\"{{DeviceSelfLink}}\"\r\n      }\r\n   ],\r\n   \"objectsToDeployReferences\":[\r\n      {\r\n         \"link\":\"{{ProfileTCPSelfLink}}\"\r\n      }],\r\n   \"deploySpecifiedObjectsOnly\":false\r\n}"
+									"raw": "{\r\n   \"skipVerifyConfig\":false,\r\n   \"skipDistribution\":true,\r\n   \"name\":\"{{DeployName}}\",\r\n{{DeviceReferenceJSON}}\r\n   \"objectsToDeployReferences\":[\r\n      {\r\n         \"link\":\"{{ProfileTCPSelfLink}}\"\r\n      }],\r\n   \"deploySpecifiedObjectsOnly\":false\r\n}"
 								},
 								"url": {
 									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/tasks/deploy-configuration",
@@ -504,7 +504,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n   \"skipVerifyConfig\":false,\r\n   \"skipDistribution\":true,\r\n   \"name\":\"{{DeployName}}\",\r\n   \"deviceReferences\":[\r\n      {\r\n         \"link\":\"{{DeviceSelfLink}}\"\r\n      }\r\n   ],\r\n   \"objectsToDeployReferences\":[\r\n      {\r\n         \"link\":\"{{NodeSelfLink}}\"\r\n      }],\r\n   \"deploySpecifiedObjectsOnly\":false\r\n}"
+									"raw": "{\r\n   \"skipVerifyConfig\":false,\r\n   \"skipDistribution\":true,\r\n   \"name\":\"{{DeployName}}\",\r\n{{DeviceReferenceJSON}}\r\n   \"objectsToDeployReferences\":[\r\n      {\r\n         \"link\":\"{{NodeSelfLink}}\"\r\n      }],\r\n   \"deploySpecifiedObjectsOnly\":false\r\n}"
 								},
 								"url": {
 									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/tasks/deploy-configuration",
@@ -522,6 +522,158 @@
 								}
 							},
 							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));",
+									"postman.setEnvironmentVariable(\"DeployName\", \"AutoDeploy-\"+Date.now())",
+									"",
+									"MgmtIP = pm.variables.get(\"BIGIQ_Mgmt\")",
+									"deviceselfURI = pm.variables.get(\"DeviceSelfURI\")",
+									"",
+									"console.log(\"Starting gathering Device Info at: \" + deviceselfURI)",
+									"",
+									"const options1 = {",
+									"    method: 'GET',",
+									"    url: pm.variables.get(\"DeviceSelfURI\"),",
+									"    header: 'ContentType: application/json',",
+									"    header: 'X-F5-Auth-Token: '+pm.variables.get(\"AuthToken\"),",
+									"    body: \"\"",
+									"};",
+									"",
+									"pm.sendRequest(options1, (error, response) => {",
+									"    if (error) {",
+									"        throw new Error(error);",
+									"    } else {",
+									"        //postman.setEnvironmentVariable(\"VirtualJSON\", response.text())",
+									"        var jsonData = response.json()",
+									"",
+									"        postman.setEnvironmentVariable(\"DeviceClusterName\", jsonData.properties.clusterName);",
+									"        clustername = pm.variables.get(\"DeviceClusterName\")",
+									"",
+									"        if ( clustername != \"\" || clustername != undefined) {",
+									"            postman.setEnvironmentVariable(\"DeviceIsClustered\", 1)",
+									"            deviceIsclustered = 1;",
+									"        } else {",
+									"            //this is an assumprion that if it isn't a DSC, that the value returned in the JSON response will be empty or undefined.",
+									"            postman.setEnvironmentVariable(\"DeviceIsClustered\", 0) ",
+									"            deviceIsclustered = 0;",
+									"        }",
+									"    }",
+									"});",
+									"",
+									"clustername = pm.variables.get(\"DeviceClusterName\")",
+									"",
+									"const options2 = {",
+									"    method: 'GET',",
+									"    url: \"https://\" + MgmtIP + \"/mgmt/shared/resolver/device-groups/cm-bigip-cluster_\" + clustername + \"/devices\",",
+									"    header: 'ContentType: application/json',",
+									"    header: 'X-F5-Auth-Token: '+pm.variables.get(\"AuthToken\"),",
+									"    body: \"\"",
+									"};",
+									"",
+									"pm.sendRequest(options2, (error, response2) => {",
+									"    if (error) {",
+									"        throw new Error(error);",
+									"    } else {",
+									"        //postman.setEnvironmentVariable(\"VirtualJSON\", response.text())",
+									"        var jsonData = response2.json()",
+									"",
+									"        clustername = pm.variables.get(\"DeviceClusterName\")",
+									"        deviceisclustered = pm.variables.get(\"DeviceIsClustered\")",
+									"",
+									"        //end setup",
+									"",
+									"        if (deviceisclustered) {",
+									"            /*device is clustered make the JSON look like:",
+									"",
+									"            \"deviceReferences\": [{",
+									"                    \"link\": \"{{DeviceSelfLink}}\"",
+									"            },",
+									"            {",
+									"                    \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-cluster_mem10fw-viprion-cluster/devices/66c4f977-2999-462a-99e4-5b325ea60413\"",
+									"            }],",
+									"            \"deviceGroupReferences\":[",
+									"            {",
+									"                \"link\":\"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-cluster_mem10fw-viprion-cluster\"",
+									"            }],",
+									"",
+									"            */",
+									"",
+									"            //var jsonData = JSON.parse(responseBody)",
+									"            deviceselflink = pm.variables.get(\"DeviceSelfLink\");",
+									"            deviceclustername = pm.variables.get(\"DeviceClusterName\");",
+									"",
+									"            let devices = pm.globals.get(\"itemOfArray\");",
+									"            devices = jsonData.items;",
+									"            devicereferencejson = '    \"deviceReferences\": [ ';",
+									"            devicecount = Object.keys(jsonData.items).length",
+									"            console.log(\"Device count: \"+ devicecount)",
+									"            currentitem = 1",
+									"",
+									"            for (device in devices){",
+									"                selflink = \"https://localhost/mgmt/shared/resolver/device-groups/cm-adccore-allbigipDevices/devices/\" + jsonData.items[device].machineId",
+									"                devicereferencejson = devicereferencejson + '{            \"link\": \"' + selflink + '\" }';",
+									"                if (currentitem < devicecount) {",
+									"                    devicereferencejson = devicereferencejson + ', '; //not the last one",
+									"                }",
+									"            }",
+									"            devicereferencejson = devicereferencejson + '    ], '; // the last one",
+									"            ",
+									"            /*",
+									"            devicereferencejson = devicereferencejson + '    \"deviceGroupReferences\":[';",
+									"            devicereferencejson = devicereferencejson + '      {';",
+									"            //\"link\":\"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-cluster_mem10fw-viprion-cluster\"",
+									"            devicegroupname = jsonData.items[device].groupName",
+									"            devicereferencejson = devicereferencejson + '         \"link\":\"https://localhost/mgmt/shared/resolver/device-groups/cm-bigip-cluster_mem10fw-viprion-cluster\"';",
+									"            //devicereferencejson = devicereferencejson + '         \"link\":\"https://localhost/mgmt/shared/resolver/device-groups/' + devicegroupname + '/devices\"';",
+									"            devicereferencejson = devicereferencejson + '      }],';",
+									"            */",
+									"",
+									"        console.log(devicereferencejson)",
+									"",
+									"        postman.setEnvironmentVariable(\"DeviceReferenceJSON\", devicereferencejson);",
+									"",
+									"        } else {",
+									"            /*device is NOT clustered make the JSON look like:",
+									"",
+									"        \"deviceReferences\":[",
+									"            {",
+									"                \"link\":\"{{DeviceSelfLink}}\"",
+									"            }",
+									"        ],",
+									"",
+									"            */",
+									"",
+									"        devicereferencejson = '\"deviceReferences\":[             {                \"link\":\"' + selflink + '\"   }        ],'",
+									"        ",
+									"        postman.setEnvironmentVariable(\"DeviceReferenceJSON\", devicereferencejson);",
+									"",
+									"",
+									"        }",
+									"",
+									"",
+									"    }",
+									"});",
+									"",
+									"",
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
 						}
 					]
 				},
@@ -6250,6 +6402,203 @@
 					"name": "Scratch",
 					"item": [
 						{
+							"name": "Deployments",
+							"item": [
+								{
+									"name": "Create CLUSTERED Virtual Deployment without deploy",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"//console.info(\"Token --->\"+pm.variables.get(\"AuthToken\"));\r",
+													"postman.setEnvironmentVariable(\"DeployName\", \"AutoDeploy-\"+Date.now())\r",
+													"\r",
+													"MgmtIP = pm.variables.get(\"BIGIQ_Mgmt\")\r",
+													"deviceselfURI = pm.variables.get(\"DeviceSelfURI\")\r",
+													"\r",
+													"console.log(\"Starting gathering Device Info at: \" + deviceselfURI)\r",
+													"\r",
+													"const options1 = {\r",
+													"    method: 'GET',\r",
+													"    url: pm.variables.get(\"DeviceSelfURI\"),\r",
+													"    header: 'ContentType: application/json',\r",
+													"    header: 'X-F5-Auth-Token: '+pm.variables.get(\"AuthToken\"),\r",
+													"    body: \"\"\r",
+													"};\r",
+													"\r",
+													"pm.sendRequest(options1, (error, response) => {\r",
+													"    if (error) {\r",
+													"        throw new Error(error);\r",
+													"    } else {\r",
+													"        //postman.setEnvironmentVariable(\"VirtualJSON\", response.text())\r",
+													"        var jsonData = response.json()\r",
+													"\r",
+													"        postman.setEnvironmentVariable(\"DeviceClusterName\", jsonData.properties.clusterName);\r",
+													"        clustername = pm.variables.get(\"DeviceClusterName\")\r",
+													"\r",
+													"        if ( clustername != \"\" || clustername != undefined) {\r",
+													"            postman.setEnvironmentVariable(\"DeviceIsClustered\", 1)\r",
+													"            deviceIsclustered = 1;\r",
+													"        } else {\r",
+													"            //this is an assumprion that if it isn't a DSC, that the value returned in the JSON response will be empty or undefined.\r",
+													"            postman.setEnvironmentVariable(\"DeviceIsClustered\", 0) \r",
+													"            deviceIsclustered = 0;\r",
+													"        }\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"clustername = pm.variables.get(\"DeviceClusterName\")\r",
+													"\r",
+													"const options2 = {\r",
+													"    method: 'GET',\r",
+													"    url: \"https://\" + MgmtIP + \"/mgmt/shared/resolver/device-groups/cm-bigip-cluster_\" + clustername + \"/devices\",\r",
+													"    header: 'ContentType: application/json',\r",
+													"    header: 'X-F5-Auth-Token: '+pm.variables.get(\"AuthToken\"),\r",
+													"    body: \"\"\r",
+													"};\r",
+													"\r",
+													"pm.sendRequest(options2, (error, response2) => {\r",
+													"    if (error) {\r",
+													"        throw new Error(error);\r",
+													"    } else {\r",
+													"        //postman.setEnvironmentVariable(\"VirtualJSON\", response.text())\r",
+													"        var jsonData = response2.json()\r",
+													"\r",
+													"        clustername = pm.variables.get(\"DeviceClusterName\")\r",
+													"        deviceisclustered = pm.variables.get(\"DeviceIsClustered\")\r",
+													"\r",
+													"        //end setup\r",
+													"\r",
+													"        if (deviceisclustered) {\r",
+													"            /*device is clustered make the JSON look like:\r",
+													"\r",
+													"            \"deviceReferences\": [{\r",
+													"                    \"link\": \"{{DeviceSelfLink}}\"\r",
+													"            },\r",
+													"            {\r",
+													"                    \"link\": \"https://localhost/mgmt/shared/resolver/device-groups/xxxx/devices/66c4f977-2999-462a-99e4-5b325ea60413\"\r",
+													"            }],\r",
+													"            \"deviceGroupReferences\":[\r",
+													"            {\r",
+													"                \"link\":\"https://localhost/mgmt/shared/resolver/device-groups/xxxxx\"\r",
+													"            }],\r",
+													"\r",
+													"            */\r",
+													"\r",
+													"            //var jsonData = JSON.parse(responseBody)\r",
+													"            deviceselflink = pm.variables.get(\"DeviceSelfLink\");\r",
+													"            deviceclustername = pm.variables.get(\"DeviceClusterName\");\r",
+													"\r",
+													"            let devices = pm.globals.get(\"itemOfArray\");\r",
+													"            devices = jsonData.items;\r",
+													"            devicereferencejson = '    \"deviceReferences\": [ ';\r",
+													"            devicecount = Object.keys(jsonData.items).length\r",
+													"            console.log(\"Device count: \"+ devicecount)\r",
+													"            currentitem = 1\r",
+													"\r",
+													"            for (device in devices){\r",
+													"                selflink = \"https://localhost/mgmt/shared/resolver/device-groups/cm-adccore-allbigipDevices/devices/\" + jsonData.items[device].machineId\r",
+													"                devicereferencejson = devicereferencejson + '{            \"link\": \"' + selflink + '\" }';\r",
+													"                if (currentitem < devicecount) {\r",
+													"                    devicereferencejson = devicereferencejson + ', '; //not the last one\r",
+													"                }\r",
+													"            }\r",
+													"            devicereferencejson = devicereferencejson + '    ], '; // the last one\r",
+													"            \r",
+													"            /*\r",
+													"            devicereferencejson = devicereferencejson + '    \"deviceGroupReferences\":[';\r",
+													"            devicereferencejson = devicereferencejson + '      {';\r",
+													"            //\"link\":\"https://localhost/mgmt/shared/resolver/device-groups/xxxx\"\r",
+													"            devicegroupname = jsonData.items[device].groupName\r",
+													"            devicereferencejson = devicereferencejson + '         \"link\":\"https://localhost/mgmt/shared/resolver/device-groups/xxxx\"';\r",
+													"            //devicereferencejson = devicereferencejson + '         \"link\":\"https://localhost/mgmt/shared/resolver/device-groups/' + devicegroupname + '/devices\"';\r",
+													"            devicereferencejson = devicereferencejson + '      }],';\r",
+													"            */\r",
+													"\r",
+													"        console.log(devicereferencejson)\r",
+													"\r",
+													"        postman.setEnvironmentVariable(\"DeviceReferenceJSON\", devicereferencejson);\r",
+													"\r",
+													"        } else {\r",
+													"            /*device is NOT clustered make the JSON look like:\r",
+													"\r",
+													"        \"deviceReferences\":[\r",
+													"            {\r",
+													"                \"link\":\"{{DeviceSelfLink}}\"\r",
+													"            }\r",
+													"        ],\r",
+													"\r",
+													"            */\r",
+													"\r",
+													"        devicereferencejson = '\"deviceReferences\":[             {                \"link\":\"' + selflink + '\"   }        ],'\r",
+													"        \r",
+													"        postman.setEnvironmentVariable(\"DeviceReferenceJSON\", devicereferencejson);\r",
+													"\r",
+													"\r",
+													"        }\r",
+													"\r",
+													"\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"console.log(\"The deployment named \"+pm.variables.get(\"DeployName\")+\" was created.\")"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "X-F5-Auth-Token",
+												"value": "{{AuthToken}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n   \"skipVerifyConfig\":false,\r\n   \"skipDistribution\":true,\r\n   \"name\":\"{{DeployName}}\",\r\n{{DeviceReferenceJSON}}\r\n   \"objectsToDeployReferences\":[\r\n      {\r\n         \"link\":\"{{VirtualSelfLink}}\"\r\n      }],\r\n   \"deploySpecifiedObjectsOnly\":false\r\n}"
+										},
+										"url": {
+											"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/tasks/deploy-configuration",
+											"protocol": "https",
+											"host": [
+												"{{BIGIQ_Mgmt}}"
+											],
+											"path": [
+												"mgmt",
+												"cm",
+												"adc-core",
+												"tasks",
+												"deploy-configuration"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
 							"name": "** Get scratch",
 							"event": [
 								{
@@ -6300,21 +6649,17 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "https://10.155.111.64/mgmt/cm/adc-core/tasks/certificate-management/{{NewFileUploadID}}",
+									"raw": "https://{{BIGIQ_Mgmt}}/mgmt/cm/adc-core/tasks/deploy-configuration",
 									"protocol": "https",
 									"host": [
-										"10",
-										"155",
-										"111",
-										"64"
+										"{{BIGIQ_Mgmt}}"
 									],
 									"path": [
 										"mgmt",
 										"cm",
 										"adc-core",
 										"tasks",
-										"certificate-management",
-										"{{NewFileUploadID}}"
+										"deploy-configuration"
 									]
 								}
 							},
@@ -6759,6 +7104,7 @@
 									"postman.setEnvironmentVariable(\"SearchPoolName\",\"\")\r",
 									"postman.setEnvironmentVariable(\"SearchMonitorName\",\"\")\r",
 									"postman.setEnvironmentVariable(\"SearchNodeName\",\"\")\r",
+									"postman.setEnvironmentVariable(\"VirtualDescription\",\"\")\r",
 									"postman.setEnvironmentVariable(\"VirtualDestinationAddress\",\"\")\r",
 									"postman.setEnvironmentVariable(\"VirtualSourceAddress\",\"\")\r",
 									"postman.setEnvironmentVariable(\"VirtualSNATType\",\"\")\r",
@@ -6822,6 +7168,9 @@
 									"postman.setEnvironmentVariable(\"ProfileServerSSLParent\",\"\")\r",
 									"postman.setEnvironmentVariable(\"ProfileServerSSLParentLink\",\"\")\r",
 									"postman.setEnvironmentVariable(\"ProfileServerSSLParentURI\",\"\")\r",
+									"postman.setEnvironmentVariable(\"DeviceIsClustered\",\"\")\r",
+									"postman.setEnvironmentVariable(\"DeviceClusterName\",\"\")\r",
+									"postman.setEnvironmentVariable(\"DeviceReferenceJSON\",\"\")\r",
 									"\r",
 									"postman.setEnvironmentVariable(\"NewFileUploadName\",\"\")\r",
 									"postman.setEnvironmentVariable(\"NewFileUploadContent\",\"\")\r",
@@ -7044,7 +7393,8 @@
 				"exec": [
 					"pm.test(\"Status 200 Test\", function () {",
 					"    var jsonData = JSON.parse(responseBody);",
-					"    pm.response.to.have.status(200);",
+					"    //pm.response.to.have.status(200);",
+					"    pm.expect(pm.response.code).to.be.oneOf([200,201,202])",
 					"});",
 					""
 				]
